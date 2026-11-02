@@ -62,6 +62,30 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
+        public void DatabasePasswordsShouldBeSecure_CS_OtherProviders() =>
+            builder.AddSnippet("""
+                using System;
+                using Microsoft.EntityFrameworkCore;
+
+                public class OtherProvidersDbContext : DbContext
+                {
+                    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+                    {
+                        var serverVersion = new MySqlServerVersion(new Version(8, 0, 0));
+                        optionsBuilder.UseAzureSql("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="); // FN https://sonarsource.atlassian.net/browse/NET-4923
+                        optionsBuilder.UseMySql("Server=localhost;User Id=root;Password=", serverVersion);                     // FN https://sonarsource.atlassian.net/browse/NET-4923
+                    }
+                }
+                """)
+                .WithOptions(LanguageOptions.CSharpLatest)
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCorePackages("9.0.0"))
+                .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer("9.0.0"))
+                .AddReferences(NuGetMetadataReference.Package("Pomelo.EntityFrameworkCore.MySql", "9.0.0"))
+                .VerifyNoIssues();
+
+        [TestMethod]
         [DataRow(true, @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
         [DataRow(false, @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(bool expectIssues, string root)

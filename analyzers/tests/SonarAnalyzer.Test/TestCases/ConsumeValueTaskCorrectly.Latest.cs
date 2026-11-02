@@ -61,3 +61,58 @@ namespace CSharp14
         }
     }
 }
+
+namespace CSharp15
+{
+    public static class ValueTaskExtensions
+    {
+        extension(ValueTask<int> task)
+        {
+            public Task<int> Property
+            {
+                get
+                {
+                    var first = task.AsTask();  // Noncompliant
+                    return task.AsTask();       // Secondary
+                }
+            }
+
+            public Task<int> this[int index]
+            {
+                get
+                {
+                    var first = task.AsTask();  // FN https://sonarsource.atlassian.net/browse/NET-4912
+                    return task.AsTask();
+                }
+            }
+
+            public Task<int> ConsumedOnce => task.AsTask();     // Compliant
+
+            public int ResultIfCompleted
+            {
+                get
+                {
+                    if (task.IsCompletedSuccessfully)           // Compliant
+                    {
+                        return task.Result;                     // Compliant
+                    }
+                    return 0;
+                }
+            }
+
+            public Task<int> this[string key] => task.AsTask(); // Compliant
+
+            public int this[long index]
+            {
+                get
+                {
+                    if (task.IsCompletedSuccessfully)
+                    {
+                        return task.Result;                     // Compliant
+                    }
+                    return 0;
+                }
+            }
+        }
+    }
+}

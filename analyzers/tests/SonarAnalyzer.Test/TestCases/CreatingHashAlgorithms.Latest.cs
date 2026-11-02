@@ -197,3 +197,21 @@ public static class Extensions
         public HashAlgorithm Method() => SHA1.Create(); // Noncompliant
     }
 }
+
+public class CSharp15
+{
+    void VerifyHmac(byte[] key, byte[] data, byte[] hash, Stream stream, CancellationToken cancellationToken)
+    {
+        CryptographicOperations.VerifyHmac(HashAlgorithmName.MD5, key, data, hash);                             // FN https://sonarsource.atlassian.net/browse/NET-4911
+        CryptographicOperations.VerifyHmac(HashAlgorithmName.SHA1, key, stream, hash);                          // FN https://sonarsource.atlassian.net/browse/NET-4911
+        CryptographicOperations.VerifyHmacAsync(HashAlgorithmName.MD5, key, stream, hash, cancellationToken);   // FN https://sonarsource.atlassian.net/browse/NET-4911
+        CryptographicOperations.VerifyHmac(HashAlgorithmName.SHA256, key, data, hash);                          // Compliant
+    }
+
+    void StaticVerify(byte[] key, byte[] data, byte[] hash)
+    {
+        HMACMD5.Verify(key, data, hash);        // FN https://sonarsource.atlassian.net/browse/NET-4911
+        HMACSHA1.Verify(key, data, hash);       // FN https://sonarsource.atlassian.net/browse/NET-4911
+        HMACSHA256.Verify(key, data, hash);     // Compliant
+    }
+}

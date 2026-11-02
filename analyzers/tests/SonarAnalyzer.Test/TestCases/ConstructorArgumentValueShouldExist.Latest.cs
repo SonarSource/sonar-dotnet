@@ -68,3 +68,15 @@ namespace CSharp14
         }
     }
 }
+
+namespace CSharp15
+{
+    public static class ExtensionIndexers
+    {
+        extension(object ext)
+        {
+            [ConstructorArgument("nonExisting")]    // Compliant
+            public object this[int index] => 42;
+        }
+    }
+}

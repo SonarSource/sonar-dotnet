@@ -33,11 +33,17 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
-        public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
-            builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.CSharp9.cs")
+        public void DangerousGetHandleShouldNotBeCalled_CS_TopLevelStatements() =>
+            builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.TopLevelStatements.cs")
                 .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
-                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void DangerousGetHandleShouldNotBeCalled_CS_Latest() =>
+            builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.Latest.cs")
+                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
         [TestMethod]

@@ -127,3 +127,11 @@ public class NullConditionalAssignment
         dsa3?.KeySize = 1024; // FN https://sonarsource.atlassian.net/browse/NET-2698
     }
 }
+
+public class CSharp15
+{
+    public void X25519KeyAgreement()
+    {
+        using var key = X25519DiffieHellman.GenerateKey();  // Compliant
+    }
+}
