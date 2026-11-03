@@ -617,3 +617,21 @@ public class Repro_6644
         }
     }
 }
+
+public class ImplicitAdd : System.Collections.IEnumerable
+{
+    public void Add(int x) // Noncompliant
+    {
+        _ = new ImplicitAdd { 1 };
+    }
+
+    public System.Collections.IEnumerator GetEnumerator() => null;
+}
+
+public class ImplicitSelect
+{
+    public ImplicitSelect Select(Func<int, int> selector) // Noncompliant
+    {
+        return from x in this select x;
+    }
+}
