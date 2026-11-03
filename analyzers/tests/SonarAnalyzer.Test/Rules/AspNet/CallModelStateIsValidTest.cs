@@ -30,7 +30,7 @@ public class CallModelStateIsValidTest
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-            ..NuGetMetadataReference.SystemComponentModelAnnotations(TestConstants.NuGetLatestVersion)
+            CoreMetadataReference.SystemComponentModelAnnotations
         ]);
 
     [TestMethod]

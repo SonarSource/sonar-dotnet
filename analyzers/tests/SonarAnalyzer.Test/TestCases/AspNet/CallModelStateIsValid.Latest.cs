@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Repro_NET1044
@@ -90,6 +91,18 @@ public sealed class AssetController : ControllerBase
     {
         var results = new List<ValidationResult>();
         Validator.TryValidateObject(input, new ValidationContext(input), results, false);
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DirectValidationAsync(AssetInput input) // Noncompliant FP NET-4881
+    {
+        var results = new List<ValidationResult>();
+        if (!await Validator.TryValidateObjectAsync(input, new ValidationContext(input), results, validateAllProperties: true))
+        {
+            return BadRequest(results);
+        }
+
         return Ok();
     }
 

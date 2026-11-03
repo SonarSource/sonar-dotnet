@@ -36,6 +36,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemCollectionsSpecialized { get; } = CreateReference("System.Collections.Specialized.dll");
     public static MetadataReference SystemCollectionsNonGeneric { get; } = CreateReference("System.Collections.NonGeneric.dll");
     public static MetadataReference SystemComponentModel { get; } = CreateReference("System.ComponentModel.dll");
+    public static MetadataReference SystemComponentModelAnnotations { get; } = CreateReference("System.ComponentModel.Annotations.dll");
     public static MetadataReference SystemComponentModelPrimitives { get; } = CreateReference("System.ComponentModel.Primitives.dll");
     public static MetadataReference SystemComponentModelTypeConverter { get; } = CreateReference("System.ComponentModel.TypeConverter.dll");
     public static MetadataReference SystemConsole { get; } = CreateReference("System.Console.dll");
