@@ -227,3 +227,21 @@ public static class Extensions
             throw new ArgumentNullException("source");      // Compliant
     }
 }
+
+public static class CSharp15ExtensionIndexers
+{
+    extension(IEnumerable<string> source)
+    {
+        public string this[int index]
+        {
+            get
+            {
+                if (index < 0)
+                    throw new ArgumentOutOfRangeException("index");   // Compliant
+                if (source == null)
+                    throw new ArgumentNullException("source");        // Compliant
+                throw new ArgumentException("message", "other");      // Noncompliant {{The parameter name 'other' is not declared in the argument list.}}
+            }
+        }
+    }
+}

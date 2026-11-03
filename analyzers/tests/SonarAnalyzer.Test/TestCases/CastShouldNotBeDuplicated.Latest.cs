@@ -450,3 +450,53 @@ public class FieldKeyword
         set;
     }
 }
+
+namespace CSharp15
+{
+    using System.Runtime.CompilerServices;
+
+    public interface IAnimal { }
+    public class Cat : IAnimal { }
+    public class Dog : IAnimal { }
+    public union Pet(Cat, Dog) : IAnimal;
+    public union Plain(Cat, Dog);
+
+    public class UnionCasts
+    {
+        public void InterfaceImplementedByUnion(Pet pet)
+        {
+            if (pet is IAnimal)             // Noncompliant FP NET-4989
+            {
+                var animal = (IAnimal)pet;  // Secondary
+            }
+            if (pet is IAnimal)             // Noncompliant FP NET-4989
+            {
+                var animal = pet as IAnimal; // Secondary
+            }
+        }
+
+        public void IUnionImplementedByEveryUnion(Plain plain)
+        {
+            if (plain is IUnion)            // Noncompliant FP NET-4989
+            {
+                var union = (IUnion)plain;  // Secondary
+            }
+            if (plain is IUnion)            // Noncompliant FP NET-4989
+            {
+                var union = plain as IUnion; // Secondary
+            }
+        }
+
+        public void TypeParameterConstrainedToIUnion<T>(T value) where T : IUnion
+        {
+            if (value is IUnion)            // Noncompliant
+            {
+                var union = (IUnion)value;  // Secondary
+            }
+            if (value is IUnion)            // Noncompliant
+            {
+                var union = value as IUnion; // Secondary
+            }
+        }
+    }
+}

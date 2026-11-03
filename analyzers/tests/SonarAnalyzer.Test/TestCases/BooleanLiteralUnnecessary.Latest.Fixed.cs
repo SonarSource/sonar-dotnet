@@ -125,3 +125,18 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp15
+{
+    public union BoolOrString(bool, string);
+
+    public class UnionPattern
+    {
+        public void Test(BoolOrString value, bool flag)
+        {
+            if (value) { }  // Fixed
+            if (!value) { } // Fixed
+            if (flag) { }   // Fixed
+        }
+    }
+}

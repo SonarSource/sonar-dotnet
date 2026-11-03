@@ -237,3 +237,25 @@ public class CrossFileStaticMethodTest
         using var sslCompliant = new SslStream(ms, false, CertValidatorCrossFile.GetCompliantCallback());
     }
 }
+
+#pragma warning disable SYSLIB5007
+public class CSharp15Tls
+{
+    public void Test(TlsSession session)
+    {
+        session.SetRemoteCertificateValidationResult(SslPolicyErrors.None); // FN NET-4886
+    }
+
+    public void Compliant(TlsSession session, SslPolicyErrors computedErrors)
+    {
+        session.SetRemoteCertificateValidationResult(computedErrors);                        // Compliant
+        session.SetRemoteCertificateValidationResult(session.AcceptWithDefaultValidation()); // Compliant
+    }
+}
+#pragma warning restore SYSLIB5007
+
+public union CertValidationUnion(int, string)
+{
+    static SslStream Make(System.IO.Stream stream, RemoteCertificateValidationCallback callback) => new SslStream(stream, false, callback); // FN NET-4986
+    static void Use(System.IO.Stream stream) => Make(stream, (sender, certificate, chain, errors) => true);
+}

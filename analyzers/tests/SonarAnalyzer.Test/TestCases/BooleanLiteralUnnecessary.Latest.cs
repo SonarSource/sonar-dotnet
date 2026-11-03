@@ -127,3 +127,18 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp15
+{
+    public union BoolOrString(bool, string);
+
+    public class UnionPattern
+    {
+        public void Test(BoolOrString value, bool flag)
+        {
+            if (value is true) { }  // Noncompliant {{Remove the unnecessary Boolean literal(s).}} FP NET-4885
+            if (value is false) { } // Noncompliant {{Remove the unnecessary Boolean literal(s).}} FP NET-4885
+            if (flag is true) { }   // Noncompliant
+        }
+    }
+}
