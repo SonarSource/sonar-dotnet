@@ -132,3 +132,23 @@ public class PublicWritablePropertiesOnEffectivelyPrivateTypes
         public static int UsedStatic => StaticWritable;
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionRepro(UnionCaseA, UnionCaseB)
+    {
+        private static int unassigned; // FN NET-4940
+
+        public static void Use() =>
+            Console.WriteLine(unassigned);
+
+        private static int assigned; // Compliant
+
+        public static void Assign() =>
+            assigned = 1;
+    }
+
+    public record class UnionCaseA(string Name);
+    public record class UnionCaseB(string Name);
+}

@@ -138,3 +138,27 @@ namespace GenericRecordClasses
     file abstract record class AbstractImplementationRecord : InheritedGenericRecord<int> { }   // Compliant
     file abstract record class AbstractImplementationRecord<T> : InheritedGenericRecord<T> { }  // Compliant
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/closed
+    public class ClosedContainer
+    {
+        private closed class ClosedPrivateClass { } // Noncompliant FP NET-4938 - closed classes are implicitly abstract and cannot be sealed
+
+        private closed class ClosedPrivateClassDerived { } // Compliant, derived
+        private sealed class ClosedPrivateClassDerivedExtension : ClosedPrivateClassDerived { }
+    }
+
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionWithNestedClass(UnionNestedCaseA, UnionNestedCaseB)
+    {
+        private class NestedNotExtended { } // FN NET-4939
+
+        private class NestedExtended { } // Compliant, derived
+        private sealed class NestedExtendedExtension : NestedExtended { }
+    }
+
+    public record class UnionNestedCaseA(string Name);
+    public record class UnionNestedCaseB(string Name);
+}
