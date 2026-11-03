@@ -115,3 +115,35 @@ namespace CSharp14
         private static void ThisIsCompliant() { } // Compliant
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionRepro(UnionCaseA, UnionCaseB)
+    {
+        private static void UsedOnlyByNestedClass() { } // FN NET-4957
+
+        public class NestedClass
+        {
+            void Foo()
+            {
+                UsedOnlyByNestedClass();
+            }
+        }
+
+        private static void UsedByBoth() { } // Compliant, also used by the outer type
+
+        public class OtherNestedClass
+        {
+            void Foo()
+            {
+                UsedByBoth();
+            }
+        }
+
+        public static void CallUsedByBoth() => UsedByBoth();
+    }
+
+    public record class UnionCaseA(string Name);
+    public record class UnionCaseB(string Name);
+}

@@ -222,3 +222,30 @@ class HelperNotFollowedFromMultipleReturnPaths
         }
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionWithMismatchedProperty(UnionCaseC, UnionCaseD)
+    {
+        private static int fieldValue;
+        private static int otherValue;
+
+        public static int FieldValue
+        {
+            get { return otherValue; } // Noncompliant
+            set { fieldValue = value; }
+        }
+
+        private static int matchingValue;
+
+        public static int MatchingValue // Compliant
+        {
+            get { return matchingValue; }
+            set { matchingValue = value; }
+        }
+    }
+
+    public record class UnionCaseC(string Name);
+    public record class UnionCaseD(string Name);
+}

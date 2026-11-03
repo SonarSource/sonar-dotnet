@@ -89,6 +89,31 @@ record struct RecordStruct
     }
 }
 
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionRepro(UnionCaseA, UnionCaseB)
+    {
+        private static int privateStaticUsed = 0; // FN NET-4956
+
+        void Foo()
+        {
+            ((privateStaticUsed)) = 42;
+            Bar(privateStaticUsed);
+        }
+
+        void Bar(int i) { }
+
+        private static int genuineField; // Compliant, used as real state across methods
+
+        void Write() => genuineField = 1;
+        void Read() => Bar(genuineField);
+    }
+
+    public record class UnionCaseA(string Name);
+    public record class UnionCaseB(string Name);
+}
+
 public class NullConditionalAssignment
 {
     public class Sample

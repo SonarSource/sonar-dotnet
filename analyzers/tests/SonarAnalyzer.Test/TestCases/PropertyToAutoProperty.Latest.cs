@@ -136,3 +136,29 @@ public static class Extensions
         public int Length => s.Length;
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union UnionRepro(UnionCaseE, UnionCaseF)
+    {
+        private static int backingField;
+
+        public static int Prop // Noncompliant
+        {
+            get { return backingField; }
+            set { backingField = value; }
+        }
+
+        private static int validatedField;
+
+        public static int Validated // Compliant, setter has extra logic
+        {
+            get { return validatedField; }
+            set { validatedField = value < 0 ? 0 : value; }
+        }
+    }
+
+    public record class UnionCaseE(string Name);
+    public record class UnionCaseF(string Name);
+}
