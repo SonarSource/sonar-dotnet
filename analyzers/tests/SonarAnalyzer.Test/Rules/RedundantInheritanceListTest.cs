@@ -52,6 +52,10 @@ namespace SonarAnalyzer.Test.Rules
                 .VerifyCodeFix();
 
         [TestMethod]
+        public void RedundantInheritanceList_Latest() =>
+            rule.AddPaths("RedundantInheritanceList.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+        [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.Fixed.cs")

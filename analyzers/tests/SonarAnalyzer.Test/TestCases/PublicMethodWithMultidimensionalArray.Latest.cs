@@ -73,3 +73,9 @@ public partial class PartialConstructor
 {
     public partial PartialConstructor(int[][] matrix);
 }
+
+namespace CSharp15
+{
+    public union UnionWithMultidimensionalArrayCaseType(int[,], string); // FN NET-4958
+    public union UnionWithSingleDimensionalArrayCaseType(int[], string); // Compliant, not a multi-dimensional array
+}

@@ -76,4 +76,40 @@ public class RedundantJumpStatement_C9Patterns
     }
 }
 
+// NET-4988: https://sonarsource.atlassian.net/browse/NET-4988
+public class RedundantJumpStatement_LabeledContinue
+{
+    void ContinueOuterAsLastStatementOfInnerLoop(int[][] grid)
+    {
+    outer:
+        for (var i = 0; i < grid.Length; i++)
+        {
+            for (var j = 0; j < grid[i].Length; j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    continue outer; // Noncompliant FP, the CFG ignores the label and models it as continuing the inner loop
+                }
+            }
+            Console.WriteLine(i);
+        }
+    }
+
+    void ContinueOuterNotLastStatement(int[][] grid)
+    {
+    outer:
+        for (var i = 0; i < grid.Length; i++)
+        {
+            for (var j = 0; j < grid[i].Length; j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    continue outer; // Compliant, not the last statement of the inner loop
+                }
+                Console.WriteLine(j);
+            }
+            Console.WriteLine(i);
+        }
+    }
+}
 
