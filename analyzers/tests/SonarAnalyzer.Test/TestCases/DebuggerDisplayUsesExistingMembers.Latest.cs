@@ -233,3 +233,20 @@ namespace SomewhereElse
         }
     }
 }
+
+namespace CSharp15
+{
+    public class Cat { }
+    public class Dog { }
+
+    [DebuggerDisplay("{Value}")]          // Compliant
+    [DebuggerDisplay("{Nonexistent}")]    // Noncompliant
+    [DebuggerDisplay("{Cat}")]            // Noncompliant
+    [DebuggerDisplay("{HasValue}")]       // Noncompliant
+    public union Pet(Cat, Dog)
+    {
+        public string Description => "pet";
+
+        [DebuggerDisplay("{Description}")] public int Member => 1;
+    }
+}

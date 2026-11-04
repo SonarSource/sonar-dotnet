@@ -486,3 +486,268 @@ class CustomCompoundAssignment
         x = null;   // Noncompliant
     }
 }
+
+namespace CSharp15
+{
+    public class Cat { }
+    public class Dog { }
+    public union Pet(Cat, Dog);
+
+    public class Probes
+    {
+        void UnionConversion()
+        {
+            Pet pet = new Cat();    // Noncompliant
+            pet = new Dog();
+            Use(pet);
+        }
+
+        void UnionConversionRead()
+        {
+            var cat = new Cat();
+            Pet pet = cat;
+            Use(pet);
+        }
+
+        void UnionPattern(Cat cat)
+        {
+            Pet pet = cat;
+            if (pet is Cat matched)
+            {
+                matched = new Cat();    // Noncompliant
+            }
+            var name = pet switch
+            {
+                Cat => "cat",
+                Dog => "dog",
+            };
+            Use(name);
+        }
+
+        int LabeledBreakOutOfSwitch(int[] values, int mode)
+        {
+            var result = 0;
+            selector: switch (mode)
+            {
+                case 1:
+                    for (var i = 0; i < values.Length; i++)
+                    {
+                        if (values[i] == 0)
+                        {
+                            result = 42;
+                            break selector;
+                        }
+                    }
+                    result = 7;
+                    break;
+            }
+            return result;
+        }
+
+        void ContinueOuterFromForeach(int[][] grid, List<int> items)
+        {
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                var flag = 0;
+                foreach (var item in items)
+                {
+                    if (item < 0)
+                    {
+                        flag = 42;      // FN NET-4914
+                        continue outer;
+                    }
+                }
+                Use(flag);
+            }
+        }
+
+        void ContinueOuterFromForeachLive(int[][] grid, List<int> items)
+        {
+            var last = 0;
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                Use(last);
+                foreach (var item in items)
+                {
+                    if (item < 0)
+                    {
+                        last = item;
+                        continue outer;
+                    }
+                }
+                last = 0;
+            }
+        }
+
+        void BreakOuterFromForeach(int[][] grid, List<int> items)
+        {
+            var flag = 0;
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                foreach (var item in items)
+                {
+                    if (item < 0)
+                    {
+                        flag = 42;      // FN NET-4914
+                        break outer;
+                    }
+                }
+                Use(flag);
+            }
+            flag = 7;
+            Use(flag);
+        }
+
+        void GotoOutOfForeach(int[][] grid, List<int> items)
+        {
+            for (var i = 0; i < grid.Length; i++)
+            {
+                var flag = 0;
+                foreach (var item in items)
+                {
+                    if (item < 0)
+                    {
+                        flag = 42;      // FN NET-4914
+                        goto next;
+                    }
+                }
+                Use(flag);
+            next:
+                ;
+            }
+        }
+
+        void GotoOutOfFor(int[][] grid, int[] items)
+        {
+            for (var i = 0; i < grid.Length; i++)
+            {
+                var flag = 0;
+                for (var j = 0; j < items.Length; j++)
+                {
+                    if (items[j] < 0)
+                    {
+                        flag = 42;      // Noncompliant
+                        goto next;
+                    }
+                }
+                Use(flag);
+            next:
+                ;
+            }
+        }
+
+        void CollectionExpressionArguments(int[] values)
+        {
+            var capacity = ReturnAnInt();                   // Noncompliant
+            capacity = 42;
+            List<int> list = [with(capacity), .. values];
+            Use(list);
+
+            var comparer = StringComparer.Ordinal;          // Noncompliant
+            comparer = StringComparer.OrdinalIgnoreCase;
+            HashSet<string> set = [with(comparer: comparer), "a"];
+            Use(set);
+        }
+
+        int LabeledBreakCompliant(int[][] grid)
+        {
+            var result = 0;
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                for (var j = 0; j < grid[i].Length; j++)
+                {
+                    if (grid[i][j] == 0)
+                    {
+                        result = 42;
+                        break outer;
+                    }
+                }
+                result = 7;
+            }
+            return result;
+        }
+
+        int LabeledBreakNonCompliant(int[][] grid)
+        {
+            var result = 0;
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                for (var j = 0; j < grid[i].Length; j++)
+                {
+                    if (grid[i][j] == 0)
+                    {
+                        result = 42;    // Noncompliant
+                        break outer;
+                    }
+                }
+                Use(result);
+            }
+            result = 7;
+            return result;
+        }
+
+        int LabeledContinueCompliant(int[][] grid)
+        {
+            var result = 0;
+            outer: for (var i = 0; i < grid.Length; i++)
+            {
+                Use(result);
+                for (var j = 0; j < grid[i].Length; j++)
+                {
+                    if (grid[i][j] == 0)
+                    {
+                        result = 42;
+                        continue outer;
+                    }
+                }
+                result = 7;
+            }
+            return result;
+        }
+
+        void LabeledContinueNoncompliant(int[][] grid)
+        {
+            outer: foreach (var row in grid)
+            {
+                var flag = 0;
+                for (var i = 0; i < row.Length; i++)
+                {
+                    if (row[i] < 0)
+                    {
+                        flag = 42;      // Noncompliant
+                        continue outer;
+                    }
+                }
+                Use(flag);
+            }
+        }
+
+        void ExtensionIndexer(Box box)
+        {
+            var key = "first";      // Noncompliant
+            key = "second";
+            box[key] = 1;
+            Use(box[key]);
+        }
+
+        static int ReturnAnInt() => 42;
+        static void Use(object o) { }
+    }
+
+    public class Box
+    {
+        public int Value;
+    }
+
+    public static class IndexerExtensions
+    {
+        extension(Box box)
+        {
+            public int this[string key]
+            {
+                get => box.Value;
+                set => box.Value = value;
+            }
+        }
+    }
+}

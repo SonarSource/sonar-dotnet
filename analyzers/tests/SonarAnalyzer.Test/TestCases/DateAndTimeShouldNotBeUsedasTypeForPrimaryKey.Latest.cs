@@ -18,6 +18,18 @@ static class Extensions
     }
 }
 
+closed class ClosedEntity
+{
+    public DateTime Id { get; set; }  // Noncompliant
+}
+
+class DerivedClosedEntity : ClosedEntity { }
+
+union UnionEntity(int, string)
+{
+    public DateTime Id { get => default; set { } }  // Compliant
+}
+
 class FieldKeyWord
 {
     public DateTime Id  // Noncompliant

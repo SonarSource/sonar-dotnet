@@ -27,4 +27,32 @@ namespace Tests.Diagnostics
     record struct RecordStructInNamespace;
 
     record class RecordClassInNamespace;
+
+    union UnionInNamespace(int, string)
+    {
+        class InnerClassOfUnion { }     // Noncompliant {{Move 'InnerClassOfUnion' into a named namespace.}} FP NET-4916
+    }
+
+    closed class ClosedInNamespace;
+}
+
+union GlobalUnion(int, string);         // FN NET-4915
+
+union GlobalUnionWithNestedType(int, string)    // FN NET-4915
+{
+    class InnerClassOfGlobalUnion { }           // Noncompliant {{Move 'InnerClassOfGlobalUnion' into a named namespace.}} FP NET-4916
+}
+
+closed class GlobalClosed;              // Noncompliant
+
+class GlobalClassWithNestedUnion        // Noncompliant
+{
+    union NestedUnion(int, string);
+}
+
+[System.Runtime.CompilerServices.Union]
+struct GlobalHandWrittenUnion           // Noncompliant
+{
+    public GlobalHandWrittenUnion(int value) => Value = value;
+    public object Value { get; }
 }
