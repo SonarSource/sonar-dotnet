@@ -122,3 +122,9 @@ public class SubClass2() : MyWrongClass(1, 2, 3, 4) // Compliant
 }
 
 public struct MyWrongStruct(int p1, int p2, int p3, int p4) { } // Noncompliant {{Constructor has 4 parameters, which is greater than the 3 authorized.}}
+
+public union MyUnion(int, string, bool, double) // Compliant
+{
+    public void Method(int p1, int p2, int p3) { }          // Compliant
+    public void Method(int p1, int p2, int p3, int p4) { }  // Noncompliant {{Method has 4 parameters, which is greater than the 3 authorized.}}
+}

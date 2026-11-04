@@ -28,6 +28,14 @@ public class ThreadResumeOrSuspendShouldNotBeCalledTest
         new VerifierBuilder<CS.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.cs").Verify();
 
     [TestMethod]
+    public void ThreadResumeOrSuspendShouldNotBeCalled_CS_Latest() =>
+        new VerifierBuilder<CS.ThreadResumeOrSuspendShouldNotBeCalled>()
+            .AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.Latest.cs")
+            .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     public void ThreadResumeOrSuspendShouldNotBeCalled_VB() =>
         new VerifierBuilder<VB.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.vb").Verify();
 }

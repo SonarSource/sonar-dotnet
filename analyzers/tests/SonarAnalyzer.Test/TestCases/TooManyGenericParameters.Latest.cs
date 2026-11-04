@@ -51,3 +51,12 @@ class Bar<T1, T2, T3>(string classParam) // Noncompliant
         bool GenericLambda<T1, T2, T3, T4>(T1 lambdaParam = default(T1)) => true; // Noncompliant
     }
 }
+
+public union Union<T1, T2>(T1, T2);         // Compliant
+public union Union<T1, T2, T3>(T1, T2, T3); // FN NET-4966
+
+public union UnionWithMethods(int, string)
+{
+    public void Foo<T1, T2, T3>() { }
+    public void Foo<T1, T2, T3, T4>() { } // Noncompliant {{Reduce the number of generic parameters in the 'UnionWithMethods.Foo' method to no more than the 3 authorized.}}
+}
