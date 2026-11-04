@@ -139,7 +139,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         NuGetMetadataReference.SystemMemory();
 #else
-        [];
+        [CoreMetadataReference.SystemMemory];
 #endif
 
     public static References SystemServiceModel =>

@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_Latest() =>
             builder.AddPaths("DoNotLockWeakIdentityObjects.Latest.cs")
+                .AddReferences(MetadataReferenceFacade.SystemMemory)
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 

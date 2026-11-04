@@ -106,3 +106,50 @@ public static class Extensions
         public void AnotherPublicMethod(string s1, string s2) { } // Compliant, it's an extension method
     }
 }
+
+namespace CSharp15
+{
+    public interface IAnimal { }
+    public record Cat : IAnimal;
+    public record Dog : IAnimal;
+
+    public union Pet(Cat, Dog) : IAnimal
+    {
+        public void Feed(Dog dog) { } // Compliant, a union is a struct and has no base class methods to hide
+    }
+
+    public class CaseTypeBase
+    {
+        public void Feed(Dog dog) { }
+    }
+
+    public class UnionParameter : CaseTypeBase
+    {
+        public void Feed(Pet pet) { } // FN, Feed(dog) now binds here through the union conversion, like any implicit conversion below
+    }
+
+    public class UnionBase
+    {
+        public void Feed(Pet pet) { }
+    }
+
+    public class InterfaceParameter : UnionBase
+    {
+        public void Feed(IAnimal animal) { } // Noncompliant {{Remove or rename that method because it hides 'CSharp15.UnionBase.Feed(CSharp15.Pet)'.}}
+    }
+
+    public class CaseTypeParameter : UnionBase
+    {
+        public void Feed(Dog dog) { } // Compliant, a Pet argument still binds to the base method
+    }
+
+    public readonly struct DogWrapper
+    {
+        public static implicit operator DogWrapper(Dog dog) => default;
+    }
+
+    public class ImplicitConversionParameter : CaseTypeBase
+    {
+        public void Feed(DogWrapper wrapper) { } // FN, Feed(dog) binds here through the implicit conversion
+    }
+}

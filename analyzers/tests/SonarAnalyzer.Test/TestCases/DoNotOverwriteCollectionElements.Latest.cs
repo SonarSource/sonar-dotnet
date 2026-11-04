@@ -63,3 +63,39 @@ class CSharp14
         items?[0] = new CSharp14(); // FN NET-2710
     }
 }
+
+class CSharp15
+{
+    void ExtensionIndexerOnCollection(HashSet<string> set)
+    {
+        set[0] = "a"; // Secondary
+        set[0] = "b"; // Noncompliant
+    }
+
+    void ExtensionIndexerOnNonCollection(IEnumerable<string> sequence)
+    {
+        sequence[0] = "a";
+        sequence[0] = "b";
+    }
+}
+
+static class CSharp15Extensions
+{
+    extension(HashSet<string> set)
+    {
+        public string this[int index]
+        {
+            get => null;
+            set { }
+        }
+    }
+
+    extension(IEnumerable<string> sequence)
+    {
+        public string this[int index]
+        {
+            get => null;
+            set { }
+        }
+    }
+}
