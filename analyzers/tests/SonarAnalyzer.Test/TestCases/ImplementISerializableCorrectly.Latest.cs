@@ -364,3 +364,25 @@ public class SomeClass(Serializable serializableField) : Serializable
         Console.WriteLine(serializableField.ToString());
     }
 }
+
+namespace CSharp15
+{
+    public union SerializableUnion(int, string) : ISerializable     // FN NET-4929
+    {
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+    [Serializable]
+    public union CompliantUnion(int, string) : ISerializable        // Compliant
+    {
+        private CompliantUnion(SerializationInfo info, StreamingContext context) : this(0) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+    public closed class ClosedSerializable : ISerializable
+    //                  ^^^^^^^^^^^^^^^^^^ Noncompliant
+    //            ^^^^^ Secondary@-1 {{Add a 'protected' constructor 'ClosedSerializable(SerializationInfo, StreamingContext)'.}}
+    {
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+}

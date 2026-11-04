@@ -45,6 +45,27 @@ void TopLevelMethod(bool condition)
 void DoTheThing() { }
 void Foo() { }
 
+void LabeledLoops(int[][] rows)
+{
+    outer: foreach (var row in rows)    // Noncompliant FP NET-4932
+        foreach (var cell in row)       // Secondary
+            if (cell == 0)
+                break outer;
+
+    next: for (var i = 0; i < rows.Length; i++) // Noncompliant FP NET-4932
+        foreach (var cell in rows[i])           // Secondary
+            if (cell < 0)
+                continue next;
+}
+
+void LabeledLoopNotIndented(int[][] rows)
+{
+    outer: foreach (var row in rows)    // Noncompliant
+    foreach (var cell in row)           // Secondary
+        if (cell == 0)
+            break outer;
+}
+
 public interface IStaticInterfaceMethod
 {
     static virtual string MyStaticVirtualMethod(bool condition)

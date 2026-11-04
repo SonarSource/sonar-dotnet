@@ -248,3 +248,27 @@ public partial class PartialConstructor
     internal string Name { get; private set; }
     public partial PartialConstructor(string name);
 }
+
+namespace CSharp15
+{
+    [Serializable]
+    public union SerializableUnion(int, string)
+    {
+        public SerializableUnion(bool flag, int other) : this(other)     // FN NET-4930
+        {
+            if (flag)
+            {
+                Value = 1;
+            }
+        }
+    }
+
+    [Serializable]
+    public union CompliantUnion(int, string)       // Compliant
+    {
+        public CompliantUnion(bool flag, int other) : this(other)
+        {
+            _ = flag;
+        }
+    }
+}

@@ -236,3 +236,87 @@ public static class Extensions
         }
     }
 }
+
+public static class ExtensionIndexers
+{
+    extension(System.Collections.Generic.IEnumerable<int> source)
+    {
+        public int this[int index] => source[index];    // Noncompliant
+
+        public int this[string key]
+        {
+            get { return source[key]; }                 // Noncompliant
+            set { source[key] = value; }                // Noncompliant
+        }
+
+        public int this[long index] => source.GetHashCode() + (int)index;
+    }
+}
+
+public class CollectionExpressionArguments
+{
+    public System.Collections.Generic.List<int> Infinite() =>   // Noncompliant
+        [with(capacity: Infinite().Count), 1, 2];
+
+    public System.Collections.Generic.List<int> Finite(int count) =>
+        [with(capacity: count > 0 ? Finite(count - 1).Count : 0), 1, 2];
+}
+
+public class LabeledJumps
+{
+    public int BreakOuter(int count)
+    {
+        outer: while (true)
+        {
+            while (true)
+            {
+                if (count > 0) break outer;
+                BreakOuter(count - 1);
+            }
+        }
+
+        return 0;
+    }
+
+    public int BreakInner(int count)    // Noncompliant
+    {
+        while (true)
+        {
+            while (true)
+            {
+                if (count > 0) break;
+                BreakInner(count - 1);
+            }
+        }
+    }
+
+    public int ContinueOuter(int count)
+    {
+        outer: do
+        {
+            while (true)
+            {
+                if (count > 0) continue outer;
+                ContinueOuter(count - 1);
+            }
+        }
+        while (--count > 0);
+
+        return 0;
+    }
+
+    public int ContinueInner(int count) // Noncompliant
+    {
+        do
+        {
+            while (true)
+            {
+                if (count > 0) continue;
+                ContinueInner(count - 1);
+            }
+        }
+        while (--count > 0);
+
+        return 0;
+    }
+}
