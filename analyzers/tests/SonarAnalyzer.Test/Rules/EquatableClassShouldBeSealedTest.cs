@@ -29,9 +29,9 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("EquatableClassShouldBeSealed.cs").Verify();
 
         [TestMethod]
-        public void EquatableClassShouldBeSealed_CSharp9() =>
-            builder.AddPaths("EquatableClassShouldBeSealed.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
+        public void EquatableClassShouldBeSealed_Latest() =>
+            builder.AddPaths("EquatableClassShouldBeSealed.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
     }
 }

@@ -36,11 +36,11 @@ public class ExceptionsShouldBeLoggedTest
             .Verify();
 
     [TestMethod]
-    public void ExceptionsShouldBeLogged_CSharp8() =>
+    public void ExceptionsShouldBeLogged_Latest() =>
         builder
             .AddAnalyzer(() => new ExceptionsShouldBeLoggedOrThrown())
-            .AddPaths("ExceptionsShouldBeLogged.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
+            .AddPaths("ExceptionsShouldBeLogged.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 

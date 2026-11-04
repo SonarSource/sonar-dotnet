@@ -139,3 +139,25 @@ namespace Extensions
         }
     }
 }
+
+namespace CSharp15
+{
+    public class Cat { }
+    public class Dog { }
+
+    [System.Runtime.CompilerServices.Union]
+    public struct Pet : System.Runtime.CompilerServices.IUnion
+    {
+        public Pet(Cat value) => Value = value;
+        public Pet(Dog value) => throw new Exception(); // FN NET-4999
+        public object Value { get; }
+    }
+
+    public class UnionUsage
+    {
+        public void Convert()
+        {
+            Pet pet = new Dog();
+        }
+    }
+}

@@ -98,3 +98,18 @@ namespace TestWithUsingStatic
         }
     }
 }
+
+namespace CSharp15
+{
+    public class BFloat16Equality
+    {
+        bool Equal(BFloat16 first, BFloat16 second) =>
+            first == second; // FN NET-4903
+
+        bool NotEqual(BFloat16 first, BFloat16 second) =>
+            first != second; // FN NET-4903
+
+        bool EqualsMethod(BFloat16 first, BFloat16 second) =>
+            first.Equals(second); // FN NET-4903
+    }
+}

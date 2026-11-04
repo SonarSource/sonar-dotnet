@@ -22,3 +22,18 @@ public abstract record RecordWithAbstractEquals : IEquatable<RecordWithAbstractE
 
 public record R1(string x); // Compliant
 public record R2(string x, string y) : R1(x); // Compliant
+
+public closed class ClosedWithNonVirtualEquals : IEquatable<ClosedWithNonVirtualEquals> // Noncompliant {{Seal class 'ClosedWithNonVirtualEquals' or implement 'IEqualityComparer<T>' instead.}}
+{
+    public bool Equals(ClosedWithNonVirtualEquals other) => true;
+}
+
+public closed class ClosedWithVirtualEquals : IEquatable<ClosedWithVirtualEquals> // Compliant
+{
+    public virtual bool Equals(ClosedWithVirtualEquals other) => true;
+}
+
+public closed class ClosedWithAbstractEquals : IEquatable<ClosedWithAbstractEquals> // Compliant
+{
+    public abstract bool Equals(ClosedWithAbstractEquals other);
+}
