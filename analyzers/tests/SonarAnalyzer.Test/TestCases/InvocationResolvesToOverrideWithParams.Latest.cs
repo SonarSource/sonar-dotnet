@@ -121,3 +121,16 @@ public static class Extensions
         public static int StaticExtension(string a, params string[] bs) => 42;
     }
 }
+
+public class TargetTypedNew
+{
+    public TargetTypedNew(string a, params object[] b) { }
+
+    public TargetTypedNew(object a, object b, object c) { }
+
+    public void Method()
+    {
+        _ = new TargetTypedNew("", null, null); // Noncompliant
+        TargetTypedNew target = new("", null, null); // FN NET-4937
+    }
+}

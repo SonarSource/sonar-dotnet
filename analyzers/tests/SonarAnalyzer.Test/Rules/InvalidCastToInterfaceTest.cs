@@ -44,4 +44,8 @@ public class InvalidCastToInterfaceTest
     [TestMethod]
     public void InvalidCastToInterface_CS_Latest() =>
         builderCS.AddPaths("InvalidCastToInterface.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void InvalidCastToInterface_CS_CSharp15() =>
+        builderCS.AddPaths("InvalidCastToInterface.CSharp15.cs").WithOptions(LanguageOptions.FromCSharp15).Verify();
 }

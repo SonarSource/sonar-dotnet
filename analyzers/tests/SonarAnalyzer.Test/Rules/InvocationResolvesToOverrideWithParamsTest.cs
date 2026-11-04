@@ -55,4 +55,8 @@ public class InvocationResolvesToOverrideWithParamsTest
     [TestMethod]
     public void InvocationResolvesToOverrideWithParams_CS_Latest() =>
         builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void InvocationResolvesToOverrideWithParams_CS_CSharp15() =>
+        builder.AddPaths("InvocationResolvesToOverrideWithParams.CSharp15.cs").WithOptions(LanguageOptions.FromCSharp15).Verify();
 }

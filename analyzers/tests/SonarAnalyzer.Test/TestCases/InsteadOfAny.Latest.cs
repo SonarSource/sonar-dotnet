@@ -11,6 +11,18 @@ list.Append(1).Any(x => x > 0);
 list.Any();
 list.Exists(x => x > 0);
 
+var dog = new Dog();
+var pets = new List<Pet> { dog };
+pets.Any(x => x.Equals(dog));       // Noncompliant FP NET-4998
+pets.Contains(dog);
+var petSet = new HashSet<Pet> { dog };
+petSet.Any(x => x.Equals(dog));     // Noncompliant FP NET-4998
+decimal amount = 5m;
+var moneys = new List<Money> { amount };
+moneys.Any(x => x.Equals(amount));  // Noncompliant FP NET-4998
+int number = 1;
+list.Any(x => x.Equals(number));    // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+
 var immutableList = ImmutableList.Create<int>();
 immutableList.Any(x => x > 0);  // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 immutableList?.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
@@ -40,4 +52,14 @@ public class Sample
             }
         }
     }
+}
+
+public class Cat;
+public class Dog;
+public union Pet(Cat, Dog);
+
+public struct Money
+{
+    public decimal Value;
+    public static implicit operator Money(decimal d) => new Money { Value = d };
 }

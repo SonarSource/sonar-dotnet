@@ -43,5 +43,11 @@ public class LocalVariableDeclarationAssignmentShouldBeJoinedTest
             .WithTopLevelStatements()
             .Verify();
 
+    [TestMethod]
+    public void LocalVariableDeclarationAssignmentShouldBeJoined_CSharp15() =>
+        verifier.AddPaths("LocalVariableDeclarationAssignmentShouldBeJoined.CSharp15.cs")
+            .WithOptions(LanguageOptions.FromCSharp15)
+            .Verify();
+
 #endif
 }

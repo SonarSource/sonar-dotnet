@@ -63,6 +63,10 @@ public class LocalFunctionShouldBeStaticTest
             """).WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
+    public void LocalFunctionShouldBeStatic_CSharp15() =>
+        builder.AddPaths("LocalFunctionShouldBeStatic.CSharp15.cs").WithOptions(LanguageOptions.FromCSharp15).VerifyNoIssues();
+
+    [TestMethod]
     public void LocalFunctionShouldBeStatic_TopLevel() =>
         builder.AddSnippet("""
             int Local(int value) => value + 1; // Noncompliant {{Make this local function static.}}
