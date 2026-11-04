@@ -214,3 +214,23 @@ public partial class PartialEvent
     private int field;
     public partial event EventHandler myPartialEvent;
 }
+
+public union ShadowingUnion(int, string)
+{
+    private static int counter;
+
+    public static int Method(int input)
+    {
+        var value = input;   // Compliant
+        var Value = input;   // Compliant
+        var counter = input; // Noncompliant {{Rename 'counter' which hides the field with the same name.}}
+        return value + Value + counter;
+    }
+
+    public int InstanceMethod(int input)
+    {
+        var value = input;   // Compliant
+        var Value = input;   // Noncompliant {{Rename 'Value' which hides the property with the same name.}}
+        return value + Value;
+    }
+}

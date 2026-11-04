@@ -27,6 +27,16 @@ public class UseWhereBeforeOrderByTest
     public void UseWhereBeforeOrderBy_CS() =>
         new VerifierBuilder<CS.UseWhereBeforeOrderBy>().AddPaths("UseWhereBeforeOrderBy.cs").Verify();
 
+#if NET
+    [TestMethod]
+    public void UseWhereBeforeOrderBy_CS_Latest() =>
+        new VerifierBuilder<CS.UseWhereBeforeOrderBy>()
+            .AddPaths("UseWhereBeforeOrderBy.Latest.cs")
+            .AddReferences([CoreMetadataReference.SystemLinqAsyncEnumerable])
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+#endif
+
     [TestMethod]
     public void UseWhereBeforeOrderBy_VB() =>
         new VerifierBuilder<VB.UseWhereBeforeOrderBy>().AddPaths("UseWhereBeforeOrderBy.vb").Verify();

@@ -50,6 +50,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemIoFileSystem { get; } = CreateReference("System.IO.FileSystem.dll");
     public static MetadataReference SystemIoFileSystemAccessControl { get; } = CreateReference("System.IO.FileSystem.AccessControl.dll");
     public static MetadataReference SystemLinq { get; } = CreateReference("System.Linq.dll");
+    public static MetadataReference SystemLinqAsyncEnumerable { get; } = CreateReference("System.Linq.AsyncEnumerable.dll");
     public static MetadataReference SystemLinqExpressions { get; } = CreateReference("System.Linq.Expressions.dll");
     public static MetadataReference SystemLinqQueryable { get; } = CreateReference("System.Linq.Queryable.dll");
     public static MetadataReference SystemMemory { get; } = CreateReference("System.Memory.dll");

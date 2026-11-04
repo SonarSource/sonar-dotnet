@@ -109,3 +109,21 @@ public partial class PartialEvent
     private EventHandler backingField;
     public partial event EventHandler Compliant;
 }
+
+public static class ExtensionIndexerSetters
+{
+    extension(System.Collections.Generic.List<int> list)
+    {
+        public int this[string key]
+        {
+            get => list.Count;
+            set => list.Add(value); // Compliant
+        }
+
+        public int this[long index]
+        {
+            get => list.Count;
+            set => list.Clear(); // Noncompliant {{Use the 'value' contextual keyword in this indexer set accessor declaration.}}
+        }
+    }
+}
