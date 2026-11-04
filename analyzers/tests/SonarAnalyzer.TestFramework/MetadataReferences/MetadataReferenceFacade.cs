@@ -167,6 +167,13 @@ public static class MetadataReferenceFacade
         ];
 #endif
 
+    public static References SystemRuntimeNumerics =>
+#if NETFRAMEWORK
+        FrameworkMetadataReference.SystemNumerics;
+#else
+        [CoreMetadataReference.SystemRuntimeNumerics];
+#endif
+
     public static References SystemSecurityCryptography =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemSecurityCryptographyAlgorithms;

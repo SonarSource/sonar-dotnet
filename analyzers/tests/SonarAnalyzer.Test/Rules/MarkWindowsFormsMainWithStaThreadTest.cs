@@ -35,6 +35,15 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
+        public void MarkWindowsFormsMainWithStaThread_CSharp15() =>
+            builderCS
+                .AddPaths("MarkWindowsFormsMainWithStaThread.CSharp15.cs")
+                .WithOutputKind(OutputKind.WindowsApplication)
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .WithOptions(LanguageOptions.FromCSharp15)
+                .Verify();
+
+        [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             builderVB
                 .AddPaths("MarkWindowsFormsMainWithStaThread.vb")

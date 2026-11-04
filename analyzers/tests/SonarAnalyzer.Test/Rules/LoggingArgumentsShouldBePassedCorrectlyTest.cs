@@ -29,6 +29,13 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         builder.AddPaths("LoggingArgumentsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
 
     [TestMethod]
+    public void LoggingArgumentsShouldBePassedCorrectly_CS_Latest() =>
+        builder.AddPaths("LoggingArgumentsShouldBePassedCorrectly.Latest.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]

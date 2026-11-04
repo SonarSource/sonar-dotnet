@@ -338,3 +338,64 @@ public partial class PartialConstructors_MixedDeclImpl_Compliant
     public partial PartialConstructors_MixedDeclImpl_Compliant(string s);
 }
 
+
+public class Cat;
+public class Dog;
+
+public union Pet(Cat, Dog)
+{
+    static int counter = 1;     // FN NET-4946
+    static string name = "X";   // FN NET-4946
+
+    static Pet()
+    {
+        counter = 2;
+        name = "Y";
+    }
+}
+
+public struct StructWithStaticConstructor
+{
+    static int counter = 1;     // Noncompliant
+
+    static StructWithStaticConstructor()
+    {
+        counter = 2;
+    }
+}
+
+public closed class ClosedBase
+{
+    int id = 100;               // Noncompliant
+
+    protected ClosedBase()
+    {
+        id = 1;
+    }
+}
+
+public class LabeledJumps
+{
+    int overwritten = 100;      // Noncompliant
+    int conditional = 100;
+
+    public LabeledJumps(int[] values)
+    {
+        outer: foreach (var i in values)
+        {
+            foreach (var j in values)
+            {
+                if (j > i)
+                {
+                    continue outer;
+                }
+                if (i > 1)
+                {
+                    conditional = 2;
+                    break outer;
+                }
+            }
+        }
+        overwritten = 2;
+    }
+}

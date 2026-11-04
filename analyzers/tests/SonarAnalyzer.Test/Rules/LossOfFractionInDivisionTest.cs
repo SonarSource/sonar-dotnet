@@ -16,6 +16,7 @@
  */
 
 using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.TestFramework.MetadataReferences;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -30,5 +31,9 @@ public class LossOfFractionInDivisionTest
 
     [TestMethod]
     public void LossOfFractionInDivision_CS_Latest() =>
-        builder.AddPaths("LossOfFractionInDivision.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("LossOfFractionInDivision.Latest.cs").AddReferences(MetadataReferenceFacade.SystemRuntimeNumerics).WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void LossOfFractionInDivision_Numerics() =>
+        builder.AddPaths("LossOfFractionInDivision.Numerics.cs").AddReferences(MetadataReferenceFacade.SystemRuntimeNumerics).Verify();
 }

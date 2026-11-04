@@ -70,6 +70,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemRuntime { get; } = CreateReference("System.Runtime.dll");
     public static MetadataReference SystemRuntimeExtensions { get; } = CreateReference("System.Runtime.Extensions.dll");
     public static MetadataReference SystemRuntimeInteropServices { get; } = CreateReference("System.Runtime.InteropServices.dll");
+    public static MetadataReference SystemRuntimeNumerics { get; } = CreateReference("System.Runtime.Numerics.dll");
     public static MetadataReference SystemRuntimeSerialization { get; } = CreateReference("System.Runtime.Serialization.dll");
     public static MetadataReference SystemRuntimeSerializationFormatters { get; } = CreateReference("System.Runtime.Serialization.Formatters.dll");
     public static MetadataReference SystemRuntimeSerializationPrimitives { get; } = CreateReference("System.Runtime.Serialization.Primitives.dll");

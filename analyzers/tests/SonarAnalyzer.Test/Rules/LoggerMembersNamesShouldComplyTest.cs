@@ -61,6 +61,13 @@ public class LoggerMembersNamesShouldComplyTest
             .Verify();
 
     [TestMethod]
+    public void LoggerMembersNamesShouldComply_MicrosoftExtensionsLogging_CS_Latest() =>
+        Builder.AddPaths("LoggerMembersNamesShouldComply.MicrosoftExtensionsLogging.Latest.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     public void LoggerMembersNamesShouldComply_Serilog_CS() =>
         Builder.AddPaths("LoggerMembersNamesShouldComply.Serilog.cs")
             .AddReferences(NuGetMetadataReference.Serilog())

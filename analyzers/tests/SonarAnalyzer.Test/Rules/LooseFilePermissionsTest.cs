@@ -61,6 +61,12 @@ public class LooseFilePermissionsTest
             .Verify();
 
     [TestMethod]
+    public void LooseFilePermissions_Windows_CS_Latest() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     public void LooseFilePermissions_Unix_CS() =>
         builderCS.AddPaths("LooseFilePermissions.Unix.cs")
             .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())

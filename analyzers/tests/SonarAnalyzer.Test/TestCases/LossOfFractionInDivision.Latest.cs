@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 decimal dec = 3 / 2;    // Noncompliant
@@ -177,4 +179,42 @@ interface IMyInterface
     {
         decimal dec = 3 / 2; // Noncompliant
     }
+}
+
+class OtherNonIntegralTypes
+{
+    void Declarations(int a, int b)
+    {
+        NFloat nfloat = a / b;                  // FN NET-4944
+        Complex<double> genericDouble = a / b;  // FN NET-4944
+        Complex<float> genericFloat = a / b;    // FN NET-4944
+        Half half = (Half)(a / b);              // Compliant, explicit conversion
+    }
+
+    void Arguments(int a, int b)
+    {
+        TakeNFloat(a / b);                      // FN NET-4944
+        TakeGeneric(a / b);                     // FN NET-4944
+    }
+
+    void TakeNFloat(NFloat value) { }
+    void TakeGeneric(Complex<double> value) { }
+}
+
+class DecimalFloatingPoint
+{
+    Decimal64 field64;
+
+    Decimal64 Assignment(int a, int b)
+    {
+        Decimal64 d64 = a / b;                  // FN NET-4944
+        Decimal128 d128 = a / b;                // FN NET-4944
+        d64 = a / b;                            // FN NET-4944
+        Take64(a / b);                          // FN NET-4944
+        field64 = a / b;                        // FN NET-4944
+        d128 = (Decimal128)a / b;               // Compliant
+        return a / b;                           // FN NET-4944
+    }
+
+    void Take64(Decimal64 value) { }
 }

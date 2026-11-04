@@ -410,4 +410,53 @@ namespace CSharp13
             return null;
         }
     }
+
+    public class LabeledJumps
+    {
+        public bool BreakOuter(IEnumerable<int> xs, IEnumerable<int> ys)
+        {
+            var found = false;
+            outer: foreach (var x in xs)
+            {
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}} FP NET-4949
+                {
+                    if (y > x)        // Secondary
+                    {
+                        found = true;
+                        break outer;
+                    }
+                }
+            }
+            return found;
+        }
+
+        public bool BreakSelf(IEnumerable<int> ys)
+        {
+            var found = false;
+            self: foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (y > 0)              // Secondary
+                {
+                    found = true;
+                    break self;
+                }
+            }
+            return found;
+        }
+
+        public void ContinueOuter(IEnumerable<int> xs, IEnumerable<int> ys)
+        {
+            outer: foreach (var x in xs)
+            {
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}} FP NET-4949
+                {
+                    if (y > x)        // Secondary
+                    {
+                        Console.WriteLine(y);
+                        continue outer;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -34,6 +34,7 @@ public static class FrameworkMetadataReference
 
     public static References System { get; } = Create("System.dll");
     public static References SystemComponentModelComposition { get; } = Create("System.ComponentModel.Composition.dll");
+    public static References SystemNumerics { get; } = Create("System.Numerics.dll");
     public static References SystemNetHttp { get; } = Create("System.Net.Http.dll");
     public static References SystemIOCompression { get; } = Create("System.IO.Compression.dll");
     public static References SystemIOCompressionFileSystem { get; } = Create("System.IO.Compression.FileSystem.dll");

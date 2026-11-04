@@ -32,6 +32,13 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
             .Verify();
 
     [TestMethod]
+    public void LoggingTemplatePlaceHoldersShouldBeInOrder_CS_Latest() =>
+        Builder.AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .AddPaths("LoggingTemplatePlaceHoldersShouldBeInOrder.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
