@@ -6,6 +6,12 @@ b = f is not Apple;     // Compliant
 b = apple.GetType() == typeof(int?);                // Compliant
 b = apple.GetType().IsInstanceOfType(f.GetType());  // Compliant
 b = f as Apple == null;         // Noncompliant
+
+Pet pet = new UnionDog();
+b = typeof(UnionDog).IsInstanceOfType(pet);             // Noncompliant FP NET-4991
+b = typeof(UnionDog).IsAssignableFrom(pet.GetType());   // Noncompliant FP NET-4991
+b = pet.GetType() == typeof(UnionDog);                  // Noncompliant FP NET-4991
+b = pet is UnionDog;                                    // Compliant
 b = f as Apple is null;         // Noncompliant
 b = f as Apple is not null;     // Noncompliant
 b = f as Apple is not not not not null; // Noncompliant
@@ -42,3 +48,7 @@ public class SomeClass : System.Collections.ArrayList
         return a is [SomeClass];
     }
 }
+
+public class UnionCat;
+public sealed class UnionDog;
+public union Pet(UnionCat, UnionDog);

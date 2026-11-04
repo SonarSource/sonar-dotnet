@@ -28,6 +28,10 @@ public class GotoStatementTest
         new VerifierBuilder<CS.GotoStatement>().AddPaths("GotoStatement.cs").Verify();
 
     [TestMethod]
+    public void GotoStatement_CS_Latest() =>
+        new VerifierBuilder<CS.GotoStatement>().AddPaths("GotoStatement.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+
+    [TestMethod]
     public void GotoStatement_VB() =>
         new VerifierBuilder<VB.GotoStatement>().AddPaths("GotoStatement.vb").Verify();
 }

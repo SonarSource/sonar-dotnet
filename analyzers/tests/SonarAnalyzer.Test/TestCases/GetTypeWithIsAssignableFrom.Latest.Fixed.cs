@@ -6,6 +6,12 @@ b = f is not Apple;     // Compliant
 b = apple.GetType() == typeof(int?);                // Compliant
 b = apple.GetType().IsInstanceOfType(f.GetType());  // Compliant
 b = !(f is Apple);         // Fixed
+
+Pet pet = new UnionDog();
+b = pet is UnionDog;             // Fixed
+b = pet is UnionDog;   // Fixed
+b = pet is UnionDog;                  // Fixed
+b = pet is UnionDog;                                    // Compliant
 b = !(f is Apple);         // Fixed
 b = f is Apple;     // Fixed
 b = !(f is Apple); // Fixed
@@ -42,3 +48,7 @@ public class SomeClass : System.Collections.ArrayList
         return a is [SomeClass];
     }
 }
+
+public class UnionCat;
+public sealed class UnionDog;
+public union Pet(UnionCat, UnionDog);

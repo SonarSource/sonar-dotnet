@@ -240,3 +240,22 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp15
+{
+    public closed class ClosedDisposable : IDisposable // Noncompliant
+    {                                                  // Secondary@-1
+        public void Dispose() { }  // Secondary
+    }
+
+    public closed class ClosedCompliantDisposable : IDisposable
+    {
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) { }
+    }
+}

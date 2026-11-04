@@ -125,3 +125,14 @@ public static class Extensions
         T Extension(T item) => item;    // Doesn't make the class compliant
     }
 }
+
+public class Cat;
+public class Dog;
+
+public union UnusedParameter<T>(Cat, Dog); // FN NET-4931
+
+public union UsedParameter<T>(Cat, T);
+
+public closed record class Tree<T>; // Noncompliant FP NET-4843
+
+public record class Leaf<T>(T Value) : Tree<T>;
