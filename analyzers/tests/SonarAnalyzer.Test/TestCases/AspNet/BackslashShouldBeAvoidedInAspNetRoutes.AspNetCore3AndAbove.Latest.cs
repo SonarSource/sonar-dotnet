@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 class WithAllControllerEndpointRouteBuilderExtensionsMethods
@@ -61,5 +64,20 @@ class WithAllControllerEndpointRouteBuilderExtensionsMethods
     private sealed class ATransformer : DynamicRouteValueTransformer
     {
         public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values) => throw new NotImplementedException();
+    }
+}
+
+class CollectionExpressionWithArgument
+{
+    RouteCollection Create() => [with("{controller=Home}\\{action=Index}"), "x"]; // Noncompliant
+    //                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    RouteCollection Compliant() => [with("{controller=Home}/{action=Index}"), "x"];
+
+    class RouteCollection : IEnumerable<string>
+    {
+        public RouteCollection([StringSyntax("Route")] string template) { }
+        public void Add(string item) { }
+        public IEnumerator<string> GetEnumerator() => throw new NotImplementedException();
+        IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
     }
 }
