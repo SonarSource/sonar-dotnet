@@ -1160,3 +1160,53 @@ public class Repro_3596_AD0001<T> // https://sonarsource.atlassian.net/browse/NE
 
     private class Nullable(Repro_3596_AD0001<T> outer) { }
 }
+
+public union UnionMembers(int, string)
+{
+    private static int unread; // Noncompliant {{Remove this unread private field 'unread' or refactor the code to use its value.}}
+    private static void Unused() { } // Noncompliant
+    private static void Used() { }
+
+    public static void Method()
+    {
+        Used();
+        unread = 42;
+    }
+}
+
+public class NestedUnions
+{
+    private union UnusedNestedUnion(int, string); // FN NET-4972
+    private union UsedNestedUnion(int, string);   // Compliant
+
+    public object Method() => new UsedNestedUnion(42);
+}
+
+public static class ExtensionIndexers
+{
+    extension(List<int> list)
+    {
+        private int this[string used] => list.Count; // Noncompliant {{Remove the unused private property 'this[]'.}} FP NET-4973
+        private int this[long unused] => list.Count; // Noncompliant
+    }
+
+    public static int Method(List<int> list) => list["key"];
+}
+
+public class CollectionExpressionArguments
+{
+    public class MyCollection : IEnumerable<int>
+    {
+        private readonly List<int> items;
+
+        public MyCollection() => items = [];
+        private MyCollection(int used) => items = new(used); // Noncompliant {{Remove the unused private constructor 'MyCollection'.}} FP NET-4974
+        private MyCollection(string unused) => items = []; // Noncompliant
+
+        public static MyCollection Create() => [with(4), 1, 2];
+
+        public void Add(int item) => items.Add(item);
+        public IEnumerator<int> GetEnumerator() => items.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+}

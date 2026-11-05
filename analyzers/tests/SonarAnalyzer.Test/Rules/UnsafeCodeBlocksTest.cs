@@ -45,4 +45,16 @@ public class UnsafeCodeBlocksTest
             """)
             .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
+
+    [TestMethod]
+    public void UnsafeUnion() =>
+        builder.AddSnippet("""
+            unsafe union UnsafeUnion(int, string);  // FN NET-4971
+            union SafeUnion(int, string)            // Compliant
+            {
+                unsafe void Method() { }            // Noncompliant
+            }
+            """)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
