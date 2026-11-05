@@ -30,5 +30,8 @@ public class StreamReadStatementTest
 
     [TestMethod]
     public void StreamReadStatement_Latest() =>
-        builder.AddPaths("StreamReadStatement.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("StreamReadStatement.Latest.cs")
+            .AddReferences(MetadataReferenceFacade.SystemMemory)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

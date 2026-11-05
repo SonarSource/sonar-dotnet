@@ -94,3 +94,19 @@ namespace CSharp14
         }
     }
 }
+
+class DeconstructionForEach
+{
+    void Concatenate(System.Collections.Generic.Dictionary<string, string> pairs)
+    {
+        var keys = "";
+        foreach (var (key, value) in pairs)
+        {
+            keys += key;      // FN NET-5011
+        }
+        foreach (var pair in pairs)
+        {
+            keys += pair.Key; // Noncompliant {{Use a StringBuilder instead.}}
+        }
+    }
+}

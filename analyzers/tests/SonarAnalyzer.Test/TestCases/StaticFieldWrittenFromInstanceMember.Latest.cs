@@ -204,3 +204,42 @@ static class CSharp14
         }
     }
 }
+
+static class CSharp15
+{
+    class Sample { }
+
+    static int count = 0;
+    extension(Sample sample)
+    {
+        int this[int index]
+        {
+            get { count++; return count; } // Compliant
+            set { count = value; }         // Compliant
+        }
+    }
+}
+
+class Indexer
+{
+    static int count = 0; // Secondary
+    int this[int index]
+    {
+        get => count;
+        set { count = value; } // Noncompliant {{Make the enclosing instance property 'static' or remove this set on the 'static' field.}} NET-5010
+    }
+}
+
+public record Cat;
+public record Dog;
+
+public union Pet(Cat, Dog)
+{
+    static int count = 0;             // Secondary
+
+    public void Feed() =>
+        count++;                      // Noncompliant {{Make the enclosing instance method 'static' or remove this set on the 'static' field.}}
+
+    public static void Reset() =>
+        count = 0;                    // Compliant
+}

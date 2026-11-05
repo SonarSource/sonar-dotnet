@@ -125,3 +125,25 @@ namespace CSharp14
         public partial Person(DateTime birthday);
     }
 }
+
+namespace CSharp15
+{
+    public record Cat;
+    public record Dog;
+
+    public union Pet(Cat, Dog)
+    {
+        private static int created;   // Secondary
+        private static int instances;
+
+        static Pet()
+        {
+            instances = 0;            // Compliant
+        }
+
+        public Pet(int age, string name) : this(new Cat())
+        {
+            created++;                // Noncompliant {{Remove this assignment of 'created' or initialize it statically.}}
+        }
+    }
+}

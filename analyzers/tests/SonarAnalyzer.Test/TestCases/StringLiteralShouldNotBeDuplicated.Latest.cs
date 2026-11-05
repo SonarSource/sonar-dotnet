@@ -365,3 +365,25 @@ namespace CSharp13
         public partial string World => "csharp13";
     }
 }
+
+namespace CSharp15
+{
+    public record Cat;
+    public record Dog;
+
+    public union Pet(Cat, Dog)
+    {
+        public string Name() => "unknown pet";  // FN NET-5014
+        public string Kind() => "unknown pet";
+        public string Sound() => "unknown pet";
+        public string Owner() => "unknown pet";
+    }
+
+    public struct PetStruct
+    {
+        public string Name() => "unknown pet";  // Noncompliant {{Define a constant instead of using this literal 'unknown pet' 4 times.}}
+        public string Kind() => "unknown pet";  // Secondary
+        public string Sound() => "unknown pet"; // Secondary
+        public string Owner() => "unknown pet"; // Secondary
+    }
+}

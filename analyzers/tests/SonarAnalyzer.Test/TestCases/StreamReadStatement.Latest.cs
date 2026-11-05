@@ -37,3 +37,16 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+public class NewStreamTypes
+{
+    public async Task Read(ReadOnlyMemory<byte> memory, System.Buffers.ReadOnlySequence<byte> sequence, byte[] buffer)
+    {
+        var memoryStream = new ReadOnlyMemoryStream(memory);
+        memoryStream.Read(buffer, 0, buffer.Length);                                // Noncompliant {{Check the return value of the 'Read' call to see how many bytes were read.}}
+        var read = memoryStream.Read(buffer, 0, buffer.Length);                     // Compliant
+        new StringStream("text", System.Text.Encoding.UTF8).Read(buffer.AsSpan());  // Noncompliant {{Check the return value of the 'Read' call to see how many bytes were read.}}
+        new System.Buffers.ReadOnlySequenceStream(sequence).ReadAtLeast(buffer, 1); // Noncompliant {{Check the return value of the 'ReadAtLeast' call to see how many bytes were read.}}
+        await new WritableMemoryStream(buffer).ReadAsync(buffer);                   // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
+    }
+}

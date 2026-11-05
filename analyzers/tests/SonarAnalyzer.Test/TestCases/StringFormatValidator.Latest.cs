@@ -24,3 +24,15 @@ class CSharp13
         _ = string.Format("{0}", "\e");     // Compliant
     }
 }
+
+class CSharp15
+{
+    void CollectionExpressionArguments(object first, object second, object third)
+    {
+        _ = string.Format("{0} {1}", [first, second]);                         // Noncompliant {{Invalid string format, the highest string format item index should not be greater than the arguments count.}} FP NET-5012
+        _ = string.Format("{0} {1}", new object[] { first, second });          // Compliant
+        _ = string.Format("{0} {2}", [first, second, third]);                  // Noncompliant {{Invalid string format, the highest string format item index should not be greater than the arguments count.}} FP NET-5012, FN NET-5013
+        _ = string.Format("{0} {2}", new object[] { first, second, third });   // Noncompliant {{The format string might be wrong, the following item indexes are missing: '1'.}}
+        _ = string.Format("{0}", [first]);                                     // Compliant
+    }
+}
