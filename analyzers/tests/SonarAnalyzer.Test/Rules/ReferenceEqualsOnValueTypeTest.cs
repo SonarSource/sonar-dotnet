@@ -25,5 +25,12 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ReferenceEqualsOnValueType() =>
             new VerifierBuilder<ReferenceEqualsOnValueType>().AddPaths("ReferenceEqualsOnValueType.cs").Verify();
+
+        [TestMethod]
+        public void ReferenceEqualsOnValueType_Latest() =>
+            new VerifierBuilder<ReferenceEqualsOnValueType>()
+                .AddPaths("ReferenceEqualsOnValueType.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
+                .Verify();
     }
 }

@@ -252,3 +252,14 @@ class SpanConversions
     ReadOnlySpan<char> Method3 => default;      // Compliant
     ReadOnlySpan<char> Method4 => "a string";   // Compliant
 }
+
+public class Catalog { }
+
+public static class CatalogExtensions
+{
+    extension(Catalog catalog)
+    {
+        public int[] this[string key] => null;  // Noncompliant
+        public int[] this[int index] => [];     // Compliant
+    }
+}

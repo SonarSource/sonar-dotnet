@@ -33,4 +33,10 @@ public class RequireAttributeUsageAttributeTest
         builder.AddPaths("RequireAttributeUsageAttribute.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
+
+    [TestMethod]
+    public void RequireAttributeUsageAttribute_Latest() =>
+        builder.AddPaths("RequireAttributeUsageAttribute.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

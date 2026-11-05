@@ -33,6 +33,7 @@ public class ReturnValueIgnoredTest
         builder.AddPaths("ReturnValueIgnored.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .AddReferences(MetadataReferenceFacade.SystemRuntimeNumerics)
             .Verify();
 
     [TestMethod]
