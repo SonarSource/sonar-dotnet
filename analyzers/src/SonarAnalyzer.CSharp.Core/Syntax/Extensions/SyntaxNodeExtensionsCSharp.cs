@@ -304,15 +304,15 @@ public static class SyntaxNodeExtensionsCSharp
             PostfixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
             UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
             VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
-            { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
+            { } fileScoped when fileScoped.IsKind(SyntaxKindEx.FileScopedNamespaceDeclaration)
                 && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
-            { } localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
-            { } singleVar when SingleVariableDesignationSyntaxWrapper.IsInstance(singleVar) => ((SingleVariableDesignationSyntaxWrapper)singleVar).Identifier,
-            { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
-            { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
+            { } localFunction when localFunction.IsKind(SyntaxKindEx.LocalFunctionStatement) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
+            { } singleVar when singleVar.IsKind(SyntaxKindEx.SingleVariableDesignation) => ((SingleVariableDesignationSyntaxWrapper)singleVar).Identifier,
+            { } implicitNew when implicitNew.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
+            { } primary when primary.IsKind(SyntaxKindEx.PrimaryConstructorBaseType)
                 && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
-            { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
-            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { WrappedInstance: not null } expressionColon =>
+            { } refType when refType.IsKind(SyntaxKindEx.RefType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
+            { } subPattern when subPattern.IsKind(SyntaxKindEx.Subpattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { WrappedInstance: not null } expressionColon =>
                 GetIdentifier(expressionColon.Expression),
             _ => null
         };
