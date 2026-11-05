@@ -101,3 +101,34 @@ class FieldKeyword<T>
 {
     static int Property { get => field; set => field = value; } // Noncompliant
 }
+
+namespace CSharp15
+{
+    public union GenericUnion<T>(T, string)
+    {
+        internal static string field; // FN NET-5033
+
+        internal static T genericField; // Compliant, field type depends on the type parameter
+    }
+
+    public union GenericUnionWithProperty<T>(T, string)
+    {
+        static int Property { get; set; }       // FN NET-5033
+
+        static T GenericProperty { get; set; }  // Compliant
+    }
+
+    public union GenericUnionWithNestedClass<T>(T, string)
+    {
+        class Nested
+        {
+            static int field;           // Noncompliant
+            static T genericField;      // Compliant
+        }
+    }
+
+    public union NonGenericUnion(int, string)
+    {
+        static int field;               // Compliant, the union is not generic
+    }
+}

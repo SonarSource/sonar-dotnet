@@ -141,3 +141,51 @@ namespace CSharp13
         public static int A = Y;
     }
 }
+
+namespace CSharp15
+{
+    public union UnionCorrectOrder(UnionCaseA, UnionCaseB)
+    {
+        public static int Y = 42;
+        public static int Z = Y; // Noncompliant FP NET-5034
+
+        public static int U = Const; // Compliant - const
+        public const int Const = 5;
+    }
+
+    public union UnionWrongOrder(UnionCaseA, UnionCaseB)
+    {
+        public static int X = Y; // Noncompliant
+        public static int Y = 42;
+    }
+
+    public class ClassContainingUnions
+    {
+        public union NestedUnionCorrectOrder(UnionCaseA, UnionCaseB)
+        {
+            public static int Y = 42;
+            public static int Z = Y; // Noncompliant FP NET-5034
+        }
+
+        public union NestedUnionWrongOrder(UnionCaseA, UnionCaseB)
+        {
+            public static int X = Y; // Noncompliant
+            public static int Y = 42;
+        }
+    }
+
+    public partial union PartialUnion(UnionCaseA, UnionCaseB)
+    {
+        public static int A = 1;
+        public static int B = A; // Noncompliant FP NET-5034
+        public static int X = Y; // Noncompliant
+    }
+
+    public partial union PartialUnion
+    {
+        public static int Y = 42;
+    }
+
+    public record class UnionCaseA(string Name);
+    public record class UnionCaseB(string Name);
+}

@@ -86,3 +86,20 @@ static class Extensions
         }                                       // Secondary@-1
     }
 }
+
+public class Settings { }
+
+public static class SettingsExtensions
+{
+    extension(Settings settings)
+    {
+        public int this[string key] { get => 0; set { } }
+
+        static void Assign(Settings instance)
+        {
+            instance["key"] = instance["key"];      // Noncompliant
+                                                    // Secondary@-1
+            instance["key"] = instance["other"];    // Compliant
+        }
+    }
+}
