@@ -104,3 +104,14 @@ namespace NUnitTests
     {
     }
 }
+
+namespace CSharp15
+{
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    [TestClass]
+    public closed class ClosedTestBase { }      // Compliant
+
+    [TestClass]
+    public class OpenTestBase { }               // Noncompliant {{Add some tests to this class.}}
+}
