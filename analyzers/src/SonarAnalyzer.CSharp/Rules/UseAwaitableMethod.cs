@@ -147,7 +147,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             var members = FetchMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
             var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
             var awaitableAlternatives = SpeculativeBindCandidates(model, awaitableRoot, invocationExpression, awaitableCandidates)
-                .Where(x => !containingSymbol.Equals(x) && x.IsAwaitableNonDynamic())
+                .Where(x => !containingSymbol.Equals(x) && x.IsAwaitableNonDynamic() && !x.IsHiddenFromIntelliSense)
                 .ToImmutableArray();
             return awaitableAlternatives;
         }
@@ -163,7 +163,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             .Distinct()
             .SelectMany(x => x.GetMembers(methodName))
             .OfType<IMethodSymbol>()
-            .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute));
+            .Where(x => !x.IsHiddenFromIntelliSense);
 
     private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer lookup, ITypeSymbol invokedType) =>
         lookup.TryGetValue(invokedType, out var extensionMethodContainer)

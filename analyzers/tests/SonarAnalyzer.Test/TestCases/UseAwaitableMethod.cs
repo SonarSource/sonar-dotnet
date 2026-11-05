@@ -318,6 +318,92 @@ class ObsoletedMethod
     }
 }
 
+class EditorBrowsableNeverMethod // NET-4733
+{
+    public void VoidMethod() { }
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // Compliant: The overload is hidden from IntelliSense
+    }
+}
+
+class EditorBrowsableNeverOnlyApplicableOverload // NET-4733
+{
+    public void VoidMethod() { }
+    public Task VoidMethodAsync(string s) => Task.CompletedTask;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // Compliant: The only applicable overload is hidden from IntelliSense
+    }
+}
+
+class ObsoleteOnlyApplicableOverload // NET-4733
+{
+    public void VoidMethod() { }
+    public Task VoidMethodAsync(string s) => Task.CompletedTask;
+    [Obsolete]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // Compliant: The only applicable overload is deprecated
+    }
+}
+
+class EditorBrowsableNeverWithVisibleCancellationTokenOverload // NET-4733
+{
+    public void VoidMethod() { }
+    public Task VoidMethodAsync(CancellationToken cancel) => Task.CompletedTask;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // FN: VoidMethodAsync(CancellationToken) is visible, but the call binds to the hidden overload
+    }
+}
+
+class EditorBrowsableAdvancedMethod // NET-4733
+{
+    public void VoidMethod() { }
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // Noncompliant
+    }
+}
+
+public class HiddenExtensionHost { }
+
+public static class HiddenExtensions
+{
+    public static void ExtMethod(this HiddenExtensionHost host) { }
+    public static Task ExtMethodAsync(this HiddenExtensionHost host, string s) => Task.CompletedTask;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public static Task ExtMethodAsync(this HiddenExtensionHost host) => Task.CompletedTask;
+
+    public static void VisibleExtMethod(this HiddenExtensionHost host) { }
+    public static Task VisibleExtMethodAsync(this HiddenExtensionHost host, string s) => Task.CompletedTask;
+    public static Task VisibleExtMethodAsync(this HiddenExtensionHost host) => Task.CompletedTask;
+}
+
+class EditorBrowsableNeverExtensionOnlyApplicableOverload // NET-4733
+{
+    async Task Test(HiddenExtensionHost host)
+    {
+        host.ExtMethod();        // Compliant: The only applicable extension overload is hidden from IntelliSense
+        host.VisibleExtMethod(); // Noncompliant
+    }
+}
+
 class ExpressionTrees
 {
     public bool BoolMethod() => true;
