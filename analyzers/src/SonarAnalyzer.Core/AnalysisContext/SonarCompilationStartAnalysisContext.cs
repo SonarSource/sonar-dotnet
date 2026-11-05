@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
@@ -22,12 +24,17 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
-    private static readonly SyntaxTreeValueProvider<ShouldAnalyzeTreeCache> ShouldAnalyzeValueProvider = new(x => new ShouldAnalyzeTreeCache(x));
+    // One cache per compilation, shared by all analyzers. Execute reads it for every action, so it does not use a SyntaxTreeValueProvider:
+    // CompilationStartAnalysisContext.TryGetValue takes a lock on each read, which all analyzers contend for.
+    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, ShouldAnalyzeTreeCache>> ShouldAnalyzeCaches = new();
+
+    private readonly ConcurrentDictionary<SyntaxTree, ShouldAnalyzeTreeCache> shouldAnalyzeCache;
 
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
-    internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) =>
+        shouldAnalyzeCache = ShouldAnalyzeCaches.GetValue(context.Compilation, static _ => new ConcurrentDictionary<SyntaxTree, ShouldAnalyzeTreeCache>());
 
     /// <inheritdoc cref="CompilationStartAnalysisContext.TryGetValue{TValue}(SourceText, SourceTextValueProvider{TValue}, out TValue)"/>
     public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
@@ -81,10 +88,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         where TSonarContext : IAnalysisContext // Generic specialization: The JIT emmits a specialized version of Execute() for each struct TSonarContext, which means it gets called without boxing.
     {
         Debug.Assert(context.HasMatchingScope(AnalysisContext.SupportedDiagnostics), "SonarAnalysisContext.Execute does this check. It should never be needed here.");
-        if (!TryGetValue(sourceTree, ShouldAnalyzeValueProvider, out var shouldAnalyzeTree))
-        {
-            shouldAnalyzeTree = new ShouldAnalyzeTreeCache(sourceTree);
-        }
+        var shouldAnalyzeTree = shouldAnalyzeCache.GetOrAdd(sourceTree, static x => new ShouldAnalyzeTreeCache(x));
         if (shouldAnalyzeTree.ShouldAnalyze(context, generatedCodeRecognizer))
         {
             action(context);
