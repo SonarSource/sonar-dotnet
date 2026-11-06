@@ -17,33 +17,35 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotCallGCSuppressFinalizeTest
 {
-    [TestClass]
-    public class DoNotCallGCSuppressFinalizeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCSuppressFinalize>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCSuppressFinalize>();
 
-        [TestMethod]
-        public void DoNotCallGCSuppressFinalize() =>
-            builder.AddPaths("DoNotCallGCSuppressFinalize.cs")
-                .Verify();
+    [TestMethod]
+    public void DoNotCallGCSuppressFinalize() =>
+        builder.AddPaths("DoNotCallGCSuppressFinalize.cs")
+            .Verify();
 
-#if NET
+    [TestMethod]
+    public void DoNotCallGCSuppressFinalize_NetCore() =>
+        builder.AddPaths("DoNotCallGCSuppressFinalize.NetCore.cs")
+            .WithNetOnly()
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .Verify();
 
-        [TestMethod]
-        public void DoNotCallGCSuppressFinalize_NetCore() =>
-            builder.AddPaths("DoNotCallGCSuppressFinalize.NetCore.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void DoNotCallGCSuppressFinalize_Net5() =>
+        builder.AddPaths("DoNotCallGCSuppressFinalize.Net5.cs")
+            .WithNetOnly()
+            .WithOptions(LanguageOptions.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void DoNotCallGCSuppressFinalize_Net5() =>
-            builder.AddPaths("DoNotCallGCSuppressFinalize.Net5.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-#endif
-
-    }
+    [TestMethod]
+    public void DoNotCallGCSuppressFinalize_Latest() =>
+        builder.AddPaths("DoNotCallGCSuppressFinalize.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

@@ -27,6 +27,60 @@ catch (Exception e) when (((e is not NullReferenceException))) // Compliant
     throw;
 }
 
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is NullReferenceException nre) // FN NET-5019
+{
+    throw;
+}
+
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is NullReferenceException _) // FN NET-5019
+{
+    throw;
+}
+
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is NullReferenceException or ArgumentNullException) // FN NET-5019
+{
+    throw;
+}
+
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is NullReferenceException { Message: not null }) // FN NET-5019
+{
+    throw;
+}
+
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is (NullReferenceException)) // FN NET-5019
+{
+    throw;
+}
+
+try
+{
+    return args[0].Length;
+}
+catch (Exception e) when (e is not NullReferenceException) // Compliant
+{
+    throw;
+}
+
 record R
 {
     int i;

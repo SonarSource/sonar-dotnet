@@ -103,6 +103,26 @@ static class Extensions
 {
     extension(Sample s)
     {
-        void Dispose() { }  // Compliant FP NET-2712
+        void Dispose() { }  // Compliant NET-2712
     }
+}
+
+public union UnionNoInterface(int, bool)
+{
+    public void Dispose() { } // Noncompliant {{Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.}}
+}
+
+public union UnionDisposable(int, bool) : IDisposable
+{
+    public void Dispose() { }
+}
+
+public closed class ClosedNoInterface
+{
+    public void Dispose() { } // Noncompliant {{Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.}}
+}
+
+public closed class ClosedDisposable : IDisposable
+{
+    public void Dispose() { }
 }

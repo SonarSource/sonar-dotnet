@@ -107,3 +107,25 @@ class ConditionalAssignment
         }
     }
 }
+
+namespace CSharp15
+{
+    public union FileOrText(FileStream, string);
+
+    class UnionConversion
+    {
+        FileOrText UsingDeclaration(string path)
+        {
+            using var fs = File.Create(path); // Noncompliant {{Remove the 'using' statement; it will cause automatic disposal of 'fs'.}}
+            return fs;
+        }
+
+        FileOrText UsingStatement(string path)
+        {
+            using (var fs = File.Create(path)) // Noncompliant
+            {
+                return fs;
+            }
+        }
+    }
+}

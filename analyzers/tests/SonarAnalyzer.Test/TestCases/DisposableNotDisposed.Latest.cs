@@ -257,3 +257,95 @@ class RegistryKeyUsingDeclaration
         using var key = Registry.CurrentUser.OpenSubKey("Software"); // Compliant - using declaration
     }
 }
+
+namespace CSharp15
+{
+    using System.IO.Compression;
+    using System.Text;
+
+    public class NewStreamTypes
+    {
+        public void Method(byte[] bytes)
+        {
+            var readOnly = new ReadOnlyMemoryStream(bytes);
+            var writable = new WritableMemoryStream(bytes);
+            var text = new StringStream("text", Encoding.UTF8);
+            var zstandard = new ZstandardStream(readOnly, CompressionMode.Decompress);
+            var zstandardEncoder = new ZstandardEncoder();  // FN NET-5016
+            var deflateEncoder = new DeflateEncoder();      // FN NET-5016
+        }
+    }
+
+    public union FileOrText(FileStream, string)
+    {
+        public void Method()
+        {
+            var fs = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant
+        }
+    }
+
+    public class NewStreamTypesNotPassedAsArgument
+    {
+        public void Method(byte[] bytes)
+        {
+            var readOnly = new ReadOnlyMemoryStream(bytes);
+            var zstandard = new ZstandardStream(Stream.Null, CompressionMode.Decompress); // Compliant - constructed from another stream
+        }
+    }
+
+    public class UnionConversion
+    {
+        public void NotDisposed(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} NET-5015
+        }
+
+        public void DisposedViaIsPattern(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            if (u is FileStream fs)
+            {
+                fs.Dispose();
+            }
+        }
+
+        public void DisposedViaSwitchExpression(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            _ = u switch
+            {
+                FileStream fs => Close(fs),
+                _ => 0
+            };
+        }
+
+        public void DisposedViaValueCast(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            ((IDisposable)u.Value).Dispose();
+        }
+
+        public void DisposedViaValueAs(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            (u.Value as IDisposable)?.Dispose();
+        }
+
+        public void DisposedViaSwitchStatement(string path)
+        {
+            FileOrText u = new FileStream(path, FileMode.Open); // Compliant
+            switch (u)
+            {
+                case FileStream fs:
+                    fs.Dispose();
+                    break;
+            }
+        }
+
+        private static int Close(FileStream fs)
+        {
+            fs.Dispose();
+            return 1;
+        }
+    }
+}

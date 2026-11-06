@@ -12,3 +12,13 @@ record R
         init => GC.Collect(); // Noncompliant
     }
 }
+
+union IntOrBool(int, bool)
+{
+    void Foo() => GC.Collect(); // Noncompliant
+}
+
+closed class ClosedClass
+{
+    void Foo() => GC.Collect(); // Noncompliant
+}

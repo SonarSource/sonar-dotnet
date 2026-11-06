@@ -45,7 +45,12 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_DefaultValues_Latest() =>
-        builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs").AddReferences(AdditionalReferences).WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs")
+            .AddReferences(AdditionalReferences)
+            .AddReferences(MetadataReferenceFacade.SystemIoCompression)
+            .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_CustomValues() =>

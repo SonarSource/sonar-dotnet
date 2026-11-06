@@ -50,5 +50,6 @@ public class DisposableNotDisposedTest
             .AddReferences(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver5))
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
+            .AddReferences(MetadataReferenceFacade.SystemIoCompression)
             .Verify();
 }

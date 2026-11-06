@@ -286,3 +286,41 @@ namespace Extensions
         }
     }
 }
+
+namespace CSharp15
+{
+    public class Base
+    {
+        public void SomeMethod(int count) { }
+    }
+
+    public abstract class AbstractDerived : Base
+    {
+        private void SomeMethod(int count) { }  // Noncompliant {{This member hides 'CSharp15.Base.SomeMethod(int)'. Make it non-private or seal the class.}} NET-5017
+    }
+
+    public closed class ClosedDerived : Base
+    {
+        private void SomeMethod(int count) { }  // Noncompliant {{This member hides 'CSharp15.Base.SomeMethod(int)'. Make it non-private or seal the class.}} NET-5017
+    }
+
+    public record BaseRecord
+    {
+        public void SomeMethod(int count) { }
+    }
+
+    public closed record ClosedRecord : BaseRecord
+    {
+        private void SomeMethod(int count) { }  // Noncompliant {{This member hides 'CSharp15.BaseRecord.SomeMethod(int)'. Make it non-private or seal the class.}} NET-5017
+    }
+
+    public record PositionalBase(string X)
+    {
+        public void SomeMethod(int count) { }
+    }
+
+    public closed record ClosedPositional(string X) : PositionalBase(X)
+    {
+        private void SomeMethod(int count) { }  // Noncompliant {{This member hides 'CSharp15.PositionalBase.SomeMethod(int)'. Make it non-private or seal the class.}} NET-5017
+    }
+}

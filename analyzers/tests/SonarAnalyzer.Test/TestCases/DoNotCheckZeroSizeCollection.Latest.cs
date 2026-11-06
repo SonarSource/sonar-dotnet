@@ -208,3 +208,68 @@ class DuckTypedCountables // NET-3922: duck-typed C# 8 "countable" covers any ac
         public long Length => 0;
     }
 }
+
+class CSharp15
+{
+    void BitArrayMembers(ReadOnlySpan<bool> values)
+    {
+        var bits = new System.Collections.BitArray(values);
+        _ = bits.Count >= 0;  // Noncompliant {{The 'Count' of 'BitArray' always evaluates as 'True' regardless the size.}}
+        _ = bits.Length >= 0; // Noncompliant {{The 'Length' of 'BitArray' always evaluates as 'True' regardless the size.}}
+        _ = bits.PopCount() >= 0;
+    }
+}
+
+class ExtensionCountables
+{
+    void Method(Bag bag, List<int> list)
+    {
+        _ = bag.Count >= 0;     // FN NET-5018
+        _ = bag.Length >= 0;    // FN NET-5018
+        _ = bag.Count > 0;      // Compliant
+        _ = list.Count >= 0;    // Noncompliant
+    }
+
+    public class Bag : System.Collections.IEnumerable
+    {
+        public int this[int index] => 0;
+        public System.Collections.IEnumerator GetEnumerator() => null;
+    }
+}
+
+static class BagExtensions
+{
+    extension(ExtensionCountables.Bag b)
+    {
+        public int Count => 0;
+        public int Length => 0;
+    }
+}
+
+union ArrayOrList(int[], List<int>);
+
+class CSharp15Unions
+{
+    void IsPattern(ArrayOrList u)
+    {
+        _ = u is int[] { Length: >= 0 };        // Noncompliant
+        _ = u is List<int> { Count: >= 0 };     // Noncompliant
+        _ = u is int[] { Length: >= 1 };
+    }
+
+    int SwitchExpression(ArrayOrList u) =>
+        u switch
+        {
+            List<int> { Count: >= 0 } => 1,     // Noncompliant
+            _ => 0
+        };
+
+    void SwitchStatement(ArrayOrList u)
+    {
+        switch (u)
+        {
+            case int[] { Length: >= 0 }:        // Noncompliant
+                break;
+        }
+    }
+}
