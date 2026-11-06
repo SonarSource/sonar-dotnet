@@ -49,7 +49,8 @@ public sealed class RedundantJumpStatement : SonarDiagnosticAnalyzer
 
     private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context)
     {
-        if (!CSharpControlFlowGraph.TryGet(context.Node, context.Model, out var cfg))
+        if (!context.Node.DescendantNodes().Any(IsRemovableJumpCandidate)
+            || !CSharpControlFlowGraph.TryGet(context.Node, context.Model, out var cfg))
         {
             return;
         }
@@ -63,6 +64,10 @@ public sealed class RedundantJumpStatement : SonarDiagnosticAnalyzer
             context.ReportIssue(Rule, jumpBlock.JumpNode);
         }
     }
+
+    private static bool IsRemovableJumpCandidate(SyntaxNode node) =>
+        node is ReturnStatementSyntax { Expression: null } or BreakStatementSyntax or ContinueStatementSyntax or GotoStatementSyntax
+        || node.IsKind(SyntaxKind.YieldBreakStatement);
 
     private static bool IsJumpRemovable(JumpBlock jumpBlock, int yieldStatementCount) =>
         !IsInsideSwitch(jumpBlock)
