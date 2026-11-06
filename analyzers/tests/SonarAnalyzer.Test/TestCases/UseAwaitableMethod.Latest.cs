@@ -142,3 +142,13 @@ public class DelegateNode
         _ = node?.Factory()()!.Child(); // Noncompliant [forgivingResultFactory, forgivingResultChild]
     }
 }
+
+public class ProcessRunAlternatives
+{
+    public async Task Method(System.Diagnostics.ProcessStartInfo startInfo)
+    {
+        System.Diagnostics.Process.Run(startInfo);                          // Noncompliant {{Await RunAsync instead.}}
+        System.Diagnostics.Process.Run(startInfo, TimeSpan.FromSeconds(1)); // Compliant
+        await System.Diagnostics.Process.RunAsync(startInfo);
+    }
+}

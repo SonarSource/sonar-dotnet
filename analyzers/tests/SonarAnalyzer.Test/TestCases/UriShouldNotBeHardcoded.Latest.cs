@@ -124,3 +124,20 @@ public static class Extensions
         public static string FilePath => "c:\\blah\\blah\\blah.txt";    // FN https://sonarsource.atlassian.net/browse/NET-2833
     }
 }
+
+class CollectionExpressionArguments
+{
+    class PathList : List<string>
+    {
+        public PathList() { }
+        public PathList(string path) => Add(path);
+    }
+
+    void Method()
+    {
+        PathList viaWith = [with(@"C:\data\file.txt")];         // FN NET-4987
+        PathList viaNew = new PathList(@"C:\data\file.txt");    // Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}}
+        PathList relativeViaWith = [with("data/file.txt")];      // Compliant
+        PathList relativeViaNew = new PathList("data/file.txt"); // Compliant
+    }
+}

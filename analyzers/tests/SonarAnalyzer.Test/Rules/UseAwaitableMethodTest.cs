@@ -44,7 +44,7 @@ public class UseAwaitableMethodTest
 
     [TestMethod]
     public void UseAwaitableMethod_CS_Latest() =>
-        builder.AddPaths("UseAwaitableMethod.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("UseAwaitableMethod.Latest.cs").AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess).WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #if NET
     [TestMethod]
