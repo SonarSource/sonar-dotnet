@@ -97,3 +97,9 @@ public static class NewExtensions
         public void Method(string[] messages, string delimiter = "\n") { }
     }
 }
+
+public union SampleUnion(Sample, SampleWithMethod)
+{
+    void Method(string[] messages) { }
+    void Method(string[] messages, string delimiter = "\n") { } // Noncompliant
+}

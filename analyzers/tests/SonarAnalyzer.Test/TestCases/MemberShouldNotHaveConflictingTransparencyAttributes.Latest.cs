@@ -67,3 +67,24 @@ public static class Extensions
         public static void ExtensionMethod() { }
     }
 }
+
+public class UnionCase1 { }
+public class UnionCase2 { }
+
+[SecurityCritical]
+// Secondary@-1
+public union CriticalUnion(UnionCase1, UnionCase2)
+{
+    [SecuritySafeCritical]  // Noncompliant
+    public void Safe() { }
+
+    [SecurityCritical]
+    public void Critical() { }
+}
+
+[SecuritySafeCritical]
+public union SafeUnion(UnionCase1, UnionCase2)
+{
+    [SecurityCritical]
+    public void Critical() { }
+}

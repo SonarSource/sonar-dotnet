@@ -202,6 +202,13 @@ namespace Tests.Diagnostics
         protected int BarBar() => 1; // Noncompliant
     }
 
+    public class WebClass4 : Microsoft.AspNetCore.Mvc.ControllerBase
+    {
+        public int Foo() => 0; // Noncompliant {{Make 'Foo' a static method.}} FP NET-4983
+
+        protected int FooFoo() => 0; // Noncompliant
+    }
+
     public class Foo
     {
         protected void Application_AuthenticateRequest(Object sender, EventArgs e) { }

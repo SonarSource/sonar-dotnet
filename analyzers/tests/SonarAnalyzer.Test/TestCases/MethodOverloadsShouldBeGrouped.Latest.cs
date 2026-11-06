@@ -213,3 +213,22 @@ public static class Extensions
         void y(int a) { }
     }
 }
+
+public class UnionCase1 { }
+public class UnionCase2 { }
+
+public union UnionSample(UnionCase1, UnionCase2)
+{
+    public void Overloaded() { }            // FN NET-4982
+    public void Overloaded(int a) { }
+    public void Other() { }
+    public void Overloaded(string a) { }
+}
+
+public union GroupedUnionSample(UnionCase1, UnionCase2)
+{
+    public void Overloaded() { }            // Compliant
+    public void Overloaded(int a) { }
+    public void Overloaded(string a) { }
+    public void Other() { }
+}

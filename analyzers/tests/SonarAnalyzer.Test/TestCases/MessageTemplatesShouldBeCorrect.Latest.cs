@@ -18,3 +18,29 @@ public class Program
         logger.LogError("{{\e{", user);                          // Noncompliant
     }
 }
+
+public union UserOrId(string, int);
+
+public class Holder { }
+
+public static class Extensions
+{
+    extension(Holder holder)
+    {
+        public string this[int index] => "user";
+    }
+}
+
+public class CSharp15
+{
+    public void Method(ILogger logger, UserOrId union, Holder holder)
+    {
+        logger.LogError("Login failed for {User}", union);
+        logger.LogError("Login failed for {User}", holder[0]);
+        logger.LogError("Login failed for {User}", [union]);
+
+        logger.LogError("Login failed for {User", union);       // Noncompliant {{Log message template should be syntactically correct.}}
+        logger.LogError("Login failed for {User", holder[0]);   // Noncompliant
+        logger.LogError("Login failed for {User", [union]);     // Noncompliant
+    }
+}

@@ -246,3 +246,14 @@ public static class ExtensionShadowsNestedExtendedType
         public static void Method(int j) { }
     }
 }
+
+public class UnionOuter
+{
+    public static int Value { get; set; }
+    public static int Shadowed { get; set; }
+
+    public union UnionInner(int, string)
+    {
+        public int Shadowed() => 1;    // Noncompliant {{Rename this method to not shadow the outer class' member with the same name.}}
+    }
+}

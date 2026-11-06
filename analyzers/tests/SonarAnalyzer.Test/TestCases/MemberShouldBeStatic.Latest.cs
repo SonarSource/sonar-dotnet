@@ -206,3 +206,18 @@ namespace CSharp14
         }
     }
 }
+
+namespace CSharp15
+{
+    public class UnionCase1 { }
+    public class UnionCase2 { }
+
+    public union UnionSample(UnionCase1, UnionCase2)
+    {
+        public int Constant() => 42;                        // Noncompliant
+        public bool IsEmpty() => Value is null;             // Compliant, Value is instance data.
+        public bool IsSame(UnionSample other) => other.Value == Value;
+        public bool IsFirst() => this is UnionCase1;
+        public bool IsOtherFirst(UnionSample other) => other is UnionCase1;     // Noncompliant
+    }
+}
