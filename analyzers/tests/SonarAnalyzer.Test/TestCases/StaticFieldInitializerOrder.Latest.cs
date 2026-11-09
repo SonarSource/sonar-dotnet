@@ -147,7 +147,7 @@ namespace CSharp15
     public union UnionCorrectOrder(UnionCaseA, UnionCaseB)
     {
         public static int Y = 42;
-        public static int Z = Y; // Noncompliant FP NET-5034
+        public static int Z = Y; // Compliant - NET-5034 Y is already initialized
 
         public static int U = Const; // Compliant - const
         public const int Const = 5;
@@ -164,7 +164,7 @@ namespace CSharp15
         public union NestedUnionCorrectOrder(UnionCaseA, UnionCaseB)
         {
             public static int Y = 42;
-            public static int Z = Y; // Noncompliant FP NET-5034
+            public static int Z = Y; // Compliant - NET-5034 Y is already initialized
         }
 
         public union NestedUnionWrongOrder(UnionCaseA, UnionCaseB)
@@ -177,12 +177,27 @@ namespace CSharp15
     public partial union PartialUnion(UnionCaseA, UnionCaseB)
     {
         public static int A = 1;
-        public static int B = A; // Noncompliant FP NET-5034
+        public static int B = A; // Compliant - NET-5034 A is already initialized
+        public static int C = D; // Noncompliant
+        public static int D = 2;
         public static int X = Y; // Noncompliant
+        public static int V = W; // Noncompliant - W is declared in another file
     }
 
     public partial union PartialUnion
     {
+        public static int Y = 42;
+    }
+
+    public union UnionContainingType(UnionCaseA, UnionCaseB)
+    {
+        public class Nested
+        {
+            public static int Z = Y; // Compliant - Y is a field of the outer union, not of Nested
+            public static int X = W; // Noncompliant
+            public static int W = 1;
+        }
+
         public static int Y = 42;
     }
 

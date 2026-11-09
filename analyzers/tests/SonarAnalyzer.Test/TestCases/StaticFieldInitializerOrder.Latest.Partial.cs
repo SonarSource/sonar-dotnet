@@ -18,3 +18,12 @@ namespace CSharp13
         public static int B = X;
     }
 }
+
+namespace CSharp15
+{
+    public partial union PartialUnion
+    {
+        public static int W = 3;
+        public static int T = W;
+    }
+}
