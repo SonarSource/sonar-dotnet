@@ -17,7 +17,9 @@
 
 using System.Collections;
 using SonarAnalyzer.Core.Syntax.Utilities;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
+using SonarAnalyzer.TestFramework.MetadataReferences;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -317,6 +319,115 @@ public class MethodParameterLookupTest
         lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
         expressions.Should().BeEmpty();
     }
+
+#if NET
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_Constructor()
+    {
+        Mappings(WithElementLookup("""Ctor positional = [$$with(3, "o")$$, "x"];""")).Should().Equal(("3", "capacity"), ("\"o\"", "other"));
+        Mappings(WithElementLookup("""Ctor named = [$$with(capacity: 3)$$, "x"];""")).Should().Equal(("capacity: 3", "capacity"));
+        var list = WithElementLookup("IList<int> list = [$$with(capacity: 4)$$, 1];");
+        Mappings(list).Should().Equal(("capacity: 4", "capacity"));
+        list.MethodSymbol.ContainingType.Name.Should().Be("List");
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_CollectionBuilder()
+    {
+        var lookup = WithElementLookup("""Coll<int> builder = [$$with("n", 5)$$, 1, 2];""");
+        Mappings(lookup).Should().Equal(("\"n\"", "name"), ("5", "size"));
+        lookup.MethodSymbol.Parameters.Select(x => x.Name).Should().Equal("name", "size", "items");
+        lookup.TryGetSyntax("name", out var name).Should().BeTrue();
+        name.Should().ContainSingle().Which.Should().BeOfType<CSharpSyntax.LiteralExpressionSyntax>().Which.Token.ValueText.Should().Be("n");
+        lookup.TryGetSyntax(lookup.MethodSymbol.Parameters[1], out var size).Should().BeTrue();
+        size.Should().ContainSingle().Which.Should().BeOfType<CSharpSyntax.LiteralExpressionSyntax>().Which.Token.ValueText.Should().Be("5");
+        lookup.TryGetNonParamsSyntax(lookup.MethodSymbol.Parameters[0], out var nonParams).Should().BeTrue();
+        nonParams.Should().BeOfType<CSharpSyntax.LiteralExpressionSyntax>().Which.Token.ValueText.Should().Be("n");
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_CollectionBuilder_SpanParameterHasNoArgument()
+    {
+        var lookup = WithElementLookup("""Coll<int> builder = [$$with("n", 5)$$, 1, 2];""");
+        var span = lookup.MethodSymbol.Parameters.Last();
+        span.Name.Should().Be("items");
+        lookup.TryGetSyntax(span, out var expressions).Should().BeFalse(
+            "the span maps indirectly to the collection expression elements. Returning the CollectionExpression node could be considered, but would likely break callers' expectations");
+        expressions.Should().BeEmpty();
+        lookup.TryGetNonParamsSyntax(span, out var expression).Should().BeFalse();
+        expression.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_ParamsSpanBuilder()
+    {
+        var lookup = WithElementLookup("""ImmutableHashSet<string> paramsSpan = [$$with(StringComparer.Ordinal)$$, "a"];""");
+        Mappings(lookup).Should().Equal(("StringComparer.Ordinal", "equalityComparer"));
+        var span = lookup.MethodSymbol.Parameters.Last();
+        span.IsParams.Should().BeTrue();
+        lookup.TryGetSyntax(span, out var expressions).Should().BeFalse();
+        expressions.Should().BeEmpty();
+        Action act = () => lookup.TryGetNonParamsSyntax(span, out _);
+        act.Should().Throw<InvalidOperationException>().WithMessage("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_InterfaceWithoutConstructMethod()
+    {
+        var lookup = WithElementLookup("IReadOnlyList<int> readOnlyList = [$$with()$$];");
+        lookup.MethodSymbol.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_WithElement_ParamsConstructor()
+    {
+        var lookup = WithElementLookup("""Params spread = [$$with("n", 1, 2)$$, 3];""");
+        Mappings(lookup).Should().Equal(("\"n\"", "name"), ("1", "values"), ("2", "values"));
+        lookup.TryGetSyntax("values", out var values).Should().BeTrue();
+        values.Select(x => x.ToString()).Should().Equal("1", "2");
+    }
+
+    private static CSharpMethodParameterLookup WithElementLookup(string statement)
+    {
+        const string types = """
+            using System;
+            using System.Collections;
+            using System.Collections.Generic;
+            using System.Collections.Immutable;
+            using System.Runtime.CompilerServices;
+
+            [CollectionBuilder(typeof(Builder), "Create")]
+            class Coll<T> : IEnumerable<T>
+            {
+                public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+                IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
+            }
+
+            static class Builder
+            {
+                public static Coll<T> Create<T>(string name, int size, ReadOnlySpan<T> items) => null;
+            }
+
+            class Ctor : List<string>
+            {
+                public Ctor(int capacity, string other = null) { }
+            }
+
+            class Params : List<int>
+            {
+                public Params(string name, params int[] values) { }
+            }
+
+            """;
+        var (node, model) = TestCompiler.NodeBetweenMarkersCS(types + "class TestClass { void Main() { " + statement + " } }", additionalReferences: [CoreMetadataReference.SystemCollectionsImmutable]);
+        return new CSharpMethodParameterLookup(node.ArgumentList(), model);
+    }
+
+    private static (string Argument, string Parameter)[] Mappings(CSharpMethodParameterLookup lookup) =>
+        lookup.GetAllArgumentParameterMappings().Select(x => (x.Node.ToString(), x.Symbol.Name)).ToArray();
+
+#endif
 
     private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
         where TArgumentSyntax : SyntaxNode
