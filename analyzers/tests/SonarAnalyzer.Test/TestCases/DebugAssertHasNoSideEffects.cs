@@ -28,6 +28,8 @@ namespace Tests.Diagnostics
         public bool Dispose() => true;
         public bool CanAddItem() => true;
         public bool SetEquals() => true;
+        public int PopCount() => 0;
+        public bool PopItem() => true;
     }
 
     class Program
@@ -43,6 +45,9 @@ namespace Tests.Diagnostics
             Debug.Assert(foo.Destroy());
             Debug.Assert(foo.CanAddItem());
             Debug.Assert(foo.SetEquals());
+            Debug.Assert(foo.PopCount() == 0);
+            Debug.Assert(foo?.PopCount() == 0);
+            Debug.Assert(foo.PopItem()); // Noncompliant
 
             Debug.Assert(foo.Remove("a")); // Noncompliant {{Expressions used in 'Debug.Assert' should not produce side effects.}}
 //                      ^^^^^^^^^^^^^^^^^
