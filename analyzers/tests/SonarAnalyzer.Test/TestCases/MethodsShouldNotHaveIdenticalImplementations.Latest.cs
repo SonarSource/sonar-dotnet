@@ -345,3 +345,31 @@ public static class NewExtensions
         }
     }
 }
+
+// https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+public union IntOrBool(int, bool)
+{
+    public void First()
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+    }
+
+    public void Second() // FN NET-4933
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+    }
+
+    public void Third()
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Three");
+    }
+
+    public void Fourth()
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Four");
+    }
+}

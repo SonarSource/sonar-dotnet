@@ -37,5 +37,20 @@ public static class  Extensions
     {
         public string NewCompliant() => s + "!";
         public string NewNonCompliant() => "!"; // Noncompliant
+        public int this[int index] => 42; // Compliant, only methods are inspected
+    }
+}
+
+namespace CSharp15
+{
+    public closed class ClosedBase
+    {
+        public int Value() => 42; // Noncompliant
+    }
+
+    public class NewNumericTypes
+    {
+        public System.Numerics.Decimal64 Max() => System.Numerics.Decimal64.MaxValue; // Compliant, no literal form for the new numeric types
+        public System.Numerics.BFloat16 Zero() => default; // Compliant
     }
 }

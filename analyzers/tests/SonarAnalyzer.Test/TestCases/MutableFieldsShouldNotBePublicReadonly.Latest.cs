@@ -98,3 +98,13 @@ namespace CSharp13
         public readonly ReadOnlySet<string> ReadOnlySet = new(set);                  // Compliant
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union IntOrBool(int, bool)
+    {
+        public static readonly List<string> MutableField = new List<string> { "a", "b" }; // FN NET-4934
+        public static readonly ImmutableArray<string> ImmutableField = ImmutableArray.Create("a", "b");
+    }
+}

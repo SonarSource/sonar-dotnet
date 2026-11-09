@@ -28,5 +28,7 @@ public static class Extensions
         public void NonCompliant([DefaultParameterValue(5)] int j) { } //Noncompliant
         public void Compliant([DefaultParameterValue(5), Optional] int j) { }
         public void AlsoCompliant([DefaultParameterValue(5)][Optional] int j) { }
+        public int this[int other, [DefaultParameterValue(5)] int index] => 0; //Noncompliant
+        public int this[int other, [DefaultParameterValue(5), Optional] int index, int third] => 0;
     }
 }

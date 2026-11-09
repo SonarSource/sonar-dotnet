@@ -37,6 +37,10 @@ public class NamedPlaceholdersShouldBeUniqueTest
         Builder.AddPaths("NamedPlaceholdersShouldBeUnique.cs").Verify();
 
     [TestMethod]
+    public void NamedPlaceholdersShouldBeUnique_CS_Latest() =>
+        Builder.AddPaths("NamedPlaceholdersShouldBeUnique.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]

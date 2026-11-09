@@ -525,3 +525,25 @@ public static class Extensions // https://sonarsource.atlassian.net/browse/NET-2
     }
     public class AnyAttribute : Attribute { }
 }
+
+namespace CSharp15
+{
+    public class CollectionExpressionArguments
+    {
+        private List<int> UsedInWith(int capacity) => [with(capacity), 1, 2];
+        private List<int> UnusedWithLiteral(int capacity) => [with(10), 1, 2]; // Noncompliant
+        private List<int> UsedInElement(int capacity) => [with(10), capacity];
+    }
+
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union IntOrBool(int, bool)
+    {
+        private int Unused(int a, int b) => b; // Noncompliant
+        public int PublicUnused(int a) => 42;  // Compliant, public methods are not raised to avoid breaking external contract
+
+        private IntOrBool(string s, int i) : this(i) // Noncompliant
+        {
+            System.Console.WriteLine(i);
+        }
+    }
+}

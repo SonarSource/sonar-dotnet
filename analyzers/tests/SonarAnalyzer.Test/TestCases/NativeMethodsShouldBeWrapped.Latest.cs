@@ -45,3 +45,15 @@ namespace LibraryImportAttributeTests
             => CompliantDllImportAttributeAppliedToGeneratedLocalFunction(p);
     }
 }
+
+namespace CSharp15
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
+    public union IntOrBool(int, bool)
+    {
+        [DllImport("kernel32.dll")]
+        public static extern int Native(int i); // Noncompliant
+
+        public static int Wrapper(int i) => Native(i); // Noncompliant
+    }
+}
