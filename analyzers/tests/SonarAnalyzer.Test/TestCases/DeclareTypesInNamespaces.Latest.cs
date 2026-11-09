@@ -20,6 +20,14 @@ static class Extensions                 // Noncompliant
     extension(string s) { }             // Compliant: not a type
 }
 
+static class ExtensionsWithNestedType   // Noncompliant
+{
+    extension(string s)
+    {
+        class InnerClassOfExtensionBlock { }    // Error [CS9282]
+    }
+}
+
 namespace Tests.Diagnostics
 {
     record PositionalRecordInNamespace(string FirstParam, string SecondParam);
@@ -30,7 +38,12 @@ namespace Tests.Diagnostics
 
     union UnionInNamespace(int, string)
     {
-        class InnerClassOfUnion { }     // Noncompliant {{Move 'InnerClassOfUnion' into a named namespace.}} FP NET-4916
+        class InnerClassOfUnion { }             // Compliant NET-4916
+        enum InnerEnumOfUnion { }               // Compliant
+        struct InnerStructOfUnion { }           // Compliant
+        interface IInnerOfUnion { }             // Compliant
+        record InnerRecordOfUnion;              // Compliant
+        record struct InnerRecordStructOfUnion; // Compliant
     }
 
     closed class ClosedInNamespace;
@@ -40,7 +53,7 @@ union GlobalUnion(int, string);         // FN NET-4915
 
 union GlobalUnionWithNestedType(int, string)    // FN NET-4915
 {
-    class InnerClassOfGlobalUnion { }           // Noncompliant {{Move 'InnerClassOfGlobalUnion' into a named namespace.}} FP NET-4916
+    class InnerClassOfGlobalUnion { }           // Compliant NET-4916: we want to report only on the outer union (FN NET-4915)
 }
 
 closed class GlobalClosed;              // Noncompliant
@@ -48,6 +61,14 @@ closed class GlobalClosed;              // Noncompliant
 class GlobalClassWithNestedUnion        // Noncompliant
 {
     union NestedUnion(int, string);
+}
+
+class GlobalClassWithNestedUnionWithNestedType  // Noncompliant
+{
+    union NestedUnion(int, string)
+    {
+        class InnerClassOfNestedUnion { }       // Compliant
+    }
 }
 
 [System.Runtime.CompilerServices.Union]
