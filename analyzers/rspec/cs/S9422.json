@@ -15,7 +15,7 @@
   "ruleSpecification": "RSPEC-9422",
   "sqKey": "S9422",
   "scope": "All",
-  "quickfix": "unknown",
+  "quickfix": "targeted",
   "code": {
     "impacts": {
       "MAINTAINABILITY": "MEDIUM"
