@@ -144,11 +144,21 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/closed
     public class ClosedContainer
     {
-        private closed class ClosedPrivateClass { } // Noncompliant FP NET-4938 - closed classes are implicitly abstract and cannot be sealed
+        private closed class ClosedPrivateClass { } // Compliant
+        private class NotClosedPrivateClass { }     // Noncompliant
 
-        private closed class ClosedPrivateClassDerived { } // Compliant, derived
-        private sealed class ClosedPrivateClassDerivedExtension : ClosedPrivateClassDerived { }
+        private closed class ClosedPrivateClassWithSealedCase { }       // Compliant
+        private sealed class SealedCase : ClosedPrivateClassWithSealedCase { }
+
+        private closed class ClosedPrivateClassWithNonSealedCase { }
+        private class NonSealedCase : ClosedPrivateClassWithNonSealedCase { } // Noncompliant
+
+        private closed record ClosedPrivateRecord { }   // Compliant
+        private record NotClosedPrivateRecord { }       // Noncompliant
     }
+
+    file closed class ClosedFileClass { }   // Compliant
+    file class NotClosedFileClass { }       // Noncompliant
 
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union UnionWithNestedClass(UnionNestedCaseA, UnionNestedCaseB)
