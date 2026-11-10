@@ -20,7 +20,7 @@ using SonarAnalyzer.CSharp.Rules;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class CancellationTokenShouldBeUsedMethodInvocationTest
+public class CancellationTokenShouldBeUsedTest
 {
     // Minimal dependency type included in every snippet to keep tests self-contained.
     // Next/indexer enable building '.'/'?.'/'[x]'/'?[x]' chains for NET-4157's conditional-access coverage.
@@ -62,22 +62,18 @@ public class CancellationTokenShouldBeUsedMethodInvocationTest
         ("CancellationToken.None", true),
     ];
 
-    private static readonly bool[] IsFieldValues = [true, false];
-
-    private readonly VerifierBuilder builder = new VerifierBuilder<CancellationTokenShouldBeUsed>().WithOnlyDiagnostics(CancellationTokenShouldBeUsed.RuleS8949);
+    private readonly VerifierBuilder builder = new VerifierBuilder<CancellationTokenShouldBeUsed>();
 
     private readonly VerifierBuilder builderLatest = new VerifierBuilder<CancellationTokenShouldBeUsed>()
-        .WithOnlyDiagnostics(CancellationTokenShouldBeUsed.RuleS8949)
-        .WithOptions(LanguageOptions.CSharpLatest)
-        .WithWarningsAsErrors("CS8425");
+        .WithOptions(LanguageOptions.CSharpLatest);
 
     [TestMethod]
     public void CancellationTokenShouldBeUsed_CS() =>
-        builder.AddPaths("CancellationTokenShouldBeUsed.MethodInvocation.cs").Verify();
+        builder.AddPaths("CancellationTokenShouldBeUsed.cs").Verify();
 
     [TestMethod]
     public void CancellationTokenShouldBeUsed_Latest_CS() =>
-        builderLatest.AddPaths("CancellationTokenShouldBeUsed.MethodInvocation.Latest.cs").Verify();
+        builderLatest.AddPaths("CancellationTokenShouldBeUsed.Latest.cs").Verify();
 
     // ─── Noncompliant: member CT sources (field / property) ──────────────────
     // Secondary location points to the member declaration line of the snippet.
@@ -278,7 +274,9 @@ public class CancellationTokenShouldBeUsedMethodInvocationTest
             .Verify();
 
     public static IEnumerable<object[]> FixedCancelledTokenMemberData() =>
-        IsFieldValues.SelectMany(x => FixedCancelledTokenValues.Select(value => new object[] { x, value.Initializer, value.Noncompliant }));
+        from isField in new[] { true, false }
+        from value in FixedCancelledTokenValues
+        select new object[] { isField, value.Initializer, value.Noncompliant };
 
     [TestMethod]
     [DynamicData(nameof(FixedCancelledTokenMemberData))]
