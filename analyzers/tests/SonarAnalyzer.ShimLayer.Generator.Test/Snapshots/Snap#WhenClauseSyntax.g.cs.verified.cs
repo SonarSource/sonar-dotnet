@@ -154,6 +154,13 @@ public readonly struct WhenClauseSyntaxWrapper : IWrapper, IEquatable<WhenClause
     public static implicit operator CSharpSyntaxNode(WhenClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static WhenClauseSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new WhenClauseSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static WhenClauseSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

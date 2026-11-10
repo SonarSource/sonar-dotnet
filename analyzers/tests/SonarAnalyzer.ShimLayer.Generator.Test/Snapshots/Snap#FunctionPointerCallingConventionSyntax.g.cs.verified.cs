@@ -156,6 +156,13 @@ public readonly struct FunctionPointerCallingConventionSyntaxWrapper : IWrapper,
     public static implicit operator CSharpSyntaxNode(FunctionPointerCallingConventionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static FunctionPointerCallingConventionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new FunctionPointerCallingConventionSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static FunctionPointerCallingConventionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

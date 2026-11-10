@@ -158,6 +158,13 @@ public readonly struct ParenthesizedPatternSyntaxWrapper : IWrapper, IEquatable<
     public static implicit operator CSharpSyntaxNode(ParenthesizedPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ParenthesizedPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ParenthesizedPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ParenthesizedPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

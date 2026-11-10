@@ -154,6 +154,13 @@ public readonly struct SpreadElementSyntaxWrapper : IWrapper, IEquatable<SpreadE
     public static implicit operator CSharpSyntaxNode(SpreadElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SpreadElementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SpreadElementSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SpreadElementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

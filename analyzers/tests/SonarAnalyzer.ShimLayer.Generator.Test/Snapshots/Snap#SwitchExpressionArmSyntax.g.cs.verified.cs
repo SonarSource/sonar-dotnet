@@ -162,6 +162,13 @@ public readonly struct SwitchExpressionArmSyntaxWrapper : IWrapper, IEquatable<S
     public static implicit operator CSharpSyntaxNode(SwitchExpressionArmSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SwitchExpressionArmSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SwitchExpressionArmSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SwitchExpressionArmSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

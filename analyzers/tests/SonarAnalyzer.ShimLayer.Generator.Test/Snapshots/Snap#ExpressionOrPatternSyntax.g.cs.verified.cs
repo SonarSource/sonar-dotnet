@@ -142,6 +142,13 @@ public readonly struct ExpressionOrPatternSyntaxWrapper : IWrapper, IEquatable<E
     public static implicit operator CSharpSyntaxNode(ExpressionOrPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ExpressionOrPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ExpressionOrPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ExpressionOrPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

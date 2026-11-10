@@ -160,6 +160,13 @@ public readonly struct TupleExpressionSyntaxWrapper : IWrapper, IEquatable<Tuple
     public static implicit operator ExpressionSyntax(TupleExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static TupleExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new TupleExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static TupleExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

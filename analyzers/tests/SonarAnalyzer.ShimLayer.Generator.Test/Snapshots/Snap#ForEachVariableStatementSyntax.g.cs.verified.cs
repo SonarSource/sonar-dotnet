@@ -188,6 +188,13 @@ public readonly struct ForEachVariableStatementSyntaxWrapper : IWrapper, IEquata
     public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ForEachVariableStatementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ForEachVariableStatementSyntaxWrapper((StatementSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ForEachVariableStatementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

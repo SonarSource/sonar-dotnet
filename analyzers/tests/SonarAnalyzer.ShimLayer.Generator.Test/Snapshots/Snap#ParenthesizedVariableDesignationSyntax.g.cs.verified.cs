@@ -160,6 +160,13 @@ public readonly struct ParenthesizedVariableDesignationSyntaxWrapper : IWrapper,
     public static implicit operator CSharpSyntaxNode(ParenthesizedVariableDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ParenthesizedVariableDesignationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ParenthesizedVariableDesignationSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ParenthesizedVariableDesignationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

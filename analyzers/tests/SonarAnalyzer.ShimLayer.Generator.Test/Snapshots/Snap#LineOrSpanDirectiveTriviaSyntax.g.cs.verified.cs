@@ -163,6 +163,13 @@ public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper : IWrapper, IEquat
     public static implicit operator DirectiveTriviaSyntax(LineOrSpanDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static LineOrSpanDirectiveTriviaSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new LineOrSpanDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static LineOrSpanDirectiveTriviaSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

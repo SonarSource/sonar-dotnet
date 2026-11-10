@@ -169,6 +169,13 @@ public readonly struct RefTypeSyntaxWrapper : IWrapper, IEquatable<RefTypeSyntax
     public static implicit operator TypeSyntax(RefTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RefTypeSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RefTypeSyntaxWrapper((TypeSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RefTypeSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

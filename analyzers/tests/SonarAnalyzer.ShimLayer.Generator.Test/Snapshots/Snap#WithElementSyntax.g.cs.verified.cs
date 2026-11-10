@@ -156,6 +156,13 @@ public readonly struct WithElementSyntaxWrapper : IWrapper, IEquatable<WithEleme
     public static implicit operator CSharpSyntaxNode(WithElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static WithElementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new WithElementSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static WithElementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

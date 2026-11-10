@@ -154,6 +154,13 @@ public readonly struct ExpressionColonSyntaxWrapper : IWrapper, IEquatable<Expre
     public static implicit operator CSharpSyntaxNode(ExpressionColonSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ExpressionColonSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ExpressionColonSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ExpressionColonSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

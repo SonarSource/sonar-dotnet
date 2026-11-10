@@ -162,6 +162,13 @@ public readonly struct UnsafeExpressionSyntaxWrapper : IWrapper, IEquatable<Unsa
     public static implicit operator ExpressionSyntax(UnsafeExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static UnsafeExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new UnsafeExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static UnsafeExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

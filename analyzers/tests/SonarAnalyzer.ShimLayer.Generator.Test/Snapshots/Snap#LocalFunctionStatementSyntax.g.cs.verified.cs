@@ -202,6 +202,13 @@ public readonly struct LocalFunctionStatementSyntaxWrapper : IWrapper, IEquatabl
     public static implicit operator StatementSyntax(LocalFunctionStatementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static LocalFunctionStatementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new LocalFunctionStatementSyntaxWrapper((StatementSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static LocalFunctionStatementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

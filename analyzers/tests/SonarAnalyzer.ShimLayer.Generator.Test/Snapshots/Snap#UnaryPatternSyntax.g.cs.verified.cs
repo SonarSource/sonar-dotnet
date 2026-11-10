@@ -154,6 +154,13 @@ public readonly struct UnaryPatternSyntaxWrapper : IWrapper, IEquatable<UnaryPat
     public static implicit operator CSharpSyntaxNode(UnaryPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static UnaryPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new UnaryPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static UnaryPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

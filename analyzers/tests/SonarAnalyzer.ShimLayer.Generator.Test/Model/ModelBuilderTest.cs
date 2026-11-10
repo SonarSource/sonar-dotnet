@@ -197,6 +197,16 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
+    public void Build_SyntaxNode_UsesSyntaxNodeStrategy_EvenWhenMembersMatchBaseline()
+    {
+        // Once a baseline bump catches up with every member SyntaxNode currently needs the shim for, latest and baseline members become equal.
+        // SyntaxNode must still resolve to SyntaxNodeStrategy (not NoChangeStrategy), because every XxxSyntaxWrapper unconditionally forwards to its As gate.
+        var type = typeof(SyntaxNode);
+        var model = ModelBuilder.Build([new(type, [])], [new(type, [])]);
+        model[type].Should().BeOfType<SyntaxNodeStrategy>();
+    }
+
+    [TestMethod]
     public void Build_FallbackBaseType()
     {
         var type = typeof(BaseNamespaceDeclarationSyntax);
@@ -254,7 +264,7 @@ public class ModelBuilderTest
         var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(SyntaxNode));
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(SyntaxNode));
         var model = ModelBuilder.Build([latest], [baseline]);
-        model[latest.Type].Should().BeOfType<ExtendStrategy>()
+        model[latest.Type].Should().BeOfType<SyntaxNodeStrategy>()
             .Which.Members.Where(x => !x.IsPassthrough).Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Boolean IsIncrementallyIdenticalTo(Microsoft.CodeAnalysis.SyntaxNode)",
                 "System.Boolean ContainsDirective(System.Int32)",

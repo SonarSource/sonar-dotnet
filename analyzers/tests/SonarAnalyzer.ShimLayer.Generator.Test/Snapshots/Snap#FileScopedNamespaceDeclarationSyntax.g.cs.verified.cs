@@ -188,6 +188,13 @@ public readonly struct FileScopedNamespaceDeclarationSyntaxWrapper : IWrapper, I
     public static implicit operator MemberDeclarationSyntax(FileScopedNamespaceDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static FileScopedNamespaceDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new FileScopedNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static FileScopedNamespaceDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

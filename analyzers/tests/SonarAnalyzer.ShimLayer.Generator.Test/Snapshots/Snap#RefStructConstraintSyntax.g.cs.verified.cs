@@ -154,6 +154,13 @@ public readonly struct RefStructConstraintSyntaxWrapper : IWrapper, IEquatable<R
     public static implicit operator CSharpSyntaxNode(RefStructConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RefStructConstraintSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RefStructConstraintSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RefStructConstraintSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

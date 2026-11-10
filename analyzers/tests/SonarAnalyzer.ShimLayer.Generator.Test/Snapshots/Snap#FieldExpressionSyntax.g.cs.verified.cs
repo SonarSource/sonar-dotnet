@@ -150,6 +150,13 @@ public readonly struct FieldExpressionSyntaxWrapper : IWrapper, IEquatable<Field
     public static implicit operator ExpressionSyntax(FieldExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static FieldExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new FieldExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static FieldExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

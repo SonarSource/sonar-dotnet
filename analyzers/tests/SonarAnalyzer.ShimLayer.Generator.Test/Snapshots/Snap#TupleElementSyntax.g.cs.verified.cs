@@ -154,6 +154,13 @@ public readonly struct TupleElementSyntaxWrapper : IWrapper, IEquatable<TupleEle
     public static implicit operator CSharpSyntaxNode(TupleElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static TupleElementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new TupleElementSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static TupleElementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

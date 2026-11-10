@@ -142,6 +142,13 @@ public readonly struct CollectionElementSyntaxWrapper : IWrapper, IEquatable<Col
     public static implicit operator CSharpSyntaxNode(CollectionElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static CollectionElementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new CollectionElementSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static CollectionElementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

@@ -158,6 +158,13 @@ public readonly struct BaseObjectCreationExpressionSyntaxWrapper : IWrapper, IEq
     public static implicit operator ExpressionSyntax(BaseObjectCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static BaseObjectCreationExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new BaseObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static BaseObjectCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

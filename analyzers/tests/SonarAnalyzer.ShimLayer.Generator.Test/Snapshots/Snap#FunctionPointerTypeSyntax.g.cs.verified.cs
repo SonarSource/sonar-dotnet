@@ -173,6 +173,13 @@ public readonly struct FunctionPointerTypeSyntaxWrapper : IWrapper, IEquatable<F
     public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static FunctionPointerTypeSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new FunctionPointerTypeSyntaxWrapper((TypeSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static FunctionPointerTypeSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

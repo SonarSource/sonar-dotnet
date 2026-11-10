@@ -158,6 +158,13 @@ public readonly struct RangeExpressionSyntaxWrapper : IWrapper, IEquatable<Range
     public static implicit operator ExpressionSyntax(RangeExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RangeExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RangeExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RangeExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

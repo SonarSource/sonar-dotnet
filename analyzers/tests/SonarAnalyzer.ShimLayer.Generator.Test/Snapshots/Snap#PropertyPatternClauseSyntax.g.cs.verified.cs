@@ -160,6 +160,13 @@ public readonly struct PropertyPatternClauseSyntaxWrapper : IWrapper, IEquatable
     public static implicit operator CSharpSyntaxNode(PropertyPatternClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static PropertyPatternClauseSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new PropertyPatternClauseSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static PropertyPatternClauseSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

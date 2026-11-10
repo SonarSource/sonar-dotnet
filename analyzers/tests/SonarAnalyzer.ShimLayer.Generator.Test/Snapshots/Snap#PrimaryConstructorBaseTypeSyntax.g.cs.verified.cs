@@ -155,6 +155,13 @@ public readonly struct PrimaryConstructorBaseTypeSyntaxWrapper : IWrapper, IEqua
     public static implicit operator BaseTypeSyntax(PrimaryConstructorBaseTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static PrimaryConstructorBaseTypeSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new PrimaryConstructorBaseTypeSyntaxWrapper((BaseTypeSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static PrimaryConstructorBaseTypeSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

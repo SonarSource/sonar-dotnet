@@ -160,6 +160,13 @@ public readonly struct SubpatternSyntaxWrapper : IWrapper, IEquatable<Subpattern
     public static implicit operator CSharpSyntaxNode(SubpatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SubpatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SubpatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SubpatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

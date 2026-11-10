@@ -160,6 +160,13 @@ public readonly struct PositionalPatternClauseSyntaxWrapper : IWrapper, IEquatab
     public static implicit operator CSharpSyntaxNode(PositionalPatternClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static PositionalPatternClauseSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new PositionalPatternClauseSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static PositionalPatternClauseSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

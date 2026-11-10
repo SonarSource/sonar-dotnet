@@ -171,6 +171,13 @@ public readonly struct NullableDirectiveTriviaSyntaxWrapper : IWrapper, IEquatab
     public static implicit operator DirectiveTriviaSyntax(NullableDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static NullableDirectiveTriviaSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new NullableDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static NullableDirectiveTriviaSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

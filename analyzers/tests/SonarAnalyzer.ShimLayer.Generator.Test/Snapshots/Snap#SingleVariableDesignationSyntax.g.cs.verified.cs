@@ -150,6 +150,13 @@ public readonly struct SingleVariableDesignationSyntaxWrapper : IWrapper, IEquat
     public static implicit operator CSharpSyntaxNode(SingleVariableDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SingleVariableDesignationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SingleVariableDesignationSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SingleVariableDesignationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

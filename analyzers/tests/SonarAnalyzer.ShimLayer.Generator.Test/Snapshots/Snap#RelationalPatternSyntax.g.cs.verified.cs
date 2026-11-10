@@ -154,6 +154,13 @@ public readonly struct RelationalPatternSyntaxWrapper : IWrapper, IEquatable<Rel
     public static implicit operator CSharpSyntaxNode(RelationalPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RelationalPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RelationalPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RelationalPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

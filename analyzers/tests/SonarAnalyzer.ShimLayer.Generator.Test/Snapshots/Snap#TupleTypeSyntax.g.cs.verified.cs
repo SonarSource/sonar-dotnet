@@ -169,6 +169,13 @@ public readonly struct TupleTypeSyntaxWrapper : IWrapper, IEquatable<TupleTypeSy
     public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static TupleTypeSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new TupleTypeSyntaxWrapper((TypeSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static TupleTypeSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

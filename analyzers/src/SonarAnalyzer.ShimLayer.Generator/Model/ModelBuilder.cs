@@ -42,7 +42,10 @@ public static class ModelBuilder
         {
             return baseline is null ? new SkipStrategy(latest.Type) : new NoChangeStrategy(latest.Type);
         }
-        else if (baseline is not null && latest.Members.Select(x => x.ToString()).OrderBy(x => x).SequenceEqual(baseline.Members.Select(x => x.ToString()).OrderBy(x => x)))
+        // SyntaxNode is excluded here to always keep the SyntaxNodeStrategy branch below reachable, even once a baseline bump catches up with every member SyntaxNode currently needs the shim for.
+        else if (baseline is not null
+            && !IsSyntaxNode(latest.Type)
+            && latest.Members.Select(x => x.ToString()).OrderBy(x => x).SequenceEqual(baseline.Members.Select(x => x.ToString()).OrderBy(x => x)))
         {
             return new NoChangeStrategy(latest.Type);
         }
@@ -66,7 +69,9 @@ public static class ModelBuilder
             }
             else
             {
-                return new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+                return IsSyntaxNode(latest.Type)
+                    ? new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline))
+                    : new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
             }
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
@@ -97,6 +102,9 @@ public static class ModelBuilder
                 return new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
             }
         }
+
+        static bool IsSyntaxNode(Type type) =>
+            type.FullName == typeof(SyntaxNode).FullName;
     }
 
     private static bool IsStaticClass(Type type) =>

@@ -164,6 +164,13 @@ public readonly struct ListPatternSyntaxWrapper : IWrapper, IEquatable<ListPatte
     public static implicit operator CSharpSyntaxNode(ListPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ListPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ListPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ListPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

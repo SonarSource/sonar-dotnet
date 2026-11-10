@@ -166,6 +166,13 @@ public readonly struct RecursivePatternSyntaxWrapper : IWrapper, IEquatable<Recu
     public static implicit operator CSharpSyntaxNode(RecursivePatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RecursivePatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RecursivePatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RecursivePatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

@@ -154,6 +154,13 @@ public readonly struct SlicePatternSyntaxWrapper : IWrapper, IEquatable<SlicePat
     public static implicit operator CSharpSyntaxNode(SlicePatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SlicePatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SlicePatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SlicePatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

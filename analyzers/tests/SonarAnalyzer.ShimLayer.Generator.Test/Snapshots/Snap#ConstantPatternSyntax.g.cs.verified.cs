@@ -150,6 +150,13 @@ public readonly struct ConstantPatternSyntaxWrapper : IWrapper, IEquatable<Const
     public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ConstantPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ConstantPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

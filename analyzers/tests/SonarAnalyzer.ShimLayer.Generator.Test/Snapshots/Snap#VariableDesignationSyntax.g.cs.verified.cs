@@ -142,6 +142,13 @@ public readonly struct VariableDesignationSyntaxWrapper : IWrapper, IEquatable<V
     public static implicit operator CSharpSyntaxNode(VariableDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static VariableDesignationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new VariableDesignationSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static VariableDesignationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

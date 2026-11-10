@@ -170,6 +170,13 @@ public readonly struct ExtensionMemberCrefSyntaxWrapper : IWrapper, IEquatable<E
     public static implicit operator MemberCrefSyntax(ExtensionMemberCrefSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ExtensionMemberCrefSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ExtensionMemberCrefSyntaxWrapper((MemberCrefSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ExtensionMemberCrefSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

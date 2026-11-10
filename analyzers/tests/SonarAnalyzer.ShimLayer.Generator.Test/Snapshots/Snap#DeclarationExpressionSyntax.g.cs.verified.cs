@@ -154,6 +154,13 @@ public readonly struct DeclarationExpressionSyntaxWrapper : IWrapper, IEquatable
     public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static DeclarationExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new DeclarationExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static DeclarationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

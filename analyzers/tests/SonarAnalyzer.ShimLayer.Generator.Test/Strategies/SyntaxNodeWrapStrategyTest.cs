@@ -90,6 +90,13 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
+                internal static RecordDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
+
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
                     if (instance is null)
@@ -212,6 +219,13 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
+                internal static RecordDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
+
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
                     if (instance is null)
@@ -308,6 +322,13 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
+                internal static IsPatternExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
+
                 public static IsPatternExpressionSyntaxWrapper From(SyntaxNode instance)
                 {
                     if (instance is null)
@@ -397,6 +418,13 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
+
+                internal static ConstantPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
 
                 public static ConstantPatternSyntaxWrapper From(SyntaxNode instance)
                 {
@@ -493,6 +521,13 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
                     wrapper.wrappedInstance;
+
+                internal static SyntaxNodeWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new SyntaxNodeWrapper((SyntaxNode)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
 
                 public static SyntaxNodeWrapper From(SyntaxNode instance)
                 {
@@ -593,6 +628,13 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
+
+                internal static IndexerDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new IndexerDeclarationSyntaxWrapper((SyntaxNode)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
 
                 public static IndexerDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
@@ -698,6 +740,13 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
+                internal static RecordDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
+
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
                     if (instance is null)
@@ -785,6 +834,13 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
+
+                internal static BaseNamespaceDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+                    IsInstance(instance) ? new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)instance) : null;
+
+                public SyntaxNodeAs As => wrappedInstance.As;
+
+                public SyntaxNodeTo To => wrappedInstance.To;
 
                 public static BaseNamespaceDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {

@@ -182,6 +182,13 @@ public readonly struct BaseNamespaceDeclarationSyntaxWrapper : IWrapper, IEquata
     public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static BaseNamespaceDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static BaseNamespaceDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

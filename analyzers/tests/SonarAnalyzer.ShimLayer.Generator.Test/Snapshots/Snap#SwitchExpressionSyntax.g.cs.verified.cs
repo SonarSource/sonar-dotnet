@@ -168,6 +168,13 @@ public readonly struct SwitchExpressionSyntaxWrapper : IWrapper, IEquatable<Swit
     public static implicit operator ExpressionSyntax(SwitchExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static SwitchExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new SwitchExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static SwitchExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

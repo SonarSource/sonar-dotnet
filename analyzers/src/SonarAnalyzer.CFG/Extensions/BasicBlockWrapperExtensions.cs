@@ -29,8 +29,7 @@ public static class BasicBlockWrapperExtensions
             {
                 // since Roslyn does not differentiate between pattern types in CFG, it builds unreachable block for missing
                 // pattern match even when discard pattern option is presented. In this case we explicitly exclude this branch
-                if (SwitchExpressionArmSyntaxWrapper.IsInstance(block.BranchValue?.Syntax)
-                    && DiscardPatternSyntaxWrapper.IsInstance(((SwitchExpressionArmSyntaxWrapper)block.BranchValue.Syntax).Pattern))
+                if (block.BranchValue is { Syntax.As.SwitchExpressionArm.Pattern.As.DiscardPattern: not null })
                 {
                     return block.FallThroughSuccessor.WrappedInstance is null ? ImmutableArray<ControlFlowBranchWrapper>.Empty : ImmutableArray.Create(block.FallThroughSuccessor);
                 }

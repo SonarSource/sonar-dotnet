@@ -156,6 +156,13 @@ public readonly struct AllowsConstraintClauseSyntaxWrapper : IWrapper, IEquatabl
     public static implicit operator TypeParameterConstraintSyntax(AllowsConstraintClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static AllowsConstraintClauseSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new AllowsConstraintClauseSyntaxWrapper((TypeParameterConstraintSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static AllowsConstraintClauseSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

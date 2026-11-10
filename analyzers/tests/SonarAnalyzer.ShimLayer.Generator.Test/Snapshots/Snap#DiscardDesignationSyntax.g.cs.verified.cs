@@ -150,6 +150,13 @@ public readonly struct DiscardDesignationSyntaxWrapper : IWrapper, IEquatable<Di
     public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static DiscardDesignationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new DiscardDesignationSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static DiscardDesignationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

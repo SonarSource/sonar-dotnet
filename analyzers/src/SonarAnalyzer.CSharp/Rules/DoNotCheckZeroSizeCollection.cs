@@ -60,7 +60,7 @@ public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionB
 
     private void AnalyzeIsPatternExpression(SonarSyntaxNodeReportingContext c)
     {
-        var isPatternExpression = (IsPatternExpressionSyntaxWrapper)c.Node;
+        var isPatternExpression = c.Node.To.IsPatternExpression;
         AnalyzePatterns(c, isPatternExpression.Expression, isPatternExpression.Pattern);
     }
 

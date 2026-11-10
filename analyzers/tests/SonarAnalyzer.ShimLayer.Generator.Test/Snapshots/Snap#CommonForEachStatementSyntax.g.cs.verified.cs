@@ -178,6 +178,13 @@ public readonly struct CommonForEachStatementSyntaxWrapper : IWrapper, IEquatabl
     public static implicit operator StatementSyntax(CommonForEachStatementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static CommonForEachStatementSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new CommonForEachStatementSyntaxWrapper((StatementSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static CommonForEachStatementSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

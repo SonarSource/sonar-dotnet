@@ -154,6 +154,13 @@ public readonly struct RefExpressionSyntaxWrapper : IWrapper, IEquatable<RefExpr
     public static implicit operator ExpressionSyntax(RefExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RefExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RefExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RefExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

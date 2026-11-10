@@ -160,6 +160,13 @@ public readonly struct CasePatternSwitchLabelSyntaxWrapper : IWrapper, IEquatabl
     public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static CasePatternSwitchLabelSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new CasePatternSwitchLabelSyntaxWrapper((SwitchLabelSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static CasePatternSwitchLabelSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

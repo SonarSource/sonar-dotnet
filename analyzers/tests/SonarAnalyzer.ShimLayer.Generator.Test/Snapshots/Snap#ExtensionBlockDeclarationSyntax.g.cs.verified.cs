@@ -198,6 +198,13 @@ public readonly struct ExtensionBlockDeclarationSyntaxWrapper : IWrapper, IEquat
     public static implicit operator TypeDeclarationSyntax(ExtensionBlockDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ExtensionBlockDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ExtensionBlockDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ExtensionBlockDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

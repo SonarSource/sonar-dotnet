@@ -27,6 +27,13 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
 
             public static implicit operator {CompiletimeTypeSnippet}({Latest.Name}Wrapper wrapper) =>
                 wrapper.wrappedInstance;
+
+            internal static {ReturnTypeSnippet}? FromOrDefault(SyntaxNode instance) =>
+                IsInstance(instance) ? new {TypeSnippet}(({CompiletimeTypeSnippet})instance) : null;
+
+            public SyntaxNodeAs As => wrappedInstance.As;
+
+            public SyntaxNodeTo To => wrappedInstance.To;
         """;
 
     public SyntaxNodeWrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, baseType, fallbackBaseType, members) { }

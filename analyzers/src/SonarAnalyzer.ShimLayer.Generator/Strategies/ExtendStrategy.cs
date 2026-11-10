@@ -21,12 +21,14 @@ public class ExtendStrategy : MemberStrategy
 {
     public override string TypeSnippet => Latest.Name;
 
+    protected virtual bool AlwaysGenerate => false;
+
     public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
     protected override string GenerateCore(StrategyModel model)
     {
         var wrap = WrapMembers(model);
-        return wrap.Properties.Any() || wrap.Methods.Any()
+        return (wrap.Properties.Any() || wrap.Methods.Any() || AlwaysGenerate
             ? $$"""
                 {{Preamble()}}
                 public static class {{Latest.Name}}ShimExtensions
@@ -46,9 +48,13 @@ public class ExtendStrategy : MemberStrategy
                 {{AdditionalMembers(model)}}
                     }
                 }
+
+                {{AdditionalTopLevelTypes(model)}}
                 """
-            : null;
+            : null)?.TrimEnd();
     }
 
     protected virtual string AdditionalMembers(StrategyModel model) => null;
+
+    protected virtual string AdditionalTopLevelTypes(StrategyModel model) => null;
 }

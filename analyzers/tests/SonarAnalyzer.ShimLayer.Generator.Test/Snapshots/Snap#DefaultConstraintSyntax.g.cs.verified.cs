@@ -150,6 +150,13 @@ public readonly struct DefaultConstraintSyntaxWrapper : IWrapper, IEquatable<Def
     public static implicit operator TypeParameterConstraintSyntax(DefaultConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static DefaultConstraintSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new DefaultConstraintSyntaxWrapper((TypeParameterConstraintSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static DefaultConstraintSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

@@ -158,6 +158,13 @@ public readonly struct BinaryPatternSyntaxWrapper : IWrapper, IEquatable<BinaryP
     public static implicit operator CSharpSyntaxNode(BinaryPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static BinaryPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new BinaryPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static BinaryPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

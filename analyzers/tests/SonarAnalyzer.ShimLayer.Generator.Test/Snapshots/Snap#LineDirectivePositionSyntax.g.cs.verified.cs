@@ -166,6 +166,13 @@ public readonly struct LineDirectivePositionSyntaxWrapper : IWrapper, IEquatable
     public static implicit operator CSharpSyntaxNode(LineDirectivePositionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static LineDirectivePositionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new LineDirectivePositionSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static LineDirectivePositionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

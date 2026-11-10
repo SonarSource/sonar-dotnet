@@ -160,6 +160,13 @@ public readonly struct FunctionPointerParameterListSyntaxWrapper : IWrapper, IEq
     public static implicit operator CSharpSyntaxNode(FunctionPointerParameterListSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static FunctionPointerParameterListSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new FunctionPointerParameterListSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static FunctionPointerParameterListSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

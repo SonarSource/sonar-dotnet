@@ -160,6 +160,13 @@ public readonly struct ImplicitObjectCreationExpressionSyntaxWrapper : IWrapper,
     public static implicit operator ExpressionSyntax(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ImplicitObjectCreationExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ImplicitObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ImplicitObjectCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

@@ -154,6 +154,13 @@ public readonly struct DeclarationPatternSyntaxWrapper : IWrapper, IEquatable<De
     public static implicit operator CSharpSyntaxNode(DeclarationPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static DeclarationPatternSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new DeclarationPatternSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static DeclarationPatternSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

@@ -163,6 +163,13 @@ public readonly struct ScopedTypeSyntaxWrapper : IWrapper, IEquatable<ScopedType
     public static implicit operator TypeSyntax(ScopedTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ScopedTypeSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ScopedTypeSyntaxWrapper((TypeSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ScopedTypeSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

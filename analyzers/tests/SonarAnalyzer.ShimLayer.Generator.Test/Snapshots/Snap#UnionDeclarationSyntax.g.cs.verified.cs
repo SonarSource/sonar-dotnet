@@ -198,6 +198,13 @@ public readonly struct UnionDeclarationSyntaxWrapper : IWrapper, IEquatable<Unio
     public static implicit operator TypeDeclarationSyntax(UnionDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static UnionDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new UnionDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static UnionDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

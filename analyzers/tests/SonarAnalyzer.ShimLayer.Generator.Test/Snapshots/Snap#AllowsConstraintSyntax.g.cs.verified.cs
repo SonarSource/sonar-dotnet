@@ -142,6 +142,13 @@ public readonly struct AllowsConstraintSyntaxWrapper : IWrapper, IEquatable<Allo
     public static implicit operator CSharpSyntaxNode(AllowsConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static AllowsConstraintSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new AllowsConstraintSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static AllowsConstraintSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

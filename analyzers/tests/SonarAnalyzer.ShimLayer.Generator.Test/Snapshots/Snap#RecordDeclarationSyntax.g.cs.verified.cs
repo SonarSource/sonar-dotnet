@@ -204,6 +204,13 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static RecordDeclarationSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

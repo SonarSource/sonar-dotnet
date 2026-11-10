@@ -158,6 +158,13 @@ public readonly struct IsPatternExpressionSyntaxWrapper : IWrapper, IEquatable<I
     public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static IsPatternExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static IsPatternExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

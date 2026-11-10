@@ -164,6 +164,13 @@ public readonly struct ImplicitStackAllocArrayCreationExpressionSyntaxWrapper : 
     public static implicit operator ExpressionSyntax(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new ImplicitStackAllocArrayCreationExpressionSyntaxWrapper((ExpressionSyntax)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)

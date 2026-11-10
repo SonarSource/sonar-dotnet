@@ -160,6 +160,13 @@ public readonly struct BaseParameterSyntaxWrapper : IWrapper, IEquatable<BasePar
     public static implicit operator CSharpSyntaxNode(BaseParameterSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
+    internal static BaseParameterSyntaxWrapper? FromOrDefault(SyntaxNode instance) =>
+        IsInstance(instance) ? new BaseParameterSyntaxWrapper((CSharpSyntaxNode)instance) : null;
+
+    public SyntaxNodeAs As => wrappedInstance.As;
+
+    public SyntaxNodeTo To => wrappedInstance.To;
+
     public static BaseParameterSyntaxWrapper From(SyntaxNode instance)
     {
         if (instance is null)
