@@ -1137,6 +1137,8 @@ End Class";
     [DataRow("""record class $$T$$ { }""", "T")]                                  // BaseTypeDeclarationSyntax
     [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
     [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
+    [DataRow("""void M() { outer: foreach (var x in new int[0]) { $$break outer;$$ } }""", "outer")] // BreakStatementSyntax
+    [DataRow("""void M() { foreach (var x in new int[0]) { $$break;$$ } }""", null)]                 // BreakStatementSyntax
     [DataRow("""void M() { try { } catch $$(Exception e)$$ { } }""", "e")]       // CatchDeclarationSyntax
     [DataRow("""void M(string s) { var x = $$s?.Length$$; }""", "Length")]                                      // ConditionalAccessExpressionSyntax
     [DataRow("""void M(string s) { $$s?.ToLower()?.ToUpper()$$; }""", "ToUpper")]                               // ConditionalAccessExpressionSyntax
@@ -1150,6 +1152,8 @@ End Class";
     [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
     [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
     [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax
+    [DataRow("""void M() { outer: foreach (var x in new int[0]) { $$continue outer;$$ } }""", "outer")] // ContinueStatementSyntax
+    [DataRow("""void M() { foreach (var x in new int[0]) { $$continue;$$ } }""", null)]                 // ContinueStatementSyntax
     [DataRow("""$$public static implicit operator int(Test t) => 1;$$""", "int")] // ConversionOperatorDeclarationSyntax
     [DataRow("""$$delegate void D();$$""", "D")]                                  // DelegateDeclarationSyntax
     [DataRow("""$$~Test() { }$$""", "Test")]                                      // DestructorDeclarationSyntax
@@ -1160,12 +1164,16 @@ End Class";
     [DataRow("""$$event Action E1, E2;$$""", null)]                               // EventFieldDeclarationSyntax
     [DataRow("""void M() { $$foreach (var x in new int[0]) { }$$ }""", "x")]      // ForEachStatementSyntax
     [DataRow("""void M() { var q = $$from x in new int[0]$$ select x; }""", "x")] // FromClauseSyntax
+    [DataRow("""void M() { outer: ; $$goto outer;$$ }""", "outer")]                                                  // GotoStatementSyntax
+    [DataRow("""void M(int i) { const int X = 1; switch (i) { case X: break; case 2: $$goto case X;$$ } }""", null)] // GotoStatementSyntax
+    [DataRow("""void M(int i) { switch (i) { default: break; case 2: $$goto default;$$ } }""", null)]                // GotoStatementSyntax
     [DataRow("""$$Int32$$ i;""", "Int32")]                                        // IdentifierNameSyntax
     [DataRow("""$$int this[int i] { get => 1; set { } }$$""", "this")]            // IndexerDeclarationSyntax
     [DataRow("""int i = $$Math.Abs(1)$$;""", "Abs")]                              // InvocationExpressionSyntax
     [DataRow("""int i = $$Fun()()$$;""", null)]                                   // InvocationExpressionSyntax
     [DataRow("""void M() { var q = from _ in new int[0] $$join x in new int[0] on _ equals x$$ select _; }""", "x")]  // JoinClauseSyntax
     [DataRow("""void M() { var q = from _ in new int[0] join y in new int[0] on _ equals y $$into x$$ select _; }""", "x")] // JoinIntoClauseSyntax
+    [DataRow("""void M() { $$outer: foreach (var x in new int[0]) { }$$ }""", "outer")]                                     // LabeledStatementSyntax
     [DataRow("""void M() { var q = from _ in new int[0] $$let x = 0$$ select _; }""", "x")]                            // LetClauseSyntax
     [DataRow("""int i = $$int.MaxValue$$;""", "MaxValue")]                        // MemberAccessExpressionSyntax
     [DataRow("""string s = (new object())?$$.ToString$$();""", "ToString")]       // MemberBindingExpressionSyntax

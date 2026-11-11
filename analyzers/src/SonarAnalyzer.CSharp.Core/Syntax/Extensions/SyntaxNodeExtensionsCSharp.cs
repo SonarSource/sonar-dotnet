@@ -262,10 +262,12 @@ public static class SyntaxNodeExtensionsCSharp
             AttributeArgumentSyntax { NameEquals.Name.Identifier: var identifier } => identifier,
             AttributeSyntax { Name: { } name } => GetIdentifier(name),
             BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
+            BreakStatementSyntax { Name: { } name } => name.Identifier,
             CatchDeclarationSyntax { Identifier: var identifier } => identifier,
             ConditionalAccessExpressionSyntax { WhenNotNull: var rightSide } => GetIdentifier(rightSide),
             ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
             ConstructorInitializerSyntax { ThisOrBaseKeyword: var keyword } => keyword,
+            ContinueStatementSyntax { Name: { } name } => name.Identifier,
             ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
             DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
             DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
@@ -273,6 +275,7 @@ public static class SyntaxNodeExtensionsCSharp
             EventDeclarationSyntax { Identifier: var identifier } => identifier,
             ForEachStatementSyntax { Identifier: var identifier } => identifier,
             FromClauseSyntax { Identifier: var identifier } => identifier,
+            GotoStatementSyntax { RawKind: (int)SyntaxKind.GotoStatement, Expression: IdentifierNameSyntax label } => label.Identifier,
             IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
             InvocationExpressionSyntax
             {
@@ -280,6 +283,7 @@ public static class SyntaxNodeExtensionsCSharp
             } invocation => GetIdentifier(invocation.Expression),
             JoinClauseSyntax { Identifier: var identifier } => identifier,
             JoinIntoClauseSyntax { Identifier: var identifier } => identifier,
+            LabeledStatementSyntax labeled => labeled.Identifier,
             LetClauseSyntax { Identifier: var identifier } => identifier,
             MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
             MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
