@@ -47,8 +47,10 @@ public class ModelBuilderTest
     [TestMethod]
     public void Build_Delegates()
     {
-        var type = typeof(SyntaxReceiverCreator);
-        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
+        using var loader = new TypeLoader();    // Types from MetadataLoadContext, like in production. typeof(Delegate) does not match them.
+        var latest = loader.LoadLatest();
+        var type = latest.Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.SyntaxReceiverCreator").Type;
+        var model = ModelBuilder.Build(latest, loader.LoadBaseline());
         model[type].Should().BeOfType<SkipStrategy>();
     }
 
