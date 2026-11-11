@@ -2173,6 +2173,43 @@ public class Sample
         #region Continue
 
         [TestMethod]
+        public void Cfg_LabeledContinue_TargetsLabeledLoop()
+        {
+            var cfg = Build("cw0(); outer: for (a; b; c) { while (d) { if (e) { cw1(); continue outer; } cw2(); } cw3(); } cw4();");
+            var blocks = cfg.Blocks.ToList();
+            var continueJump = (JumpBlock)blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw1"));
+            var outerIncrementor = blocks.Single(x => x.Instructions.Any(n => n.ToString() == "c"));
+
+            continueJump.JumpNode.Kind().Should().Be(SyntaxKind.ContinueStatement);
+            continueJump.SuccessorBlock.Should().Be(outerIncrementor);
+        }
+
+        [TestMethod]
+        public void Cfg_LabeledBreak_FromSwitch_TargetsLabeledLoop()
+        {
+            var cfg = Build("cw0(); loop: foreach (var x in xs) { switch (x) { case 1: cw1(); break loop; default: cw2(); break; } cw3(); } cw4();");
+            var blocks = cfg.Blocks.ToList();
+            var labeledBreak = (JumpBlock)blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw1"));
+            var switchBreak = (JumpBlock)blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw2"));
+            var afterSwitch = blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw3"));
+            var afterLoop = blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw4"));
+
+            labeledBreak.SuccessorBlock.Should().Be(afterLoop);
+            switchBreak.SuccessorBlock.Should().Be(afterSwitch);
+        }
+
+        [TestMethod]
+        public void Cfg_LabeledBreak_FromLoop_TargetsLabeledSwitch()
+        {
+            var cfg = Build("cw0(); sw: switch (x) { case 1: for (a; b; c) { if (e) { cw1(); break sw; } cw2(); } cw3(); break; } cw4();");
+            var blocks = cfg.Blocks.ToList();
+            var labeledBreak = (JumpBlock)blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw1"));
+            var afterSwitch = blocks.Single(x => x.Instructions.Any(n => n.ToString() == "cw4"));
+
+            labeledBreak.SuccessorBlock.Should().Be(afterSwitch);
+        }
+
+        [TestMethod]
         public void Cfg_For_Continue()
         {
             var cfg = Build("cw0(); for (a; b && c; d) { if (e) { cw1(); continue; } cw2(); } cw3();");

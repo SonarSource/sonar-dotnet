@@ -88,7 +88,7 @@ public class RedundantJumpStatement_LabeledContinue
             {
                 if (grid[i][j] == 0)
                 {
-                    continue outer; // Noncompliant FP, the CFG ignores the label and models it as continuing the inner loop
+                    continue outer; // Compliant labeled jumps target the outer loop
                 }
             }
             Console.WriteLine(i);
@@ -113,3 +113,136 @@ public class RedundantJumpStatement_LabeledContinue
     }
 }
 
+// NET-4840: https://sonarsource.atlassian.net/browse/NET-4840
+public class RedundantJumpStatement_LabeledForeach
+{
+    void ContinueOuterForeach(int[][] rows)
+    {
+        var count = 0;
+    next:
+        foreach (var row in rows)
+        {
+            foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue next; // Compliant
+                }
+            }
+            count++;
+        }
+    }
+
+    void BreakOuterAsLastStatementOfInnerLoop(int[][] rows)
+    {
+    outer:
+        foreach (var row in rows)
+        {
+            foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    break outer; // Compliant
+                }
+            }
+            Console.WriteLine(row.Length);
+        }
+    }
+
+    void ContinueOwnLabelAsLastStatement(int n)
+    {
+    outer:
+        for (var i = 0; i < n; i++)
+        {
+            Console.WriteLine(i);
+            continue outer; // Noncompliant
+        }
+    }
+
+    void ContinueOwnLabelAfterInnerLoop(int[][] grid)
+    {
+    outer:
+        for (var i = 0; i < grid.Length; i++)
+        {
+            for (var j = 0; j < grid[i].Length; j++)
+            {
+                Console.WriteLine(j);
+            }
+            continue outer; // Noncompliant
+        }
+    }
+
+    void ContinueOwnLabelForeach(int[] values)
+    {
+    next:
+        foreach (var value in values)
+        {
+            Console.WriteLine(value);
+            continue next; // Noncompliant
+        }
+    }
+
+    void ContinueOwnLabelWhile(int n)
+    {
+    loop:
+        while (n > 0)
+        {
+            n--;
+            continue loop; // Noncompliant
+        }
+    }
+
+    void ContinueOuterFromDoWhile(int[] values)
+    {
+    outer:
+        foreach (var value in values)
+        {
+            var i = 0;
+            do
+            {
+                i++;
+                if (i == value)
+                {
+                    continue outer; // Compliant
+                }
+            } while (i < 10);
+            Console.WriteLine(value);
+        }
+    }
+
+    void ContinueToStackedLabel(int n)
+    {
+    a:
+    b:
+        for (var i = 0; i < n; i++)
+        {
+            for (var j = 0; j < n; j++)
+            {
+                if (j == i)
+                {
+                    continue a; // Error [CS9394]
+                }
+            }
+            Console.WriteLine(i);
+        }
+    }
+
+    void BreakLabeledSwitchFromLoop(int x, int n)
+    {
+    sw:
+        switch (x)
+        {
+            case 1:
+                for (var i = 0; i < n; i++)
+                {
+                    if (i == 2)
+                    {
+                        break sw;
+                    }
+                    Console.WriteLine(i);
+                }
+                break;
+        }
+        return; // Noncompliant
+    }
+}

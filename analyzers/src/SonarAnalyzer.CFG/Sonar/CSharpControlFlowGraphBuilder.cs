@@ -26,6 +26,8 @@ namespace SonarAnalyzer.CFG.Sonar
 
         private readonly Stack<Block> breakTarget = new Stack<Block>();
         private readonly Stack<Block> continueTargets = new Stack<Block>();
+        private readonly Dictionary<string, Block> labeledBreakTargets = [];
+        private readonly Dictionary<string, Block> labeledContinueTargets = [];
         private readonly Stack<Dictionary<object, List<JumpBlock>>> switchGotoJumpBlocks = new Stack<Dictionary<object, List<JumpBlock>>>();
         private readonly Dictionary<string, List<JumpBlock>> gotoJumpBlocks = new Dictionary<string, List<JumpBlock>>();
         private readonly Dictionary<string, JumpBlock> labeledStatements = new Dictionary<string, JumpBlock>();
@@ -702,6 +704,7 @@ namespace SonarAnalyzer.CFG.Sonar
         {
             var caseBlocksByValue = new Dictionary<object, Block>();
             this.breakTarget.Push(currentBlock);
+            RegisterLabeledSwitchTarget(switchStatement, currentBlock);
             this.switchGotoJumpBlocks.Push(new Dictionary<object, List<JumpBlock>>());
 
             // Default section is always evaluated last, we are handling it first because
@@ -843,7 +846,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 throw new InvalidOperationException("break; outside a loop");
             }
 
-            var target = this.breakTarget.Peek();
+            var target = JumpTarget(breakStatement.Name, this.labeledBreakTargets, this.breakTarget);
             if (currentBlock is BranchBlock possibleTryBlock &&
                 possibleTryBlock.BranchingNode.IsKind(SyntaxKind.TryStatement))
             {
@@ -862,8 +865,36 @@ namespace SonarAnalyzer.CFG.Sonar
                 throw new InvalidOperationException("continue; outside a loop");
             }
 
-            var target = this.continueTargets.Peek();
+            var target = JumpTarget(continueStatement.Name, this.labeledContinueTargets, this.continueTargets);
             return CreateJumpBlock(continueStatement, target, currentBlock);
+        }
+
+        private static Block JumpTarget(IdentifierNameSyntax label, Dictionary<string, Block> labeledTargets, Stack<Block> targets)
+        {
+            if (label is null)
+            {
+                return targets.Peek();
+            }
+            return labeledTargets.TryGetValue(label.Identifier.ValueText, out var target)
+                ? target
+                : throw new InvalidOperationException("Labeled jump to non-existent loop");
+        }
+
+        private void RegisterLabeledLoopTargets(StatementSyntax loop, Block breakTarget, Block continueTarget)
+        {
+            if (loop.Parent is LabeledStatementSyntax labeledStatement)
+            {
+                this.labeledBreakTargets[labeledStatement.Identifier.ValueText] = breakTarget;
+                this.labeledContinueTargets[labeledStatement.Identifier.ValueText] = continueTarget;
+            }
+        }
+
+        private void RegisterLabeledSwitchTarget(SwitchStatementSyntax switchStatement, Block breakTarget)
+        {
+            if (switchStatement.Parent is LabeledStatementSyntax labeledStatement)
+            {
+                this.labeledBreakTargets[labeledStatement.Identifier.ValueText] = breakTarget;
+            }
         }
 
         private Block BuildReturnStatement(ReturnStatementSyntax returnStatement, Block currentBlock)
@@ -955,6 +986,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
             this.breakTarget.Push(currentBlock);
             this.continueTargets.Push(conditionBlock);
+            RegisterLabeledLoopTargets(doStatement, currentBlock, conditionBlock);
 
             var loopBody = BuildStatement(doStatement.Statement, CreateBlock(conditionBlock)); // B
             conditionBlockTemp.SuccessorBlock = loopBody;
@@ -975,6 +1007,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
             this.breakTarget.Push(currentBlock);
             this.continueTargets.Push(incrementorBlock);
+            RegisterLabeledLoopTargets(forStatement, currentBlock, incrementorBlock);
 
             var forBlock = BuildStatement(forStatement.Statement, CreateBlock(incrementorBlock)); // D
 
@@ -1008,6 +1041,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
             this.breakTarget.Push(currentBlock);
             this.continueTargets.Push(temp);
+            RegisterLabeledLoopTargets(foreachStatement, currentBlock, temp);
 
             var foreachBlock = BuildStatement(foreachBodyStatement, CreateBlock(temp));
 
@@ -1026,6 +1060,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
             this.breakTarget.Push(currentBlock);
             this.continueTargets.Push(loopTempBlock);
+            RegisterLabeledLoopTargets(whileStatement, currentBlock, loopTempBlock);
 
             var bodyBlock = BuildStatement(whileStatement.Statement, CreateBlock(loopTempBlock));
 
