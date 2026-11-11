@@ -75,7 +75,7 @@ public static class ISymbolExtensions
 
         public bool IsPubliclyAccessible => symbol.EffectiveAccessibility is Accessibility.Public or Accessibility.Protected or Accessibility.ProtectedOrInternal;
 
-        public bool IsConstructor => symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
+        public bool IsConstructor => symbol is IMethodSymbol { MethodKind: MethodKind.Constructor };
 
         /// <summary>
         /// <see langword="true"/> if the symbol is any of the members that make up the <see langword="await"/> pattern.

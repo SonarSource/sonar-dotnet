@@ -154,6 +154,25 @@ public class ISymbolExtensionsTest
         ISymbolExtensionsCommon.IsInType(null, []).Should().BeFalse();
 
     [TestMethod]
+    public void IsConstructor()
+    {
+        const string code = """
+            public class Sample
+            {
+                static Sample() { }
+                public Sample() { }
+                public void Method() { }
+                public int Property { get; }
+            }
+            """;
+        var compiler = new SnippetCompiler(code);
+        var members = compiler.DeclaredSymbol<INamedTypeSymbol>("Sample").GetMembers().Where(x => !x.IsImplicitlyDeclared).ToArray();
+
+        members.Where(x => x.IsConstructor).Should().ContainSingle().Which.Should().Match<IMethodSymbol>(x => !x.IsStatic);
+        compiler.DeclaredSymbol<INamedTypeSymbol>("Sample").IsConstructor.Should().BeFalse();
+    }
+
+    [TestMethod]
     [DataRow("{ get; set; }")]
     [DataRow("{ get; }")]
     [DataRow("{ get; } = string.Empty;")]
