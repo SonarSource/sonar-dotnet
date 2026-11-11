@@ -15,120 +15,118 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TStatementSyntax : SyntaxNode
+    where TSyntaxKind : struct
 {
-    public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TStatementSyntax : SyntaxNode
-        where TSyntaxKind : struct
-    {
-        protected const string DiagnosticId = "S1751";
+    protected const string DiagnosticId = "S1751";
 
-        protected abstract ISet<TSyntaxKind> LoopStatements { get; }
+    protected abstract ISet<TSyntaxKind> LoopStatements { get; }
 
-        protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> GetWalker(SonarSyntaxNodeReportingContext context);
+    protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> Walker(SonarSyntaxNodeReportingContext context);
 
-        protected override string MessageFormat => "Refactor the containing loop to do more than one iteration.";
+    protected override string MessageFormat => "Refactor the containing loop to do more than one iteration.";
 
-        protected UnconditionalJumpStatementBase() : base(DiagnosticId) { }
+    protected UnconditionalJumpStatementBase() : base(DiagnosticId) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var walker = Walker(c);
+                if (walker.Visit())
                 {
-                    var walker = GetWalker(c);
-                    walker.Visit();
-                    foreach (var node in walker.GetRuleViolations())
+                    foreach (var node in walker.RuleViolations())
                     {
                         c.ReportIssue(Rule, node);
                     }
-                },
-                LoopStatements.ToArray());
-    }
+                }
+            },
+            LoopStatements.ToArray());
+}
 
-    public abstract class LoopWalkerBase<TStatementSyntax, TLanguageKindEnum>
-        where TStatementSyntax : SyntaxNode
-        where TLanguageKindEnum : struct
+public abstract class LoopWalkerBase<TStatementSyntax, TSyntaxKind>
+    where TStatementSyntax : SyntaxNode
+    where TSyntaxKind : struct
+{
+    protected readonly SyntaxNode rootExpression;
+    protected readonly SemanticModel model;
+    protected readonly ICollection<TStatementSyntax> conditionalContinues = [];
+    protected readonly ICollection<TStatementSyntax> conditionalTerminates = [];
+    protected readonly ICollection<TStatementSyntax> unconditionalContinues = [];
+    protected readonly ICollection<TStatementSyntax> unconditionalTerminates = [];
+
+    private readonly ISet<TSyntaxKind> loopStatements;
+
+    public abstract bool Visit();
+
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected abstract ISet<TSyntaxKind> ConditionalStatements { get; }
+    protected abstract ISet<TSyntaxKind> StatementsThatCanThrow { get; }
+    protected abstract ISet<TSyntaxKind> LambdaSyntaxes { get; }
+    protected abstract ISet<TSyntaxKind> LocalFunctionSyntaxes { get; }
+
+    protected abstract IEnumerable<TStatementSyntax> TryBlockStatements(IReadOnlyList<SyntaxNode> ancestors);
+    protected abstract bool IsPropertyAccess(TStatementSyntax node);
+    protected abstract bool IsJumpToRootLoop(TStatementSyntax node);
+
+    protected LoopWalkerBase(SonarSyntaxNodeReportingContext context, ISet<TSyntaxKind> loopStatements)
     {
-        protected readonly SyntaxNode rootExpression;
-        protected readonly SemanticModel semanticModel;
+        rootExpression = context.Node;
+        model = context.Model;
+        this.loopStatements = loopStatements;
+    }
 
-        private readonly ISet<TLanguageKindEnum> ignoredSyntaxesKind;
+    public IEnumerable<TStatementSyntax> RuleViolations() =>
+        conditionalContinues.Count == 0
+            ? unconditionalContinues.Concat(unconditionalTerminates)
+            : unconditionalContinues;
 
-        protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
-        protected abstract ISet<TLanguageKindEnum> ConditionalStatements { get; }
-        protected abstract ISet<TLanguageKindEnum> StatementsThatCanThrow { get; }
-        protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
-        protected abstract ISet<TLanguageKindEnum> LocalFunctionSyntaxes { get; }
+    protected void StoreVisitData(TStatementSyntax node, ICollection<TStatementSyntax> conditionalCollection, ICollection<TStatementSyntax> unconditionalCollection)
+    {
+        var ancestors = node
+            .Ancestors()
+            .TakeWhile(x => !rootExpression.Equals(x))
+            .ToList();
 
-        public abstract void Visit();
-        protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<TStatementSyntax> tryAncestorStatements);
-        protected abstract bool IsPropertyAccess(TStatementSyntax node);
-
-        protected List<TStatementSyntax> ConditionalContinues { get; } = new List<TStatementSyntax>();
-        protected List<TStatementSyntax> ConditionalTerminates { get; } = new List<TStatementSyntax>();
-
-        protected List<TStatementSyntax> UnconditionalContinues { get; } = new List<TStatementSyntax>();
-        protected List<TStatementSyntax> UnconditionalTerminates { get; } = new List<TStatementSyntax>();
-
-        protected LoopWalkerBase(SonarSyntaxNodeReportingContext context, ISet<TLanguageKindEnum> loopStatements)
+        if (ancestors.Any(x => Language.Syntax.IsAnyKind(x, LambdaSyntaxes) || Language.Syntax.IsAnyKind(x, LocalFunctionSyntaxes)))
         {
-            rootExpression = context.Node;
-            semanticModel = context.Model;
-            ignoredSyntaxesKind = LambdaSyntaxes.Union(LocalFunctionSyntaxes).Union(loopStatements).ToHashSet();
+            return;
         }
 
-        public List<TStatementSyntax> GetRuleViolations()
+        var isInNestedLoop = ancestors.Any(x => Language.Syntax.IsAnyKind(x, loopStatements));
+        if (isInNestedLoop && !IsJumpToRootLoop(node))
         {
-            var ruleViolations = new List<TStatementSyntax>(UnconditionalContinues);
-            if (!ConditionalContinues.Any())
-            {
-                ruleViolations.AddRange(UnconditionalTerminates);
-            }
-
-            return ruleViolations;
+            return;
         }
 
-        protected void StoreVisitData(TStatementSyntax node, List<TStatementSyntax> conditionalCollection, List<TStatementSyntax> unconditionalCollection)
+        if (isInNestedLoop
+            || ancestors.Any(x => Language.Syntax.IsAnyKind(x, ConditionalStatements))
+            || IsInTryCatchWithStatementThatCanThrow(node, ancestors))
         {
-            var ancestors = node
-                .Ancestors()
-                .TakeWhile(n => !rootExpression.Equals(n))
-                .ToList();
-
-            if (ancestors.Any(n => Language.Syntax.IsAnyKind(n, ignoredSyntaxesKind)))
-            {
-                return;
-            }
-
-            if (ancestors.Any(n => Language.Syntax.IsAnyKind(n, ConditionalStatements))
-                || IsInTryCatchWithStatementThatCanThrow(node, ancestors))
-            {
-                conditionalCollection.Add(node);
-            }
-            else
-            {
-                unconditionalCollection.Add(node);
-            }
+            conditionalCollection.Add(node);
         }
-
-        private bool IsInTryCatchWithStatementThatCanThrow(TStatementSyntax node, List<SyntaxNode> ancestors)
+        else
         {
-            if (!TryGetTryAncestorStatements(node, ancestors, out var tryAncestorStatements))
-            {
-                return false;
-            }
-
-            if (Language.Syntax.IsKind(node, Language.SyntaxKind.ReturnStatement)
-                && (node.DescendantNodes().Any(n => Language.Syntax.IsAnyKind(n, StatementsThatCanThrow))
-                    || IsPropertyAccess(node)))
-            {
-                return true;
-            }
-
-            return tryAncestorStatements
-                .TakeWhile(statement => !statement.Equals(node))
-                .SelectMany(statement => statement.DescendantNodes())
-                .Any(statement => Language.Syntax.IsAnyKind(statement, StatementsThatCanThrow));
+            unconditionalCollection.Add(node);
         }
     }
+
+    private bool IsInTryCatchWithStatementThatCanThrow(TStatementSyntax node, IReadOnlyList<SyntaxNode> ancestors)
+    {
+        var tryBlockStatements = TryBlockStatements(ancestors);
+        return tryBlockStatements.Any()
+            && (IsReturnThatCanThrow(node)
+                || tryBlockStatements
+                    .TakeWhile(x => !x.Equals(node))
+                    .SelectMany(x => x.DescendantNodes())
+                    .Any(x => Language.Syntax.IsAnyKind(x, StatementsThatCanThrow)));
+    }
+
+    private bool IsReturnThatCanThrow(TStatementSyntax node) =>
+        Language.Syntax.IsKind(node, Language.SyntaxKind.ReturnStatement)
+        && (node.DescendantNodes().Any(x => Language.Syntax.IsAnyKind(x, StatementsThatCanThrow)) || IsPropertyAccess(node));
 }

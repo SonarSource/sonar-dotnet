@@ -15,116 +15,107 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
     {
+        SyntaxKind.ForBlock,
+        SyntaxKind.ForEachBlock,
+        SyntaxKind.WhileBlock,
+        SyntaxKind.DoLoopWhileBlock,
+        SyntaxKind.DoLoopUntilBlock,
+        SyntaxKind.SimpleDoLoopBlock
+    };
+
+    protected override LoopWalkerBase<StatementSyntax, SyntaxKind> Walker(SonarSyntaxNodeReportingContext context) =>
+        new LoopWalker(context, LoopStatements);
+
+    private sealed class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
+    {
+        private static readonly HashSet<SyntaxKind> StatementsThatCanThrowKinds =
+        [
+            SyntaxKind.InvocationExpression,
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKind.SimpleMemberAccessExpression
+        ];
+
+        private static readonly HashSet<SyntaxKind> LambdaKinds =
+        [
+            SyntaxKind.FunctionLambdaHeader,
+            SyntaxKind.MultiLineFunctionLambdaExpression,
+            SyntaxKind.MultiLineSubLambdaExpression,
+            SyntaxKind.SingleLineFunctionLambdaExpression,
+            SyntaxKind.SingleLineSubLambdaExpression,
+            SyntaxKind.SubLambdaHeader
+        ];
+
+        private static readonly HashSet<SyntaxKind> LocalFunctionKinds = [];
+
+        private static readonly HashSet<SyntaxKind> ConditionalStatementKinds =
+        [
+            SyntaxKind.SingleLineIfStatement,
+            SyntaxKind.SingleLineIfPart,
+            SyntaxKind.MultiLineIfBlock,
+            SyntaxKind.CaseBlock,
+            SyntaxKind.CaseElseBlock,
+            SyntaxKind.CatchBlock
+        ];
+
+        protected override ISet<SyntaxKind> StatementsThatCanThrow => StatementsThatCanThrowKinds;
+        protected override ISet<SyntaxKind> LambdaSyntaxes => LambdaKinds;
+        protected override ISet<SyntaxKind> LocalFunctionSyntaxes => LocalFunctionKinds;
+        protected override ISet<SyntaxKind> ConditionalStatements => ConditionalStatementKinds;
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
+        public LoopWalker(SonarSyntaxNodeReportingContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
+
+        public override bool Visit() =>
+            new VbLoopwalker(this).SafeVisit(rootExpression);
+
+        protected override bool IsPropertyAccess(StatementSyntax node) =>
+            node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => model.GetSymbolInfo(x).Symbol is IPropertySymbol);
+
+        protected override IEnumerable<StatementSyntax> TryBlockStatements(IReadOnlyList<SyntaxNode> ancestors) =>
+            ancestors.OfType<TryBlockSyntax>().FirstOrDefault() is { CatchBlocks.Count: > 0 } tryBlock
+                ? tryBlock.Statements
+                : Enumerable.Empty<StatementSyntax>();
+
+        protected override bool IsJumpToRootLoop(StatementSyntax node) => false;
+
+        private sealed class VbLoopwalker : SafeVisualBasicSyntaxWalker
         {
-            SyntaxKind.ForBlock,
-            SyntaxKind.ForEachBlock,
-            SyntaxKind.WhileBlock,
-            SyntaxKind.DoLoopWhileBlock,
-            SyntaxKind.DoLoopUntilBlock,
-            SyntaxKind.SimpleDoLoopBlock
-        };
+            private readonly LoopWalker walker;
 
-        protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SonarSyntaxNodeReportingContext context)
-            => new LoopWalker(context, LoopStatements);
+            public VbLoopwalker(LoopWalker loopWalker) =>
+                walker = loopWalker;
 
-        private sealed class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
-        {
-            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
+            public override void VisitContinueStatement(ContinueStatementSyntax node)
             {
-                SyntaxKind.InvocationExpression,
-                SyntaxKind.ObjectCreationExpression,
-                SyntaxKind.SimpleMemberAccessExpression
-            };
-
-            protected override ISet<SyntaxKind> LambdaSyntaxes { get; } = new HashSet<SyntaxKind>
-                {
-                    SyntaxKind.FunctionLambdaHeader,
-                    SyntaxKind.MultiLineFunctionLambdaExpression,
-                    SyntaxKind.MultiLineSubLambdaExpression,
-                    SyntaxKind.SingleLineFunctionLambdaExpression,
-                    SyntaxKind.SingleLineSubLambdaExpression,
-                    SyntaxKind.SubLambdaHeader
-                };
-
-            protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind>();
-
-            protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.SingleLineIfStatement,
-                SyntaxKind.SingleLineIfPart,
-                SyntaxKind.MultiLineIfBlock,
-                SyntaxKind.CaseBlock,
-                SyntaxKind.CaseElseBlock,
-                SyntaxKind.CatchBlock
-            };
-
-            protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-            public LoopWalker(SonarSyntaxNodeReportingContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
-
-            public override void Visit()
-            {
-                var vbWalker = new VbLoopwalker(this);
-                vbWalker.SafeVisit(rootExpression);
+                base.VisitContinueStatement(node);
+                walker.StoreVisitData(node, walker.conditionalContinues, walker.unconditionalContinues);
             }
 
-            protected override bool IsPropertyAccess(StatementSyntax node) =>
-                node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => semanticModel.GetSymbolInfo(x).Symbol is { } symbol && symbol.Kind == SymbolKind.Property);
-
-            protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
+            public override void VisitExitStatement(ExitStatementSyntax node)
             {
-                var tryAncestor = (TryBlockSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryBlock));
-
-                if (tryAncestor == null || tryAncestor.CatchBlocks.Count == 0)
-                {
-                    tryAncestorStatements = null;
-                    return false;
-                }
-
-                tryAncestorStatements = tryAncestor.Statements;
-                return true;
+                base.VisitExitStatement(node);
+                walker.StoreVisitData(node, walker.conditionalTerminates, walker.unconditionalTerminates);
             }
 
-            private class VbLoopwalker : SafeVisualBasicSyntaxWalker
+            public override void VisitReturnStatement(ReturnStatementSyntax node)
             {
-                private readonly LoopWalker walker;
+                base.VisitReturnStatement(node);
+                walker.StoreVisitData(node, walker.conditionalTerminates, walker.unconditionalTerminates);
+            }
 
-                public VbLoopwalker(LoopWalker loopWalker)
-                {
-                    walker = loopWalker;
-                }
-
-                public override void VisitContinueStatement(ContinueStatementSyntax node)
-                {
-                    base.VisitContinueStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
-                }
-
-                public override void VisitExitStatement(ExitStatementSyntax node)
-                {
-                    base.VisitExitStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
-                }
-
-                public override void VisitReturnStatement(ReturnStatementSyntax node)
-                {
-                    base.VisitReturnStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
-                }
-
-                public override void VisitThrowStatement(ThrowStatementSyntax node)
-                {
-                    base.VisitThrowStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
-                }
+            public override void VisitThrowStatement(ThrowStatementSyntax node)
+            {
+                base.VisitThrowStatement(node);
+                walker.StoreVisitData(node, walker.conditionalTerminates, walker.unconditionalTerminates);
             }
         }
     }
