@@ -22,6 +22,8 @@ namespace SonarAnalyzer.TestFramework.Test.Common;
 [TestClass]
 public class SdkPathProviderTest
 {
+    public TestContext TestContext { get; set; }
+
     private static AnalyzerFileReference RazorSourceGenerator =>
         SdkPathProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.dll"));
 
@@ -38,7 +40,6 @@ public class SdkPathProviderTest
     public void RazorSourceGenerator_LoadsCorrectAssembly() =>
         RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.CodeAnalysis.Razor.Compiler");
 
-    [Ignore("FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed. Until then this test has to be skipped.")]
     [TestMethod]
     public void LatestSdkVersion_ReturnsAssemblyMajor()
     {
@@ -49,9 +50,26 @@ public class SdkPathProviderTest
 
     [TestMethod]
     public void LatestSdkVersion_PathDoesNotExists() =>
-        ((Func<string>)(() => SdkPathProvider.LatestFolder("C:\\NonExistingPath", "dotnet.dll", string.Empty))).Should().Throw<NotSupportedException>();
+        FluentActions.Invoking(() => SdkPathProvider.LatestFolder("C:\\NonExistingPath", "dotnet.dll")).Should().Throw<NotSupportedException>();
 
-    [Ignore("FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed. Until then this test has to be skipped.")]
+    [TestMethod]
+    public void LatestFolder_SkipsFoldersWithoutAssembly()
+    {
+        var assemblyPath = TestFiles.TestPath(TestContext, Path.Combine("1.0.0", "dotnet.dll"));
+        File.Copy(typeof(object).Assembly.Location, assemblyPath, true);
+        var withAssembly = Directory.GetParent(assemblyPath);
+        Directory.CreateDirectory(Path.Combine(withAssembly.Parent.FullName, "99.0.0"));
+        SdkPathProvider.LatestFolder(withAssembly.Parent.FullName, "dotnet.dll").Should().Be(withAssembly.FullName);
+    }
+
+    [TestMethod]
+    public void LatestFolder_NoFolderContainsAssembly_Throws()
+    {
+        var root = Directory.CreateDirectory(TestFiles.TestPath(TestContext, "1.0.0")).Parent.FullName;
+        FluentActions.Invoking(() => SdkPathProvider.LatestFolder(root, "dotnet.dll")).Should().Throw<NotSupportedException>()
+            .WithMessage($"No folder in '{root}' contains 'dotnet.dll'.");
+    }
+
     [TestMethod]
     public void LatestSdkFolder_ReturnLatest()
     {
@@ -60,6 +78,7 @@ public class SdkPathProviderTest
         var parentDirectory = Directory.GetParent(latestSdkFolder);
         parentDirectory.Name.Should().Be("sdk", "Parent directory of the latest SDK should be 'sdk'");
         Directory.GetDirectories(parentDirectory.FullName, $"{typeof(object).Assembly.GetName().Version.Major}.*")
+            .Where(x => File.Exists(Path.Combine(x, "dotnet.dll")))
             .Should().NotContain(x => IsHigherVersion(x, latestVersion), "There should be no SDK folders with a higher version number than the latest SDK folder");
     }
 

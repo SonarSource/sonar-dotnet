@@ -1114,10 +1114,10 @@ void Foo()
             .Compile()
             .Single();
 
-        var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
-        var semanticModel = compilation.GetSemanticModel(syntaxTree);
-
-        var lineNumbers = CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
+        // Since .NET 11, the .razor file is generated into two trees: *_razor.g.cs and *_razor.decl.g.cs
+        var lineNumbers = compilation.SyntaxTrees
+            .Where(x => x.ToString().Contains(fileName))
+            .SelectMany(x => CSharpExecutableLinesMetric.GetLineNumbers(x, compilation.GetSemanticModel(x)));
         lineNumbers.Should().BeEquivalentTo(expectedExecutableLines);
     }
 }

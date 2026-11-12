@@ -1,0 +1,15 @@
+@* Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by the matching .Latest.cshtml file and do not have this problem. *@
+<p>The solution to all problems is: @(RaiseHere(21))</p>
+@*                                          ^^^^^^^^^ Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+@*                                                    ^^ Secondary@-1 Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+
+@functions
+{
+    private int magicNumber = RaiseHere(42);
+//                            ^^^^^^^^^
+//                                      ^^ Secondary@-1
+    private static int RaiseHere(int nb)
+    {
+        return nb;
+    }
+}

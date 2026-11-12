@@ -60,18 +60,19 @@ public class MetricsAnalyzerTest
             .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(RazorFileName, "Component.razor");
+                    // The .NET 11 Razor declaration files *_razor.decl.g.cs are not mapped to the original .razor file path
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(RazorFileName, "Component.razor", "Razor_razor.decl.g.cs", "Component_razor.decl.g.cs");
 
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
-                    metrics.ClassCount.Should().Be(1);
-                    metrics.CodeLine.Should().BeEquivalentTo([1, 2, 3, 5, 8, 10, 13, 15, 16, 17, 19, 22, 23, 24, 26, 28, 29, 32, 33, 34, 36, 37, 39, 40, 43]);
+                    metrics.ClassCount.Should().Be(0);  // FN: Since .NET 11, the class is counted in Razor_razor.decl.g.cs instead
+                    metrics.CodeLine.Should().BeEquivalentTo([2, 3, 5, 13, 15, 16, 17, 19, 22, 23, 24, 26, 28, 29, 32, 33, 34, 36, 37, 39, 40, 43]); // FN: 1, 8, 10 are lost since .NET 11 Razor declaration files
                     metrics.CognitiveComplexity.Should().Be(3);
                     metrics.Complexity.Should().Be(4);
                     metrics.ExecutableLines.Should().BeEquivalentTo([3, 5, 13, 15, 17, 24, 28, 29, 32, 36, 39, 43]); // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
                     metrics.FunctionCount.Should().Be(1);
                     metrics.NoSonarComment.Should().BeEmpty();
-                    metrics.NonBlankComment.Should().BeEquivalentTo([7, 8, 10, 15, 21, 22, 23, 28, 29, 32, 33, 36, 37, 38]);
+                    metrics.NonBlankComment.Should().BeEquivalentTo([15, 21, 22, 23, 28, 29, 32, 33, 36, 37, 38]); // FN: 7, 8, 10 are lost since .NET 11 Razor declaration files
                     metrics.StatementCount.Should().Be(13); // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
                 });
 

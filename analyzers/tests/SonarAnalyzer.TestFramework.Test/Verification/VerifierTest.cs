@@ -180,36 +180,49 @@ public class VerifierTest
             .Invoking(x => x.Verify())
             .Should().Throw<DiagnosticVerifierException>();
 
+    // Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by Dummy.SecondaryLocation.Latest.cshtml and do not have this problem.
     [TestMethod]
     [DataRow("Dummy.SecondaryLocation.razor")]
-    [DataRow("Dummy.SecondaryLocation.cshtml")]
-    public void Verify_RazorWithAdditionalLocation(string path) =>
+    [DataRow("Dummy.SecondaryLocation.BeforeCSharp10.cshtml")]
+    public void Verify_RazorWithAdditionalLocation_BeforeCSharp10(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithOptions(LanguageOptions.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
-    [DataRow("Dummy.SecondaryLocation.CSharp10.razor")]
-    [DataRow("Dummy.SecondaryLocation.cshtml")]
-    public void Verify_RazorWithAdditionalLocation_CSharp10(string path) =>
+    [DataRow("Dummy.SecondaryLocation.Latest.razor")]
+    [DataRow("Dummy.SecondaryLocation.Latest.cshtml")]
+    public void Verify_RazorWithAdditionalLocation_Latest(string path) =>
         DummyWithLocation.AddPaths(path)
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    // Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by Dummy.Latest.cshtml and do not have this problem.
+    [TestMethod]
+    [DataRow("Dummy.razor")]
+    [DataRow("Dummy.BeforeCSharp10.cshtml")]
+    public void Verify_Razor_BeforeCSharp10(string path) =>
+        DummyWithLocation.AddPaths(path)
+            .WithOptions(LanguageOptions.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     [DataRow("Dummy.razor")]
-    [DataRow("Dummy.cshtml")]
-    public void Verify_Razor(string path) =>
+    [DataRow("Dummy.Latest.cshtml")]
+    public void Verify_Razor_Latest(string path) =>
         DummyWithLocation.AddPaths(path)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
+    // Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by DummyExpressions.Latest.cshtml and do not have this problem.
     [TestMethod]
     [DataRow("DummyExpressions.razor")]
-    [DataRow("DummyExpressions.cshtml")]
-    public void Verify_RazorExpressions_Locations(string path) =>
+    [DataRow("DummyExpressions.BeforeCSharp10.cshtml")]
+    public void Verify_RazorExpressions_Locations_BeforeCSharp10(string path) =>
         DummyWithLocation
             .AddPaths(path)
             .WithOptions(LanguageOptions.BeforeCSharp10)
@@ -217,28 +230,39 @@ public class VerifierTest
             .Verify();
 
     [TestMethod]
-    [DataRow("DummyExpressions.CSharp10.razor")]
-    [DataRow("DummyExpressions.cshtml")]
-    public void Verify_RazorExpressions_Locations_CSharp10(string path) =>
+    [DataRow("DummyExpressions.Latest.razor")]
+    [DataRow("DummyExpressions.Latest.cshtml")]
+    public void Verify_RazorExpressions_Locations_Latest(string path) =>
         DummyWithLocation
             .AddPaths(path)
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     [DataRow("Dummy.razor")]
-    [DataRow("Dummy.cshtml")]
+    [DataRow("Dummy.Latest.cshtml")]
     public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
             .VerifyNoIssues();
 
+    // Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by Dummy.Latest.cshtml and do not have this problem.
     [TestMethod]
     [DataRow("Dummy.razor")]
-    [DataRow("Dummy.cshtml")]
-    public void Verify_RazorAnalysisInSLAndNugetContext(string path) =>
+    [DataRow("Dummy.BeforeCSharp10.cshtml")]
+    public void Verify_RazorAnalysisInSLAndNugetContext_BeforeCSharp10(string path) =>
         DummyWithLocation.AddPaths(path)
+            .WithOptions(LanguageOptions.BeforeCSharp10)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
+            .Verify();
+
+    [TestMethod]
+    [DataRow("Dummy.razor")]
+    [DataRow("Dummy.Latest.cshtml")]
+    public void Verify_RazorAnalysisInSLAndNugetContext_Latest(string path) =>
+        DummyWithLocation.AddPaths(path)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
             .Verify();
 
@@ -308,8 +332,9 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        compilation.Compilation.SyntaxTrees.Should().ContainSingle();
+        compilation.Compilation.SyntaxTrees.Should().HaveCount(2);  // Since .NET 11, Razor also generates a declaration file
         ContainsSyntaxTreeWithName(compilation, "snippet_razor.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet_razor.decl.g.cs");
     }
 
     [TestMethod]
@@ -334,14 +359,14 @@ public class VerifierTest
     public void Compile_Razor_Snippet_NoName()
     {
         var compilation = DummyWithLocation
-            .AddPaths("Dummy.cshtml")
+            .AddPaths("Dummy.Latest.cshtml")
             .AddSnippet("class Sample {}")
             .WithLanguageVersion(LanguageVersion.Latest)
             .Build()
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_Latest_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
     }
 
@@ -349,14 +374,14 @@ public class VerifierTest
     public void Compile_Razor_Snippet_Name_CSharp()
     {
         var compilation = DummyWithLocation
-            .AddPaths("Dummy.cshtml")
+            .AddPaths("Dummy.Latest.cshtml")
             .AddSnippet("class Sample {}", "snippet.cs")
             .WithLanguageVersion(LanguageVersion.Latest)
             .Build()
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_Latest_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet.cs");
     }
 
@@ -364,14 +389,14 @@ public class VerifierTest
     public void Compile_Razor_Snippet_Name_Cshtml()
     {
         var compilation = DummyWithLocation
-            .AddPaths("Dummy.cshtml")
+            .AddPaths("Dummy.Latest.cshtml")
             .AddSnippet("class Sample {}", "snippet.cshtml")
             .WithLanguageVersion(LanguageVersion.Latest)
             .Build()
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_Latest_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
     }
 
@@ -379,7 +404,7 @@ public class VerifierTest
     public void Compile_Razor_Snippet_MixedNames()
     {
         var compilation = DummyWithLocation
-            .AddPaths("Dummy.cshtml")
+            .AddPaths("Dummy.Latest.cshtml")
             .AddSnippet("class Sample {}")                     // No name, .0.cs
             .AddSnippet("class Sample {}")                     // No name, .1.cs
             .AddSnippet("class Sample {}", "snippet.cs")       // Named, c#
@@ -389,7 +414,7 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_Latest_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet1.cs");

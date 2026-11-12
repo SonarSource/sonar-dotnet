@@ -1,0 +1,34 @@
+@* Language versions before C# 10 only: #line can only map lines, so columns are shifted (https://github.com/dotnet/roslyn/issues/85611). Current language versions are covered by DummyExpressions.Latest.cshtml and do not have this problem. *@
+<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant *@
+@*                              ^^^^^^^^^ Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+
+<p>Implicit expression: @RaiseHere()</p> @* Noncompliant *@
+@*                             ^^^^^^^^^ Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+
+<p>Multi-statement block: @{ var result = RaiseHere(); }</p>
+@*                                        ^^^^^^^^^ *@
+
+<p>Control structures: @if(RaiseHere() == 42) { <text>42</text> }</p>
+@*                         ^^^^^^^^^ *@
+
+<p>Loops: @for(var i = 0; i < RaiseHere(); i++) { <text>@i</text> }</p>
+@*                            ^^^^^^^^^ *@
+
+<p>Code blocks: @{ RaiseHere(); }</p>
+@*                 ^^^^^^^^^ *@
+
+<p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p>
+@*                                              ^^^^^^^^^ Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+
+<p>Nested multi-statement block: @{ var result2 = RaiseHere(); var result3 = RaiseHere(); }</p>
+@*                                                ^^^^^^^^^ *@
+@*                                                                           ^^^^^^^^^@-1 *@
+
+<p>Nested control structures: @if(RaiseHere() == 42) { <text>@(RaiseHere() + 1)</text> }</p>
+@*                                ^^^^^^^^^ *@
+@*                                                                   ^^^^^^^^^@-1 Wrong location, see https://github.com/dotnet/roslyn/issues/85611 *@
+
+@functions
+{
+    private static int RaiseHere() { return 42; }
+}

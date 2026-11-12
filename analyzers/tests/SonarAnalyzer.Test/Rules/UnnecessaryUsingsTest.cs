@@ -89,7 +89,11 @@ public class UnnecessaryUsingsTest
     public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName) =>
         builder
             .AddSnippet("@using System.Linq;", "_Imports.razor")
-            .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+            .AddSnippet("""
+                @using System.Text.Json; @* Noncompliant *@
+                @* Noncompliant@-1 Duplicate: raised also on the .NET 11 Razor declaration file *_razor.decl.g.cs *@
+                """,
+                fileName)
             .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();

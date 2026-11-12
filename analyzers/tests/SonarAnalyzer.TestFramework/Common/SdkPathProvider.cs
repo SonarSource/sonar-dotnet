@@ -21,10 +21,6 @@ namespace SonarAnalyzer.TestFramework.Common;
 
 public static class SdkPathProvider
 {
-    // FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed.
-    private const string SdkVersion = "10.0.20*";
-    private const string RuntimeVersionPattern = "10.*";
-
     private static readonly string RazorSourceGeneratorPath = Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
@@ -33,22 +29,23 @@ public static class SdkPathProvider
     ];
 
     public static string LatestSdkFolder() =>
-        LatestFolder(TestConstants.SdkPath, "dotnet.dll", SdkVersion);
+        LatestFolder(TestConstants.SdkPath, "dotnet.dll");
 
     public static string LatestAspNetCoreSdkFolder() =>
-        LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll", RuntimeVersionPattern);
+        LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll");
 
     public static string LatestWindowsDesktopSdkFolder() =>
-        LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll", RuntimeVersionPattern);
+        LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll");
 
-    public static string LatestFolder(string path, string assemblyName, string versionPattern)
+    public static string LatestFolder(string path, string assemblyName)
     {
         if (!Directory.Exists(path))
         {
             throw new NotSupportedException(
                 $"The directory '{path}' does not exist. This may be because you are not using .NET Core. Please note that Razor analysis is only supported when using .NET Core.");
         }
-        return Directory.GetDirectories(path, versionPattern).OrderBy(x => FromFolderName(x, assemblyName)).Last();
+        return Directory.GetDirectories(path).Where(x => File.Exists(Path.Combine(x, assemblyName))).OrderBy(x => FromFolderName(x, assemblyName)).LastOrDefault()
+            ?? throw new NotSupportedException($"No folder in '{path}' contains '{assemblyName}'.");
 
         static Version FromFolderName(string folderName, string assemblyName)
         {
