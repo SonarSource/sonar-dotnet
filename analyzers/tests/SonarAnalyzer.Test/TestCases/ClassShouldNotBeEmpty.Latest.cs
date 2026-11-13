@@ -132,9 +132,22 @@ public partial class PartialEvent
 
 namespace CSharp15
 {
-    public closed class ClosedEmpty { }         // Noncompliant FP NET-4893
+    public closed class ClosedEmpty { }         // Compliant NET-4893
     public sealed class ClosedA : ClosedEmpty { }
     public sealed class ClosedB : ClosedEmpty { }
+    public abstract class AbstractEmpty { }     // Noncompliant
+    public sealed class AbstractEmptyA : AbstractEmpty { }
+
+    public closed class ClosedWithConcreteBase : ConcreteBase { }   // Compliant
+    public sealed class ClosedWithConcreteBaseA : ClosedWithConcreteBase { }
+    public class ConcreteBase { public int Value { get; } }
+
+    public closed record ClosedRecordEmpty;     // Compliant
+    public sealed record ClosedRecordA : ClosedRecordEmpty;
+    public abstract record AbstractRecordEmpty; // Noncompliant
+    public sealed record AbstractRecordA : AbstractRecordEmpty;
+
+    public closed class ClosedWithoutDerivedTypes { }   // Compliant, deliberate FN: proving there is no derived type needs a compilation-wide search. NET-5060 would report it.
 
     public union Result(Success, Failure);
     public class Success { public int Value { get; } }

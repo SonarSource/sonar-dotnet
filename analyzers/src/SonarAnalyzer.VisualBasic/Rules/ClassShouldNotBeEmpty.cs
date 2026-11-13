@@ -26,7 +26,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         node is ClassBlockSyntax { Members.Count: 0 } classSyntax
         && !classSyntax.ClassStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
-    protected override TypeBlockSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
+    protected override TypeBlockSyntax DeclarationWithBaseTypes(SyntaxNode node) =>
         node is ClassBlockSyntax { Inherits.Count: > 0 } or ClassBlockSyntax { Implements.Count: > 0 }
             ? (ClassBlockSyntax)node
             : null;
@@ -39,11 +39,11 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         node is ClassBlockSyntax { ClassStatement.AttributeLists.Count: > 0 };
 
     protected override bool HasConditionalCompilationDirectives(SyntaxNode node) =>
-        node.DescendantNodes(descendIntoTrivia: true).Any(x => x.IsAnyKind(
-            SyntaxKind.IfDirectiveTrivia,
-            SyntaxKind.ElseIfDirectiveTrivia,
-            SyntaxKind.ElseDirectiveTrivia,
-            SyntaxKind.EndIfDirectiveTrivia));
+        node.DescendantNodes(descendIntoTrivia: true)
+            .Any(x => x.Kind() is SyntaxKind.IfDirectiveTrivia
+                                    or SyntaxKind.ElseIfDirectiveTrivia
+                                    or SyntaxKind.ElseDirectiveTrivia
+                                    or SyntaxKind.EndIfDirectiveTrivia);
 
     protected override string DeclarationTypeKeyword(SyntaxNode node) =>
         ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();

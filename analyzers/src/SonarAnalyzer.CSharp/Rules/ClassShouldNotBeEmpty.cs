@@ -27,7 +27,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
         && LacksParameterizedPrimaryConstructor(node);
 
-    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
+    protected override BaseTypeDeclarationSyntax DeclarationWithBaseTypes(SyntaxNode node) =>
         node is TypeDeclarationSyntax { BaseList: not null } declaration
             ? declaration
             : null;
@@ -46,11 +46,10 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 
     protected override bool HasConditionalCompilationDirectives(SyntaxNode node) =>
         node.DescendantNodes(descendIntoTrivia: true)
-        .Any(x => x.Kind() is
-            SyntaxKind.IfDirectiveTrivia or
-            SyntaxKind.ElifDirectiveTrivia or
-            SyntaxKind.ElseDirectiveTrivia or
-            SyntaxKind.EndIfDirectiveTrivia);
+            .Any(x => x.Kind() is SyntaxKind.IfDirectiveTrivia
+                                    or SyntaxKind.ElifDirectiveTrivia
+                                    or SyntaxKind.ElseDirectiveTrivia
+                                    or SyntaxKind.EndIfDirectiveTrivia);
 
     private static bool LacksParameterizedPrimaryConstructor(SyntaxNode node) =>
         IsParameterlessClass(node)
@@ -75,7 +74,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 
     private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(BaseListSyntax list) =>
        list?.Types.FirstOrDefault() is { } type
-       && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
-           ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
-           : null;
+        && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+            ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
+            : null;
 }

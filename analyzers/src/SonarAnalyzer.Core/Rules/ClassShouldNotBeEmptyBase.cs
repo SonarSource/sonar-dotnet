@@ -33,7 +33,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
     private static readonly IEnumerable<string> IgnoredSuffixes = ["Command", "Event", "Message", "Query"];
 
     protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
-    protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node);
+    protected abstract TDeclarationSyntax DeclarationWithBaseTypes(SyntaxNode node);
     protected abstract bool HasInterfaceOrGenericBaseClass(TDeclarationSyntax declaration);
     protected abstract bool HasAnyAttribute(SyntaxNode node);
     protected abstract string DeclarationTypeKeyword(SyntaxNode node);
@@ -53,7 +53,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     && !HasAnyAttribute(c.Node)
                     && !HasConditionalCompilationDirectives(c.Node)
                     && !ShouldIgnoreBecauseOfName(identifier)
-                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.Model))
+                    && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { IsClosed: false } symbol
+                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, symbol))
                 {
                     c.ReportIssue(Rule, identifier, DeclarationTypeKeyword(c.Node));
                 }
@@ -64,19 +65,17 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         IgnoredNames.Contains(identifier.ValueText)
         || IgnoredSuffixes.Any(identifier.ValueText.EndsWith);
 
-    private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
-        GetIfHasDeclaredBaseClassOrInterface(node) is { } declaration
-        && (HasInterfaceOrGenericBaseClass(declaration) || ShouldIgnoreType(declaration, model) || HasNonPublicDefaultConstructor(declaration, model));
+    private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, INamedTypeSymbol classSymbol) =>
+        DeclarationWithBaseTypes(node) is { } declaration
+        && (HasInterfaceOrGenericBaseClass(declaration) || ShouldIgnoreType(classSymbol) || HasNonPublicDefaultConstructor(classSymbol));
 
-    private static bool ShouldIgnoreType(TDeclarationSyntax node, SemanticModel model) =>
-        model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
-            && (classSymbol.BaseType is { IsAbstract: true }
-            || classSymbol.DerivesFromAny(BaseClassesToIgnore)
-            || classSymbol.Interfaces.Any(x => !x.Is(KnownType.System_IEquatable_T))); // every record type implicitly implements System.IEquatable<T>
+    private static bool ShouldIgnoreType(INamedTypeSymbol classSymbol) =>
+        classSymbol.BaseType is { IsAbstract: true }
+        || classSymbol.DerivesFromAny(BaseClassesToIgnore)
+        || classSymbol.Interfaces.Any(x => !x.Is(KnownType.System_IEquatable_T)); // every record type implicitly implements System.IEquatable<T>
 
-    private static bool HasNonPublicDefaultConstructor(TDeclarationSyntax declaration, SemanticModel model) =>
-        model.GetDeclaredSymbol(declaration) is INamedTypeSymbol classSymbol
-        && classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0) is { } constructor
+    private static bool HasNonPublicDefaultConstructor(INamedTypeSymbol classSymbol) =>
+        classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0) is { } constructor
         && (constructor.EffectiveAccessibility < classSymbol.DeclaredAccessibility
             // GetEffectiveAccessibility is not handling Protected
             || (constructor.DeclaredAccessibility == Accessibility.Protected && classSymbol.DeclaredAccessibility > Accessibility.Protected)
