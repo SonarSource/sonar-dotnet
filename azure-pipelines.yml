@@ -32,6 +32,12 @@ stages:
       clean: all
 
     steps:
+    - task: UseDotNet@2
+      displayName: "Install .NET SDK"
+      inputs:
+        packageType: 'sdk'
+        useGlobalJson: true
+
     - task: CmdLine@2
       displayName: "NuGet Restore"
       inputs:
