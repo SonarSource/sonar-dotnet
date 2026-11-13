@@ -39,8 +39,8 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
-                if (!IsOrImplementsIEnumerable(c.Model, forEachStatementSyntax)
-                    || IsOrImplementsIQueryable(c.Model, forEachStatementSyntax)
+                if (!IsOrImplementsIEnumerable(c, forEachStatementSyntax)
+                    || IsOrImplementsIQueryable(c, forEachStatementSyntax)
                     || IsInPerformanceSensitiveContext(forEachStatementSyntax, c.Model))
                 {
                     return;
@@ -69,7 +69,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     private static IfStatementSyntax SimplifiableIf(SyntaxNode statement, SonarSyntaxNodeReportingContext context) =>
         IfStatement(statement) is { } ifStatementSyntax
         && CanIfStatementBeMoved(ifStatementSyntax)
-        && !ContainsRefStructReference(ifStatementSyntax, context.Model)
+        && !ContainsRefStructReference(ifStatementSyntax, context)
         && !HasNullableConversion(ifStatementSyntax, context)
             ? ifStatementSyntax
             : null;
@@ -81,7 +81,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         && RequiresNullableConversion(returnOrAssignment, context);
 
     private static string SuggestedMethod(ForEachStatementSyntax forEachStatementSyntax, IfStatementSyntax ifStatementSyntax, SonarSyntaxNodeReportingContext context) =>
-        !IsOrImplementsIAsyncEnumerable(context.Model, forEachStatementSyntax)
+        !IsOrImplementsIAsyncEnumerable(context, forEachStatementSyntax)
         // A down-casting foreach would additionally need a Cast<T>/OfType<T>, so no specific method fits.
         && context.Model.GetForEachStatementInfo(forEachStatementSyntax).ElementConversion.IsIdentity
             ? SingleReturnOrBreakingAssignment(ifStatementSyntax) switch
@@ -130,10 +130,10 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
             .OfType<IdentifierNameSyntax>()
             .Any(x => x.Identifier.ValueText == forEachStatementSyntax.Identifier.ValueText);
 
-    private static bool ContainsRefStructReference(IfStatementSyntax ifStatement, SemanticModel model) =>
+    private static bool ContainsRefStructReference(IfStatementSyntax ifStatement, SonarSyntaxNodeReportingContext context) =>
         ifStatement.DescendantNodes()
             .OfType<IdentifierNameSyntax>()
-            .Any(x => model.GetTypeInfo(x).Type is { IsRefStruct: true });
+            .Any(x => context.Model.GetTypeInfo(x, context.Cancel).Type is { IsRefStruct: true });
 
     private static bool RequiresNullableConversion(SyntaxNode returnOrAssignment, SonarSyntaxNodeReportingContext context)
     {
@@ -146,7 +146,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
 
         // expression can be null if the return statement is empty
         return expression is not null
-            && context.Model.GetTypeInfo(expression) is { Type: { } type, ConvertedType: { } convertedType }
+            && context.Model.GetTypeInfo(expression, context.Cancel) is { Type: { } type, ConvertedType: { } convertedType }
             && context.Compilation.ClassifyConversion(type, convertedType).IsNullable;
     }
 
@@ -161,7 +161,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         // Check if the statement is a block with a single assignment followed by a break
         if (ifStatementSyntax.Statement is BlockSyntax { Statements: { Count: 2 } statements }
             && statements[0] is ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax assignment }
-            && statements[1] is BreakStatementSyntax)
+            && statements[1] is BreakStatementSyntax { Name: null })
         {
             return assignment;
         }
@@ -216,7 +216,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     /// </remarks>
     private static void CheckIfCanBeSimplifiedUsingSelect(SonarSyntaxNodeReportingContext c, ForEachStatementSyntax forEachStatementSyntax)
     {
-        var declaredSymbol = new Lazy<ILocalSymbol>(() => c.Model.GetDeclaredSymbol(forEachStatementSyntax));
+        var declaredSymbol = new Lazy<ILocalSymbol>(() => c.Model.GetDeclaredSymbol(forEachStatementSyntax, c.Cancel));
 
         var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
@@ -224,9 +224,9 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         {
             if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
                 && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
-                && c.Model.GetSymbolInfo(identifierSyntax).Symbol is { } identifierSymbol
+                && c.Model.GetSymbolInfo(identifierSyntax, c.Cancel).Symbol is { } identifierSymbol
                 && identifierSymbol.Equals(declaredSymbol.Value)
-                && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { SymbolType.IsRefStruct: false } symbol)
+                && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name, c.Cancel).Symbol is { SymbolType.IsRefStruct: false } symbol)
             {
                 var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 
@@ -256,23 +256,23 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
             !(memberAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == memberAccess);
     }
 
-    private static bool IsOrImplementsIEnumerable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
-        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Collections_Generic_IEnumerable_T)
-        || IsOrImplementsIAsyncEnumerable(model, forEachStatementSyntax);
+    private static bool IsOrImplementsIEnumerable(SonarSyntaxNodeReportingContext context, ForEachStatementSyntax forEachStatementSyntax) =>
+        IsOrImplements(context, forEachStatementSyntax, KnownType.System_Collections_Generic_IEnumerable_T)
+        || IsOrImplementsIAsyncEnumerable(context, forEachStatementSyntax);
 
     // On IAsyncEnumerable the terminal operators are named "AnyAsync", "AllAsync" and "FirstOrDefaultAsync", so those
     // suggestions would be wrong. "Where" is deferred and keeps its name, which makes it the correct fallback.
-    private static bool IsOrImplementsIAsyncEnumerable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
-        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Collections_Generic_IAsyncEnumerable_T);
+    private static bool IsOrImplementsIAsyncEnumerable(SonarSyntaxNodeReportingContext context, ForEachStatementSyntax forEachStatementSyntax) =>
+        IsOrImplements(context, forEachStatementSyntax, KnownType.System_Collections_Generic_IAsyncEnumerable_T);
 
     // For IQueryable the "Where"/"Select" rewrite is translated by the query provider (e.g. EF Core -> SQL) and executed
     // server-side, unlike the in-memory foreach+if. The rewrite is therefore not equivalent and can throw at runtime for a
     // predicate the provider cannot translate, so the rule should not raise on IQueryable sources.
-    private static bool IsOrImplementsIQueryable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
-        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Linq_IQueryable);
+    private static bool IsOrImplementsIQueryable(SonarSyntaxNodeReportingContext context, ForEachStatementSyntax forEachStatementSyntax) =>
+        IsOrImplements(context, forEachStatementSyntax, KnownType.System_Linq_IQueryable);
 
-    private static bool IsOrImplements(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax, KnownType type) =>
-        model.GetTypeInfo(forEachStatementSyntax.Expression).Type is { } expressionType
+    private static bool IsOrImplements(SonarSyntaxNodeReportingContext context, ForEachStatementSyntax forEachStatementSyntax, KnownType type) =>
+        context.Model.GetTypeInfo(forEachStatementSyntax.Expression, context.Cancel).Type is { } expressionType
         && (expressionType.Is(type) || expressionType.Implements(type));
 
     private sealed class UsageStats

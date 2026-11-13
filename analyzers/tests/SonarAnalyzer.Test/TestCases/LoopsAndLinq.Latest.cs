@@ -418,7 +418,7 @@ namespace CSharp13
             var found = false;
             outer: foreach (var x in xs)
             {
-                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}} FP NET-4949
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}} NET-4949
                 {
                     if (y > x)        // Secondary
                     {
@@ -433,7 +433,7 @@ namespace CSharp13
         public bool BreakSelf(IEnumerable<int> ys)
         {
             var found = false;
-            self: foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            self: foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (y > 0)              // Secondary
                 {
@@ -448,7 +448,7 @@ namespace CSharp13
         {
             outer: foreach (var x in xs)
             {
-                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}} FP NET-4949
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}} NET-4949
                 {
                     if (y > x)        // Secondary
                     {
@@ -457,6 +457,162 @@ namespace CSharp13
                     }
                 }
             }
+        }
+
+        public void ContinueOuterFor(int n, IEnumerable<int> ys)
+        {
+            outer: for (var i = 0; i < n; i++)
+            {
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+                {
+                    if (y > i)        // Secondary
+                    {
+                        continue outer;
+                    }
+                }
+            }
+        }
+
+        public void ContinueSelf(IEnumerable<int> ys)
+        {
+            self: foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (y > 0)              // Secondary
+                {
+                    Console.WriteLine(y);
+                    continue self;
+                }
+            }
+        }
+
+        public void NestedJumpToEnclosingLoop(IEnumerable<int> xs, IEnumerable<int> ys)
+        {
+            outer: foreach (var x in xs)
+            {
+                foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+                {
+                    if (y > x)        // Secondary
+                    {
+                        Console.WriteLine(y);
+                        if (y > 10)
+                        {
+                            continue outer;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void JumpToLoopInsideIf(IEnumerable<int> ys, IEnumerable<int> zs)
+        {
+            foreach (var y in ys)             // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (y > 0)                    // Secondary
+                {
+                    inner: foreach (var z in zs) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+                    {
+                        if (z > y)               // Secondary
+                        {
+                            Console.WriteLine(z);
+                            break inner;
+                        }
+                    }
+                }
+            }
+        }
+
+        public bool BreakUnlabeled(IEnumerable<int> ys)
+        {
+            var found = false;
+            foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (y > 0)        // Secondary
+                {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+
+        public bool GotoOut(IEnumerable<int> ys)
+        {
+            var found = false;
+            foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (y > 0)        // Secondary
+                {
+                    found = true;
+                    goto done;
+                }
+            }
+        done:
+            return found;
+        }
+
+        public bool BreakLabeledSwitch(int n, IEnumerable<int> ys)
+        {
+            var found = false;
+            sw: switch (n)
+            {
+                case 1:
+                    foreach (var y in ys) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+                    {
+                        if (y > 0)        // Secondary
+                        {
+                            found = true;
+                            break sw;
+                        }
+                    }
+                    break;
+            }
+            return found;
+        }
+    }
+
+    public class DeconstructingForEach
+    {
+        public void NamedValueTuple(IEnumerable<(int Id, string Name)> pairs)
+        {
+            foreach (var (id, name) in pairs)  // Compliant, only a named ValueTuple has a clean "Where" rewrite, too narrow to support
+            {
+                if (id > 0)
+                {
+                    Console.WriteLine(name);
+                }
+            }
+        }
+
+        public void CustomDeconstruct(IEnumerable<Coordinate> points)
+        {
+            foreach (var (x, y) in points)     // Compliant, no member matches the deconstructed names, so no lambda like p => p.X exists
+            {
+                if (x > 0)
+                {
+                    Console.WriteLine(y);
+                }
+            }
+        }
+
+        public void NotDeconstructed(IEnumerable<(int Id, string Name)> pairs)
+        {
+            foreach (var pair in pairs)        // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (IsValid(pair))             // Secondary
+                {
+                    Console.WriteLine(pair.Name);
+                }
+            }
+        }
+
+        private static bool IsValid((int Id, string Name) pair) => pair.Id > 0;
+
+        public class Coordinate
+        {
+            public int Left { get; }
+            public string Label { get; }
+
+            public void Deconstruct(out int left, out string label) => (left, label) = (Left, Label);
         }
     }
 }
