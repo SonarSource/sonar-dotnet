@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.IO;
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
 
@@ -26,7 +27,15 @@ public static class SyntaxTreeExtensions
 
     extension(SyntaxTree tree)
     {
-        public string OriginalFilePath => tree.GetRoot().DescendantNodes(_ => true, true).Select(FileFromDirective).FirstOrDefault(static x => x is not null) ?? tree.FilePath;
+        public string OriginalFilePath
+        {
+            get
+            {
+                var files = tree.GetRoot().DescendantNodes(_ => true, true).Select(FileFromDirective).Where(static x => x is not null);
+                // Since .NET 11, *_razor.decl.g.cs files start with the @using directives inherited from _Imports.razor files.
+                return (tree.EndsWith("_razor.decl.g.cs") ? files.FirstOrDefault(static x => !IsRazorImportsFile(x)) : files.FirstOrDefault()) ?? tree.FilePath;
+            }
+        }
 
         public SemanticModel SemanticModelOrDefault(SemanticModel model)
         {
@@ -81,4 +90,7 @@ public static class SyntaxTreeExtensions
         static string FileOrNull(SyntaxToken file) =>
             file is { IsMissing: false, RawKind: not (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.None } ? file.ValueText : null;
     }
+
+    private static bool IsRazorImportsFile(string path) =>
+        Path.GetFileName(path).Equals("_Imports.razor", StringComparison.OrdinalIgnoreCase);
 }

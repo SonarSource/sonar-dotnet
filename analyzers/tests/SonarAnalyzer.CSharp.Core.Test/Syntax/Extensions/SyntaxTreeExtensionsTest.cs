@@ -83,17 +83,40 @@ public class SyntaxTreeExtensionsTest
     [DataRow(@"#pragma checksum ""C:\Component.razor"" ""{8829d00f-11b8-4213-878b-770e8597ac16}"" ""35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d""", "Pages_Component_razor.g.cs")]
     [DataRow(@"#line (1,1)-(1,1) ""C:\Component.razor""", "Pages_Component_razor.decl.g.cs")]
     [DataRow(@"#line 5 ""C:\Component.razor""", "Generated.g.cs")]
-    public void OriginalFilePath_WithDirective_ReturnsOriginalRazorPath(string content, string fileName) =>
-        CSharpSyntaxTree.ParseText(content, path: fileName, cancellationToken: TestContext.CancellationToken).OriginalFilePath.Should().Be(@"C:\Component.razor");
+    [DataRow("""
+        #line (1,2)-(1,19) "C:\_Imports.razor"
+        using System.Text
+        #line default
+        #line (1,8)-(1,28) "C:\Component.razor"
+        #line default
+        """,
+        "Pages_Component_razor.decl.g.cs")]
+    [DataRow("""
+        #pragma checksum "C:\_Imports.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
+        #line (1,2)-(1,19) "C:\_Imports.razor"
+        using System.Text
+        #line default
+        """,
+        "_Imports_razor.g.cs",
+        @"C:\_Imports.razor")]
+    public void OriginalFilePath_WithDirective_ReturnsOriginalRazorPath(string content, string fileName, string expected = @"C:\Component.razor") =>
+        CSharpSyntaxTree.ParseText(content, path: fileName, cancellationToken: TestContext.CancellationToken).OriginalFilePath.Should().Be(expected);
 
     [TestMethod]
     [DataRow("namespace NoDirective { }")]
     [DataRow("#line 200")]
-    public void OriginalFilePath_WithoutFileDirective_ReturnsTreeFilePath(string content)
+    [DataRow(@"#line (1,2)-(1,19) ""C:\_Imports.razor""", "Pages_Component_razor.decl.g.cs")] // The decl file of a component without code only has the @using directives inherited from _Imports.razor
+    public void OriginalFilePath_WithoutFileDirective_ReturnsTreeFilePath(string content, string fileName = "Regular.cs")
     {
-        var tree = CSharpSyntaxTree.ParseText(content, path: "Regular.cs", cancellationToken: TestContext.CancellationToken);
+        var tree = CSharpSyntaxTree.ParseText(content, path: fileName, cancellationToken: TestContext.CancellationToken);
         tree.OriginalFilePath.Should().Be(tree.FilePath);
     }
+
+    [TestMethod]
+    public void OriginalFilePath_ComponentNameEndingWithImports_ReturnsComponentPath() =>
+        CSharpSyntaxTree.ParseText(@"#line (1,1)-(1,1) ""C:\My_Imports.razor""", path: "My_Imports_razor.decl.g.cs", cancellationToken: TestContext.CancellationToken)
+            .OriginalFilePath
+            .Should().Be(@"C:\My_Imports.razor");
 
     private bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         CSharpSyntaxTree.ParseText(content, path: "File.cs", cancellationToken: TestContext.CancellationToken).IsGenerated(generatedCodeRecognizer);

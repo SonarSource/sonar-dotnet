@@ -51,23 +51,32 @@ public partial class SonarAnalysisContextBaseTest
         ShouldAnalyzeTree(CreateOptions(["ThisIsNotInCompilation.cs", "SomethingElse.cs"])).Should().BeTrue();
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile() =>
+    [DataRow(@"C:\Component.razor", "Pages_Component_razor.g")]
+    [DataRow(@"C:\_Imports.razor", "_Imports_razor.g")]
+    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile(string razorFile, string generatedFileName) =>
         ShouldAnalyzeTree(
-            CreateOptions([@"C:\Component.razor"]),
-            @"Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g",
-            """
-            #pragma checksum "C:\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
+            CreateOptions([razorFile]),
+            @"Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\" + generatedFileName,
+            $$"""
+            #pragma checksum "{{razorFile}}" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
             """).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
 
-    // Since .NET 11 the Razor source generator emits an additional declaration partial per component (e.g. Pages_Component_razor.decl.g.cs).
+    // Since .NET 11 the Razor source generator emits an additional declaration partial per component (e.g. Pages/Component_razor.decl.g.cs).
+    // It starts with the @using directives inherited from _Imports.razor, the component is only referenced by the later #line directives.
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedDeclGeneratedFile() =>
+    [DataRow(@"C:\Pages\Component.razor", false)]
+    [DataRow(@"C:\_Imports.razor", true)]
+    public void ShouldAnalyzeTree_Scanner_RazorDeclGeneratedFile_UsesTheComponentFile(string unchangedFile, bool expected) =>
         ShouldAnalyzeTree(
-            CreateOptions([@"C:\Component.razor"]),
-            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.decl.g",
+            CreateOptions([unchangedFile]),
+            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages/Component_razor.decl.g",
             """
-            #line (1,1)-(1,1) "C:\Component.razor"
-            """).Should().BeFalse();
+            #line (1,2)-(1,19) "C:\_Imports.razor"
+            using System.Text
+            #line default
+            #line (1,8)-(1,28) "C:\Pages\Component.razor"
+            #line default
+            """).Should().Be(expected);
 
     [TestMethod]
     [DataRow(GeneratedFileName, false)]
