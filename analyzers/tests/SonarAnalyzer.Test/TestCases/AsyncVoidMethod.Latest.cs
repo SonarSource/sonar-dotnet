@@ -249,6 +249,23 @@ namespace CSharp15
     {
         public void Start() => Task.Run(Work);
 
-        private async void Work() { await Task.Delay(1); } // Noncompliant {{Return 'Task' instead.}} FP NET-4888
+        private async void Work() { await Task.Delay(1); } // Compliant, passed as an argument NET-4888
+
+        private async void NotReferenced() { await Task.Delay(1); } // Noncompliant {{Return 'Task' instead.}}
+    }
+
+    public union UnionWithUsages(int, string)
+    {
+        private static event EventHandler<bool> Changed;
+
+        public static void Subscribe() => Changed += Handle;
+
+        public static void StartTimer() => new System.Threading.Timer(Tick);
+
+        private static async void Handle(object sender, bool e) { await Task.Delay(1); } // Compliant, subscribed with +=
+
+        private static async void Tick(object state) { await Task.Delay(1); } // Compliant, passed to a constructor
+
+        private static async void Unused(object state) { await Task.Delay(1); } // Noncompliant
     }
 }
