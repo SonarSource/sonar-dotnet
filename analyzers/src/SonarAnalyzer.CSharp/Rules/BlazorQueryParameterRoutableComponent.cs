@@ -34,6 +34,8 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
     {
         KnownType.System_Boolean,
         KnownType.System_DateTime,
+        KnownType.System_DateOnly,
+        KnownType.System_TimeOnly,
         KnownType.System_Decimal,
         KnownType.System_Double,
         KnownType.System_Single,
