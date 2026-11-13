@@ -121,9 +121,17 @@ public class CollectionExpressionWithArgument
 {
     public static void Test()
     {
-        WithComparer([with(StringComparer.OrdinalIgnoreCase), "s1", "S1"]); // Noncompliant FP NET-4875
-        WithComparer("s1", "S1");                                          // Compliant
+        WithComparer([with(StringComparer.OrdinalIgnoreCase), "s1", "S1"]); // Compliant NET-4875
+        WithComparer(["s1", "S1"]);                                         // Noncompliant
+        WithComparer("s1", "S1");                                           // Compliant
+        WithComparer([with(StringComparer.OrdinalIgnoreCase)]);             // Compliant
+        WithComparer([]);                                                   // Noncompliant
+        WithComparer([with(), "s1"]);                                       // Compliant
+        WithComparer(["s1"]);                                               // Noncompliant
+        WithCapacity([with(capacity: 10), 1, 2]);                           // Compliant
+        WithCapacity([1, 2]);                                               // Noncompliant
     }
 
     public static void WithComparer(params HashSet<string> set) { }
+    public static void WithCapacity(params List<int> list) { }
 }

@@ -34,7 +34,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, CS
     {
         CSharpSyntaxNode lastArgument = expression switch
         {
-             AttributeSyntax { ArgumentList.Arguments: { Count: > 0 } args } when args.Last().NameEquals is null => args.Last(),
+            AttributeSyntax { ArgumentList.Arguments: { Count: > 0 } args } when args.Last().NameEquals is null => args.Last(),
             _ when ArgumentList(expression) is { Arguments: { Count: > 0 } args } => args.Last(),
             _ => null
         };
@@ -69,14 +69,13 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, CS
         {
             ArrayCreationExpressionSyntax { Initializer: not null } => true,
             ImplicitArrayCreationExpressionSyntax => true,
-            _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => !ContainsSpread((CollectionExpressionSyntaxWrapper)expression),
+            _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => !InvalidAsParams((CollectionExpressionSyntaxWrapper)expression),
             _ => false
         };
     }
 
-    // [x, y, ..z] is not possible to be passed as params
-    private static bool ContainsSpread(CollectionExpressionSyntaxWrapper expression) =>
-        expression.Elements.Any(x => x.WrappedInstance.IsKind(SyntaxKindEx.SpreadElement));
+    private static bool InvalidAsParams(CollectionExpressionSyntaxWrapper expression) =>
+        expression.Elements.Any(x => x.WrappedInstance.Kind() is SyntaxKindEx.SpreadElement or SyntaxKindEx.WithElement);
 
     private static ExpressionSyntax ArgumentExpression(CSharpSyntaxNode node) =>
         node switch
