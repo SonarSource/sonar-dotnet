@@ -48,6 +48,7 @@ public static class SyntaxNodeExtensionsCSharp
             SyntaxKind.FieldDeclaration,
             SyntaxKind.GetAccessorDeclaration,
             SyntaxKind.GroupClause,
+            SyntaxKind.IndexerDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.JoinClause,
             SyntaxKind.LetClause,

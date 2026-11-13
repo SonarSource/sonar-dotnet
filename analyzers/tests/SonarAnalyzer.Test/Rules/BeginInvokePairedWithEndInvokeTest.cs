@@ -37,6 +37,18 @@ public class BeginInvokePairedWithEndInvokeTest
             .Verify();
 
     [TestMethod]
+    public void BeginInvokePairedWithEndInvoke_CS_TopLevelStatements() =>
+        builderCS.AddPaths("BeginInvokePairedWithEndInvoke.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
+
+    [TestMethod]
+    public void BeginInvokePairedWithEndInvoke_CS_TopLevelStatements_EndInvokeInType() =>
+        builderCS.AddPaths("BeginInvokePairedWithEndInvoke.TopLevelStatements.EndInvokeInType.cs")
+            .WithTopLevelStatements()
+            .Verify();
+
+    [TestMethod]
     public void BeginInvokePairedWithEndInvoke_VB() =>
         builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb", "BeginInvokePairedWithEndInvoke.Partial.vb")
             .WithOptions(LanguageOptions.FromVisualBasic14)

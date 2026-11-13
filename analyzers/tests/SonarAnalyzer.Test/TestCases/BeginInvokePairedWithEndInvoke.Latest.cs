@@ -277,10 +277,24 @@ namespace CSharp15
             get
             {
                 var calc = new Calc(Compute);
-                var result = calc.BeginInvoke(i, null, null); // Noncompliant FP NET-4889
+                var result = calc.BeginInvoke(i, null, null); // Compliant NET-4889
                 return calc.EndInvoke(result);
             }
         }
+
+        public int this[string key]
+        {
+            get
+            {
+                var calc = new Calc(Compute);
+                calc.BeginInvoke(key.Length, null, null); // Noncompliant
+                return 0;
+            }
+        }
+
+        public int this[long l] => new Calc(Compute) is var calc ? calc.EndInvoke(calc.BeginInvoke((int)l, null, null)) : 0; // Compliant
+
+        public int this[short s] => new Calc(Compute).BeginInvoke(s, null, null) is null ? 0 : 1; // Noncompliant
     }
 
     public static class ExtensionIndexers
@@ -294,10 +308,24 @@ namespace CSharp15
                 get
                 {
                     var calc = new Calc(Compute);
-                    var result = calc.BeginInvoke(i, null, null); // Noncompliant FP NET-4889
+                    var result = calc.BeginInvoke(i, null, null); // Compliant NET-4889
                     return calc.EndInvoke(result);
                 }
             }
+
+            public int this[string key]
+            {
+                get
+                {
+                    var calc = new Calc(Compute);
+                    calc.BeginInvoke(key.Length, null, null); // Noncompliant
+                    return 0;
+                }
+            }
+
+            public int this[long l] => new Calc(Compute) is var calc ? calc.EndInvoke(calc.BeginInvoke((int)l, null, null)) : 0; // Compliant
+
+            public int this[short x] => new Calc(Compute).BeginInvoke(x, null, null) is null ? 0 : 1; // Noncompliant
         }
     }
 }

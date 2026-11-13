@@ -20,11 +20,7 @@ namespace SonarAnalyzer.VisualBasic.Rules;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
-    protected override string CallbackParameterName { get; } = "DelegateCallback";
-
-    protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
+    private static readonly ISet<SyntaxKind> ParentDeclarationKinds = new HashSet<SyntaxKind>
     {
         // Methods
         SyntaxKind.ConstructorBlock,
@@ -44,12 +40,19 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
         SyntaxKind.SingleLineSubLambdaExpression
     }.ToImmutableHashSet();
 
-    protected override void VisitInvocation(EndInvokeContext context) =>
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
+    protected override string CallbackParameterName { get; } = "DelegateCallback";
+
+    protected override bool VisitInvocation(EndInvokeContext context) =>
         new InvocationWalker(context).SafeVisit(context.Root);
 
-    protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
-        FindCallback(callbackArg, semanticModel) is { } callback
-        && callback.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } callbackModel
+    protected override SyntaxNode EnclosingScope(SyntaxNode node) =>
+        node.AncestorsAndSelf().FirstOrDefault(x => ParentDeclarationKinds.Contains(x.Kind()));
+
+    protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel model) =>
+        FindCallback(callbackArg, model) is { } callback
+        && callback.EnsureCorrectSemanticModelOrDefault(model) is { } callbackModel
         && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, callbackModel));
 
     /// <summary>

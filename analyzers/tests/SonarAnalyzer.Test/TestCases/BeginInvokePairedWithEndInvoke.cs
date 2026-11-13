@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 
 namespace Tests.Diagnostics
@@ -305,13 +306,57 @@ namespace Tests.Diagnostics
             {
                 get
                 {
-                    caller.BeginInvoke("prop", null, null); // FN, detection thinks that "EndInvoke" in setter is valid pair for this
+                    caller.BeginInvoke("prop", null, null); // Noncompliant
                     return 0;
                 }
                 set
                 {
                     caller.EndInvoke(null);
                 }
+            }
+        }
+
+        public class EventAccessors
+        {
+            private AsyncMethodCaller caller;
+
+            public event EventHandler SomeEvent
+            {
+                add
+                {
+                    var result = caller.BeginInvoke("add", null, null); // Compliant
+                    caller.EndInvoke(result);
+                }
+                remove
+                {
+                    caller.BeginInvoke("remove", null, null); // Noncompliant
+                }
+            }
+        }
+
+        public class FieldInitializers
+        {
+            public delegate int Calc(int x);
+
+            private static readonly Calc Calculator = new Calc(x => x);
+            private static readonly int Paired = Calculator.EndInvoke(Calculator.BeginInvoke(1, null, null)); // Compliant
+            private static readonly IAsyncResult Unpaired = Calculator.BeginInvoke(2, null, null); // Noncompliant
+        }
+
+        public class QueryExpressions
+        {
+            public void Paired(AsyncMethodCaller[] callers)
+            {
+                var results = (from c in callers select c.BeginInvoke("query", null, null)).ToList(); // Compliant
+                foreach (var result in results)
+                {
+                    callers[0].EndInvoke(result);
+                }
+            }
+
+            public void Unpaired(AsyncMethodCaller[] callers)
+            {
+                var results = (from c in callers select c.BeginInvoke("query", null, null)).ToList(); // Noncompliant
             }
         }
     }

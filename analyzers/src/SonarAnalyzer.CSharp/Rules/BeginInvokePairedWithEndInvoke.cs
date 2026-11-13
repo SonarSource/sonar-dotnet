@@ -24,29 +24,27 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
     protected override SyntaxKind InvocationExpressionKind => SyntaxKind.InvocationExpression;
     protected override string CallbackParameterName => "callback";
 
-    protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
+    protected override bool VisitInvocation(EndInvokeContext context)
     {
-        SyntaxKind.AnonymousMethodExpression,
-        SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.ConversionOperatorDeclaration,
-        SyntaxKind.DestructorDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.LocalFunctionStatement,
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.OperatorDeclaration,
-        SyntaxKind.ParenthesizedLambdaExpression,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.SimpleLambdaExpression,
-    }.ToImmutableHashSet();
+        var walker = new InvocationWalker(context);
+        return context.Root is CompilationUnitSyntax compilationUnit
+            ? compilationUnit.Members.OfType<GlobalStatementSyntax>().All(walker.SafeVisit)
+            : walker.SafeVisit(context.Root);
+    }
 
-    protected override void VisitInvocation(EndInvokeContext context) =>
-        new InvocationWalker(context).SafeVisit(context.Root);
-
-    protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
+    protected override SyntaxNode EnclosingScope(SyntaxNode node)
     {
-        if (FindCallback(callbackArg, semanticModel) is { } callback)
+        var scope = node.EnclosingScope();
+        return scope is QueryClauseSyntax or SelectOrGroupClauseSyntax or QueryContinuationSyntax
+            ? EnclosingScope(scope.Parent)
+            : scope;
+    }
+
+    protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel model)
+    {
+        if (FindCallback(callbackArg, model) is { } callback)
         {
-            var callbackModel = callback.EnsureCorrectSemanticModelOrDefault(semanticModel);
+            var callbackModel = callback.EnsureCorrectSemanticModelOrDefault(model);
             return callback is MemberAccessExpressionSyntax memberAccess && memberAccess.Name.ToString().Equals(EndInvoke)
                 ? callbackModel.GetSymbolInfo(callback).Symbol is not IMethodSymbol
                 : Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, callbackModel);
