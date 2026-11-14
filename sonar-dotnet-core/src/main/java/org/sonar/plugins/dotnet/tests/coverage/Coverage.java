@@ -110,7 +110,9 @@ public class Coverage {
       int[] otherHitsByLine = entry.getValue();
 
       for (int i = otherHitsByLine.length - 1; i >= 0; i--) {
-        addHits(file, i + 1, otherHitsByLine[i]);
+        if (otherHitsByLine[i] != SPECIAL_HITS_NON_EXECUTABLE) {
+          addHits(file, i + 1, otherHitsByLine[i]);
+        }
       }
     }
   }
