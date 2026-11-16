@@ -32,6 +32,11 @@ public abstract class ClassNotInstantiatableBase<TBaseTypeSyntax, TSyntaxKind> :
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
+    protected virtual IMethodSymbol InvokedMethod(SyntaxNode node, SemanticModel model) =>
+        Language.SyntaxKind.ObjectCreationExpressions.Contains(Language.Syntax.Kind(node))
+            ? model.GetSymbolInfo(node).Symbol as IMethodSymbol
+            : null;
+
     private bool IsClassTypeDeclaration(SyntaxNode node) =>
         Language.SyntaxKind.ClassAndRecordDeclarations.Contains(Language.Syntax.Kind(node));
 
@@ -86,10 +91,9 @@ public abstract class ClassNotInstantiatableBase<TBaseTypeSyntax, TSyntaxKind> :
 
     private bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel model) =>
         descendantNodes
-            .Where(x => Language.SyntaxKind.ObjectCreationExpressions.Contains(Language.Syntax.Kind(x)))
-            .Select(x => model.GetSymbolInfo(x).Symbol as IMethodSymbol)
+            .Select(x => InvokedMethod(x, model))
             .WhereNotNull()
-            .Any(x => Equals(x.ContainingType.OriginalDefinition, namedType));
+            .Any(x => x.MethodKind == MethodKind.Constructor && Equals(x.ContainingType.OriginalDefinition, namedType));
 
     private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
         constructors.Any(x => x.DeclaredAccessibility != Accessibility.Private);

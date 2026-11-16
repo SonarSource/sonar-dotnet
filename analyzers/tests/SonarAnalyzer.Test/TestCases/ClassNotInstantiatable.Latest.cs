@@ -205,7 +205,8 @@ namespace CSharp15
         public sealed class Derived : ClosedWithNestedDerived { }
     }
 
-    public class CollectionWithArguments : IEnumerable<int> // Noncompliant FP NET-4892
+    // https://sonarsource.atlassian.net/browse/NET-4892
+    public class CollectionWithArguments : IEnumerable<int> // Compliant - the collection expression passes 'with(...)' arguments to the private constructor
     {
         private CollectionWithArguments(int capacity) { }
 
@@ -216,5 +217,71 @@ namespace CSharp15
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
         public static CollectionWithArguments Create() => [with(10), 1, 2];
+    }
+
+    public class CollectionWithoutArguments : IEnumerable<int> // Compliant - the collection expression calls the private parameterless constructor
+    {
+        private CollectionWithoutArguments() { }
+
+        public void Add(int item) { }
+
+        public IEnumerator<int> GetEnumerator() => throw new NotImplementedException();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public static CollectionWithoutArguments Create() => [1, 2];
+    }
+
+    public class CollectionBuiltByNestedType : IEnumerable<int> // Compliant - the nested type's collection expression calls the private constructor
+    {
+        private CollectionBuiltByNestedType(int capacity) { }
+
+        public void Add(int item) { }
+
+        public IEnumerator<int> GetEnumerator() => throw new NotImplementedException();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public class Factory
+        {
+            public CollectionBuiltByNestedType Create() => [with(10), 1];
+        }
+    }
+
+    public class CollectionExpressionOfAnotherType // Noncompliant {{This class can't be instantiated; make its constructor 'public'.}}
+    {
+        private CollectionExpressionOfAnotherType() { }
+
+        public List<int> Create() => [1, 2];
+    }
+
+    public class GenericCollectionWithArguments<T> : IEnumerable<T> // Compliant - the constructed generic type is the same type
+    {
+        private GenericCollectionWithArguments(int capacity) { }
+
+        public void Add(T item) { }
+
+        public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public static GenericCollectionWithArguments<int> Create() => [with(10), 1, 2];
+    }
+
+    [System.Runtime.CompilerServices.CollectionBuilder(typeof(CollectionBuilder), nameof(CollectionBuilder.Build))]
+    public class BuiltCollection : IEnumerable<int>
+    {
+        public IEnumerator<int> GetEnumerator() => throw new NotImplementedException();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    public class CollectionBuilder // Noncompliant - the collection expression calls the builder method, not the constructor
+    {
+        private CollectionBuilder() { }
+
+        public static BuiltCollection Build(ReadOnlySpan<int> items) => new BuiltCollection();
+
+        public BuiltCollection Create() => [1, 2];
     }
 }

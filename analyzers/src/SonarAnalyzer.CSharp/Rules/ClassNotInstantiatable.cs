@@ -15,18 +15,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase<BaseTypeDeclarationSyntax, SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase<BaseTypeDeclarationSyntax, SyntaxKind>
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, string messageArg)
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
 
-        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, string messageArg)
-        {
-            var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
-
-            return typeDeclarations.Select(x => new ConstructorContext(x, x.Node.Identifier.GetLocation(), x.Node.GetDeclarationTypeName(), messageArg));
-        }
+        return typeDeclarations.Select(x => new ConstructorContext(x, x.Node.Identifier.GetLocation(), x.Node.GetDeclarationTypeName(), messageArg));
     }
+
+    protected override IMethodSymbol InvokedMethod(SyntaxNode node, SemanticModel model) =>
+        node.IsKind(SyntaxKindEx.CollectionExpression)
+            ? model.GetOperation(node)?.AsCollectionExpression?.ConstructMethod
+            : base.InvokedMethod(node, model);
 }
