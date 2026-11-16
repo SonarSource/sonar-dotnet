@@ -124,81 +124,81 @@
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26465.4",
-        "contentHash": "rnxXLw/9kD5+v1zpUCI/Wch4/CZ0sldZwuvM2oaZgPEsF6yOdCwsytyCZho3OspInUE5AGZ+WsdLiM1ZlkCHFg=="
+        "resolved": "5.9.0",
+        "contentHash": "jMNOo+uoBGiWbZ6Wx0dqU93r5WD4P5WnIRZdoz67RP5N09OUetHgAbo4L7hihOH1NHdD2TgW5/l+SP4gQukwww=="
       },
       "Microsoft.CodeAnalysis.Common": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "Q9bwMaOtx2FZXQmC6jdVakNTlIEiGXlmBsoPv/+PLeLpWCgUu0vCh3ZhMAz4VDVU+jvuYEgRJg/27+nStwHEcw==",
+        "resolved": "5.12.0",
+        "contentHash": "0C7o9ys497xp0kZ64sL7C6nY/5WPQlxia28VlezdonBmjxbC6mIovAYs8mBoh/QooxBBZQCo/wMuZnV1kNk9GA==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4"
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0"
         }
       },
       "Microsoft.CodeAnalysis.CSharp": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "hsnjeT1sBfA+Ox55b1FFNbJu6pJ/BetjzMpWKeSYw4Qp3fEBs7hSLjn3HXuMU8eNW/qYzxIjDUPKL2dfLYdU2A==",
+        "resolved": "5.12.0",
+        "contentHash": "6W6vBcpQFjlxog+KUGNM2fFy+XA2StC1PtnkEkechk68vFy3a28tGjEdnoA7NrxhMdr8a+zh/AmiUtBAmdkQPg==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.Common": "[5.12.0-1.26529.118]"
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.Common": "[5.12.0]"
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "P7aUa5RuUWGa/d+D61Z3WSBhL55r82qDTGaR14l31r/sPWl/hMrAK9ZjOZdrNuPWh9cDDo9tcUIjnybne0ljHw==",
+        "resolved": "5.12.0",
+        "contentHash": "pYIu3+fWc+pqqAryYeiKZV4AqwG/yM/3UPwV9gtpsyBI+Jo1cL/3lNiWCA6tmtFAZXmwjKZuofSU3uu1TPhcbQ==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.CSharp": "[5.12.0-1.26529.118]",
-          "Microsoft.CodeAnalysis.Common": "[5.12.0-1.26529.118]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0-1.26529.118]",
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.CSharp": "[5.12.0]",
+          "Microsoft.CodeAnalysis.Common": "[5.12.0]",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0]",
           "System.Composition": "10.0.10"
         }
       },
       "Microsoft.CodeAnalysis.VisualBasic": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "aIUnDbKK6fWyUCUSKmSrEqMuZhiHwd1cP3/+pMkKwS0Kq+zLoX0W7F7YgnWYVVB3XoXgcn+aPF03G5nY45kluA==",
+        "resolved": "5.12.0",
+        "contentHash": "iwd4NiGd/Sb4rEKdjR+Sub+aZmtw/MbrT53rhygYpH5co5AXMQ39qlIfhz93dPFBt/EqyWhYbfCOKRWVEsFekQ==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.Common": "[5.12.0-1.26529.118]"
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.Common": "[5.12.0]"
         }
       },
       "Microsoft.CodeAnalysis.VisualBasic.Workspaces": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "YY6s0gku/FvDK1/uSgFPsnnk8AEEpfZvW2Kx3yjbQwOGkC2wAbc5BBJ4uK9Bvv/QcyFs5QVx1UhZOM9TwR0YUw==",
+        "resolved": "5.12.0",
+        "contentHash": "bPml3rdalSA+OrrP66w4GfNCcw9faJ2cYa9ErHuj8+F9yYu4vDjt305SpwYB9XB59NuhxS9LQSEeHSolmUNayg==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.Common": "[5.12.0-1.26529.118]",
-          "Microsoft.CodeAnalysis.VisualBasic": "[5.12.0-1.26529.118]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0-1.26529.118]",
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.Common": "[5.12.0]",
+          "Microsoft.CodeAnalysis.VisualBasic": "[5.12.0]",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0]",
           "System.Composition": "10.0.10"
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "R367CJaPN8AhsELGDf2AVb+u1wT1izMaeGJW59JgPZmnTRHmYpGiCyRA9unIs6MPz1tfzEXu6aB54mG06avM1g==",
+        "resolved": "5.12.0",
+        "contentHash": "s2kdxHJMthfIvYqn1yHxzS2IfH/541/b4jpwRD1JhZtldYgily5K8oGfKJEvpnCscItwuQLgLsq2OvWyvA0ugw==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.Common": "[5.12.0-1.26529.118]",
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.Common": "[5.12.0]",
           "System.Composition": "10.0.10"
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.MSBuild": {
         "type": "Transitive",
-        "resolved": "5.12.0-1.26529.118",
-        "contentHash": "sz8szWyFr5+AIWgTebW+xc6aGne6KpdKkpLw4jz41oPKAtBU+qoCdjOn8u++v6s8IQb6iw3VlkHOr9jZUklbAw==",
+        "resolved": "5.12.0",
+        "contentHash": "wDeCVWmNtyS9aZoReduw2frWXB8RHPt342nMFgEQmk++Gn4t+enWk4/mg4u5y94/d0tBurJX0RFD2LARd/NtRA==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.Build.Framework": "18.7.1",
-          "Microsoft.CodeAnalysis.Analyzers": "5.12.0-1.26465.4",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0-1.26529.118]",
+          "Microsoft.CodeAnalysis.Analyzers": "5.9.0",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.12.0]",
           "Microsoft.Extensions.DependencyInjection": "10.0.10",
           "Microsoft.Extensions.Logging": "10.0.10",
           "Microsoft.Extensions.Logging.Abstractions": "10.0.10",
@@ -601,9 +601,9 @@
           "MSTest.TestAdapter": "[4.5.2, )",
           "MSTest.TestFramework": "[4.5.2, )",
           "Microsoft.Build.Locator": "[1.11.2, )",
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[5.12.0-1.26529.118, )",
-          "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[5.12.0-1.26529.118, )",
-          "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[5.12.0-1.26529.118, )",
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[5.12.0, )",
+          "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[5.12.0, )",
+          "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[5.12.0, )",
           "Microsoft.NET.Test.Sdk": "[18.11.1, )",
           "NSubstitute": "[6.2.0, )",
           "NuGet.Protocol": "[8.0.0, )",
