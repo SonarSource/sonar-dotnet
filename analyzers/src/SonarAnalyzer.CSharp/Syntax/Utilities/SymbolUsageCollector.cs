@@ -107,6 +107,11 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             {
                 UsedSymbols.UnionWith(Symbols(node));
             }
+            // "with(...)" has no type name in the syntax, so the knownSymbolNames filter cannot be applied.
+            else if (node.IsKind(SyntaxKindEx.WithElement))
+            {
+                UsedSymbols.UnionWith(Symbols(node));
+            }
             base.Visit(node);
         }
     }

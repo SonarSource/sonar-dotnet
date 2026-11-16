@@ -1200,12 +1200,42 @@ public class CollectionExpressionArguments
         private readonly List<int> items;
 
         public MyCollection() => items = [];
-        private MyCollection(int used) => items = new(used); // Noncompliant {{Remove the unused private constructor 'MyCollection'.}} FP NET-4974
-        private MyCollection(string unused) => items = []; // Noncompliant
+        private MyCollection(int used) => items = new(used);    // Compliant NET-4974
+        private MyCollection(string unused) => items = [];      // Noncompliant
 
         public static MyCollection Create() => [with(4), 1, 2];
 
         public void Add(int item) => items.Add(item);
+        public IEnumerator<int> GetEnumerator() => items.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    public class NamedArgument : List<int>
+    {
+        private NamedArgument(int capacity) : base(capacity) => Add(0);  // Compliant
+        private NamedArgument(string unused) : base(0) => Add(0);        // Noncompliant
+
+        public static NamedArgument Create() => [with(capacity: 4), 1];
+    }
+
+    public class EmptyArgumentList : List<int>
+    {
+        private EmptyArgumentList() => Add(0);                           // Compliant
+        private EmptyArgumentList(string unused) : base(0) => Add(0);    // Noncompliant
+
+        public static EmptyArgumentList Create() => [with(), 1];
+    }
+
+    [System.Runtime.CompilerServices.CollectionBuilder(typeof(BuilderCollection), "Create")]
+    public class BuilderCollection : IEnumerable<int>
+    {
+        private readonly List<int> items = [];
+
+        private static BuilderCollection Create(int capacity, ReadOnlySpan<int> values) => new();   // Compliant
+        private static BuilderCollection Create(string unused, ReadOnlySpan<int> values) => new();  // Noncompliant
+
+        public static BuilderCollection Build() => [with(4), 1, 2];
+
         public IEnumerator<int> GetEnumerator() => items.GetEnumerator();
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
     }
