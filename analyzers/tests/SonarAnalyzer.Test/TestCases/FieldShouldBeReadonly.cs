@@ -320,11 +320,12 @@ namespace Tests.Diagnostics
 }
 
 // https://sonarsource.atlassian.net/browse/NET-691
+// https://sonarsource.atlassian.net/browse/NET-744
 namespace Repro_NET691
 {
     public class MyClass
     {
-        private bool myField = true; // Noncompliant FP
+        private bool myField = true; // Compliant, passed by reference to a 'this ref' extension method
 
         public void ToggleField()
         {
@@ -332,11 +333,52 @@ namespace Repro_NET691
         }
     }
 
+    public class ClassicExtensionReceivers
+    {
+        private bool viaThis = true; // Compliant
+        private bool parenthesized = true; // Compliant
+        private int generic = 1; // Compliant
+        private bool otherInstance = true; // Compliant
+        private bool byValue = true; // Noncompliant
+        private bool byIn = true; // Noncompliant
+        private bool onlyInConstructor = true; // Noncompliant
+        private bool shadowed = true; // Noncompliant
+
+        public ClassicExtensionReceivers()
+        {
+            onlyInConstructor.Toggle();
+        }
+
+        public void Use()
+        {
+            this.viaThis.Toggle();
+            (parenthesized).Toggle();
+            generic.Reset();
+            _ = byValue.Negated();
+            _ = byIn.NegatedIn();
+        }
+
+        public void Shadow(bool shadowed) =>
+            shadowed.Toggle();
+
+        public void OtherInstance(ClassicExtensionReceivers other) =>
+            other.otherInstance.Toggle();
+    }
+
     public static class BoolExtension
     {
         public static void Toggle(this ref bool value)
         {
             value = !value;
+        }
+
+        public static bool Negated(this bool value) => !value;
+
+        public static bool NegatedIn(this in bool value) => !value;
+
+        public static void Reset<T>(this ref T value) where T : struct
+        {
+            value = default;
         }
     }
 }

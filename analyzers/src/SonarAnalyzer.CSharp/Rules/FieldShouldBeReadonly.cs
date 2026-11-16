@@ -144,7 +144,8 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
 
                 AllFields = partialTypeDeclaration.Node.ChildNodes()
                     .OfType<FieldDeclarationSyntax>()
-                    .SelectMany(GetAllFields);
+                    .SelectMany(DeclaredFields)
+                    .ToList();
             }
 
             public void CollectFields()
@@ -156,10 +157,11 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     CollectFieldsFromPrefixUnaryExpressions();
                     CollectFieldsFromPostfixUnaryExpressions();
                     CollectFieldsFromArguments();
+                    CollectFieldsFromRefExtensionReceivers();
                 }
             }
 
-            private IEnumerable<FieldTuple> GetAllFields(FieldDeclarationSyntax fieldDeclaration) =>
+            private IEnumerable<FieldTuple> DeclaredFields(FieldDeclarationSyntax fieldDeclaration) =>
                 fieldDeclaration.Declaration.Variables
                     .Select(x => new FieldTuple(x, partialTypeDeclaration.Model.GetDeclaredSymbol(x) as IFieldSymbol, partialTypeDeclaration.Model));
 
@@ -185,6 +187,26 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                 {
                     // ref/out should be handled the same way as all other field assignments:
                     ProcessExpression(argument.Expression);
+                }
+            }
+
+            private void CollectFieldsFromRefExtensionReceivers()
+            {
+                var relevantFieldNames = new HashSet<string>(AllFields.Where(x => IsFieldRelevant(x.Symbol) && x.Symbol.Type.IsValueType).Select(x => x.Symbol.Name));
+                if (relevantFieldNames.Count == 0)
+                {
+                    return;
+                }
+
+                foreach (var access in partialTypeDeclaration.Node.DescendantNodes())
+                {
+                    if (Receiver(access) is { } receiver
+                        && receiver.GetIdentifier() is { } identifier
+                        && relevantFieldNames.Contains(identifier.ValueText)
+                        && IsRefReceiverExtensionMember(partialTypeDeclaration.Model.GetSymbolInfo(access).Symbol))
+                    {
+                        ProcessExpression(receiver);
+                    }
                 }
             }
 
@@ -243,7 +265,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
 
             private void ProcessAssignedTopMemberAccessExpression(ExpressionSyntax expression)
             {
-                var topExpression = GetTopMemberAccessIfNested(expression);
+                var topExpression = TopMemberAccessIfNested(expression);
                 if (topExpression is null)
                 {
                     return;
@@ -259,7 +281,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                 ProcessExpressionOnField(topExpression, fieldSymbol);
             }
 
-            private static ExpressionSyntax GetTopMemberAccessIfNested(ExpressionSyntax expression, bool isNestedMemberAccess = false)
+            private static ExpressionSyntax TopMemberAccessIfNested(ExpressionSyntax expression, bool isNestedMemberAccess = false)
             {
                 // If expression is (this.a.b).c, we need to return this.a
                 var noParens = expression.WithoutEnclosingParentheses;
@@ -269,17 +291,17 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     return isNestedMemberAccess ? noParens : null;
                 }
 
-                if (noParens is not MemberAccessExpressionSyntax memberAccess)
+                if (noParens is MemberAccessExpressionSyntax memberAccess)
                 {
-                    return null;
+                    if (memberAccess.Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.ThisExpression))
+                    {
+                        return isNestedMemberAccess ? memberAccess : null;
+                    }
+
+                    return TopMemberAccessIfNested(memberAccess.Expression, true);
                 }
 
-                if (memberAccess.Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.ThisExpression))
-                {
-                    return isNestedMemberAccess ? memberAccess : null;
-                }
-
-                return GetTopMemberAccessIfNested(memberAccess.Expression, true);
+                return null;
             }
 
             private void ProcessAssignedExpression(ExpressionSyntax expression)
@@ -301,14 +323,8 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     return;
                 }
 
-                if (partialTypeDeclaration.Model.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol methodSymbol)
-                {
-                    readonlyFieldCollector.excludedFields.Add(fieldSymbol);
-                    return;
-                }
-
-                if (methodSymbol.MethodKind == MethodKind.Constructor
-                    && methodSymbol.ContainingType.Equals(fieldSymbol.ContainingType))
+                if (partialTypeDeclaration.Model.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol { MethodKind: MethodKind.Constructor } constructor
+                    && constructor.ContainingType.Equals(fieldSymbol.ContainingType))
                 {
                     readonlyFieldCollector.assignedAsReadonly.Add(fieldSymbol);
                 }
@@ -317,6 +333,22 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                 }
             }
+
+            private static ExpressionSyntax Receiver(SyntaxNode node) =>
+                node switch
+                {
+                    MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
+                    ElementAccessExpressionSyntax elementAccess => elementAccess.Expression,
+                    _ => null
+                };
+
+            private static bool IsRefReceiverExtensionMember(ISymbol symbol) =>
+                symbol switch
+                {
+                    IMethodSymbol { MethodKind: MethodKind.ReducedExtension, ReducedFrom.Parameters: { Length: > 0 } parameters } => parameters[0].RefKind == RefKind.Ref,
+                    { IsStatic: false, ContainingType: { IsExtensionBlock: true, ExtensionParameter.RefKind: RefKind.Ref } } => true,
+                    _ => false
+                };
 
             private static bool IsFieldRelevant(IFieldSymbol fieldSymbol) =>
                 fieldSymbol is { IsStatic: false, IsConst: false, IsReadOnly: false, DeclaredAccessibility: Accessibility.Private };
