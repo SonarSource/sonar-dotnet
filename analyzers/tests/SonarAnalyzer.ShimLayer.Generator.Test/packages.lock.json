@@ -533,8 +533,8 @@
       },
       "System.Reflection.MetadataLoadContext": {
         "type": "Transitive",
-        "resolved": "10.0.15",
-        "contentHash": "BmEkRBijFmPeMP9xuJIUcRaTjCB8UXLdWeivMLTDZd1HS6DKGynBJJNPrlAeIboz8UFD4uhzzq3z5Xwy3v1XuA=="
+        "resolved": "11.0.0",
+        "contentHash": "IixPUjMvqADBklO1Cz9OiEcfxIwFptmAwnm02DVTmW5JW4k06HU76boTVxPMChOvalE6FFJH3H82gO8+sgDhwQ=="
       },
       "System.Resources.ResourceManager": {
         "type": "Transitive",
@@ -601,7 +601,7 @@
       "Internal.SonarAnalyzer.ShimLayer.Generator": {
         "type": "Project",
         "dependencies": {
-          "System.Reflection.MetadataLoadContext": "[10.0.15, )"
+          "System.Reflection.MetadataLoadContext": "[11.0.0, )"
         }
       },
       "sonaranalyzer.cfg": {
