@@ -23,7 +23,7 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
-        GetArgumentExpression(node, 0) is SingleLineLambdaExpressionSyntax lambda
+        ArgumentExpression(node, 0) is SingleLineLambdaExpressionSyntax lambda
         && lambda.SubOrFunctionHeader.ParameterList.Parameters is { Count: 1 } parameters
         && parameters[0].Identifier.GetName() is var lambdaVariableName
         && lambda.Body switch
@@ -35,13 +35,6 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
             _ => false
         };
 
-    private bool HasValidBinaryOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
-        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
-        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
-
-    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model) =>
-        node.IsKind(SyntaxKind.NothingLiteralExpression) || IsValueTypeOrString(node, model);
-
     protected override bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
         first is IdentifierNameSyntax && IsNameEqualTo(first, lambdaVariable)
         && second switch
@@ -51,6 +44,13 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
             _ => false,
         };
 
-    protected override SyntaxNode GetArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
+    protected override SyntaxNode ArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
         invocation.ArgumentList.Arguments[index].GetExpression();
+
+    private bool HasValidBinaryOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
+        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
+
+    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model) =>
+        node.IsKind(SyntaxKind.NothingLiteralExpression) || IsValueTypeOrString(node, model);
 }

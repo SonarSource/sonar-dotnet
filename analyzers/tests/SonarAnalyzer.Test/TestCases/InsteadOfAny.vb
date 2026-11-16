@@ -225,4 +225,20 @@ Public Class ClassB
     Private Function Equals(ByVal a As Integer, ByVal b As Integer, ByVal c As Integer) As Boolean
         Return False
     End Function
+
+    ' https://sonarsource.atlassian.net/browse/NET-4998
+    Private Sub EqualsWithConversion(ByVal longList As List(Of Long), ByVal moneyList As List(Of Money), ByVal moneySet As HashSet(Of Money), ByVal someInt As Integer, ByVal amount As Decimal)
+        longList.Any(Function(x) x.Equals(0)) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}} Equals(Long) converts 0 like Contains does
+        longList.Any(Function(x) 0.Equals(x)) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Integer.Equals(Object) never matches a boxed Long
+        moneyList.Any(Function(x) x.Equals(amount)) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Contains(amount) would use the widening conversion to Money
+        moneySet.Any(Function(x) x.Equals(amount))  ' Compliant, Contains(amount) would use the widening conversion to Money and change the result
+    End Sub
 End Class
+
+Public Structure Money
+    Public Value As Decimal
+
+    Public Shared Widening Operator CType(ByVal d As Decimal) As Money
+        Return New Money With {.Value = d}
+    End Operator
+End Structure

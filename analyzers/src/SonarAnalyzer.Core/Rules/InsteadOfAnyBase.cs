@@ -25,9 +25,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     private const string ContainsDiagnosticId = "S6617";
     private const string MessageFormat = "Collection-specific \"{0}\" method should be used instead of the \"Any\" extension.";
 
-    private readonly DiagnosticDescriptor existsRule;
-    private readonly DiagnosticDescriptor containsRule;
-
     private static readonly ImmutableArray<KnownType> ExistsTypes = ImmutableArray.Create(
         KnownType.System_Array,
         KnownType.System_Collections_Immutable_ImmutableList_T);
@@ -36,13 +33,16 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_SortedSet_T);
 
+    private readonly DiagnosticDescriptor existsRule;
+    private readonly DiagnosticDescriptor containsRule;
+
+    protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
+    protected abstract SyntaxNode ArgumentExpression(TInvocationExpression invocation, int index);
+    protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
+
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(existsRule, containsRule);
-
-    protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
-    protected abstract SyntaxNode GetArgumentExpression(TInvocationExpression invocation, int index);
-    protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
 
     protected InsteadOfAnyBase()
     {
@@ -51,38 +51,40 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            var invocation = (TInvocationExpression)c.Node;
-
-            if (IsNameEqualTo(invocation, nameof(Enumerable.Any))
-                && Language.Syntax.HasExactlyNArguments(invocation, 1)
-                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
-                && IsCorrectCall(right, c.Model)
-                && c.Model.GetTypeInfo(left).Type is { } type
-                && !Language.Syntax.IsInExpressionTree(c.Model, invocation))
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer, c =>
             {
-                if (ExistsTypes.Any(x => type.DerivesFrom(x)))
+                var invocation = (TInvocationExpression)c.Node;
+
+                if (IsNameEqualTo(invocation, nameof(Enumerable.Any))
+                    && Language.Syntax.HasExactlyNArguments(invocation, 1)
+                    && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
+                    && IsCorrectCall(right, c.Model)
+                    && c.Model.GetTypeInfo(left).Type is { } type
+                    && !Language.Syntax.IsInExpressionTree(c.Model, invocation))
                 {
-                    RaiseIssue(c, invocation, existsRule, "Exists");
-                }
-                else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.Model)))
-                {
-                    RaiseIssue(c, invocation, containsRule, "Contains");
-                }
-                else if (type.DerivesFrom(KnownType.System_Collections_Generic_List_T))
-                {
-                    if (IsSimpleEqualityCheck(invocation, c.Model))
-                    {
-                        RaiseIssue(c, invocation, containsRule, "Contains");
-                    }
-                    else
+                    if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                     {
                         RaiseIssue(c, invocation, existsRule, "Exists");
                     }
+                    else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.Model)))
+                    {
+                        RaiseIssue(c, invocation, containsRule, "Contains");
+                    }
+                    else if (type.DerivesFrom(KnownType.System_Collections_Generic_List_T))
+                    {
+                        if (IsSimpleEqualityCheck(invocation, c.Model))
+                        {
+                            RaiseIssue(c, invocation, containsRule, "Contains");
+                        }
+                        else
+                        {
+                            RaiseIssue(c, invocation, existsRule, "Exists");
+                        }
+                    }
                 }
-            }
-        }, Language.SyntaxKind.InvocationExpression);
+            },
+            Language.SyntaxKind.InvocationExpression);
 
     protected bool IsNameEqualTo(SyntaxNode node, string name) =>
         Language.GetName(node).Equals(name, Language.NameComparison);
@@ -98,19 +100,27 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
             if (Language.Syntax.HasExactlyNArguments(invocation, 1)) // x.Equals(y)
             {
                 return Language.Syntax.Operands(invocation).Left is { } left
-                    && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0))
+                    && HasInvocationValidOperands(left, ArgumentExpression(invocation, 0))
                     && IsSystemEquals();
             }
             if (Language.Syntax.HasExactlyNArguments(invocation, 2)) // Equals(x,y)
             {
-                return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1))
+                return HasInvocationValidOperands(ArgumentExpression(invocation, 0), ArgumentExpression(invocation, 1))
                     && IsSystemEquals();
             }
         }
         return false;
 
-        bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
-            AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
+        bool HasInvocationValidOperands(SyntaxNode left, SyntaxNode right) =>
+            (AreValidOperands(lambdaVariableName, left, right) && IsComparedAsElementType(left, right))
+            || (AreValidOperands(lambdaVariableName, right, left) && IsComparedAsElementType(right, left));
+
+        bool IsComparedAsElementType(SyntaxNode lambdaVariable, SyntaxNode other) =>
+            model.GetTypeInfo(lambdaVariable).Type is { } elementType
+            && model.GetTypeInfo(other) is var otherTypeInfo
+            && (otherTypeInfo.Type is null
+                || otherTypeInfo.Type.DerivesOrImplements(elementType)
+                || elementType.Equals(otherTypeInfo.ConvertedType));
 
         bool IsSystemEquals() =>
             model.GetSymbolInfo(invocation).Symbol.ContainingNamespace.Name == nameof(System);

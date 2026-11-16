@@ -11,15 +11,18 @@ list.Append(1).Any(x => x > 0);
 list.Any();
 list.Exists(x => x > 0);
 
+// https://sonarsource.atlassian.net/browse/NET-4998
 var dog = new Dog();
 var pets = new List<Pet> { dog };
-pets.Any(x => x.Equals(dog));       // Noncompliant FP NET-4998
+pets.Any(x => x.Equals(dog));       // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Contains(dog) would convert dog to Pet and change the result
 pets.Contains(dog);
 var petSet = new HashSet<Pet> { dog };
-petSet.Any(x => x.Equals(dog));     // Noncompliant FP NET-4998
+petSet.Any(x => x.Equals(dog));     // Compliant, Contains(dog) would convert dog to Pet and change the result
 decimal amount = 5m;
 var moneys = new List<Money> { amount };
-moneys.Any(x => x.Equals(amount));  // Noncompliant FP NET-4998
+moneys.Any(x => x.Equals(amount));  // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Contains(amount) would use the implicit conversion to Money
+var moneySet = new HashSet<Money> { amount };
+moneySet.Any(x => x.Equals(amount));    // Compliant, Contains(amount) would use the implicit conversion to Money and change the result
 int number = 1;
 list.Any(x => x.Equals(number));    // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
 

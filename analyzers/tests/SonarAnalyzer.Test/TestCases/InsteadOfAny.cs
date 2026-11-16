@@ -218,6 +218,36 @@ public class TestClass
         bool Equals(int a, int b, int c) => false;
     }
 
+    // https://sonarsource.atlassian.net/browse/NET-4998
+    void EqualsWithConversion(
+        List<long> longList,
+        HashSet<long> longSet,
+        List<object> objectList,
+        List<BaseRef> baseList,
+        HashSet<DerivedRef> derivedSet,
+        List<GenericBase<int>> genericBaseList,
+        List<int?> nullableList,
+        int someInt,
+        BaseRef baseRef,
+        DerivedRef derivedRef,
+        DerivedFromGeneric derivedFromGeneric)
+    {
+        longList.Any(x => x.Equals(0));         // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}} Equals(long) converts 0 like Contains does
+        longList.Any(x => 0.Equals(x));         // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} int.Equals(object) never matches a boxed long
+        longSet.Any(x => x.Equals(someInt));    // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        longSet.Any(x => someInt.Equals(x));    // Compliant, Contains(someInt) would convert someInt to long and change the result
+        longSet.Any(x => Equals(x, someInt));   // Compliant, Contains(someInt) would convert someInt to long and change the result
+
+        objectList.Any(x => x.Equals(someInt));     // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        objectList.Any(x => someInt.Equals(x));     // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        baseList.Any(x => x.Equals(derivedRef));    // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        baseList.Any(x => Equals(derivedRef, x));   // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        derivedSet.Any(x => x.Equals(baseRef));     // Compliant, baseRef is not a DerivedRef so Contains(baseRef) does not apply
+
+        genericBaseList.Any(x => x.Equals(derivedFromGeneric)); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Should be Contains, DerivedFromGeneric is a GenericBase<int> by reference
+        nullableList.Any(x => x.Equals(someInt));               // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Should be Contains, converting int to int? keeps the value
+    }
+
     bool ContainsEvenExpression(List<int> data) =>
         data.Any(x => x % 2 == 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 
@@ -263,6 +293,11 @@ public class ClassB
 
     public bool Any(Func<int, bool> predicate) => false;
 }
+
+public class BaseRef { }
+public class DerivedRef : BaseRef { }
+public class GenericBase<T> { }
+public class DerivedFromGeneric : GenericBase<int> { }
 
 public class ExpressionTree
 {
