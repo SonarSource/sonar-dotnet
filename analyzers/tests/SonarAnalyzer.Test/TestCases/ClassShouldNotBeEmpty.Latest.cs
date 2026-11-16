@@ -151,5 +151,11 @@ namespace CSharp15
 
     public union Result(Success, Failure);
     public class Success { public int Value { get; } }
-    public class Failure { }                    // Noncompliant FP NET-4894
+    public class Failure { }                    // Compliant, NET-4894: case type of a union
+
+    public union GenericResult<T>(Ok<T>, Error);
+    public class Ok<T> { public T Value { get; } }
+    public class Error { }                      // Compliant, NET-4894: case type of a union
+
+    public class NotACaseType { }               // Noncompliant
 }

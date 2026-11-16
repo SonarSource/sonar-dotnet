@@ -51,6 +51,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
                                     or SyntaxKind.ElseDirectiveTrivia
                                     or SyntaxKind.EndIfDirectiveTrivia);
 
+    protected override bool IsUnionCaseType(SyntaxNode node, SemanticModel model) =>
+        model.GetDeclaredSymbol(node) is INamedTypeSymbol symbol && symbol.IsUnionCaseType(model.Compilation);
+
     private static bool LacksParameterizedPrimaryConstructor(SyntaxNode node) =>
         IsParameterlessClass(node)
         || IsParameterlessRecord(node);

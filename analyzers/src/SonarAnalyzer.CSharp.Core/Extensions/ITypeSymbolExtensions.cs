@@ -27,5 +27,11 @@ public static class ITypeSymbolExtensions
             languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
             && symbol.IsRefStruct
             && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
+
+        public ImmutableArray<INamedTypeSymbol> CaseOfUnions(Compilation compilation) =>
+            compilation.UnionsWithCaseType(symbol);
+
+        public bool IsUnionCaseType(Compilation compilation) =>
+            compilation.IsUnionCaseType(symbol);
     }
 }

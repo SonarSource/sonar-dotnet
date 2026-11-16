@@ -43,6 +43,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
 
     protected ClassShouldNotBeEmptyBase() : base(DiagnosticId) { }
 
+    protected virtual bool IsUnionCaseType(SyntaxNode node, SemanticModel model) => false;
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
@@ -54,7 +56,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     && !HasConditionalCompilationDirectives(c.Node)
                     && !ShouldIgnoreBecauseOfName(identifier)
                     && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { IsClosed: false } symbol
-                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, symbol))
+                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, symbol)
+                    && !IsUnionCaseType(c.Node, c.Model))
                 {
                     c.ReportIssue(Rule, identifier, DeclarationTypeKeyword(c.Node));
                 }
