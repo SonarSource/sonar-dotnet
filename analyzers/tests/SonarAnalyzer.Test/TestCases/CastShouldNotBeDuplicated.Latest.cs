@@ -465,25 +465,86 @@ namespace CSharp15
     {
         public void InterfaceImplementedByUnion(Pet pet)
         {
-            if (pet is IAnimal)             // Noncompliant FP NET-4989
+            if (pet is IAnimal)             // Compliant NET-4989, 'is' tests the case value, the cast converts the union itself
             {
-                var animal = (IAnimal)pet;  // Secondary
+                var animal = (IAnimal)pet;
             }
-            if (pet is IAnimal)             // Noncompliant FP NET-4989
+            if (pet is IAnimal)             // Compliant NET-4989
             {
-                var animal = pet as IAnimal; // Secondary
+                var animal = pet as IAnimal;
             }
         }
 
-        public void IUnionImplementedByEveryUnion(Plain plain)
+        public void IUnionCheckTestsCaseValue(Plain plain)
         {
-            if (plain is IUnion)            // Noncompliant FP NET-4989
+            if (plain is IUnion)            // Compliant NET-4989
             {
-                var union = (IUnion)plain;  // Secondary
+                var union = (IUnion)plain;
             }
-            if (plain is IUnion)            // Noncompliant FP NET-4989
+            if (plain is IUnion)            // Compliant NET-4989
             {
-                var union = plain as IUnion; // Secondary
+                var union = plain as IUnion;
+            }
+        }
+
+        private Pet field;
+
+        public void OtherShapesOnUnion(Pet pet, Pet? nullablePet)
+        {
+            if (pet is object)                          // Compliant, the cast boxes the union, not the case value
+            {
+                var boxed = (object)pet;
+            }
+            if (nullablePet is IAnimal)                 // Compliant, patterns on a nullable union also test the case value
+            {
+                var animal = (IAnimal)nullablePet;
+            }
+            if (this.field is IAnimal)                  // Compliant, member access on a union
+            {
+                var animal = (IAnimal)field;
+            }
+            if ((pet, 1) is (IAnimal, _))               // Compliant, tuple subpattern on a union element
+            {
+                var animal = (IAnimal)pet;
+            }
+            if (pet is IAnimal declared)                // Compliant, 'declared' is the case value, not the union
+            {
+                var animal = (IAnimal)pet;
+            }
+            switch (pet)
+            {
+                case IAnimal inCase:                    // Compliant, switch statement on a union
+                    var animal = (IAnimal)pet;
+                    break;
+            }
+            var result = pet switch
+            {
+                IAnimal inArm => (IAnimal)pet,          // Compliant, switch expression on a union
+                _ => null
+            };
+        }
+
+        public void NestedTypeCheckOnUnion(Pet pet)
+        {
+            if (pet is IAnimal)                         // FN, union receivers are skipped entirely
+            {
+                if (pet is IAnimal) { }
+            }
+        }
+
+        public void CastOfDesignationIsStillRedundant(Pet pet)
+        {
+            if (pet is IAnimal declared)                // Secondary
+            {
+                var animal = (IAnimal)declared;         // Noncompliant {{Remove this redundant cast.}}
+            }
+        }
+
+        public void UnionAsTargetTypeOnly(object value)
+        {
+            if (value is Pet)                           // Noncompliant
+            {
+                var pet = (Pet)value;                   // Secondary
             }
         }
 

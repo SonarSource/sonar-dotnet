@@ -114,15 +114,16 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         {
             var pattern = expressionPatternPair.Value;
             var leftVariable = expressionPatternPair.Key;
-            var targetTypes = GetTypesFromPattern(pattern);
+            var targetTypes = TypesFromPattern(pattern);
             var rightPartsToCheck = new Dictionary<SyntaxNode, Tuple<TypeSyntax, Location>>();
             foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x?.Kind() is SyntaxKindEx.DeclarationPattern or SyntaxKindEx.RecursivePattern))
             {
-                if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
+                if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern))
                 {
+                    var declarationPattern = (DeclarationPatternSyntaxWrapper)subPattern;
                     rightPartsToCheck.Add(declarationPattern.Designation.WrappedInstance, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                 }
-                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.WrappedInstance: { }, Type: { } } recursivePattern)
+                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.WrappedInstance: not null, Type: not null } recursivePattern)
                 {
                     rightPartsToCheck.Add(recursivePattern.Designation.WrappedInstance, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
                 }
@@ -143,10 +144,10 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         }
     }
 
-    private static IEnumerable<TypeSyntax> GetTypesFromPattern(SyntaxNode pattern)
+    private static IEnumerable<TypeSyntax> TypesFromPattern(SyntaxNode pattern)
     {
         var targetTypes = new HashSet<TypeSyntax>();
-        if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.WrappedInstance: { } } recursivePattern))
+        if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.WrappedInstance: not null } recursivePattern))
         {
             foreach (var subpattern in recursivePattern.PositionalPatternClause.Subpatterns)
             {
@@ -173,14 +174,14 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 
         static void AddPatternType(SyntaxNode pattern, ISet<TypeSyntax> targetTypes)
         {
-            if (GetType(pattern) is { } patternType)
+            if (PatternType(pattern) is { } patternType)
             {
                 targetTypes.Add(patternType);
             }
         }
     }
 
-    private static TypeSyntax GetType(SyntaxNode pattern)
+    private static TypeSyntax PatternType(SyntaxNode pattern)
     {
         if (ConstantPatternSyntaxWrapper.IsInstance(pattern))
         {
@@ -205,11 +206,14 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                                                     string message)
     {
         var duplicatedCastLocations = DuplicatedCastLocations(context, parentStatement, castType, variableExpression);
-        if (duplicatedCastLocations.Any())
+        if (duplicatedCastLocations.Any() && !HasUnionType(context.Model, variableExpression))
         {
             context.ReportIssue(Rule, mainLocation, duplicatedCastLocations.ToSecondary(), message);
         }
     }
+
+    private static bool HasUnionType(SemanticModel model, SyntaxNode expression) =>
+        model.GetTypeInfo(expression).Type?.NullableUnderlyingTypeOrSelf() is { IsUnion: true };
 
     private static void ReportPatternAtCastLocation(SonarSyntaxNodeReportingContext context,
                                                     SyntaxNode variableExpression,
