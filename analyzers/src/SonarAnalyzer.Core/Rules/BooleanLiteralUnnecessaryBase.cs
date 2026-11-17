@@ -55,6 +55,8 @@ public abstract class BooleanLiteralUnnecessaryBase<TSyntaxKind> : SonarDiagnost
     // For C# 7 syntax
     protected virtual bool IsInsideTernaryWithThrowExpression(SyntaxNode node) => false;
 
+    protected virtual bool IsLanguageSpecificIgnoredType(ITypeSymbol type) => false;
+
     // LogicalAnd (C#) / AndAlso (VB)
     protected void CheckAndExpression(SonarSyntaxNodeReportingContext context)
     {
@@ -219,6 +221,7 @@ public abstract class BooleanLiteralUnnecessaryBase<TSyntaxKind> : SonarDiagnost
             || type is ITypeParameterSymbol
             || type.Is(KnownType.System_Object)
             || type.Is(TypeKind.Dynamic)
-            || systemBooleanInterfaces.Any(x => x.Equals(type));
+            || systemBooleanInterfaces.Any(x => x.Equals(type))
+            || IsLanguageSpecificIgnoredType(type);
     }
 }

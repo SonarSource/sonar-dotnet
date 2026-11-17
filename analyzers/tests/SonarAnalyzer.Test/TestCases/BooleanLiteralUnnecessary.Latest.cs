@@ -136,9 +136,17 @@ namespace CSharp15
     {
         public void Test(BoolOrString value, bool flag)
         {
-            if (value is true) { }  // Noncompliant {{Remove the unnecessary Boolean literal(s).}} FP NET-4885
-            if (value is false) { } // Noncompliant {{Remove the unnecessary Boolean literal(s).}} FP NET-4885
+            if (value is true) { }  // Compliant NET-4885
+            if (value is false) { } // Compliant NET-4885
             if (flag is true) { }   // Noncompliant
+
+            if (value is not true) { }  // Compliant
+            if (value is not false) { } // Compliant
+            if (flag is not true) { }   // Noncompliant
+
+            if (value == true) { }  // Error [CS0019]
+            if (value != false) { } // Error [CS0019]
+            if (!value) { }         // Error [CS0023]
         }
     }
 }

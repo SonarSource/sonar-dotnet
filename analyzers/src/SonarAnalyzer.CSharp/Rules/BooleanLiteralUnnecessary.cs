@@ -40,6 +40,9 @@ public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<Sy
         node.Parent is ConditionalExpressionSyntax conditionalExpression
         && (IsThrowExpression(conditionalExpression.WhenTrue) || IsThrowExpression(conditionalExpression.WhenFalse));
 
+    protected override bool IsLanguageSpecificIgnoredType(ITypeSymbol type) =>
+        type is { IsUnion: true };
+
     protected override SyntaxNode LeftNode(SyntaxNode node) =>
         node switch
         {
