@@ -43,6 +43,18 @@ public class UseDifferentMember : StylingAnalyzer
                         identifier.Identifier.Text,
                         " It resolves the parameter list correctly across all supported Roslyn versions.");
                 }
+                else if (identifier.Identifier.Text is nameof(Compilation.ToMetadataReference)
+                    && c.Model.GetSymbolInfo(identifier) is { Symbol: IMethodSymbol method }
+                    && method.HasContainingType(KnownType.Microsoft_CodeAnalysis_Compilation, checkDerivedTypes: true))
+                {
+                    c.ReportIssue(
+                        Rule,
+                        c.Node,
+                        "ToPortableExecutableReference()",
+                        nameof(Compilation.ToMetadataReference),
+                        " 'ToMetadataReference' exposes source symbols and locations, as VS project references do; the replacement loads real PE symbols, as command-line builds do."
+                        + " Suppress with a reason if the test needs source symbols.");
+                }
             },
             SyntaxKind.IdentifierName);
 

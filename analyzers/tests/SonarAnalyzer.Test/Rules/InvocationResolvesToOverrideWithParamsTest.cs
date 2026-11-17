@@ -27,7 +27,7 @@ public class InvocationResolvesToOverrideWithParamsTest
     [TestMethod]
     public void InvocationResolvesToOverrideWithParams()
     {
-        var anotherAssembly = TestCompiler.CompileCS("""
+        var anotherAssembly = TestCompiler.CompileToReferenceCS("""
             public class FromAnotherAssembly
             {
                 protected int ProtectedOverload(object a, string b) => 42;
@@ -42,7 +42,7 @@ public class InvocationResolvesToOverrideWithParamsTest
                 internal int InternalOverload(object a, string b) => 42;
                 public int InternalOverload(string a, params string[] bs) => 42;
             }
-            """).Model.Compilation.ToMetadataReference();
+            """);
         builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
             .AddReferences([anotherAssembly])
             .Verify();

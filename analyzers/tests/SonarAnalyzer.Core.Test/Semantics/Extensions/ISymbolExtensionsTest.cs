@@ -328,7 +328,7 @@ public class ISymbolExtensionsTest
             """;
 
         var parseOptions = new CSharpParseOptions(LanguageVersion.Latest);
-        var interfaceMetadata = new SnippetCompiler(interfaceCode, ignoreErrors: false, AnalyzerLanguage.CSharp, parseOptions: parseOptions).Compilation.ToMetadataReference();
+        var interfaceMetadata = new SnippetCompiler(interfaceCode, ignoreErrors: false, AnalyzerLanguage.CSharp, parseOptions: parseOptions).Compilation.ToPortableExecutableReference();
         var implCompilation = new SnippetCompiler(implementationCode, ignoreErrors: false, AnalyzerLanguage.CSharp, [interfaceMetadata], parseOptions: parseOptions).Compilation;
 
         var method = implCompilation.GetTypeByMetadataName("Implementation").Should().BeAssignableTo<INamedTypeSymbol>()

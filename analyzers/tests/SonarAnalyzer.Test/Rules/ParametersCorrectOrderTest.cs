@@ -72,6 +72,7 @@ public class ParametersCorrectOrderTest
                 public static void Method(int a, int b) { }
             }
             """).Model.Compilation;
+#pragma warning disable T0047 // Simulates a VS project reference: source symbols and locations from another compilation, see sonar-dotnet#8577
         var usage = TestCompiler.CompileCS("""
             public class Usage
             {
@@ -82,6 +83,7 @@ public class ParametersCorrectOrderTest
                 }
             }
             """, library.ToMetadataReference()).Model.Compilation;
+#pragma warning restore T0047
         var diagnostics = await usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync();
         diagnostics.Should().ContainSingle().Which.Id.Should().Be("S2234", "we don't want AD0001 here");
     }

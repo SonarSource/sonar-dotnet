@@ -181,6 +181,7 @@ public class CallModelStateIsValidTest
     [TestMethod]
     public void CallModelStateIsValid_ManualDataAnnotationsValidationInReferencedCompilation_CS()
     {
+#pragma warning disable T0047 // Simulates a VS project reference: source symbols and locations from another compilation, see NET-4506
         var helperReference = new SnippetCompiler(
                 """
                 using System.Collections.Generic;
@@ -200,6 +201,7 @@ public class CallModelStateIsValidTest
                 NuGetMetadataReference.SystemComponentModelAnnotations(TestConstants.NuGetLatestVersion))
             .Compilation
             .ToMetadataReference();
+#pragma warning restore T0047
 
         builder.AddReferences([helperReference])
             .AddSnippet(

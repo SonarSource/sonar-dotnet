@@ -144,12 +144,8 @@ public class SnippetCompiler
         return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
     }
 
-    public Assembly EmitAssembly()
-    {
-        using var memoryStream = new MemoryStream();
-        Compilation.Emit(memoryStream).Success.Should().BeTrue("The provided snippet should emit assembly.");
-        return Assembly.Load(memoryStream.ToArray());
-    }
+    public Assembly EmitAssembly() =>
+        Assembly.Load(Compilation.EmitToImage());
 
     private static bool HasCompilationErrors(Compilation compilation) =>
         compilation.GetDiagnostics().Any(IsCompilationError);

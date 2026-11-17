@@ -29,4 +29,8 @@ public class UseDifferentMemberTest
     [TestMethod]
     public void UseParameterList() =>
         builder.AddPaths("UseDifferentMember.ParameterList.cs").Verify();
+
+    [TestMethod]
+    public void UseToPortableExecutableReference() =>
+        builder.AddPaths("UseDifferentMember.ToMetadataReference.cs").AddReferences([CoreMetadataReference.SystemCollectionsImmutable]).Verify();
 }

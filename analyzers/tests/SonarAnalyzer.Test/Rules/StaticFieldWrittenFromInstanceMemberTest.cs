@@ -61,9 +61,11 @@ public class StaticFieldWrittenFromInstanceMemberTest
 
         var analyzers = ImmutableArray<DiagnosticAnalyzer>.Empty.Add(new StaticFieldWrittenFromInstanceMember());
         var firstCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(firstClass), "First").WithAnalyzers(analyzers).Compilation;
+#pragma warning disable T0047 // Simulates a VS project reference: source symbols and locations from another compilation, see sonar-dotnet#5661
         var secondCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(secondClass), "Second")
             .AddReferences(firstCompilation.ToMetadataReference())
             .WithAnalyzers(analyzers);
+#pragma warning restore T0047
 
         var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
 

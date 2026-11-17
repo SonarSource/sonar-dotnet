@@ -41,6 +41,12 @@ public static class TestCompiler
     public static (SyntaxTree Tree, SemanticModel Model) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
         Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
 
+    public static PortableExecutableReference CompileToReferenceCS(string snippet, params MetadataReference[] additionalReferences) =>
+        CompileCS(snippet, additionalReferences).Model.Compilation.ToPortableExecutableReference();
+
+    public static PortableExecutableReference CompileToReferenceVB(string snippet, params MetadataReference[] additionalReferences) =>
+        CompileVB(snippet, additionalReferences).Model.Compilation.ToPortableExecutableReference();
+
     public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet,
                                                                  bool ignoreErrors,
                                                                  AnalyzerLanguage language,

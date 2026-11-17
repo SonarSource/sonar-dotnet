@@ -164,6 +164,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
     public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
     public static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
+    public static readonly KnownType Microsoft_CodeAnalysis_Compilation = new("Microsoft.CodeAnalysis.Compilation");
     public static readonly KnownType Microsoft_CodeAnalysis_IMethodSymbol = new("Microsoft.CodeAnalysis.IMethodSymbol");
     public static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
     public static readonly KnownType Microsoft_EntityFramework_DbContext = new("System.Data.Entity.DbContext");

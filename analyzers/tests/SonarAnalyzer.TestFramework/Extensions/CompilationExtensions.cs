@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.TestFramework.Extensions;
 
-internal static class CompilationExtensions
+public static class CompilationExtensions
 {
     public static string LanguageVersionString(this Compilation compilation) =>
         compilation switch
@@ -29,4 +29,16 @@ internal static class CompilationExtensions
             VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
             _ => throw new NotSupportedException($"Not supported compilation type: '{compilation?.GetType()}'")
         };
+
+    public static byte[] EmitToImage(this Compilation compilation)
+    {
+        using var stream = new MemoryStream();
+        var result = compilation.Emit(stream);
+        result.Success.Should().BeTrue("the compilation should emit an assembly. Errors: {0}", string.Join(Environment.NewLine, result.Diagnostics.Where(x => x.Severity == DiagnosticSeverity.Error)));
+        return stream.ToArray();
+    }
+
+    // Unlike Compilation.ToMetadataReference(), which exposes the source symbols of this compilation, this loads PE symbols from the emitted image.
+    public static PortableExecutableReference ToPortableExecutableReference(this Compilation compilation) =>
+        MetadataReference.CreateFromImage(compilation.EmitToImage());
 }
