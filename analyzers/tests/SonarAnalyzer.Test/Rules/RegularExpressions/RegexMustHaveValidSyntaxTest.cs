@@ -26,12 +26,12 @@ public class RegexMustHaveValidSyntaxTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RegexMustHaveValidSyntax>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
-        .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
+        .AddReferences(MetadataReferenceFacade.SystemComponentModelAnnotations);
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RegexMustHaveValidSyntax>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
-        .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
+        .AddReferences(MetadataReferenceFacade.SystemComponentModelAnnotations);
 
     [TestMethod]
     public void RegexMustHaveValidSyntax_CS() =>

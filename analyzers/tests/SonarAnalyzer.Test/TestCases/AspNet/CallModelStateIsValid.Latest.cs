@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -95,12 +96,64 @@ public sealed class AssetController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> DirectValidationAsync(AssetInput input) // Noncompliant FP NET-4881
+    public async Task<IActionResult> DirectValidationAsync(AssetInput input) // Compliant NET-4881
     {
         var results = new List<ValidationResult>();
         if (!await Validator.TryValidateObjectAsync(input, new ValidationContext(input), results, validateAllProperties: true))
         {
             return BadRequest(results);
+        }
+
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DirectValidationAsyncWithFalseNamedArgument(AssetInput input) // Noncompliant
+    {
+        var results = new List<ValidationResult>();
+        if (!await Validator.TryValidateObjectAsync(input, new ValidationContext(input), results, validateAllProperties: false))
+        {
+            return BadRequest(results);
+        }
+
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DirectValidationAsyncWithPositionalArgument(AssetInput input, CancellationToken cancellationToken) // Compliant
+    {
+        var results = new List<ValidationResult>();
+        await Validator.TryValidateObjectAsync(input, new ValidationContext(input), results, true, cancellationToken);
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DirectValidationAsyncWithoutValidateAllProperties(AssetInput input) // Noncompliant
+    {
+        var results = new List<ValidationResult>();
+        await Validator.TryValidateObjectAsync(input, new ValidationContext(input), results);
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(AssetInput input)               // Compliant
+    {
+        var error = await FirstValidationErrorAsync(input);
+        if (error is not null)
+        {
+            return BadRequest(error);
+        }
+
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DoesNotValidateAllPropertiesAsync(AssetInput input) // Noncompliant
+    {
+        var error = await FirstRequiredValidationErrorAsync(input);
+        if (error is not null)
+        {
+            return BadRequest(error);
         }
 
         return Ok();
@@ -209,6 +262,22 @@ public sealed class AssetController : ControllerBase
     {
         var results = new List<ValidationResult>();
         return Validator.TryValidateObject(model, new ValidationContext(model), results, validateAllProperties: false)
+            ? null
+            : results[0].ErrorMessage;
+    }
+
+    private static async Task<string> FirstValidationErrorAsync(object model)
+    {
+        var results = new List<ValidationResult>();
+        return await Validator.TryValidateObjectAsync(model, new ValidationContext(model), results, validateAllProperties: true)
+            ? null
+            : results[0].ErrorMessage;
+    }
+
+    private static async Task<string> FirstRequiredValidationErrorAsync(object model)
+    {
+        var results = new List<ValidationResult>();
+        return await Validator.TryValidateObjectAsync(model, new ValidationContext(model), results, validateAllProperties: false)
             ? null
             : results[0].ErrorMessage;
     }

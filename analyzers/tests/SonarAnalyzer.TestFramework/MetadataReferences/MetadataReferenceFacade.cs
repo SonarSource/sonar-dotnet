@@ -284,6 +284,13 @@ public static class MetadataReferenceFacade
         NuGetMetadataReference.SystemComponentModelComposition();
 #endif
 
+    public static References SystemComponentModelAnnotations =>
+#if NETFRAMEWORK
+        NuGetMetadataReference.SystemComponentModelAnnotations();
+#else
+        [CoreMetadataReference.SystemComponentModelAnnotations];
+#endif
+
     public static References SystemCompositionAttributedModel =>
         NuGetMetadataReference.SystemCompositionAttributedModel();
 

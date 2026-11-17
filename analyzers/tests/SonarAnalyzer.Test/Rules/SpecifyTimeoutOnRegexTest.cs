@@ -26,12 +26,12 @@ public class SpecifyTimeoutOnRegexTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SpecifyTimeoutOnRegex())
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
-        .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
+        .AddReferences(MetadataReferenceFacade.SystemComponentModelAnnotations);
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder()
         .AddAnalyzer(() => new VB.SpecifyTimeoutOnRegex())
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
-        .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
+        .AddReferences(MetadataReferenceFacade.SystemComponentModelAnnotations);
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_CS() =>

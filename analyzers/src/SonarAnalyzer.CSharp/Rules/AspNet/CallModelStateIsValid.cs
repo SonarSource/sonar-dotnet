@@ -171,7 +171,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             || IsCompletelyValidatedInstance(invocation, method));
 
     private static bool IsCompletelyValidatedInstance(InvocationExpressionSyntax invocation, IMethodSymbol method) =>
-        method.Is(KnownType.System_ComponentModel_DataAnnotations_Validator, "TryValidateObject")
+        method.IsAny(KnownType.System_ComponentModel_DataAnnotations_Validator, "TryValidateObject", "TryValidateObjectAsync")
         && new CSharpMethodParameterLookup(invocation, method).TryGetSyntax("validateAllProperties", out var validateAllProperties)
         && validateAllProperties.Length == 1
         && validateAllProperties[0].RawKind == (int)SyntaxKind.TrueLiteralExpression;

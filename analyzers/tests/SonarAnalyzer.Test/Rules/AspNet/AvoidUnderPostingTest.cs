@@ -28,7 +28,7 @@ public class AvoidUnderPostingTest
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-                ..NuGetMetadataReference.SystemComponentModelAnnotations(TestConstants.NuGetLatestVersion)];
+                CoreMetadataReference.SystemComponentModelAnnotations];
 
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
             .WithBasePath("AspNet")

@@ -198,7 +198,7 @@ public class CallModelStateIsValidTest
                     }
                 }
                 """,
-                NuGetMetadataReference.SystemComponentModelAnnotations(TestConstants.NuGetLatestVersion))
+                CoreMetadataReference.SystemComponentModelAnnotations)
             .Compilation
             .ToMetadataReference();
 #pragma warning restore T0047

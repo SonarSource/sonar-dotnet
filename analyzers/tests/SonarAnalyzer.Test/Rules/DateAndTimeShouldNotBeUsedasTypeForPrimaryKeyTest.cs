@@ -76,7 +76,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
     private static VerifierBuilder CreateVerifier<TAnalyzer>()
         where TAnalyzer : DiagnosticAnalyzer, new() =>
         new VerifierBuilder<TAnalyzer>()
-            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelAnnotations)
 
 #if NET
 
