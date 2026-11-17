@@ -49,9 +49,14 @@ public abstract class BooleanCheckInvertedBase<TBinaryExpression> : SonarDiagnos
         && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
 
     protected static bool IsFloatingPoint(SyntaxNode expression, SemanticModel model) =>
-        model.GetTypeInfo(expression).Type.IsAny(KnownType.FloatingPointNumbers);
+        CanBeNaN(model.GetTypeInfo(expression).Type);
 
     private static bool IsUserDefinedOperator(TBinaryExpression expression, SemanticModel model) =>
         model.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol enclosingSymbol
         && enclosingSymbol.MethodKind == MethodKind.UserDefinedOperator;
+
+    private static bool CanBeNaN(ITypeSymbol type) =>
+        type.IsAny(KnownType.FloatingPointNumbers)
+        || type.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)
+        || (type is ITypeParameterSymbol typeParameter && typeParameter.ConstraintTypes.Any(CanBeNaN));
 }
