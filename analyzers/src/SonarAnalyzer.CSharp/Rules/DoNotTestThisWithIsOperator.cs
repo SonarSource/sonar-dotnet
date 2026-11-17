@@ -39,7 +39,7 @@ public sealed class DoNotTestThisWithIsOperator : SonarDiagnosticAnalyzer
     {
         if (IsNonUnionThisExpression(context.Model, ((BinaryExpressionSyntax)context.Node).Left))
         {
-            ReportDiagnostic(context, context.Node);
+            context.ReportIssue(Rule, context.Node);
         }
     }
 
@@ -47,25 +47,27 @@ public sealed class DoNotTestThisWithIsOperator : SonarDiagnosticAnalyzer
     {
         if (IsNonUnionThisExpression(context.Model, ((IsPatternExpressionSyntaxWrapper)context.Node).Expression) && ContainsTypeCheckInPattern(context.Node))
         {
-            ReportDiagnostic(context, context.Node);
+            context.ReportIssue(Rule, context.Node);
         }
     }
 
     private static void AnalyzeSwitchStatement(SonarSyntaxNodeReportingContext context)
     {
         var switchStatement = (SwitchStatementSyntax)context.Node;
-        if (IsNonUnionThisExpression(context.Model, switchStatement.Expression))
+        if (IsNonUnionThisExpression(context.Model, switchStatement.Expression)
+            && CollectSecondaryLocations(switchStatement) is { Count: > 0 } secondaryLocations)
         {
-            ReportDiagnostic(context, switchStatement.Expression, CollectSecondaryLocations(switchStatement));
+            context.ReportIssue(Rule, switchStatement.Expression, secondaryLocations);
         }
     }
 
     private static void AnalyzeSwitchExpression(SonarSyntaxNodeReportingContext context)
     {
         var switchExpression = (SwitchExpressionSyntaxWrapper)context.Node;
-        if (IsNonUnionThisExpression(context.Model, switchExpression.GoverningExpression))
+        if (IsNonUnionThisExpression(context.Model, switchExpression.GoverningExpression)
+            && CollectSecondaryLocations(switchExpression) is { Count: > 0 } secondaryLocations)
         {
-            ReportDiagnostic(context, switchExpression.GoverningExpression, CollectSecondaryLocations(switchExpression));
+            context.ReportIssue(Rule, switchExpression.GoverningExpression, secondaryLocations);
         }
     }
 
@@ -85,68 +87,32 @@ public sealed class DoNotTestThisWithIsOperator : SonarDiagnosticAnalyzer
         switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
 
     private static bool ContainsTypeCheckInPattern(SyntaxNode node) =>
-        node.DescendantNodesAndSelf()
-            .Any(x =>
-                x.Kind() is SyntaxKindEx.ConstantPattern or SyntaxKindEx.DeclarationPattern or SyntaxKindEx.RecursivePattern or SyntaxKindEx.ListPattern
-                && IsTypeCheckOnThis(x));
+        node.DescendantNodesAndSelf().Any(IsTopLevelTypeCheck);
 
-    private static bool IsTypeCheckOnThis(SyntaxNode pattern)
-    {
-        if (ConstantPatternSyntaxWrapper.IsInstance(pattern))
+    private static bool IsTopLevelTypeCheck(SyntaxNode pattern) =>
+        pattern.Kind() switch
         {
-            return ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.IdentifierName) && IsNotInSubPattern(pattern);
+            SyntaxKindEx.ConstantPattern => ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.IdentifierName),
+            SyntaxKindEx.RecursivePattern => ((RecursivePatternSyntaxWrapper)pattern).Type is not null,
+            SyntaxKindEx.DeclarationPattern or SyntaxKindEx.ListPattern => true,
+            _ => false
         }
-        else if (DeclarationPatternSyntaxWrapper.IsInstance(pattern))
-        {
-            return IsNotInSubPattern(pattern);
-        }
-        else if (RecursivePatternSyntaxWrapper.IsInstance(pattern))
-        {
-            return ((RecursivePatternSyntaxWrapper)pattern).Type is not null && IsNotInSubPattern(pattern);
-        }
-        else if (ListPatternSyntaxWrapper.IsInstance(pattern))
-        {
-            return IsNotInSubPattern(pattern);
-        }
-        else
-        {
-            return false;
-        }
-    }
+        && !IsInSubPattern(pattern);
 
-    private static bool IsNotInSubPattern(SyntaxNode node) =>
-        !node.FirstAncestorOrSelf<SyntaxNode>(x => x?.Kind() is SyntaxKindEx.IsPatternExpression
+    private static bool IsInSubPattern(SyntaxNode node) =>
+        node.FirstAncestorOrSelf<SyntaxNode>(x => x.Kind() is SyntaxKindEx.IsPatternExpression
                                                                 or SyntaxKindEx.SwitchExpression
                                                                 or SyntaxKind.SwitchStatement
                                                                 or SyntaxKindEx.Subpattern)
             .IsKind(SyntaxKindEx.Subpattern);
 
-    private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node) =>
-        context.ReportIssue(Rule, node);
-
-    private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
-    {
-        if (secondaryLocations.Any())
+    private static Location TypeMatchLocation(SwitchLabelSyntax label) =>
+        label.Kind() switch
         {
-            context.ReportIssue(Rule, node, secondaryLocations);
-        }
-    }
-
-    private static Location TypeMatchLocation(SwitchLabelSyntax label)
-    {
-        if (label is CaseSwitchLabelSyntax caseSwitchLabel)
-        {
-            return caseSwitchLabel.Value.GetLocation();
-        }
-        else if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
-        {
-            return ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.WrappedInstance.GetLocation();
-        }
-        else
-        {
-            return Location.None;
-        }
-    }
+            SyntaxKind.CaseSwitchLabel => ((CaseSwitchLabelSyntax)label).Value.GetLocation(),
+            SyntaxKindEx.CasePatternSwitchLabel => ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.WrappedInstance.GetLocation(),
+            _ => Location.None
+        };
 
     private static bool IsNonUnionThisExpression(SemanticModel model, SyntaxNode node) =>
         node.RemoveParentheses() is ThisExpressionSyntax thisExpression
