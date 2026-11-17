@@ -152,7 +152,7 @@ namespace CSharp14
 
 namespace CSharp15
 {
-    public closed class ClosedAllAbstract // Noncompliant {{Convert this 'abstract' class to an interface.}} FP NET-4873
+    public closed class ClosedAllAbstract // Compliant NET-4873 - interfaces cannot be closed
     {
         public abstract void Move();
     }
@@ -160,5 +160,60 @@ namespace CSharp15
     public class ClosedAllAbstractDerived : ClosedAllAbstract
     {
         public override void Move() { }
+    }
+
+    public abstract class NotClosedAllAbstract // Noncompliant
+    {
+        public abstract void Move();
+    }
+
+    public closed record ClosedAllAbstractRecord // Compliant
+    {
+        public abstract void Move();
+    }
+
+    public abstract record NotClosedAllAbstractRecord // Noncompliant
+    {
+        public abstract void Move();
+    }
+
+    public closed partial class ClosedPartial // Compliant
+    {
+        public abstract void Move();
+    }
+
+    public partial class ClosedPartial // Compliant
+    {
+        public abstract void Stop();
+    }
+
+    public abstract partial class NotClosedPartial // Noncompliant
+    {
+        public abstract void Move();
+    }
+
+    public partial class NotClosedPartial // Noncompliant - raised on every partial declaration
+    {
+        public abstract void Stop();
+    }
+
+    public partial class ClosedOnSecondPartial // Compliant
+    {
+        public abstract void Move();
+    }
+
+    public closed partial class ClosedOnSecondPartial // Compliant
+    {
+        public abstract void Stop();
+    }
+
+    public closed class ClosedWithBase : NotClosedAllAbstract // Compliant
+    {
+        public abstract void Stop();
+    }
+
+    public abstract class NotClosedWithBase : NotClosedAllAbstract // Compliant - base type is not object
+    {
+        public abstract void Stop();
     }
 }
