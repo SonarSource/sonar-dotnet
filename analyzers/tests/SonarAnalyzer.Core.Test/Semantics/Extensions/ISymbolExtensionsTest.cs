@@ -188,7 +188,7 @@ public class ISymbolExtensionsTest
                 public string SymbolMember {{getterSetter}}
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeTrue();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeTrue();
     }
 
     [TestMethod]
@@ -201,7 +201,7 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeTrue();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeTrue();
     }
 
     [TestMethod]
@@ -219,7 +219,7 @@ public class ISymbolExtensionsTest
                 }
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeFalse();
     }
 
     [TestMethod]
@@ -241,7 +241,7 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeFalse();
     }
 
     [TestMethod]
@@ -253,7 +253,7 @@ public class ISymbolExtensionsTest
                 public void SymbolMember() { }
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeFalse();
     }
 
     [TestMethod]
@@ -267,7 +267,44 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsAutoProperty_MetadataProperty_CS()
+    {
+        var (_, model) = TestCompiler.Compile("public class Sample { }", false, AnalyzerLanguage.CSharp);
+        var length = model.Compilation.GetTypeByMetadataName("System.String").GetMembers("Length").Single();
+        length.IsAutoProperty().Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsAutoProperty_PositionalRecordProperty_CS()
+    {
+        var (_, model) = TestCompiler.Compile("public record Sample(string SymbolMember);", false, AnalyzerLanguage.CSharp);
+        model.Compilation.GetTypeByMetadataName("Sample").GetMembers("SymbolMember").OfType<IPropertySymbol>().Single().IsAutoProperty().Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsAutoProperty_PartialProperty_CS()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                public partial string SymbolMember { get; set; }
+            }
+
+            public partial class Sample
+            {
+                private string backing;
+
+                public partial string SymbolMember { get => backing; set => backing = value; }
+            }
+            """;
+        var (_, model) = TestCompiler.Compile(code, false, AnalyzerLanguage.CSharp);
+        var property = model.Compilation.GetTypeByMetadataName("Sample").GetMembers("SymbolMember").Single();
+        property.IsAutoProperty().Should().BeFalse();
+        ((IPropertySymbol)property).PartialImplementationPart.IsAutoProperty().Should().BeFalse();
     }
 
     [TestMethod]

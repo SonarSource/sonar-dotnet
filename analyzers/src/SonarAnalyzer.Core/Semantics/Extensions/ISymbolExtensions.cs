@@ -26,8 +26,6 @@ public static class ISymbolExtensions
     {
         public SyntaxNode FirstSyntaxRef => symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
-        public bool IsAutoProperty => symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
-
         public bool IsTopLevelMain => symbol is IMethodSymbol { Name: TopLevelStatements.MainMethodImplicitName };
 
         public bool IsGlobalNamespace => symbol is INamespaceSymbol { Name: "" };
@@ -263,6 +261,9 @@ public static class ISymbolExtensions
 
         public bool HasAttribute(KnownType type) =>
             symbol.GetAttributes(type).Any();
+
+        public bool IsAutoProperty() =>
+            symbol.Kind == SymbolKind.Property && symbol.DeclaringSyntaxReferences.Length > 0 && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
 
         public bool IsInSameAssembly(ISymbol anotherSymbol) =>
             symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);

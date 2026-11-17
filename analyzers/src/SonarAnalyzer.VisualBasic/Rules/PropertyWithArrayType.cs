@@ -34,7 +34,9 @@ namespace SonarAnalyzer.VisualBasic.Rules
                     var property = (PropertyStatementSyntax)c.Node;
                     if (property.ImplementsClause is null
                         && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
-                        && c.Model.GetDeclaredSymbol(property) is IPropertySymbol { IsAutoProperty: false, Type: IArrayTypeSymbol } symbol)
+                        && c.Model.GetDeclaredSymbol(property) is IPropertySymbol { Type: IArrayTypeSymbol } symbol
+                        // IsAutoProperty() scans all members of the containing type, so keep it last on this hot path.
+                        && !symbol.IsAutoProperty())
                     {
                         c.ReportIssue(Rule, property.Identifier, symbol.Name);
                     }
