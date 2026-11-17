@@ -42,17 +42,38 @@ End Class
 Class Noncompliant
 
     Sub Ctor()
-        Dim patternOnly As New Regex("some pattern") ' Noncompliant {{Pass a timeout to limit the execution time.}}
-        '                  ^^^^^^^^^^^^^^^^^^^^^^^^^
-        Dim withOptions As New Regex("some pattern", RegexOptions.None) ' Noncompliant
+        Dim patternOnly As New Regex("a+b+") ' Noncompliant {{Pass a timeout to limit the execution time.}}
+        '                  ^^^^^^^^^^^^^^^^^
+        Dim withOptions As New Regex("a+b+", RegexOptions.None) ' Noncompliant
     End Sub
 
     Sub _Static(options As RegexOptions)
-        Dim isMatch = Regex.IsMatch("some input", "some pattern") ' Noncompliant
-        Dim match = Regex.Match("some input", "some pattern") ' Noncompliant
-        Dim matches = Regex.Matches("some input", "some pattern", RegexOptions.None) ' Noncompliant
-        Dim replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None) ' Noncompliant
-        Dim split = Regex.Split("some input", "some pattern", options) ' Noncompliant
+        Dim isMatch = Regex.IsMatch("some input", "a+b+") ' Noncompliant
+        Dim match = Regex.Match("some input", "a+b+") ' Noncompliant
+        Dim matches = Regex.Matches("some input", "a+b+", RegexOptions.None) ' Noncompliant
+        Dim replace = Regex.Replace("some input", "a+b+", "some replacement", RegexOptions.None) ' Noncompliant
+        Dim split = Regex.Split("some input", "a+b+", options) ' Noncompliant
+    End Sub
+End Class
+
+Class ConstantPatterns
+    Private Const Pattern As String = "[0-9]"
+    Private Shared mutable As String = "abc"
+
+    Sub Safe(input As String)
+        Dim a = New Regex("\r\n|\r|\n", RegexOptions.Compiled) ' Compliant (NET-4264)
+        Dim b = New Regex("^abc$")
+        Dim c = New Regex(Pattern)
+        Dim d = Regex.IsMatch(input, "Model$")
+    End Sub
+
+    Sub Risky(input As String, runtimePattern As String)
+        Dim a = New Regex("(?:abc)") ' Noncompliant
+        Dim b = New Regex("[0-9]+") ' Noncompliant
+        Dim c = New Regex("(a+)+") ' Noncompliant
+        Dim d = New Regex("(a|aa)+$") ' Noncompliant
+        Dim e = New Regex(mutable) ' Noncompliant
+        Dim f = New Regex(runtimePattern) ' Noncompliant
     End Sub
 End Class
 

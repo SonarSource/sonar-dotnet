@@ -155,7 +155,16 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method and ({ IsStatic: true } or { IsConstructor: true })
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         && !ContainsMatchTimeout(method)
-        && !NoBacktracking(method, node, model);
+        && !NoBacktracking(method, node, model)
+        && !IsSafeConstantPattern(method, node, model);
+
+    // A constant pattern without any quantifier character cannot repeat anything, so it cannot cause catastrophic backtracking.
+    // Everything else, including patterns where the characters have another meaning like "(?:" or "\+", is still reported.
+    private bool IsSafeConstantPattern(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
+        method.Parameters.SingleOrDefault(x => x.Name == "pattern") is { } patternParameter
+        && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(patternParameter, out var patternExpression)
+        && Language.FindConstantValue(model, patternExpression, strict: true) is string pattern
+        && pattern.IndexOfAny(['*', '+', '?', '{']) < 0;
 
     private static bool ContainsMatchTimeout(IMethodSymbol method) =>
         method.Parameters.Any(x => x.Name == "matchTimeout");
