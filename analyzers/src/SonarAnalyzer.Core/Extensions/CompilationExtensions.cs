@@ -25,8 +25,16 @@ public static class CompilationExtensions
         // See https://github.com/dotnet/roslyn/issues/3798
         public bool IsNetFrameworkTarget => compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
-        public INamedTypeSymbol GetTypeByMetadataName(KnownType knownType) =>
-            compilation.GetTypeByMetadataName(knownType.MetadataName);
+        public INamedTypeSymbol GetTypeByMetadataName(KnownType knownType)
+        {
+            if (compilation.GetTypeByMetadataName(knownType.MetadataName) is { } type)
+            {
+                return type;
+            }
+            var candidates = compilation.GetTypesByMetadataName(knownType.MetadataName);
+            var accessible = candidates.Where(x => compilation.IsSymbolAccessibleWithin(x, compilation.Assembly, null)).Take(2).ToArray();
+            return accessible.Length == 1 ? accessible[0] : null;
+        }
 
         public IMethodSymbol SpecialTypeMethod(SpecialType type, string methodName) =>
             (IMethodSymbol)compilation.GetSpecialType(type).GetMembers(methodName).SingleOrDefault();

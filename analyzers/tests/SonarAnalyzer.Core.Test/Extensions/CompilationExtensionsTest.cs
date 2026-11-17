@@ -31,6 +31,64 @@ public class CompilationExtensionsTest
         """;
 
     [TestMethod]
+    public void GetTypeByMetadataName_NotDefined_ReturnsNull() =>
+        Compile("class Consumer { }", "Consumer").GetTypeByMetadataName(new KnownType("Duplicate")).Should().BeNull();
+
+    [TestMethod]
+    public void GetTypeByMetadataName_DefinedOnce()
+    {
+        var compilation = Compile("class Consumer { }", "Consumer", ToReference("public class Duplicate { }", "Reference"));
+        compilation.GetTypeByMetadataName(new KnownType("Duplicate")).ContainingAssembly.Name.Should().Be("Reference");
+    }
+
+    [TestMethod]
+    public void GetTypeByMetadataName_DefinedInOwnAssemblyAndReference_PrefersOwnAssembly()
+    {
+        var compilation = Compile("public class Duplicate { }", "Consumer", ToReference("public class Duplicate { }", "Reference"));
+        compilation.GetTypeByMetadataName(new KnownType("Duplicate")).ContainingAssembly.Name.Should().Be("Consumer");
+    }
+
+    [TestMethod]
+    [DataRow(true)]
+    [DataRow(false)]
+    public void GetTypeByMetadataName_DefinedInSeveralReferences_ReturnsTheAccessibleOne(bool accessibleFirst)
+    {
+        var accessible = ToReference("public class Duplicate { }", "Accessible");
+        var inaccessible = ToReference("internal class Duplicate { }", "Inaccessible");
+        MetadataReference[] references = accessibleFirst ? [accessible, inaccessible] : [inaccessible, accessible];
+        Compile("class Consumer { }", "Consumer", references).GetTypeByMetadataName(new KnownType("Duplicate")).ContainingAssembly.Name.Should().Be("Accessible");
+    }
+
+    [TestMethod]
+    public void GetTypeByMetadataName_DefinedInSeveralReferences_InternalsVisibleTo_ReturnsTheAccessibleOne()
+    {
+        var visibleInternal = ToReference(
+            """
+            [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Consumer")]
+            internal class Duplicate { }
+            """,
+            "VisibleInternal");
+        var inaccessible = ToReference("internal class Duplicate { }", "Inaccessible");
+        Compile("class Consumer { }", "Consumer", visibleInternal, inaccessible).GetTypeByMetadataName(new KnownType("Duplicate")).ContainingAssembly.Name.Should().Be("VisibleInternal");
+    }
+
+    [TestMethod]
+    public void GetTypeByMetadataName_DefinedInSeveralReferences_Ambiguous_ReturnsNull()
+    {
+        var first = ToReference("public class Duplicate { }", "First");
+        var second = ToReference("public class Duplicate { }", "Second");
+        Compile("class Consumer { }", "Consumer", first, second).GetTypeByMetadataName(new KnownType("Duplicate")).Should().BeNull("both are accessible");
+    }
+
+    [TestMethod]
+    public void GetTypeByMetadataName_DefinedInSeveralReferences_NoneAccessible_ReturnsNull()
+    {
+        var first = ToReference("internal class Duplicate { }", "First");
+        var second = ToReference("internal class Duplicate { }", "Second");
+        Compile("class Consumer { }", "Consumer", first, second).GetTypeByMetadataName(new KnownType("Duplicate")).Should().BeNull("none is accessible");
+    }
+
+    [TestMethod]
     [DataRow("NonExistingType", "NonExistingMember", false)]
     [DataRow("Sample", "NonExistingMember", false)]
     [DataRow("Sample", "_field", true)]
@@ -92,4 +150,10 @@ public class CompilationExtensionsTest
         var (_, model) = TestCompiler.Compile(string.Empty, false, AnalyzerLanguage.CSharp, compilationReferences.ToArray());
         model.Compilation.ReferencesAny(checkedAssemblies).Should().Be(expected);
     }
+
+    private static Compilation Compile(string code, string assemblyName, params MetadataReference[] references) =>
+        new SnippetCompiler(code, references).Compilation.WithAssemblyName(assemblyName);
+
+    private static PortableExecutableReference ToReference(string code, string assemblyName) =>
+        Compile(code, assemblyName).ToPortableExecutableReference();
 }
