@@ -20,88 +20,91 @@ using SonarAnalyzer.Test.Common;
 
 using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotUseLiteralBoolInAssertionsTest
 {
-    [TestClass]
-    public class DoNotUseLiteralBoolInAssertionsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseLiteralBoolInAssertions>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseLiteralBoolInAssertions>();
 
-        [TestMethod]
-        [DataRow(MsTest.Ver11)]
-        [DataRow(MsTest.Ver311)]
-        [DataRow(TestConstants.NuGetLatestVersion)]
-        public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
-            builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-                .Verify();
+    [TestMethod]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
 
-        [TestMethod]
-        [DataRow(NUnit.Ver25)]
-        [DataRow(NUnit.Ver3Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
-        public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
-            builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .Verify();
+    [TestMethod]
+    [DataRow(NUnit.Ver25)]
+    [DataRow(NUnit.Ver3Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+    public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .Verify();
 
-        [TestMethod]
-        public void DoNotUseLiteralBoolInAssertions_NUnit4() =>
-            builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit4.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4))
-                .Verify();
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_NUnit4() =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit4.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4))
+            .Verify();
 
-        [TestMethod]
-        [DataRow("2.0.0")]
-        [DataRow(XUnitVersions.Ver253)]
-        public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
-            builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
-                .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
-                .Verify();
+    [TestMethod]
+    [DataRow("2.0.0")]
+    [DataRow(XUnitVersions.Ver253)]
+    public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
+            .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
+            .Verify();
 
-        [TestMethod]
-        public void DoNotUseLiteralBoolInAssertions_XunitV3() =>
-            builder
-                .AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
-                .AddPaths("DoNotUseLiteralBoolInAssertions.XunitV3.cs")
-                .AddReferences(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
-                .AddReferences(MetadataReferenceFacade.NetStandard)
-                .AddReferences(MetadataReferenceFacade.SystemCollections)
-                .Verify();
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_XunitV3() =>
+        builder
+            .AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
+            .AddPaths("DoNotUseLiteralBoolInAssertions.XunitV3.cs")
+            .AddReferences(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
+            .AddReferences(MetadataReferenceFacade.NetStandard)
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
 
-        [TestMethod]
-        public void DoNotUseLiteralBoolInAssertions_NUnit4_AliasedNamespace() =>
-            builder.AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddSnippet("""
-                namespace Aliased
-                {
-                    using Assert = NUnit.Framework.Legacy.ClassicAssert;
-                    class Foo
-                    {
-                        public void Test()
-                        {
-                            bool b = true;
-                            Assert.AreEqual(true, b); // Noncompliant
-                            Assert.AreEqual(b, b);    // Compliant
-                        }
-                    }
-                }
-                """).Verify();
-
-        [TestMethod]
-        public void DoNotUseLiteralBoolInAssertions_MsTest_Union() =>
-            builder.AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion)).AddSnippet("""
-                using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-                public union BoolOrString(bool, string);
-
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_NUnit4_AliasedNamespace() =>
+        builder.AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddSnippet("""
+            namespace Aliased
+            {
+                using Assert = NUnit.Framework.Legacy.ClassicAssert;
                 class Foo
                 {
-                    public void Test(BoolOrString value, bool b)
+                    public void Test()
                     {
-                        Assert.AreEqual(true, value); // Noncompliant FP NET-4908
-                        Assert.AreEqual(true, b);     // Noncompliant
+                        bool b = true;
+                        Assert.AreEqual(true, b); // Noncompliant
+                        Assert.AreEqual(b, b);    // Compliant
                     }
                 }
-                """).WithOptions(LanguageOptions.FromCSharp15).Verify();
-    }
+            }
+            """).Verify();
+
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_MsTest_Latest() =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.Latest.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_Xunit_Latest() =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.Latest.cs")
+            .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253))
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    public void DoNotUseLiteralBoolInAssertions_NUnit_Latest() =>
+        builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit.Latest.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
