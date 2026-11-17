@@ -59,7 +59,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
     {
         var references = new Dictionary<ISymbol, List<ReferenceInfo>>();
         var knownIdentifiers = new HashSet<string>(Language.NameComparer);
-        var knownNodes = new List<SyntaxNode>();
+        var knownNodes = new HashSet<SyntaxNode>();
         var declarations = GetDeclarations(root);
 
         for (var i = 0; i < declarations.Count; i++)
