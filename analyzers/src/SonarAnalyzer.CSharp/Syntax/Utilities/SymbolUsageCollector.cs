@@ -72,6 +72,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 
     private readonly Compilation compilation;
     private readonly HashSet<string> knownSymbolNames;
+    private readonly bool hasExtensionBlockIndexers;
     private SemanticModel model;
 
     public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
@@ -85,6 +86,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         this.compilation = compilation;
         knownSymbolNames = knownSymbols.Select(Name).ToHashSet();
+        hasExtensionBlockIndexers = knownSymbols.Any(IsExtensionBlockIndexer);
     }
 
     public override void Visit(SyntaxNode node)
@@ -279,11 +281,25 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.ValueText)
             || knownSymbolNames.Contains(model.GetTypeInfo(node.Expression).Type?.Name))
         {
-            var symbols = Symbols(node);
-            UsedSymbols.UnionWith(symbols);
-            TryStorePropertyAccess(node, symbols);
+            StoreIndexerUsage(node, Symbols(node));
+        }
+        else
+        {
+            TryStoreExtensionIndexerUsage(node);
         }
         base.VisitElementAccessExpression(node);
+    }
+
+    public override void VisitElementBindingExpression(ElementBindingExpressionSyntax node)
+    {
+        TryStoreExtensionIndexerUsage(node);
+        base.VisitElementBindingExpression(node);
+    }
+
+    public override void VisitImplicitElementAccess(ImplicitElementAccessSyntax node)
+    {
+        TryStoreExtensionIndexerUsage(node);
+        base.VisitImplicitElementAccess(node);
     }
 
     public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
@@ -490,6 +506,27 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 
     private bool IsKnownIdentifier(SyntaxToken identifier) =>
         knownSymbolNames.Contains(identifier.ValueText);
+
+    private void TryStoreExtensionIndexerUsage(ExpressionSyntax node)
+    {
+        if (hasExtensionBlockIndexers)
+        {
+            var symbols = Symbols(node);
+            if (symbols.Any(IsExtensionBlockIndexer))
+            {
+                StoreIndexerUsage(node, symbols);
+            }
+        }
+    }
+
+    private void StoreIndexerUsage(ExpressionSyntax node, ImmutableArray<ISymbol> symbols)
+    {
+        UsedSymbols.UnionWith(symbols);
+        TryStorePropertyAccess(node, symbols);
+    }
+
+    private static bool IsExtensionBlockIndexer(ISymbol symbol) =>
+        symbol is IPropertySymbol { IsIndexer: true, ContainingType.IsExtensionBlock: true };
 
     private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
     {

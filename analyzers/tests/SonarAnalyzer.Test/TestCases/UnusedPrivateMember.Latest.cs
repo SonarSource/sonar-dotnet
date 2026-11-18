@@ -1186,11 +1186,96 @@ public static class ExtensionIndexers
 {
     extension(List<int> list)
     {
-        private int this[string used] => list.Count; // Noncompliant {{Remove the unused private property 'this[]'.}} FP NET-4973
+        private int this[string used] => list.Count; // Compliant NET-4973
         private int this[long unused] => list.Count; // Noncompliant
     }
 
     public static int Method(List<int> list) => list["key"];
+
+    extension<T>(Stack<T> generic)
+    {
+        private int this[string used] => generic.Count; // Compliant
+        private int this[long unused] => generic.Count; // Noncompliant
+        public int this[char usedGenericSetter] { get => 0; private set { } }    // Compliant
+        public int this[byte unusedGenericSetter] { get => 0; private set { } }  // Noncompliant {{Remove the unused private setter 'set_Item'.}}
+    }
+
+    public static int GenericMethod(Stack<string> strings) => strings["key"];
+
+    public static void GenericSetters(Stack<string> strings)
+    {
+        strings['c'] = 1;
+        _ = strings[(byte)1];
+    }
+
+    extension(HashSet<int> set)
+    {
+        public int this[string usedSetter] { get => 0; private set { } }    // Compliant
+        public int this[char compoundSetter] { get => 0; private set { } }  // Compliant
+        public int this[long unusedSetter] { get => 0; private set { } }    // Noncompliant {{Remove the unused private setter 'set_Item'.}}
+    }
+
+    public static void Setters(HashSet<int> set)
+    {
+        set["key"] = 1;
+        set['c'] += 1;
+        _ = set[42L];
+    }
+
+    extension(Queue<int> queue)
+    {
+        private int this[int usedFromNested] => queue.Count;    // Compliant
+        private int this[long unusedFromNested] => queue.Count; // Noncompliant
+    }
+
+    public class Nested
+    {
+        public int Method(Queue<int> queue) => queue[42];
+    }
+
+    extension(LinkedList<int> linked)
+    {
+        private int this[string usedConditionally] => linked.Count;   // Compliant
+        private int this[long unusedConditionally] => linked.Count;   // Noncompliant
+        public int this[char usedConditionalSetter] { get => 0; private set { } }    // Compliant
+        public int this[byte unusedConditionalSetter] { get => 0; private set { } }  // Noncompliant {{Remove the unused private setter 'set_Item'.}}
+        public int this[short usedConditionalCompound] { get => 0; private set { } } // Compliant
+    }
+
+    public static int? Conditional(LinkedList<int> linked) => linked?["key"];
+
+    public static void ConditionalSetter(LinkedList<int> linked)
+    {
+        linked?['c'] = 1;
+        _ = linked?[(byte)1];
+        linked?[(short)1] += 1;
+    }
+
+    extension(SortedSet<int> sorted)
+    {
+        private int this[int a, int b] => sorted.Count;     // Compliant
+        private int this[long a, long b] => sorted.Count;   // Noncompliant
+    }
+
+    public static int MultiParameter(SortedSet<int> sorted) => sorted[1, 2];
+
+    public class OrdinaryIndexer
+    {
+        private int this[int used] => 0;     // Compliant
+        private int this[long unused] => 0;  // Noncompliant
+
+        public int Method() => this[42];
+    }
+
+    extension(Dictionary<int, int> dictionary)
+    {
+        public int this[string usedInInitializer] { get => 0; private set { } }  // Compliant
+        public int this[long unusedInInitializer] { get => 0; private set { } }  // Noncompliant {{Remove the unused private setter 'set_Item'.}}
+    }
+
+    public static Dictionary<int, int> Initializer() => new() { ["key"] = 1 };
+
+    public static int ReadOnly(Dictionary<int, int> dictionary) => dictionary[42L];
 }
 
 public class CollectionExpressionArguments
