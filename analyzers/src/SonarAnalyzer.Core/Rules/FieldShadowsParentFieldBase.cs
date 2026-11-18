@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 [Obsolete("This rule has been deprecated since 9.32")]
 public abstract class FieldShadowsParentFieldBase<TSyntaxKind, TVariableDeclaratorSyntax> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TVariableDeclaratorSyntax : SyntaxNode
 {
     private const string S2387DiagnosticId = "S2387";

@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Rules;
 
-public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct
+public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S6603";
 

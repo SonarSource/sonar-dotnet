@@ -30,7 +30,7 @@ public class UseInnermostRegistrationContext : StylingAnalyzer
             {
                 nameof(SonarAnalysisContext),
                 nameof(SonarCompilationStartAnalysisContext),
-                $"{nameof(SonarCodeBlockStartAnalysisContext<int>)}`1",
+                $"{nameof(SonarCodeBlockStartAnalysisContext<>)}`1",
                 nameof(SonarSymbolStartAnalysisContext),
                 nameof(SonarParametrizedAnalysisContext),
                 nameof(IReport),

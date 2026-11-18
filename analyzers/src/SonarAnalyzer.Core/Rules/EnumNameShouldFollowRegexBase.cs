@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.RegularExpressions;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected const string DiagnosticId = "S2342";
     private const string MessageFormat = "Rename the enumeration '{0}' to match the regular expression: '{1}'.";

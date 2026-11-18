@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Rules
 {
-    public abstract class UseShortCircuitingOperatorCodeFixBase<TSyntaxKind, TBinaryExpression> : SonarCodeFix where TSyntaxKind : struct
+    public abstract class UseShortCircuitingOperatorCodeFixBase<TSyntaxKind, TBinaryExpression> : SonarCodeFix where TSyntaxKind : struct, Enum
         where TBinaryExpression : SyntaxNode
     {
         internal const string Title = "Use short-circuiting operators";

@@ -21,7 +21,7 @@ using System.Net.Sockets;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class HardcodedIpAddressBase<TSyntaxKind, TLiteralExpression> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TLiteralExpression : SyntaxNode
 {
     private const string DiagnosticId = "S1313";

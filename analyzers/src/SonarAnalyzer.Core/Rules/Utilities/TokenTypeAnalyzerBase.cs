@@ -22,7 +22,7 @@ using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";

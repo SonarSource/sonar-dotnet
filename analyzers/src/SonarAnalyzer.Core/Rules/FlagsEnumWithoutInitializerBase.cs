@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class FlagsEnumWithoutInitializerBase<TSyntaxKind, TEnumMemberDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TEnumMemberDeclarationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2345";

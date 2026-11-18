@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Core.Rules;
 /// </summary>
 /// <typeparam name="TSyntaxKind">Discriminator for C#/VB.NET.</typeparam>
 public abstract class TestMethodDeclarationsAnalyzerBase<TSyntaxKind>() : UtilityAnalyzerBase<TSyntaxKind, MethodDeclarationsInfo>(DiagnosticId, Title)
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S9999-testMethodDeclaration";
     private const string Title = "Test method declarations generator";

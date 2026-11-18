@@ -23,7 +23,7 @@ public static class MultipleVariableDeclarationConstants
 }
 
 public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected override string MessageFormat => "Declare '{0}' in a separate statement.";
 

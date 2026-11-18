@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TBinaryExpressionSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S2692";

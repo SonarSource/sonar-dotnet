@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class SelfAssignmentBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S1656";
 

@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class DoNotCallMethodsBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TInvocationExpressionSyntax : SyntaxNode
     {
         protected abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }

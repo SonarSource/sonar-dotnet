@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ClassNotInstantiatableBase<TBaseTypeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TBaseTypeSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected const string DiagnosticId = "S3453";
 

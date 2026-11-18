@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TBinaryExpression : SyntaxNode
     {
         internal const string DiagnosticId = "S2178";

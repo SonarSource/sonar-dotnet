@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public class BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInvocationSyntax : SyntaxNode
 {
     private readonly TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions;

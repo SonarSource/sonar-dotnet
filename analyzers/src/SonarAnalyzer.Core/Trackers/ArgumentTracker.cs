@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ArgumentContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected abstract RefKind? ArgumentRefKind(SyntaxNode argumentNode);
     protected abstract IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode);

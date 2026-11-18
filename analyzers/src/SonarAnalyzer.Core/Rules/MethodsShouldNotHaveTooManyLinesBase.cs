@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class MethodsShouldNotHaveTooManyLinesBase<TSyntaxKind, TBaseMethodSyntax>
         : ParametrizedDiagnosticAnalyzer
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TBaseMethodSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S138";

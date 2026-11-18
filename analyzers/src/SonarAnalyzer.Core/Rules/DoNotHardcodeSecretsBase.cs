@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DoNotHardcodeSecretsBase<TSyntaxKind> : DoNotHardcodeBase<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected const string EqualsName = nameof(string.Equals);
 

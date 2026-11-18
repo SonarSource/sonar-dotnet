@@ -20,7 +20,7 @@ using System.Collections.Concurrent;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : SonarDiagnosticAnalyzer<TSyntaxKind>(DiagnosticId)
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S6931";
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";

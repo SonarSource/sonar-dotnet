@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class PureAttributeOnVoidMethodBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected const string DiagnosticId = "S3603";
 

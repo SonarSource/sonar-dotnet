@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInvocationSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S5659";

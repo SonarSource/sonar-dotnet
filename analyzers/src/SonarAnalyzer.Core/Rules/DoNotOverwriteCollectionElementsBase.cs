@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TStatementSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S4143";

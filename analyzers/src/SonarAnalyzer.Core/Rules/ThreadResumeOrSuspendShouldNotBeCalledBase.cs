@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class ThreadResumeOrSuspendShouldNotBeCalledBase<TSyntaxKind, TInvocation> : DoNotCallMethodsBase<TSyntaxKind, TInvocation>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TInvocation : SyntaxNode
     {
         private const string DiagnosticId = "S3889";

@@ -61,7 +61,7 @@ internal sealed class RegexContext
         }
     }
 
-    public static RegexContext FromAttribute<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct
+    public static RegexContext FromAttribute<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct, Enum
     {
         if (model.GetSymbolInfo(node).Symbol is IMethodSymbol method
             && method.IsInType(KnownType.System_ComponentModel_DataAnnotations_RegularExpressionAttribute))
@@ -76,13 +76,13 @@ internal sealed class RegexContext
         }
     }
 
-    public static RegexContext FromCtor<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct =>
+    public static RegexContext FromCtor<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct, Enum =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol { IsConstructor: true } ctor
         && ctor.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
             ? FromMethod(language, model, node, ctor)
             : null;
 
-    public static RegexContext FromMethod<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct =>
+    public static RegexContext FromMethod<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct, Enum =>
         language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
         && MatchMethods.Any(x => name.Equals(x, language.NameComparison))
         && model.GetSymbolInfo(node).Symbol is IMethodSymbol { IsStatic: true } method
@@ -90,7 +90,7 @@ internal sealed class RegexContext
             ? FromMethod(language, model, node, method)
             : null;
 
-    private static RegexContext FromMethod<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node, IMethodSymbol method) where TSyntaxKind : struct
+    private static RegexContext FromMethod<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node, IMethodSymbol method) where TSyntaxKind : struct, Enum
     {
         var parameters = language.MethodParameterLookup(node, method);
         var pattern = TryGetNonParamsSyntax(method, parameters, "pattern");

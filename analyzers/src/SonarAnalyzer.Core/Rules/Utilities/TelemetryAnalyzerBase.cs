@@ -22,7 +22,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class TelemetryAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S9999-telemetry";
     private const string Title = "Telemetry generator";

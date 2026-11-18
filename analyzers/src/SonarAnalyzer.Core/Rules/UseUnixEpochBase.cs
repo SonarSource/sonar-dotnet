@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UseUnixEpochBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     internal const string DiagnosticId = "S6588";
 
@@ -26,7 +26,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TS
 }
 
 public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberAccessExpression> : UseUnixEpochBase<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TLiteralExpression : SyntaxNode
     where TMemberAccessExpression : SyntaxNode
 {

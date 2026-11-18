@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.Metrics;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class CognitiveComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S3776";
         private const string MessageFormat = "Refactor this {0} to reduce its Cognitive Complexity from {1} to the {2} allowed.";

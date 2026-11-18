@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class EnumNameHasEnumSuffixBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S2344";
         private readonly IEnumerable<string> nameEndings = ImmutableArray.Create("enum", "flags");

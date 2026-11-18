@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6608";

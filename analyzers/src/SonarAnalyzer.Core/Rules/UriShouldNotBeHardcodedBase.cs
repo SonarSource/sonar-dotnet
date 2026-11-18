@@ -21,7 +21,7 @@ using SonarAnalyzer.CFG.Extensions;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TLiteralExpressionSyntax : SyntaxNode
     where TArgumentSyntax : SyntaxNode
 {

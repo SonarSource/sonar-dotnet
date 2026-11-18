@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSyntaxKind, MethodDeclarationContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     public abstract Condition ParameterAtIndexIsUsed(int index);
     protected abstract SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration);

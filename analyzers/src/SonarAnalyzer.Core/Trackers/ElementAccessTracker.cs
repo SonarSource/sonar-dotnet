@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     public abstract object AssignedValue(ElementAccessContext context);
     public abstract Condition ArgumentAtIndexEquals(int index, string value);

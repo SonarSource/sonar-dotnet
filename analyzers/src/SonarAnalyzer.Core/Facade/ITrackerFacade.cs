@@ -19,7 +19,7 @@ using SonarAnalyzer.Core.Trackers;
 
 namespace SonarAnalyzer.Core.Facade;
 
-public interface ITrackerFacade<TSyntaxKind> where TSyntaxKind : struct
+public interface ITrackerFacade<TSyntaxKind> where TSyntaxKind : struct, Enum
 {
     ArgumentTracker<TSyntaxKind> Argument { get; }
     BaseTypeTracker<TSyntaxKind> BaseType { get; }

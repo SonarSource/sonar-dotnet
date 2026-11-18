@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S6562";
 

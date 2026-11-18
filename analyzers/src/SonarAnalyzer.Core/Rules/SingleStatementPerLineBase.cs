@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class SingleStatementPerLineBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S122";

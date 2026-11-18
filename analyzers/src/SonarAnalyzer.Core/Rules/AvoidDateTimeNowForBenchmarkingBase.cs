@@ -20,7 +20,7 @@ namespace SonarAnalyzer.Core.Rules;
 public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvocationExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TMemberAccess : SyntaxNode
     where TInvocationExpression : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S6561";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timespan calculation operations.";

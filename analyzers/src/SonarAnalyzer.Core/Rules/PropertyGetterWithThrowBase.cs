@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Core.Rules
 
     public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> :
         PropertyGetterWithThrowBase
-        where TLanguageKindEnum : struct
+        where TLanguageKindEnum : struct, Enum
         where TAccessorSyntax : SyntaxNode
     {
         protected sealed override void Initialize(SonarAnalysisContext context)

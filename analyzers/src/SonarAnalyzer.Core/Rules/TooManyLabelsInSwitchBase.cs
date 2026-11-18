@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyntax> : ParametrizedDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TSwitchStatementSyntax : SyntaxNode
 {
     protected const string MessageFormat = "Consider reworking this '{0}' to reduce the number of '{1}' clauses to at most {{0}} or have only one statement per '{1}'.";

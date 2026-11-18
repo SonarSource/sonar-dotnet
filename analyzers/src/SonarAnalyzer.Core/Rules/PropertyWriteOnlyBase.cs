@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class PropertyWriteOnlyBase<TSyntaxKind, TPropertyDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TPropertyDeclaration : SyntaxNode
     {
         protected const string DiagnosticId = "S2376";

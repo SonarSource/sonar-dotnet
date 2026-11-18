@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TAttributeArgumentSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S4545";
 

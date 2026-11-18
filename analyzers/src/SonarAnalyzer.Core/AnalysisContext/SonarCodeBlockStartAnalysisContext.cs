@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.AnalysisContext;
 
-public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnalysisContextBase<CodeBlockStartAnalysisContext<TSyntaxKind>> where TSyntaxKind : struct
+public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnalysisContextBase<CodeBlockStartAnalysisContext<TSyntaxKind>> where TSyntaxKind : struct, Enum
 {
     public override Compilation Compilation => Context.SemanticModel.Compilation;
     public override AnalyzerOptions Options => Context.Options;

@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TStatementSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected const string DiagnosticId = "S1751";
 
@@ -50,7 +50,7 @@ public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKi
 
 public abstract class LoopWalkerBase<TStatementSyntax, TSyntaxKind>
     where TStatementSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected readonly SyntaxNode rootExpression;
     protected readonly SemanticModel model;

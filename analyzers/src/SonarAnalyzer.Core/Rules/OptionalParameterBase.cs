@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Core.Rules
     }
 
     public abstract class OptionalParameterBase<TLanguageKindEnum, TMethodSyntax, TParameterSyntax> : OptionalParameterBase
-        where TLanguageKindEnum : struct
+        where TLanguageKindEnum : struct, Enum
         where TMethodSyntax : SyntaxNode
         where TParameterSyntax: SyntaxNode
     {

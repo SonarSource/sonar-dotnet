@@ -23,7 +23,7 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeBase<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string MessageFormat = "{0}";
     private const string MessageHardcodedPassword = "Please review this hard-coded password.";

@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class ParametersCorrectOrderBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S2234";
         protected abstract TSyntaxKind[] InvocationKinds { get; }

@@ -1502,6 +1502,6 @@ public class ArgumentTrackerTest
 
     private static bool MatchArgument<TTracker, TSyntaxKind>(ArgumentContext context, ArgumentDescriptor descriptor)
         where TTracker : ArgumentTracker<TSyntaxKind>, new()
-        where TSyntaxKind : struct =>
+        where TSyntaxKind : struct, Enum =>
         new TTracker().MatchArgument(descriptor)(context);
 }

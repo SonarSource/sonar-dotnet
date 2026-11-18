@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TCatchClause : SyntaxNode
 {
     internal const string DiagnosticId = "S2737";

@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S6444";
 

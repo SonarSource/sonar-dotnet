@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class FieldShouldNotBePublicBase<TSyntaxKind, TFieldDeclarationSyntax, TVariableSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TFieldDeclarationSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
     {

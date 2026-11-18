@@ -21,7 +21,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class MetricsAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, MetricsInfo>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S9999-metrics";
         private const string Title = "Metrics calculator";

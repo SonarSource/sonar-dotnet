@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class InsecureTemporaryFilesCreationBase<TMemberAccessSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TMemberAccessSyntax : SyntaxNode
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S5445";
         private const string VulnerableApiName = "GetTempFileName";

@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInvocationSyntax : SyntaxNode
 {
     private readonly bool constructorIsSafe;

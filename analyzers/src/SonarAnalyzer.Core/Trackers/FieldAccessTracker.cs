@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     public abstract Condition WhenRead();
     public abstract Condition MatchSet();

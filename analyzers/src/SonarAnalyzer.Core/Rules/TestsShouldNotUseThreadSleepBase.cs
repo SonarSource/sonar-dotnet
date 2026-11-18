@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TMethodSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S2925";
 

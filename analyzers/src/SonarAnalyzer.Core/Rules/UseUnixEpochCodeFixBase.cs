@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class UseUnixEpochCodeFixBase<TSyntaxKind> : SonarCodeFix
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         internal const string Title = "Use UnixEpoch field";
 

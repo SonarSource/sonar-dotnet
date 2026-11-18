@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string ExplanationNeededDiagnosticId = "S1123";
     private const string ExplanationNeededMessageFormat = "Add an explanation.";

@@ -23,7 +23,7 @@ using SonarAnalyzer.Core.Json.Parsing;
 
 namespace SonarAnalyzer.Core.Rules;
 
-public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer where TSyntaxKind : struct
+public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer where TSyntaxKind : struct, Enum
 {
     protected const char KeywordSeparator = ';';
 

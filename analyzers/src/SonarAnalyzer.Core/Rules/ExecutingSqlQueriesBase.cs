@@ -20,7 +20,7 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TExpressionSyntax : SyntaxNode
     where TIdentifierNameSyntax : SyntaxNode
 {

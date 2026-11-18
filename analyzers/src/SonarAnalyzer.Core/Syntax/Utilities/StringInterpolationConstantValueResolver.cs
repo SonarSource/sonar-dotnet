@@ -24,7 +24,7 @@ public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
                                                                TInterpolatedStringContentSyntax,
                                                                TInterpolationSyntax,
                                                                TInterpolatedStringTextSyntax>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInterpolatedStringExpressionSyntax : SyntaxNode
     where TInterpolatedStringContentSyntax : SyntaxNode
     where TInterpolationSyntax : SyntaxNode

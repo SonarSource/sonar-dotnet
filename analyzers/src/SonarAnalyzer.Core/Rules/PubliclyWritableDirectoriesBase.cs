@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TInvocationExpression : SyntaxNode
 {
     protected const string DiagnosticId = "S5443";

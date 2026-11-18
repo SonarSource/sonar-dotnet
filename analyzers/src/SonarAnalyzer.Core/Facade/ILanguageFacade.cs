@@ -36,7 +36,7 @@ public interface ILanguageFacade
     string GetName(SyntaxNode expression);
 }
 
-public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade where TSyntaxKind : struct
+public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade where TSyntaxKind : struct, Enum
 {
     SyntaxFacade<TSyntaxKind> Syntax { get; }
     ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }

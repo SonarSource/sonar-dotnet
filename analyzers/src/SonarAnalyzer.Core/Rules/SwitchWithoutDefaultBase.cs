@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Core.Rules
     }
 
     public abstract class SwitchWithoutDefaultBase<TLanguageKindEnum> : SwitchWithoutDefaultBase
-        where TLanguageKindEnum : struct
+        where TLanguageKindEnum : struct, Enum
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

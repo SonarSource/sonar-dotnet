@@ -29,7 +29,7 @@ public abstract class CertificateValidationCheckBase<
     TLambdaSyntax,
     TMemberAccessSyntax
     > : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TArgumentSyntax : SyntaxNode
     where TExpressionSyntax : SyntaxNode
     where TIdentifierNameSyntax : SyntaxNode

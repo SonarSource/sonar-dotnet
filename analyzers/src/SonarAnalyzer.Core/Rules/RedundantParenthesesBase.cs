@@ -20,7 +20,7 @@ namespace SonarAnalyzer.Core.Rules;
 public abstract class RedundantParenthesesBase<TParenthesizedExpression, TSyntaxKind>
     : SonarDiagnosticAnalyzer
     where TParenthesizedExpression : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     internal const string DiagnosticId = "S1110";
     protected const string MessageFormat = "Remove these redundant parentheses.";

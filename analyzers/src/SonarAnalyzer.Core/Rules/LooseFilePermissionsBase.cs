@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class LooseFilePermissionsBase<TSyntaxKind, TMemberAccess> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TMemberAccess : SyntaxNode
 {
     protected const string DiagnosticId = "S2612";

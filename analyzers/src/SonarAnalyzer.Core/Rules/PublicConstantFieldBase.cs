@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Core.Rules
 
     public abstract class PublicConstantFieldBase<TLanguageKindEnum, TFieldDeclarationSyntax, TFieldName>
         : PublicConstantFieldBase
-        where TLanguageKindEnum : struct
+        where TLanguageKindEnum : struct, Enum
         where TFieldDeclarationSyntax : SyntaxNode
         where TFieldName : SyntaxNode
     {

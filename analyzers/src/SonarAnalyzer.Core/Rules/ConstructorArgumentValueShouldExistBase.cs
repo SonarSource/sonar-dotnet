@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttribute> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TAttribute : SyntaxNode
 {
     private const string DiagnosticId = "S4260";

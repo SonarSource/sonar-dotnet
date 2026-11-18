@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class MethodOverloadsShouldBeGroupedBase<TSyntaxKind, TMemberDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TMemberDeclarationSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S4136";

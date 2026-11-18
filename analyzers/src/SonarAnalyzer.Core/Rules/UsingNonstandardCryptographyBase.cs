@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UsingNonstandardCryptographyBase<TSyntaxKind, TTypeDeclarationSyntax> : SonarDiagnosticAnalyzer
     where TTypeDeclarationSyntax : SyntaxNode
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S2257";
     private const string MessageFormat = "Use a standard cryptographic algorithm.";

@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, PropertyAccessContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     public abstract object AssignedValue(PropertyAccessContext context);
     public abstract Condition MatchGetter();

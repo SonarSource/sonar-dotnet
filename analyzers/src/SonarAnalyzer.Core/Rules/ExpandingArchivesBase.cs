@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Core.Rules;
 
 [Obsolete("This rule has been deprecated since 10.27")]
 public abstract class ExpandingArchivesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S5042";
 

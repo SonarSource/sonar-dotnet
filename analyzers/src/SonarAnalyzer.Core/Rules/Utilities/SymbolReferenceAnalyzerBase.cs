@@ -20,7 +20,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, SymbolReferenceInfo>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     private const string DiagnosticId = "S9999-symbolRef";
     private const string Title = "Symbol reference calculator";

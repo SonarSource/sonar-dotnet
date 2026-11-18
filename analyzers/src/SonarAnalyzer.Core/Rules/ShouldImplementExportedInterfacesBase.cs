@@ -20,7 +20,7 @@ namespace SonarAnalyzer.Core.Rules
     public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TArgumentSyntax : SyntaxNode
         where TAttributeSyntax : SyntaxNode
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S4159";
         private const string ActionForInterface = "Implement";

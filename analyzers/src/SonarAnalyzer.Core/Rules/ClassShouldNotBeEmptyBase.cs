@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TDeclarationSyntax : SyntaxNode
 {
     private const string DiagnosticId = "S2094";

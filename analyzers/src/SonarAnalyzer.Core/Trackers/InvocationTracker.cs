@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     public abstract Condition ArgumentAtIndexIsStringConstant(int index);
     public abstract Condition ArgumentAtIndexIsAny(int index, params string[] values);

@@ -20,7 +20,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class FileMetadataAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, FileMetadataInfo>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S9999-metadata";
         private const string Title = "File metadata generator";

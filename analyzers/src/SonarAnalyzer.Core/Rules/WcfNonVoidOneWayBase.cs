@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class WcfNonVoidOneWayBase<TMethodSyntax, TLanguageKind> : SonarDiagnosticAnalyzer
         where TMethodSyntax : SyntaxNode
-        where TLanguageKind : struct
+        where TLanguageKind : struct, Enum
     {
         internal const string DiagnosticId = "S3598";
         protected const string MessageFormat = "This method can't return any values because it is marked as one-way operation.";

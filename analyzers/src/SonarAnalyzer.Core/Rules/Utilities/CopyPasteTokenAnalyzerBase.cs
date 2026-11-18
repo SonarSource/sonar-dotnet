@@ -20,7 +20,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class CopyPasteTokenAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, CopyPasteTokenInfo>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S9999-cpd";
         private const string Title = "Copy-paste token calculator";

@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Core.Trackers;
 /// </summary>
 /// <typeparam name="TSyntaxKind">The syntax type.</typeparam>
 public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseTypeContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     /// <summary>
     /// Extract the list of type syntax nodes for the base types/interface types.

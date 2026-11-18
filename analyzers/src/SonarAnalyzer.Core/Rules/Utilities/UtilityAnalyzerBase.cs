@@ -75,7 +75,7 @@ public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
 }
 
 public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyzerBase
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TMessage : class, IMessage, new()
 {
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }

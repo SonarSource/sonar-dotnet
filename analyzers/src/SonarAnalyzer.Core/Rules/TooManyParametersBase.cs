@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class TooManyParametersBase<TSyntaxKind, TParameterListSyntax> : ParametrizedDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TParameterListSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S107";

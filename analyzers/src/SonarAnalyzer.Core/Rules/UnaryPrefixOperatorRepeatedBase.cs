@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class UnaryPrefixOperatorRepeatedBase<TSyntaxKindEnum, TSyntaxNode> : SonarDiagnosticAnalyzer
         where TSyntaxNode : SyntaxNode
-        where TSyntaxKindEnum : struct
+        where TSyntaxKindEnum : struct, Enum
     {
         internal const string DiagnosticId = "S2761";
         protected const string MessageFormat = "Use the '{0}' operator just once or not at all.";

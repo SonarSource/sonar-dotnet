@@ -22,7 +22,7 @@ using System.Xml.XPath;
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class RequestsWithExcessiveLengthBase<TSyntaxKind, TAttributeSyntax> : ParametrizedDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TAttributeSyntax : SyntaxNode
 {
     protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";

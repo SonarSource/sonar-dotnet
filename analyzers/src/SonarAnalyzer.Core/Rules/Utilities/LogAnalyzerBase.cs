@@ -20,7 +20,7 @@ using SonarAnalyzer.Protobuf;
 namespace SonarAnalyzer.Core.Rules
 {
     public abstract class LogAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, LogInfo>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S9999-log";
         private const string Title = "Log generator";

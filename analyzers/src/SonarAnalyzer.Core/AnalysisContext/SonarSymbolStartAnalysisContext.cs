@@ -29,7 +29,7 @@ public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<S
     public void RegisterCodeBlockAction(Action<SonarCodeBlockReportingContext> action) =>
         Context.RegisterCodeBlockAction(x => action(new(AnalysisContext, x)));
 
-    public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
+    public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct, Enum =>
         Context.RegisterCodeBlockStartAction<TLanguageKindEnum>(x => action(new(AnalysisContext, x)));
 
     public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
@@ -47,6 +47,6 @@ public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<S
     public void RegisterSymbolEndAction(Action<SonarSymbolReportingContext> action) =>
         Context.RegisterSymbolEndAction(x => action(new(AnalysisContext, x)));
 
-    public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SonarSyntaxNodeReportingContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
+    public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SonarSyntaxNodeReportingContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct, Enum =>
         Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), syntaxKinds);
 }

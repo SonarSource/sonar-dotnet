@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class InsecureEncryptionAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
         : DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TInvocationExpressionSyntax : SyntaxNode
         where TArgumentListSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode

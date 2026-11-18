@@ -67,7 +67,7 @@ public class SonarAnalysisContext
         analysisContext.TryGetValue(text, valueProvider, out value);
 
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
-        where TSyntaxKind : struct =>
+        where TSyntaxKind : struct, Enum =>
         RegisterCompilationStartAction(
             x => x.RegisterCodeBlockStartAction(generatedCodeRecognizer, action));
 
@@ -88,7 +88,7 @@ public class SonarAnalysisContext
             x => x.RegisterSymbolStartAction(action, symbolKind));
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
+        where TSyntaxKind : struct, Enum =>
         RegisterCompilationStartAction(
             x => x.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
 
@@ -109,7 +109,7 @@ public class SonarAnalysisContext
     /// </list>
     /// This should NOT be used for actions that report issues.
     /// </summary>
-    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct, Enum =>
         analysisContext.RegisterSyntaxNodeAction(x => action(new(this, x)), syntaxKinds);
 
     /// <summary>

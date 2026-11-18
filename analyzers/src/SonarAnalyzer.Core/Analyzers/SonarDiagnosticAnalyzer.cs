@@ -48,7 +48,7 @@ public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
 }
 
 public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
 {
     protected abstract string MessageFormat { get; }
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }

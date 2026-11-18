@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Facade;
 
-public interface ISyntaxKindFacade<out TSyntaxKind> where TSyntaxKind : struct
+public interface ISyntaxKindFacade<out TSyntaxKind> where TSyntaxKind : struct, Enum
 {
     abstract TSyntaxKind Attribute { get; }
     abstract TSyntaxKind AttributeArgument { get; }

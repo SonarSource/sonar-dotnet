@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Facade;
 
-public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
+public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct, Enum
 {
     public abstract bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode);
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);

@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMethodDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TMethodDeclaration : SyntaxNode
 {
     private const string DiagnosticId = "S4225";

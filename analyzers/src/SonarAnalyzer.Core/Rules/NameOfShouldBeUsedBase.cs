@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Rules
 {
     public abstract class NameOfShouldBeUsedBase<TMethodSyntax, TSyntaxKind, TThrowSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TMethodSyntax : SyntaxNode
-        where TSyntaxKind : struct
+        where TSyntaxKind : struct, Enum
         where TThrowSyntax : SyntaxNode
     {
         private const string DiagnosticId = "S2302";

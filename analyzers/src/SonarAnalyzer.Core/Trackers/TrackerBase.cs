@@ -18,7 +18,7 @@
 namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class TrackerBase<TSyntaxKind, TContext>
-    where TSyntaxKind : struct
+    where TSyntaxKind : struct, Enum
     where TContext : BaseContext
 {
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
