@@ -175,6 +175,8 @@ namespace SonarAnalyzer.CSharp.Rules
             SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, shouldRemoveGetType ? ExpressionFromGetType(getTypeCall) : getTypeCall, ((TypeOfExpressionSyntax)typeInstance).Type);
 
         private static ExpressionSyntax ExpressionFromGetType(ExpressionSyntax getTypeCall) =>
-            ((MemberAccessExpressionSyntax)((InvocationExpressionSyntax)getTypeCall).Expression).Expression;
+            ((InvocationExpressionSyntax)getTypeCall).Expression is MemberAccessExpressionSyntax memberAccess
+                ? memberAccess.Expression
+                : SyntaxFactory.ThisExpression();
     }
 }

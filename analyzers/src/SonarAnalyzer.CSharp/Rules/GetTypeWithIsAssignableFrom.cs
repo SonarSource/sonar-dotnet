@@ -44,8 +44,9 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
                     && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.IsInType(KnownType.System_Type))
                 {
-                    CheckForIsAssignableFrom(c, memberAccess, methodSymbol, invocation.ArgumentList.Arguments.First().Expression);
-                    CheckForIsInstanceOfType(c, memberAccess, methodSymbol);
+                    var argumentExpression = invocation.ArgumentList.Arguments.First().Expression;
+                    CheckForIsAssignableFrom(c, memberAccess, methodSymbol, argumentExpression);
+                    CheckForIsInstanceOfType(c, memberAccess, methodSymbol, argumentExpression);
                 }
             },
             SyntaxKind.InvocationExpression);
@@ -101,19 +102,21 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
         if (sideA.ToStringContains("GetType")
             && sideB is TypeOfExpressionSyntax sideBTypeOf
             && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.Model)
-            && context.Model.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
+            && context.Model.GetTypeInfo(sideBTypeOf.Type, context.Cancel).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
             && typeSymbol.IsSealed
-            && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            && !IsGetTypeOnUnion((InvocationExpressionSyntax)sideA, context.Model, context.Cancel))
         {
             ReportDiagnostic(context, MessageIsOperator);
         }
     }
 
-    private static void CheckForIsInstanceOfType(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
+    private static void CheckForIsInstanceOfType(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
     {
         if (methodSymbol.Name == nameof(Type.IsInstanceOfType)
             && memberAccess.Expression is TypeOfExpressionSyntax typeOf
-            && !IsUnboundedGenericType(typeOf))
+            && !IsUnboundedGenericType(typeOf)
+            && !IsUnion(argument, context.Model, context.Cancel))
         {
             ReportDiagnostic(context, MessageIsOperator, useIsOperator: true);
         }
@@ -125,7 +128,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
         {
             if (memberAccess.Expression is TypeOfExpressionSyntax typeOf)
             {
-                if (!IsUnboundedGenericType(typeOf))
+                if (!IsUnboundedGenericType(typeOf) && !IsGetTypeOnUnion((InvocationExpressionSyntax)argument, context.Model, context.Cancel))
                 {
                     ReportDiagnostic(context, MessageIsOperator, useIsOperator: true, shouldRemoveGetType: true);
                 }
@@ -144,6 +147,14 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
             QualifiedNameSyntax { Right: GenericNameSyntax { IsUnboundGenericName: true } } => true,
             _ => false,
         };
+
+    private static bool IsGetTypeOnUnion(InvocationExpressionSyntax getTypeCall, SemanticModel model, CancellationToken cancel) =>
+        getTypeCall.Expression.LeftOfDot is { } receiver
+            ? IsUnion(receiver, model, cancel)
+            : model.GetEnclosingSymbol(getTypeCall.SpanStart, cancel)?.ContainingType is { IsUnion: true };
+
+    private static bool IsUnion(ExpressionSyntax expression, SemanticModel model, CancellationToken cancel) =>
+        model.GetTypeInfo(expression, cancel).Type is { } type && type.NullableUnderlyingTypeOrSelf().IsUnion;
 
     private static ExpressionSyntax ConstantPatternExpression(SyntaxNode node) =>
         node.Kind() switch
