@@ -759,7 +759,8 @@ namespace SonarAnalyzer.CFG.Sonar
             FixJumps(gotosToFix, caseBlocksByValue);
             var switchBlock = CreateBranchBlock(switchStatement, new[] { currentSectionBlock });
             return BuildExpression(switchStatement.Expression, switchBlock);
-            bool ContainsDefaultLabel(SwitchSectionSyntax s) =>
+
+            static bool ContainsDefaultLabel(SwitchSectionSyntax s) =>
                 s.Labels.Any(l => l.IsKind(SyntaxKind.DefaultSwitchLabel));
         }
 
