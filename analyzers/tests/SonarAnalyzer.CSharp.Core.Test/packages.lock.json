@@ -4,9 +4,9 @@
     "net11.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[9.0.145, )",
-        "resolved": "9.0.145",
-        "contentHash": "jVDhMWOTK4CE36yx7iUBx09nBD7Yv8KJzGptCwPPkoy+ibQCE6J+ns1wTMOn8TXz8YJTi8KK9XTKgrCfV6aMgA=="
+        "requested": "[9.0.189, )",
+        "resolved": "9.0.189",
+        "contentHash": "VCKDsFcGqDJySCtHrz6zwTzZYguDmgL+/rZqIesMardg2nrQ9CT4Tbb0WfefFuqtXqtBwkhJgPHYDkq2Y5gtRg=="
       },
       "Combinatorial.MSTest": {
         "type": "Direct",
@@ -599,7 +599,7 @@
           "NSubstitute": "[6.2.0, )",
           "NuGet.Protocol": "[8.0.0, )",
           "SonarAnalyzer.Core": "[10.37.0, )",
-          "altcover": "[9.0.145, )"
+          "altcover": "[9.0.189, )"
         }
       }
     }
