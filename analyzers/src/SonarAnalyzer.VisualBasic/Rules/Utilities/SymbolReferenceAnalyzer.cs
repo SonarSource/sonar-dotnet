@@ -22,7 +22,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
+        protected override SyntaxNode BindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
         protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 _ => null
             };
 
-        protected override IList<SyntaxNode> GetDeclarations(SyntaxNode node)
+        protected override IList<SyntaxNode> Declarations(SyntaxNode node)
         {
             var walker = new DeclarationsFinder();
             walker.SafeVisit(node);

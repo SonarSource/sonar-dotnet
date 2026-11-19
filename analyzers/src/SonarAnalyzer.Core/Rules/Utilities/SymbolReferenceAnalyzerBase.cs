@@ -25,12 +25,14 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
     private const string DiagnosticId = "S9999-symbolRef";
     private const string Title = "Symbol reference calculator";
     private const int TokenCountThreshold = 40_000;
+    private const string RazorGeneratedFileSuffix = "_razor.g.cs";
+    private const string RazorDeclGeneratedFileSuffix = "_razor.decl.g.cs";
 
-    protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
+    protected abstract SyntaxNode BindableParent(SyntaxToken token);
 
     protected abstract ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
 
-    protected abstract IList<SyntaxNode> GetDeclarations(SyntaxNode node);
+    protected abstract IList<SyntaxNode> Declarations(SyntaxNode node);
 
     protected sealed override string FileName => "symrefs.pb";
 
@@ -38,12 +40,18 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
 
     protected sealed override SymbolReferenceInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
     {
+        var declarationTree = RazorDeclarationTree(tree, model.Compilation);
+        if (TokenCount(tree) + (declarationTree is null ? 0 : TokenCount(declarationTree)) > TokenCountThreshold)
+        {
+            return null;
+        }
         var filePath = MapFilePath(tree);
         var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
-        var references = GetReferences(tree.GetRoot(), model);
+        SemanticModel[] models = declarationTree is null ? [model] : [model, model.Compilation.GetSemanticModel(declarationTree)];
+        var references = References(models);
         foreach (var symbol in references.Keys)
         {
-            if (GetSymbolReference(references[symbol], filePath) is { } reference)
+            if (SymbolReference(references[symbol], filePath, models.Length > 1) is { } reference)
             {
                 symbolReferenceInfo.Reference.Add(reference);
             }
@@ -51,48 +59,55 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
         return symbolReferenceInfo;
     }
 
+    // Workaround for NET-5129: GetDeclarations is per tree, so analyze the decl tree together with the main tree and emit one message per file.
+    // Details in the workaround comment on NET-5129.
     protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
-        base.ShouldGenerateMetrics(parameters, tree)
-        && !HasTooManyTokens(tree);
+        !tree.EndsWith(RazorDeclGeneratedFileSuffix) && base.ShouldGenerateMetrics(parameters, tree);
 
-    private Dictionary<ISymbol, List<ReferenceInfo>> GetReferences(SyntaxNode root, SemanticModel model)
+    private Dictionary<ISymbol, List<ReferenceInfo>> References(SemanticModel[] models)
     {
         var references = new Dictionary<ISymbol, List<ReferenceInfo>>();
         var knownIdentifiers = new HashSet<string>(Language.NameComparer);
         var knownNodes = new HashSet<SyntaxNode>();
-        var declarations = GetDeclarations(root);
-
-        for (var i = 0; i < declarations.Count; i++)
+        // All declarations need to be known before looking for references, as they can be in another tree
+        foreach (var model in models)
         {
-            var declarationReferences = CreateDeclarationReferenceInfo(declarations[i], model);
-            if (declarationReferences is null)
+            var declarations = Declarations(model.SyntaxTree.GetRoot());
+            for (var i = 0; i < declarations.Count; i++)
             {
-                continue;
-            }
-
-            for (var j = 0; j < declarationReferences.Length; j++)
-            {
-                var currentDeclaration = declarationReferences[j];
-                if (currentDeclaration.Symbol is not null)
+                var declarationReferences = CreateDeclarationReferenceInfo(declarations[i], model);
+                if (declarationReferences is null)
                 {
-                    references.GetOrAdd(currentDeclaration.Symbol, _ => []).Add(currentDeclaration);
-                    knownNodes.Add(currentDeclaration.Node);
-                    knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
+                    continue;
+                }
+
+                for (var j = 0; j < declarationReferences.Length; j++)
+                {
+                    var currentDeclaration = declarationReferences[j];
+                    if (currentDeclaration.Symbol is not null)
+                    {
+                        references.GetOrAdd(currentDeclaration.Symbol, _ => []).Add(currentDeclaration);
+                        knownNodes.Add(currentDeclaration.Node);
+                        knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
+                    }
                 }
             }
         }
 
-        foreach (var token in root.DescendantTokens())
+        foreach (var model in models)
         {
-            if (Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken)
-                && knownIdentifiers.Contains(token.ValueText)
-                && GetBindableParent(token) is { } parent
-                && !knownNodes.Contains(parent)
-                && GetReferenceSymbol(parent, model) is { } symbol)
+            foreach (var token in model.SyntaxTree.GetRoot().DescendantTokens())
             {
-                foreach (var part in symbol.AllPartialParts.Where(references.ContainsKey))
+                if (Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken)
+                    && knownIdentifiers.Contains(token.ValueText)
+                    && BindableParent(token) is { } parent
+                    && !knownNodes.Contains(parent)
+                    && ReferenceSymbol(parent, model) is { } symbol)
                 {
-                    references[part].Add(new(parent, token, part, false));
+                    foreach (var part in symbol.AllPartialParts.Where(references.ContainsKey))
+                    {
+                        references[part].Add(new(parent, token, part, false));
+                    }
                 }
             }
         }
@@ -100,22 +115,24 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
         return references;
     }
 
-    private static ISymbol GetReferenceSymbol(SyntaxNode node, SemanticModel model) =>
+    private static ISymbol ReferenceSymbol(SyntaxNode node, SemanticModel model) =>
         model.GetSymbolInfo(node).Symbol switch
         {
             IMethodSymbol { MethodKind: MethodKind.Constructor, IsImplicitlyDeclared: true } constructor => constructor.ContainingType,
             var symbol => symbol
         };
 
-    private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IReadOnlyList<ReferenceInfo> references, string filePath)
+    private static SymbolReferenceInfo.Types.SymbolReference SymbolReference(IReadOnlyList<ReferenceInfo> references, string filePath, bool deduplicate)
     {
-        var declarationSpan = GetDeclarationSpan(references, filePath);
+        var declarationSpan = DeclarationSpan(references, filePath);
         if (!declarationSpan.HasValue)
         {
             return null;
         }
 
         var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = ToTextRange(declarationSpan.Value) };
+        // Razor generates some code, like @typeparam constraints, into both the main and the declaration tree
+        var seen = deduplicate ? new HashSet<TextRange>() : null;
         for (var i = 0; i < references.Count; i++)
         {
             var reference = references[i];
@@ -123,15 +140,17 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
                 && reference.Identifier.GetLocation().MappedLineSpanIfAvailable is var mappedLineSpan
                 // Syntax tree can contain elements from external files (e.g. razor imports files)
                 // We need to make sure that we don't count these elements.
-                && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase)
+                && ToTextRange(mappedLineSpan) is var range
+                && (seen is null || seen.Add(range)))
             {
-                symbolReference.Reference.Add(ToTextRange(mappedLineSpan));
+                symbolReference.Reference.Add(range);
             }
         }
         return symbolReference;
     }
 
-    private static FileLinePositionSpan? GetDeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath)
+    private static FileLinePositionSpan? DeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath)
     {
         for (var i = 0; i < references.Count; i++)
         {
@@ -145,8 +164,19 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
         return null;
     }
 
-    private static bool HasTooManyTokens(SyntaxTree tree) =>
-        tree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
+    // Workaround for NET-5129: pairs the decl tree by file name. Returns null (old per-tree behavior) if there is no match.
+    private static SyntaxTree RazorDeclarationTree(SyntaxTree tree, Compilation compilation)
+    {
+        if (!tree.EndsWith(RazorGeneratedFileSuffix))
+        {
+            return null;
+        }
+        var declarationPath = tree.FilePath.Substring(0, tree.FilePath.Length - RazorGeneratedFileSuffix.Length) + RazorDeclGeneratedFileSuffix;
+        return compilation.SyntaxTrees.FirstOrDefault(x => x.FilePath.Equals(declarationPath, StringComparison.Ordinal));
+    }
+
+    private static int TokenCount(SyntaxTree tree) =>
+        tree.GetRoot().DescendantTokens().Count();
 
     protected sealed record ReferenceInfo(SyntaxNode Node, SyntaxToken Identifier, ISymbol Symbol, bool IsDeclaration);
 }

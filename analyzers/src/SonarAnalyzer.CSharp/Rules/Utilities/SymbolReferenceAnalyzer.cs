@@ -22,7 +22,7 @@ public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-    protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
+    protected override SyntaxNode BindableParent(SyntaxToken token) =>
         token.GetBindableParent();
 
     protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
@@ -42,7 +42,7 @@ public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase<SyntaxKind>
             _ => null
         };
 
-    protected override IList<SyntaxNode> GetDeclarations(SyntaxNode node)
+    protected override IList<SyntaxNode> Declarations(SyntaxNode node)
     {
         var walker = new DeclarationsFinder();
         walker.SafeVisit(node);
