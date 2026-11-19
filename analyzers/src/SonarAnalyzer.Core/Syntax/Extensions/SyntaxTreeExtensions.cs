@@ -74,10 +74,7 @@ public static class SyntaxTreeExtensions
             tree.FilePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));
-
-    private static string FileFromDirective(SyntaxNode node)
+    internal static string FileFromDirective(SyntaxNode node)
     {
         return node switch
         {
@@ -90,6 +87,9 @@ public static class SyntaxTreeExtensions
         static string FileOrNull(SyntaxToken file) =>
             file is { IsMissing: false, RawKind: not (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.None } ? file.ValueText : null;
     }
+
+    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));
 
     private static bool IsRazorImportsFile(string path) =>
         Path.GetFileName(path).Equals("_Imports.razor", StringComparison.OrdinalIgnoreCase);

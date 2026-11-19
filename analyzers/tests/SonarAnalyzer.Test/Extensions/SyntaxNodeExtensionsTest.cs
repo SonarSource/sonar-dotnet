@@ -809,13 +809,15 @@ End Class";
         ExtensionsCore.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
 
     [TestMethod]
-    [DataRow("class Test { }", DisplayName = "When there is no pragma, return default file name.")]
-    [DataRow("#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"", "FileName.txt", DisplayName = "When pragma is present, return file name from pragma.")]
-    public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
-    {
-        var tree = GetSyntaxTree(code, DefaultFileName);
-        tree.GetRoot().MappedFilePathFromRoot.Should().Be(expectedFileName);
-    }
+    [DataRow("class Test { }")]
+    [DataRow("#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"", "FileName.txt")]
+    [DataRow("#pragma checksum \"C:\\My Dir\\File Name.razor\" \"{guid}\" \"checksum bytes\"", "C:\\My Dir\\File Name.razor")]
+    [DataRow("#pragma checksum FileName.txt")]
+    [DataRow("#pragma checksum")]
+    [DataRow("// comment\n#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"")]
+    [DataRow("class Test { }\n#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"")]
+    public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName) =>
+        GetSyntaxTree(code, DefaultFileName).GetRoot(TestContext.CancellationToken).MappedFilePathFromRoot.Should().Be(expectedFileName);
 
     [TestMethod]
     [DataRow("$$M(1)$$;")]

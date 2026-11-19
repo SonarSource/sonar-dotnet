@@ -28,16 +28,12 @@ public static class SyntaxNodeExtensions
         {
             get
             {
-                if (node.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+                // Directives are always leading trivia, so this is the first trivia of the root without allocating a DescendantTrivia iterator
+                if (node.GetLeadingTrivia() is { Count: > 0 } leading
+                    && leading[0] is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum
+                    && SyntaxTreeExtensions.FileFromDirective(pragmaChecksum.GetStructure()) is { } file)
                 {
-                    // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
-                    // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
-                    // Allocates the whole directive string, see NET-5131.
-                    var content = pragmaChecksum.ToString();
-                    var firstIndex = content.IndexOf('"');
-                    var start = firstIndex + 1;
-                    var secondIndex = content.IndexOf('"', start);
-                    return content.Substring(start, secondIndex - start);
+                    return file;
                 }
 
                 // Since .NET 11, Razor also generates *_razor.decl.g.cs files without #pragma checksum
