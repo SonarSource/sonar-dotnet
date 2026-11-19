@@ -138,7 +138,8 @@ public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyz
             : tree.FilePath;
 
     private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarSemanticModelReportingContext context) =>
-        (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
+        // HasUnchangedFiles first: outside of incremental PR analysis, MapFilePath would read the directives of the tree for nothing
+        (AnalyzeUnchangedFiles || !context.HasUnchangedFiles() || !context.IsUnchanged(MapFilePath(context.Tree)))
         && ShouldGenerateMetrics(parameters, context.Tree);
 
     private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>

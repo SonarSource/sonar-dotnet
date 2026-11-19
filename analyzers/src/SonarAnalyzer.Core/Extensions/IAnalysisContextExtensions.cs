@@ -91,15 +91,43 @@ public static class IAnalysisContextExtensions
                 || !tree.IsConsideredGenerated(generatedCodeRecognizer, context.IsRazorAnalysisEnabled()))
             && (tree is null || (!context.IsUnchanged(tree) && !context.IsExcluded(sonarLintXml, tree.FilePath)));
 
-        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        /// <summary>
+        /// A tree is unchanged when all the files it maps to are unchanged. A generated Razor tree can map to several files.
+        /// </summary>
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
         public bool IsUnchanged(SyntaxTree tree)
         {
-            // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
-            var unchangedFiles = UnchangedFilesCache.TryGetValue(context.Compilation, out var unchangedFilesFromCache)
-                ? unchangedFilesFromCache
-                : UnchangedFilesCache.GetValue(context.Compilation, _ => CreateUnchangedFilesHashSet(context.ProjectConfiguration()));
-            return unchangedFiles.Contains(MapFilePath(tree));
+            var unchangedFiles = context.UnchangedFiles();
+            if (unchangedFiles.IsEmpty)
+            {
+                return false;   // Don't read the mapped files outside of incremental PR analysis
+            }
+            return IsRazorGeneratedTree(tree)
+                ? IsRazorTreeUnchanged(tree, unchangedFiles)
+                : unchangedFiles.Contains(tree.FilePath);
         }
+
+        /// <summary>
+        /// Checks a single file. Utility analyzers report their messages for the file that owns the tree, so they don't need to consider all mapped files.
+        /// </summary>
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        public bool IsUnchanged(string filePath) =>
+            context.UnchangedFiles().Contains(filePath);
+
+        /// <summary>
+        /// False outside of incremental PR analysis. Lets callers skip computing a file path when no file can be unchanged.
+        /// </summary>
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        public bool HasUnchangedFiles() =>
+            !context.UnchangedFiles().IsEmpty;
+
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        private ImmutableHashSet<string> UnchangedFiles() =>
+            // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case.
+            // The factory lambda lives in a separate method, because a closure over 'context' would be allocated on each call of this method.
+            UnchangedFilesCache.TryGetValue(context.Compilation, out var unchangedFilesFromCache)
+                ? unchangedFilesFromCache
+                : UnchangedFilesGetOrAdd(context.Compilation, context.ProjectConfiguration());
 
         [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
         private bool IsExcluded(SonarLintXmlReader sonarLintXml, string filePath)
@@ -119,18 +147,35 @@ public static class IAnalysisContextExtensions
         }
     }
 
+    private static ImmutableHashSet<string> UnchangedFilesGetOrAdd(Compilation compilation, ProjectConfigReader config) =>
+        UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(config));
+
     private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(ProjectConfigReader config) =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, config.AnalysisConfig?.UnchangedFiles() ?? []);
 
-    private static string MapFilePath(SyntaxTree tree) =>
+    private static bool IsRazorGeneratedTree(SyntaxTree tree) =>
         // Currently only .razor file hashes are stored in the cache.
         //
         // For a file like `Pages\Component.razor`, the compiler generated path has the following pattern:
         // Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g.cs
-        // In order to avoid rebuilding the original file path we have to read it from the pragma directive.
+        // In order to avoid rebuilding the original file paths we have to read them from the #pragma checksum and #line directives.
+        // For markup-only components, the checksum is the only reference to the component in the *_razor.g.cs tree.
         //
         // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
-        tree.EndsWith(RazorGeneratedFileSuffix) || tree.EndsWith(RazorDeclGeneratedFileSuffix)
-            ? tree.OriginalFilePath
-            : tree.FilePath;
+        tree.EndsWith(RazorGeneratedFileSuffix) || tree.EndsWith(RazorDeclGeneratedFileSuffix);
+
+    private static bool IsRazorTreeUnchanged(SyntaxTree tree, ImmutableHashSet<string> unchangedFiles)
+    {
+        // Stop at the first changed file. The tree of a changed component references it in one of its first directives, only trees with all files unchanged are visited entirely.
+        var hasMappedFile = false;
+        foreach (var file in tree.GetRoot().DescendantNodes(static x => x.ContainsDirectives, descendIntoTrivia: true).Select(SyntaxTreeExtensions.FileFromDirective).WhereNotNull())
+        {
+            if (!unchangedFiles.Contains(file))
+            {
+                return false;
+            }
+            hasMappedFile = true;
+        }
+        return hasMappedFile || unchangedFiles.Contains(tree.FilePath);
+    }
 }

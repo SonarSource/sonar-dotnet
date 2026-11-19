@@ -51,6 +51,18 @@ public partial class SonarAnalysisContextBaseTest
         ShouldAnalyzeTree(CreateOptions(["ThisIsNotInCompilation.cs", "SomethingElse.cs"])).Should().BeTrue();
 
     [TestMethod]
+    public void HasUnchangedFiles_SonarLint() =>
+        CreateSut(AnalysisScaffolding.CreateOptions()).HasUnchangedFiles().Should().BeFalse();
+
+    [TestMethod]
+    public void HasUnchangedFiles_Scanner_UnchangedFiles_Empty() =>
+        CreateSut(CreateOptions([])).HasUnchangedFiles().Should().BeFalse();
+
+    [TestMethod]
+    public void HasUnchangedFiles_Scanner_UnchangedFiles_NotEmpty() =>
+        CreateSut(CreateOptions([OtherFileName + ".cs"])).HasUnchangedFiles().Should().BeTrue();
+
+    [TestMethod]
     [DataRow(@"C:\Component.razor", "Pages_Component_razor.g")]
     [DataRow(@"C:\_Imports.razor", "_Imports_razor.g")]
     public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile(string razorFile, string generatedFileName) =>
@@ -63,18 +75,93 @@ public partial class SonarAnalysisContextBaseTest
 
     // Since .NET 11 the Razor source generator emits an additional declaration partial per component (e.g. Pages/Component_razor.decl.g.cs).
     // It starts with the @using directives inherited from _Imports.razor, the component is only referenced by the later #line directives.
+    // The tree is analyzed unless all the files it maps to are unchanged.
     [TestMethod]
-    [DataRow(@"C:\Pages\Component.razor", false)]
-    [DataRow(@"C:\_Imports.razor", true)]
-    public void ShouldAnalyzeTree_Scanner_RazorDeclGeneratedFile_UsesTheComponentFile(string unchangedFile, bool expected) =>
+    [DataRow(new[] { @"C:\Pages\Component.razor" }, true)]
+    [DataRow(new[] { @"C:\_Imports.razor" }, true)]
+    [DataRow(new[] { @"C:\Pages\Component.razor", @"C:\_Imports.razor" }, false)]
+    public void ShouldAnalyzeTree_Scanner_RazorDeclGeneratedFile_UsesAllMappedFiles(string[] unchangedFiles, bool expected) =>
         ShouldAnalyzeTree(
-            CreateOptions([unchangedFile]),
+            CreateOptions(unchangedFiles),
             @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages/Component_razor.decl.g",
             """
             #line (1,2)-(1,19) "C:\_Imports.razor"
             using System.Text
             #line default
             #line (1,8)-(1,28) "C:\Pages\Component.razor"
+            #line default
+            """).Should().Be(expected);
+
+    [TestMethod]
+    [DataRow(new[] { @"C:\Pages\Component.razor" }, true)]
+    [DataRow(new[] { @"C:\_Imports.razor" }, true)]
+    [DataRow(new[] { @"C:\Pages\Component.razor", @"C:\_Imports.razor" }, false)]
+    public void ShouldAnalyzeTree_Scanner_RazorGeneratedFile_UsesAllMappedFiles(string[] unchangedFiles, bool expected) =>
+        ShouldAnalyzeTree(
+            CreateOptions(unchangedFiles),
+            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages/Component_razor.g",
+            """
+            #pragma checksum "C:\Pages\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
+            namespace N
+            {
+            #line (1,2)-(1,19) "C:\_Imports.razor"
+            using System.Text;
+            #line default
+            #line hidden
+                public class Component
+                {
+            #line (2,8)-(2,20) "C:\Pages\Component.razor"
+                    int field;
+            #line default
+                }
+            }
+            """).Should().Be(expected);
+
+    // The files are compared case-insensitively, and the directives nested in method bodies are read too
+    [TestMethod]
+    [DataRow(new[] { @"C:\Pages\Component.razor", @"C:\_Imports.razor" }, true)]
+    [DataRow(new[] { @"C:\Pages\Component.razor", @"C:\_Imports.razor", @"C:\Other.razor" }, false)]
+    public void ShouldAnalyzeTree_Scanner_RazorGeneratedFile_ReadsAllDirectives(string[] unchangedFiles, bool expected) =>
+        ShouldAnalyzeTree(
+            CreateOptions(unchangedFiles),
+            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages/Component_razor.g",
+            """
+            #pragma checksum "C:\Pages\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
+            namespace N
+            {
+            #line (1,2)-(1,19) "C:\_Imports.razor"
+            using System.Text;
+            #line default
+            #line hidden
+                public class Component
+                {
+                    void M()
+                    {
+            #line (2,8)-(2,20) "C:\PAGES\COMPONENT.razor"
+                        System.Console.WriteLine();
+            #line default
+            #line 5 "C:\Other.razor"
+                        System.Console.WriteLine();
+            #line 200
+                    }
+                }
+            }
+            """).Should().Be(expected);
+
+    // The trees of a markup-only component map only to _Imports.razor, besides the checksum of the *_razor.g.cs tree.
+    [TestMethod]
+    [DataRow("Pages/Component_razor.decl.g", "", new[] { @"C:\_Imports.razor" }, false)]
+    [DataRow("Pages/Component_razor.decl.g", "", new[] { @"C:\Pages\Component.razor" }, true)]
+    [DataRow("Pages/Component_razor.g", """#pragma checksum "C:\Pages\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35" """, new[] { @"C:\_Imports.razor" }, true)]
+    [DataRow("Pages/Component_razor.g", """#pragma checksum "C:\Pages\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35" """, new[] { @"C:\Pages\Component.razor", @"C:\_Imports.razor" }, false)]
+    public void ShouldAnalyzeTree_Scanner_MarkupOnlyRazorComponent(string generatedFileName, string checksum, string[] unchangedFiles, bool expected) =>
+        ShouldAnalyzeTree(
+            CreateOptions(unchangedFiles),
+            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\" + generatedFileName,
+            $"""
+            {checksum}
+            #line (1,2)-(1,19) "C:\_Imports.razor"
+            using System.Text;
             #line default
             """).Should().Be(expected);
 
