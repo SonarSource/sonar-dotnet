@@ -20,11 +20,12 @@ using System.Collections.Concurrent;
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyzer
+public sealed class ControllersHaveMixedResponsibilities : ParametrizedDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6960";
     private const string MessageFormat = "This controller has multiple responsibilities and could be split into {0} smaller controllers.";
     private const string UnspeakableIndexerName = "<indexer>I"; // All indexers are considered part of the same group
+    private const string ExcludedServicesDefaultValue = "ILogger, IMediator, IMapper, IConfiguration, IBus, IMessageBus, IHttpClientFactory";
 
     public enum MemberType
     {
@@ -32,47 +33,46 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
         Action,
     }
 
-    private static readonly HashSet<string> ExcludedWellKnownServices =
-    [
-        "ILogger",
-        "IMediator",
-        "IMapper",
-        "IConfiguration",
-        "IBus",
-        "IMessageBus",
-        "IHttpClientFactory"
-    ];
-
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(compilationStartContext =>
-        {
-            if (!compilationStartContext.Compilation.ReferencesNetCoreControllers())
-            {
-                return;
-            }
+    [RuleParameter(
+        "excludedServices",
+        PropertyType.String,
+        "Comma-separated list of service type names that are ignored when detecting mixed responsibilities (e.g. ILogger, IMediator).",
+        ExcludedServicesDefaultValue)]
+    public string ExcludedServices { get; set; } = ExcludedServicesDefaultValue;
 
-            compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterCompilationStartAction(
+            compilationStartContext =>
             {
-                if (symbolStartContext.Symbol is INamedTypeSymbol { IsCoreApiController: true, IsAbstract: false } symbol
-                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+                if (!compilationStartContext.Compilation.ReferencesNetCoreControllers())
                 {
-                    var relevantMembers = RelevantMembers(symbol);
-
-                    if (relevantMembers.Count < 2)
-                    {
-                        return;
-                    }
-
-                    var dependencies = new ConcurrentStack<Dependency>();
-                    symbolStartContext.RegisterCodeBlockStartAction(PopulateDependencies(relevantMembers, dependencies));
-                    symbolStartContext.RegisterSymbolEndAction(CalculateAndReportOnResponsibilities(symbol, relevantMembers, dependencies));
+                    return;
                 }
-                }, SymbolKind.NamedType);
-        });
+
+                compilationStartContext.RegisterSymbolStartAction(
+                    symbolStartContext =>
+                    {
+                        if (symbolStartContext.Symbol is INamedTypeSymbol { IsCoreApiController: true, IsAbstract: false } symbol
+                            && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+                        {
+                            var relevantMembers = RelevantMembers(symbol);
+
+                            if (relevantMembers.Count < 2)
+                            {
+                                return;
+                            }
+
+                            var dependencies = new ConcurrentStack<Dependency>();
+                            symbolStartContext.RegisterCodeBlockStartAction(PopulateDependencies(relevantMembers, dependencies));
+                            symbolStartContext.RegisterSymbolEndAction(CalculateAndReportOnResponsibilities(symbol, relevantMembers, dependencies));
+                        }
+                    },
+                    SymbolKind.NamedType);
+            });
 
     private static Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> PopulateDependencies(
         ImmutableDictionary<string, MemberType> relevantMembers,
@@ -81,13 +81,15 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
         {
             if (BlockName(codeBlockStartContext.CodeBlock) is { } blockName)
             {
-                codeBlockStartContext.RegisterNodeAction(c =>
-                {
-                    if (c.Node.GetName() is { } dependencyName && relevantMembers.ContainsKey(blockName) && relevantMembers.ContainsKey(dependencyName))
+                codeBlockStartContext.RegisterNodeAction(
+                    c =>
                     {
-                        dependencies.Push(new(blockName, dependencyName));
-                    }
-                }, SyntaxKind.IdentifierName);
+                        if (c.Node.GetName() is { } dependencyName && relevantMembers.ContainsKey(blockName) && relevantMembers.ContainsKey(dependencyName))
+                        {
+                            dependencies.Push(new(blockName, dependencyName));
+                        }
+                    },
+                    SyntaxKind.IdentifierName);
             }
         };
 
@@ -136,8 +138,9 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
             _ => null
         };
 
-    private static ImmutableDictionary<string, MemberType> RelevantMembers(INamedTypeSymbol symbol)
+    private ImmutableDictionary<string, MemberType> RelevantMembers(INamedTypeSymbol symbol)
     {
+        var excludedServices = ParseExcludedServices(ExcludedServices);
         var builder = ImmutableDictionary.CreateBuilder<string, MemberType>();
         foreach (var member in symbol.GetMembers().Where(x => !x.IsStatic))
         {
@@ -167,10 +170,16 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
         }
 
         return builder.ToImmutable();
+
+        bool IsService(ISymbol member) =>
+            !excludedServices.Contains(member.SymbolType.Name);
     }
 
-    private static bool IsService(ISymbol symbol) =>
-        !ExcludedWellKnownServices.Contains(symbol.SymbolType.Name);
+    private static HashSet<string> ParseExcludedServices(string value) =>
+        value.Split([','], StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x.Trim())
+            .Where(x => x.Length != 0)
+            .ToHashSet(StringComparer.Ordinal);
 
     private static IEnumerable<SecondaryLocation> SecondaryLocations(INamedTypeSymbol controllerSymbol, List<List<string>> sets)
     {
