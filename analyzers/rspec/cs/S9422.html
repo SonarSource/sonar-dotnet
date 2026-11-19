@@ -17,7 +17,8 @@ specifically designed for use with <code>lock</code> statements. This new type o
 <h3>Exceptions</h3>
 <p>This rule only raises an issue when it can prove that converting the field to <code>Lock</code> is safe everywhere the field is used. It stays
 silent whenever that cannot be guaranteed, for example when the field is accessible outside its declaring type, used for something other than locking,
-or locked inside a <code>yield</code> iterator or an <code>async</code> method.</p>
+locked by a <code>lock</code> statement whose body contains a <code>yield</code> statement, or locked anywhere inside an <code>async</code>
+method.</p>
 <h2>How to fix it</h2>
 <p>Change the field declaration from <code>object</code> to <code>System.Threading.Lock</code>. All existing <code>lock</code> statements using the
 field continue to work without modification. If the field is initialized or reassigned with a new <code>object</code>, change those creations to
