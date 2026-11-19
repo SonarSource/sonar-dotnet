@@ -32,6 +32,7 @@ public static class SyntaxNodeExtensions
                 {
                     // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
                     // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
+                    // Allocates the whole directive string, see NET-5131.
                     var content = pragmaChecksum.ToString();
                     var firstIndex = content.IndexOf('"');
                     var start = firstIndex + 1;
@@ -39,7 +40,8 @@ public static class SyntaxNodeExtensions
                     return content.Substring(start, secondIndex - start);
                 }
 
-                return node.SyntaxTree.FilePath;
+                // Since .NET 11, Razor also generates *_razor.decl.g.cs files without #pragma checksum
+                return GeneratedCodeRecognizer.IsRazorGeneratedFile(node.SyntaxTree) ? node.SyntaxTree.OriginalFilePath : node.SyntaxTree.FilePath;
             }
         }
 

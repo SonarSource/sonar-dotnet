@@ -347,28 +347,35 @@ public class SymbolReferenceAnalyzerTest
             .WithConcurrentAnalysis(false)
             .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
                 {
-                    var orderedSymbols = x.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                    // The .NET 11 Razor declaration files *_razor.decl.g.cs are not mapped to the original .razor file path
-                    orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(
-                        "Razor.razor",
-                        "Razor.razor.cs",
-                        "RazorComponent.razor",
-                        "ToDo.cs",
-                        "Razor_razor.decl.g.cs",
-                        "RazorComponent_razor.decl.g.cs");
-                    orderedSymbols[0].FilePath.Should().EndWith("Razor.razor");
+                    // Since .NET 11, a .razor file has a message for *_razor.g.cs and one for *_razor.decl.g.cs. The plugin aggregates the messages of the same file.
+                    var references = x.GroupBy(x => Path.GetFileName(x.FilePath)).ToDictionary(x => x.Key, x => x.SelectMany(x => x.Reference).ToArray());
+                    references.Keys.Should().BeEquivalentTo("Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
 
-                    // FN: Since .NET 11, the members of the @code block are declared in Razor_razor.decl.g.cs and their references are lost.
-                    // Before, there were 10 declarations: currentCount, IncrementAmount, IncrementCount, x, todos, AddTodo, x, y, LocalMethod, AdditionalAttributes
-                    VerifyReferences(orderedSymbols[0].Reference, 1, 35, 35);                   // x
+                    // FN: Since .NET 11, the members of the @code block are declared in Razor_razor.decl.g.cs and their references from the markup are lost.
+                    var razor = references["Razor.razor"];
+                    VerifyReferences(razor, 10, 14, 21);            // currentCount
+                    VerifyReferences(razor, 10, 17, 21, 22);        // IncrementAmount
+                    VerifyReferences(razor, 10, 19);                // IncrementCount
+                    VerifyReferences(razor, 10, 35, 35);            // x
+                    VerifyReferences(razor, 10, 38);                // todos
+                    VerifyReferences(razor, 10, 40);                // AddTodo
+                    VerifyReferences(razor, 10, 42);                // x
+                    VerifyReferences(razor, 10, 43);                // y
+                    VerifyReferences(razor, 10, 45, 42);            // LocalMethod
+                    VerifyReferences(razor, 10, 58);                // AdditionalAttributes
 
-                    orderedSymbols[1].FilePath.Should().EndWith("RazorComponent.razor");        // RazorComponent.razor
                     // https://github.com/SonarSource/sonar-dotnet/issues/8417
                     // before dotnet 8.0.5  SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
                     // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring "@typeparam ")
                     // Reference "where TSomeVeryLongName" is placed starting at index 6 (ignoring "@typeparam TSomeVeryLongName ")
-                    VerifyReferences(orderedSymbols[1].Reference, 1, 1, 1);
-                    orderedSymbols[1].Reference.Single().Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 35, EndOffset = 52 });
+                    // Since .NET 11, @typeparam is generated into both RazorComponent_razor.g.cs and RazorComponent_razor.decl.g.cs, so it is reported twice
+                    var razorComponent = references["RazorComponent.razor"];
+                    razorComponent.Should().HaveCount(2).And.AllSatisfy(x =>
+                        {
+                            x.Declaration.StartLine.Should().Be(1);
+                            x.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 35, EndOffset = 52 });
+                        });
+                    razorComponent[0].Should().BeEquivalentTo(razorComponent[1]);
                 });
 
     [TestMethod]

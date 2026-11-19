@@ -56,5 +56,25 @@ namespace SonarAnalyzer.Core.Rules
 
             return metricsInfo;
         }
+
+        // The plugin imports only the first message for each file. Each tree only measures what is mapped to the original file, so the values need to be combined.
+        protected sealed override IEnumerable<MetricsInfo> MergeTreeMessages(IEnumerable<MetricsInfo> messages)
+        {
+            return messages.GroupBy(x => x.FilePath, StringComparer.Ordinal).Select(x => x.Aggregate(Merge));
+
+            static MetricsInfo Merge(MetricsInfo target, MetricsInfo other)
+            {
+                target.ClassCount += other.ClassCount;
+                target.StatementCount += other.StatementCount;
+                target.FunctionCount += other.FunctionCount;
+                target.Complexity += other.Complexity;
+                target.CognitiveComplexity += other.CognitiveComplexity;
+                target.NoSonarComment.AddRange(other.NoSonarComment.Except(target.NoSonarComment));
+                target.NonBlankComment.AddRange(other.NonBlankComment.Except(target.NonBlankComment));
+                target.CodeLine.AddRange(other.CodeLine.Except(target.CodeLine));
+                target.ExecutableLines.AddRange(other.ExecutableLines.Except(target.ExecutableLines));
+                return target;
+            }
+        }
     }
 }

@@ -109,7 +109,7 @@ public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyz
                 startContext.RegisterCompilationEndAction(endContext =>
                     {
                         var allMessages = CreateAnalysisMessages(endContext)
-                            .Concat(treeMessages)
+                            .Concat(MergeTreeMessages(treeMessages.WhereNotNull()))
                             .WhereNotNull()
                             .ToArray();
                         Directory.CreateDirectory(parameters.OutPath);
@@ -126,6 +126,10 @@ public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyz
         (parameters.AnalyzeTestProjects || !parameters.IsTestProject)
         && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
         && ShouldGenerateMetricsByType(parameters, tree);
+
+    // Since .NET 11, a Razor component is generated into two trees that produce messages for the same file.
+    protected virtual IEnumerable<TMessage> MergeTreeMessages(IEnumerable<TMessage> messages) =>
+        messages;
 
     protected static string MapFilePath(SyntaxTree tree) =>
         // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
