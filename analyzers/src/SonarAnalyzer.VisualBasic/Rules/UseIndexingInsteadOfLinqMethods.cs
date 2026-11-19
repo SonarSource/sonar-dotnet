@@ -22,6 +22,6 @@ public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMe
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
+    protected override int ArgumentCount(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count;
 }
