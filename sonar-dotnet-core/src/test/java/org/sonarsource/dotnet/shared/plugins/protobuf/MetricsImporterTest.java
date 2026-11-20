@@ -21,6 +21,7 @@ import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.StringReader;
 import java.util.Collection;
 import java.util.Collections;
 import org.assertj.core.groups.Tuple;
@@ -37,9 +38,12 @@ import org.sonar.scanner.plugin.api.impl.fs.DefaultInputFile;
 import org.sonar.scanner.plugin.api.impl.fs.FileMetadata;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.intThat;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -105,6 +109,31 @@ public class MetricsImporterTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
     verify(fileLinesContext, never()).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 7, 1);
     verify(fileLinesContext, times(41)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(1));
+  }
+
+  // https://sonarsource.atlassian.net/browse/NET-5165
+  @Test
+  public void executable_lines_out_of_range_of_the_input_file_FP() {
+    // Repro for https://community.sonarsource.com/t/sonarqube-error-scanning-xaml-files/186826
+    // Metrics computed on a generated C# file are attributed to a shorter .xaml file. The code lines are range checked, the executable lines are not.
+    String shortFile = String.join("\n", Collections.nCopies(16, "<Grid/>"));
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new StringReader(shortFile)))
+      .build();
+    tester.fileSystem().add(inputFile);
+
+    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+    // Same behavior as DefaultFileLinesContext.checkLineRange
+    doThrow(new IllegalArgumentException("Line is out of range for file Program.cs. File has 16 lines."))
+      .when(fileLinesContext).setIntValue(eq(CoreMetrics.EXECUTABLE_LINES_DATA_KEY), intThat(x -> x > 16), eq(1));
+    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
+
+    MetricsImporter importer = new MetricsImporter(tester, fileLinesContextFactory, mock(NoSonarFilter.class), String::toString);
+
+    // FP NET-5165: this should not throw, the out of range executable lines should be ignored
+    assertThatThrownBy(() -> importer.accept(protobuf.toPath()))
+      .hasMessageContaining("out of range");
   }
 
 }

@@ -54,6 +54,20 @@ public class MetricsAnalyzerTest
                     metrics.StatementCount.Should().Be(5);
                 });
 
+    // https://sonarsource.atlassian.net/browse/NET-5165
+    // The generated XAML code is only analyzed with sonar.cs.analyzeGeneratedCode=true, so that is what is needed to hit this in practice.
+    [TestMethod]
+    public void VerifyMetrics_XamlGeneratedFile_Repro() =>
+        CreateBuilder(false, analyzeGeneratedCode: true, "XamlGenerated.cs")
+            .VerifyUtilityAnalyzer<MetricsInfo>(x =>
+                {
+                    var metrics = x.Should().ContainSingle().Subject;
+                    metrics.FilePath.Should().Be(@"..\..\MainPage.xaml");
+                    metrics.CodeLine.Should().BeEquivalentTo([3]);
+                    // FP NET-5165: 11 is a line of the generated file, not of the .xaml. Expected: [3], like CodeLine.
+                    metrics.ExecutableLines.Should().BeEquivalentTo([3, 11]);
+                });
+
     [TestMethod]
     public void VerifyMetrics_Razor() =>
         CreateBuilder(false, RazorFileName, "Component.razor")
@@ -163,11 +177,14 @@ public class MetricsAnalyzerTest
         }
     }
 
-    private VerifierBuilder CreateBuilder(bool isTestProject, params string[] fileNames)
+    private VerifierBuilder CreateBuilder(bool isTestProject, params string[] fileNames) =>
+        CreateBuilder(isTestProject, false, fileNames);
+
+    private VerifierBuilder CreateBuilder(bool isTestProject, bool analyzeGeneratedCode, params string[] fileNames)
     {
         var testRoot = BasePath + TestContext.TestName;
         return new VerifierBuilder()
-            .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject))
+            .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject, analyzeGeneratedCode))
             .AddPaths(fileNames)
             .WithBasePath(BasePath)
             .WithOptions(LanguageOptions.CSharpLatest)
@@ -179,14 +196,19 @@ public class MetricsAnalyzerTest
     {
         private readonly string outPath;
         private readonly bool isTestProject;
+        private readonly bool analyzeGeneratedCode;
 
-        public TestMetricsAnalyzer(string outPath, bool isTestProject)
+        public TestMetricsAnalyzer(string outPath, bool isTestProject, bool analyzeGeneratedCode = false)
         {
             this.outPath = outPath;
             this.isTestProject = isTestProject;
+            this.analyzeGeneratedCode = analyzeGeneratedCode;
         }
 
-        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
-            base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
+        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context)
+        {
+            var parameters = base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
+            return analyzeGeneratedCode ? parameters with { AnalyzeGeneratedCode = true } : parameters;
+        }
     }
 }
