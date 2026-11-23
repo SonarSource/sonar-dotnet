@@ -73,6 +73,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     private readonly Compilation compilation;
     private readonly HashSet<string> knownSymbolNames;
     private readonly bool hasExtensionBlockIndexers;
+    private readonly Dictionary<IMethodSymbol, IMethodSymbol> extensionAccessorsByImplementation;
     private SemanticModel model;
 
     public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
@@ -82,11 +83,18 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     public HashSet<ISymbol> PrivateAttributes { get; } = [];
     public HashSet<ISymbol> TypesUsedWithReflection { get; } = [];
 
-    public SymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
+    public SymbolUsageCollector(Compilation compilation, ISet<ISymbol> knownSymbols)
     {
         this.compilation = compilation;
         knownSymbolNames = knownSymbols.Select(Name).ToHashSet();
         hasExtensionBlockIndexers = knownSymbols.Any(IsExtensionBlockIndexer);
+        extensionAccessorsByImplementation = knownSymbols
+            .OfType<IPropertySymbol>()
+            .Where(x => x.ContainingType.IsExtensionBlock)
+            .SelectMany(x => new[] { x.GetMethod, x.SetMethod })
+            .Where(x => x?.AssociatedExtensionImplementation is not null)
+            .ToDictionary(x => x.AssociatedExtensionImplementation.OriginalDefinition, x => x);
+        knownSymbolNames.UnionWith(extensionAccessorsByImplementation.Keys.Select(x => x.Name));
     }
 
     public override void Visit(SyntaxNode node)
@@ -213,6 +221,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             TryStoreFieldAccess(node, symbols);
             UsedSymbols.UnionWith(symbols);
             TryStorePropertyAccess(node, symbols);
+            StoreExtensionAccessorImplementationUsages(symbols);
         }
         base.VisitIdentifierName(node);
     }
@@ -239,7 +248,9 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         if (IsKnownIdentifier(node.Identifier))
         {
-            UsedSymbols.UnionWith(Symbols(node));
+            var symbols = Symbols(node);
+            UsedSymbols.UnionWith(symbols);
+            StoreExtensionAccessorImplementationUsages(symbols);
         }
         base.VisitGenericName(node);
     }
@@ -523,6 +534,19 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         UsedSymbols.UnionWith(symbols);
         TryStorePropertyAccess(node, symbols);
+    }
+
+    private void StoreExtensionAccessorImplementationUsages(ImmutableArray<ISymbol> symbols)
+    {
+        foreach (var implementation in symbols.OfType<IMethodSymbol>())
+        {
+            if (extensionAccessorsByImplementation.TryGetValue(implementation, out var accessor))
+            {
+                var property = (IPropertySymbol)accessor.AssociatedSymbol;
+                UsedSymbols.Add(property);
+                StorePropertyAccess(property, accessor.MethodKind == MethodKind.PropertyGet ? AccessorAccess.Get : AccessorAccess.Set);
+            }
+        }
     }
 
     private static bool IsExtensionBlockIndexer(ISymbol symbol) =>

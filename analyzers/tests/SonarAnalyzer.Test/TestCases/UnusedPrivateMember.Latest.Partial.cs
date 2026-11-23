@@ -21,3 +21,8 @@ public partial class PartialEvents
 {
     private partial event EventHandler Compliant { add { compliant += value; } remove { compliant -= value; } } // Compliant https://sonarsource.atlassian.net/browse/NET-2825
 }
+
+public static partial class ExtensionAccessorImplementationScopes
+{
+    public static int UseFromOtherPart(System.Collections.Generic.SortedList<int, int> list) => get_UsedFromOtherPart(list);
+}

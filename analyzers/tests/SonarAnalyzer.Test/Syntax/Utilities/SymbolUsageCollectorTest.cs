@@ -54,7 +54,7 @@ public class SymbolUsageCollectorTest
         var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
         var firstCompilationModel = firstCompilation.GetSemanticModel(firstTree);
         var firstCompilationFieldSymbol = firstCompilationModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
-        var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
+        var firstCompilationKnownSymbols = new HashSet<ISymbol>(SymbolEqualityComparer.Default) { firstCompilationFieldSymbol };
 
         // compilation matches semantic model and syntax node
         var firstCompilationUsageCollector = new SymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);

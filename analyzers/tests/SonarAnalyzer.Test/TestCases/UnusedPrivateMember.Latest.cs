@@ -1325,3 +1325,95 @@ public class CollectionExpressionArguments
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
+
+public static class ExtensionAccessorImplementations
+{
+    extension(SortedList<int, int> list)
+    {
+        private int UsedProperty => 0;                                       // Compliant NET-5176
+        private int UnusedProperty => 0;                                     // Noncompliant
+        public int UsedSetter { get => 0; private set { } }                  // Compliant NET-5176
+        public int UnusedSetter { get => 0; private set { } }                // Noncompliant {{Remove the unused private setter 'set_UnusedSetter'.}}
+        private int this[string used] => 0;                                  // Compliant NET-5176
+        private int this[char unused] => 0;                                  // Noncompliant
+        public int this[long usedSetter] { get => 0; private set { } }       // Compliant NET-5176
+        public int this[byte unusedSetter] { get => 0; private set { } }     // Noncompliant {{Remove the unused private setter 'set_Item'.}}
+        private int ReadAndWritten { get => 0; set { } }                     // Compliant
+        private int OnlyRead { get => 0; set { } }                           // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
+        private int OnlyWritten { get => 0; set { } }                        // Noncompliant {{Remove the unused private get accessor in property 'OnlyWritten'.}}
+        private int UsedAsMethodGroup => 0;                                  // Compliant
+        private int UnusedAsMethodGroup => 0;                                // Noncompliant
+        private static int UsedStatic => 0;                                  // Compliant
+        private static int UnusedStatic => 0;                                // Noncompliant
+    }
+
+    public static int Use(SortedList<int, int> list)
+    {
+        set_UsedSetter(list, 1);
+        set_Item(list, 1L, 2);
+        set_ReadAndWritten(list, 1);
+        set_OnlyWritten(list, 1);
+        Func<SortedList<int, int>, int> methodGroup = get_UsedAsMethodGroup;
+        return get_UsedProperty(list)
+            + get_UsedSetter(list)
+            + get_UnusedSetter(list)
+            + ExtensionAccessorImplementations.get_Item(list, "key")
+            + get_Item(list, 1L)
+            + get_Item(list, (byte)1)
+            + get_ReadAndWritten(list)
+            + get_OnlyRead(list)
+            + get_UsedStatic();
+    }
+
+    extension<T>(Stack<T> stack)
+    {
+        private int UsedInferred => stack.Count;                             // Compliant
+        private int UsedExplicit => stack.Count;                             // Compliant
+        private int UnusedGeneric => stack.Count;                            // Noncompliant
+        public int UsedGenericSetter { get => 0; private set { } }           // Compliant
+        public int UnusedGenericSetter { get => 0; private set { } }         // Noncompliant {{Remove the unused private setter 'set_UnusedGenericSetter'.}}
+        private int this[int usedGeneric] => 0;                              // Compliant
+        private int this[long unusedGeneric] => 0;                           // Noncompliant
+    }
+
+    public static int UseGeneric(Stack<string> stack)
+    {
+        set_UsedGenericSetter<string>(stack, 1);
+        return get_UsedInferred(stack) + get_UsedExplicit<string>(stack) + get_UnusedGenericSetter(stack) + get_Item(stack, 1);
+    }
+}
+
+public static partial class ExtensionAccessorImplementationScopes
+{
+    extension(SortedList<int, int> list)
+    {
+        private int UsedInsideBlock => 0;                                    // Compliant
+        public int Caller => get_UsedInsideBlock(list);
+        private int UsedFromNested => 0;                                     // Compliant
+        private int UsedFromOtherPart => 0;                                  // Compliant
+        private int UsedInNameof => 0;                                       // Compliant
+        private int UsedForThisReceiver => 0;                                // Compliant
+        private int SameNameAsOtherClass => 0;                               // Noncompliant
+    }
+
+    extension(Queue<int> queue)
+    {
+        private int UsedForThisReceiver => 0;                                // Noncompliant
+    }
+
+    public static int Use(SortedList<int, int> list) => get_UsedForThisReceiver(list) + OtherExtensionAccessorImplementations.get_SameNameAsOtherClass(list);
+    public static string Name() => nameof(get_UsedInNameof);
+
+    public class Nested
+    {
+        public int Method(SortedList<int, int> list) => get_UsedFromNested(list);
+    }
+}
+
+public static class OtherExtensionAccessorImplementations
+{
+    extension(SortedList<int, int> list)
+    {
+        public int SameNameAsOtherClass => 0;
+    }
+}

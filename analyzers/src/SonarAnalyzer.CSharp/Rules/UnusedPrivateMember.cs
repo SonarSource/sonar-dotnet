@@ -92,8 +92,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         }
     }
 
-    private static IEnumerable<ISymbol> AssociatedSymbols(IEnumerable<ISymbol> privateSymbols) =>
-        privateSymbols.Select(x => x is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } ? property : x);
+    private static HashSet<ISymbol> AssociatedSymbols(IEnumerable<ISymbol> privateSymbols) =>
+        privateSymbols.Select(x => x is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } ? property : x).ToHashSet();
 
     private static bool GatherSymbols(INamedTypeSymbol namedType,
                                       Compilation compilation,
