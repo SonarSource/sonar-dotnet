@@ -71,6 +71,66 @@ public class ConditionalSimplificationTest
             .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
             .Verify();
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/9846
+    // https://sonarsource.atlassian.net/browse/NET-5208
+    [TestMethod]
+    [DataRow("c with { F = F ?? input.F }")]
+    [DataRow("c with { F = (F) ?? input.F }")]
+    [DataRow("c with { F = F ?? \"x\" }")]
+    public void ConditionalSimplification_Initializer_Coalesce_FP(string expression) =>
+        builder.AddSnippet($$"""
+            #nullable enable
+            record C { public string? F { get; init; } }
+
+            class A
+            {
+                string? F { get; init; }
+
+                private C AppliedTo(C c, A input) =>
+                    {{expression}};   // Noncompliant FP, '??=' is not valid in a 'with' initializer
+            }
+            """).WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    // https://sonarsource.atlassian.net/browse/NET-5228
+    [TestMethod]
+    [DataRow("c with { F = F != null ? F : input.F }")]
+    [DataRow("c with { F = F == null ? input.F : F }")]
+    [DataRow("c with { F = (F != null) ? F : input.F }")]
+    [DataRow("new C { F = F != null ? F : input.F }")]
+    public void ConditionalSimplification_Initializer_Ternary_FP(string expression) =>
+        builder.AddSnippet($$"""
+            #nullable enable
+            record C { public string? F { get; init; } }
+
+            class A
+            {
+                string? F { get; init; }
+
+                private C AppliedTo(C c, A input) =>
+                    {{expression}};   // Noncompliant FP, '??=' is not valid in an initializer
+            }
+            """).WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    [DataRow("c with { F = this.F ?? input.F }")]
+    [DataRow("c with { F = input.F ?? F }")]
+    [DataRow("c with { F = c.F ?? input.F }")]
+    [DataRow("c with { F = F != null ? input.F : F }")]
+    [DataRow("new C { F = F ?? input.F }")]
+    public void ConditionalSimplification_Initializer_Compliant(string expression) =>
+        builder.AddSnippet($$"""
+            #nullable enable
+            record C { public string? F { get; init; } }
+
+            class A
+            {
+                string? F { get; init; }
+
+                private object AppliedTo(C c, A input) =>
+                    {{expression}};
+            }
+            """).WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+
     [TestMethod]
     public void ConditionalSimplification_FromCSharp9_CodeFix() =>
         codeFix.AddPaths("ConditionalSimplification.FromCSharp9.cs")
