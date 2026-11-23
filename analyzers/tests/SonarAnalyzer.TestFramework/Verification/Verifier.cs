@@ -117,7 +117,8 @@ internal class Verifier
                         onlyDiagnosticIds,
                         razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray(),
                         builder.ConcurrentAnalysis,
-                        builder.WarningsAsErrors.ToArray()));
+                        builder.WarningsAsErrors.ToArray(),
+                        builder.IdeAnalysisCheckOptOutReason is null));
         numberOfIssues.Should().BeGreaterThan(0, $"otherwise you should use '{nameof(VerifyNoIssues)}' instead");
     }
 

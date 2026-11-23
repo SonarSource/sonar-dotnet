@@ -42,6 +42,7 @@ public class ControllersHaveMixedResponsibilitiesTest
         builder
             .AddPaths("ControllersHaveMixedResponsibilities.Latest.cs", "ControllersHaveMixedResponsibilities.Latest.Partial.cs")
             .WithLanguageVersion(LanguageVersion.Latest)
+            .WithoutIdeAnalysisCheck("Probably a consequence of the partial indexer: Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179")
             .Verify();
 }
 

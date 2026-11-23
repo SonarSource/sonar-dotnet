@@ -78,7 +78,7 @@ public class UnchangedFilesTest
         }
         else
         {
-            builder.Verify();
+            builder.WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637").Verify();
         }
     }
 }

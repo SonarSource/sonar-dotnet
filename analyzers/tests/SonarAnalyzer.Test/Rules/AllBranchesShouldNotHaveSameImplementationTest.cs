@@ -23,7 +23,8 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class AllBranchesShouldNotHaveSameImplementationTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.AllBranchesShouldNotHaveSameImplementation>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.AllBranchesShouldNotHaveSameImplementation>()
+            .WithoutIdeAnalysisCheck("S3923: the callback is on the else clause, but the issue is reported on the if before it. NET-5215");
 
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CSharp8() =>
@@ -39,6 +40,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>
-            new VerifierBuilder<VB.AllBranchesShouldNotHaveSameImplementation>().AddPaths("AllBranchesShouldNotHaveSameImplementation.vb").Verify();
+            new VerifierBuilder<VB.AllBranchesShouldNotHaveSameImplementation>().AddPaths("AllBranchesShouldNotHaveSameImplementation.vb").WithoutIdeAnalysisCheck("S3923: the callback is on the else clause, but the issue is reported on the if before it. NET-5215").Verify();
     }
 }

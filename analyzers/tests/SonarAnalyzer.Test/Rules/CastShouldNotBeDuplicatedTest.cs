@@ -34,6 +34,7 @@ public class CastShouldNotBeDuplicatedTest
     public void CastShouldNotBeDuplicated_CS_Latest() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
+            .WithoutIdeAnalysisCheck("The callback is on the case label or pattern, but the issue is reported on casts in the following statements. NET-5220")
             .Verify();
 
 #if NET

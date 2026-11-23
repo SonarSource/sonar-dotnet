@@ -33,15 +33,19 @@ public static class DiagnosticVerifier
                              string[] onlyDiagnostics,
                              string[] additionalSourceFiles,
                              bool? concurrentAnalysis = null,
-                             string[] warningsAsErrors = null)
+                             string[] warningsAsErrors = null,
+                             bool ideAnalysisCheck = false)
     {
+        // Analyzers read the concurrency setting when they are initialized, so the scope has to stay open for all analysis below.
+        using var scope = concurrentAnalysis.HasValue ? new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis.Value } : null;
+        Diagnostic[] diagnostics;
         SuppressionHandler.HookSuppression();
         try
         {
             var sources = ExceptRazorGeneratedFiles(compilation.SyntaxTrees)
                 .Select(x => new FileContent(x))
                 .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis, warningsAsErrors).ToArray();
+            diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, warningsAsErrors).ToArray();
             var expected = new CompilationIssues(sources);
             VerifyNoExceptionThrown(diagnostics);
             Compare(compilation.LanguageVersionString(), new(diagnostics), expected);
@@ -50,12 +54,16 @@ public static class DiagnosticVerifier
             {
                 SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(analyzers).Should().BeTrue("The ReportIssue should be used instead of ReportDiagnostic");
             }
-            return diagnostics.Length;
         }
         finally
         {
             SuppressionHandler.UnHookSuppression();
         }
+        if (ideAnalysisCheck)
+        {
+            VerifyIdeAnalysis(compilation, analyzers, diagnostics, additionalFilePath, onlyDiagnostics, warningsAsErrors);
+        }
+        return diagnostics.Length;
     }
 
     public static void VerifyNoIssues(Compilation compilation,
@@ -75,6 +83,80 @@ public static class DiagnosticVerifier
         diagnostics.Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
     }
 
+    /// <summary>
+    /// IDEs (VS Code/OmniSharp, Rider, Visual Studio) request diagnostics per document. Roslyn drops diagnostics that are located outside of the node of the callback that reported them,
+    /// because it classifies them as non-local (see AnalyzerExecutor.AnalyzerDiagnosticReporter.FilterSpanForLocalDiagnostics). Full compilation analysis (build, scanner) does not drop them.
+    /// This fails if the per-document analysis returns fewer diagnostics than the full compilation analysis.
+    /// </summary>
+    private static void VerifyIdeAnalysis(Compilation compilation,
+                                          DiagnosticAnalyzer[] analyzers,
+                                          Diagnostic[] fullAnalysisDiagnostics,
+                                          string additionalFilePath,
+                                          string[] onlyDiagnostics,
+                                          string[] warningsAsErrors)
+    {
+        // The compilation contains the generated .Concurrent copies of the files. They are identical to the originals, so they are not analyzed twice.
+        var trees = ExceptRazorGeneratedFiles(compilation.SyntaxTrees).Where(x => !IsConcurrentCopy(x.FilePath)).ToHashSet();
+        var expected = ExpectedIdeDiagnostics(fullAnalysisDiagnostics, analyzers, trees);
+        var (perDocument, _) = CreateCompilationWithAnalyzers(compilation, analyzers, additionalFilePath, onlyDiagnostics, warningsAsErrors);
+        var actual = PerDocumentDiagnostics(perDocument, trees);
+        var missing = expected.Where(x => !actual.Contains(x.Key))
+            .OrderBy(x => x.Value.Path, StringComparer.Ordinal).ThenBy(x => x.Value.StartLinePosition.Line).ThenBy(x => x.Value.StartLinePosition.Character)
+            .Select(x => x.Key)
+            .ToArray();
+        if (missing.Length > 0)
+        {
+            throw new AssertFailedException(IdeAnalysisFailureMessage(missing));
+        }
+    }
+
+    private static Dictionary<string, FileLinePositionSpan> ExpectedIdeDiagnostics(Diagnostic[] fullAnalysisDiagnostics, DiagnosticAnalyzer[] analyzers, HashSet<SyntaxTree> trees)
+    {
+        // The full analysis diagnostics also contain compiler errors, which are not part of the analyzer results of the per-document analysis. Only the diagnostics of the analyzers under test are compared.
+        var supportedIds = analyzers.SelectMany(x => x.SupportedDiagnostics).Select(x => x.Id).Where(x => x != AD0001).ToHashSet();
+        return fullAnalysisDiagnostics
+            .Where(x => supportedIds.Contains(x.Id)
+                && x.Location.IsInSource
+                && trees.Contains(x.Location.SourceTree)
+                && !x.Descriptor.CustomTags.Contains(WellKnownDiagnosticTags.CompilationEnd))   // Compilation end diagnostics are never part of per-document analysis, by design
+            .GroupBy(Describe)  // Roslyn de-duplicates identical diagnostics in per-document results, so compare as sets
+            .ToDictionary(x => x.Key, x => x.First().Location.GetLineSpan());
+    }
+
+    private static HashSet<string> PerDocumentDiagnostics(CompilationWithAnalyzers compilationWithAnalyzers, HashSet<SyntaxTree> trees)
+    {
+        var actual = new HashSet<string>();
+        foreach (var tree in trees)
+        {
+            var model = compilationWithAnalyzers.Compilation.GetSemanticModel(tree);
+            actual.UnionWith(compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(model, null, default).Result.Select(Describe));
+            actual.UnionWith(compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(tree, default).Result.Select(Describe));
+        }
+        return actual;
+    }
+
+    private static string IdeAnalysisFailureMessage(string[] missing) =>
+        $"""
+        IDE analysis check failed: {missing.Length} diagnostic(s) are reported by the full compilation analysis (build, scanner), but not by the per-document analysis that IDEs use:
+        {string.Join(Environment.NewLine, missing.Select(x => "  " + x))}
+
+        Problem: the per-document analysis only keeps a diagnostic that is located inside the node of the callback that reported it, and never keeps one from a compilation end action.
+                 The user does not see this issue in the IDE, while the build and the server report it.
+
+        What to do:
+          - The rule reports outside of the node of its callback: report from a node that contains the location of the issue,
+            e.g. register on the outermost node that covers all locations of the issue.
+          - The rule reports from a compilation end action: add the CompilationEnd tag to its descriptor (isCompilationEnd: true), see Roslyn analyzer RS1037 and NET-1637.
+          - The issue is in the implementation of a partial property, indexer, event or constructor: Roslyn does not analyze it per document (NET-5179). Opt out with a reason.
+          - The rule cannot be fixed now, or the behavior is by design: call WithoutIdeAnalysisCheck("<reason: 'by design' and why, or the ticket>") on the VerifierBuilder of this test.
+        """;
+
+    private static string Describe(Diagnostic diagnostic)
+    {
+        var span = diagnostic.Location.GetLineSpan();
+        return $"{diagnostic.Id} {Path.GetFileName(span.Path)}@{span.StartLinePosition.Line + 1}:{span.StartLinePosition.Character + 1} {diagnostic.GetMessage()}";
+    }
+
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
         AnalyzerDiagnostics(compilation, [analyzer], checkMode, additionalFilePath, onlyDiagnostics);
 
@@ -89,12 +171,28 @@ public static class DiagnosticVerifier
                                                                    CompilationErrorBehavior checkMode, // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
                                                                    string additionalFilePath,
                                                                    string[] onlyDiagnostics,
-                                                                   bool? concurrentAnalysis = null,
                                                                    string[] warningsAsErrors = null)
     {
-        using var scope = concurrentAnalysis.HasValue ? new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis.Value } : null;
+        var (compilationWithAnalyzers, supportedDiagnostics) = CreateCompilationWithAnalyzers(compilation, analyzer, additionalFilePath, onlyDiagnostics, warningsAsErrors);
+        var diagnostics = compilationWithAnalyzers
+            .GetAllDiagnosticsAsync(default)
+            .Result
+            .Where(x => (x.Severity == DiagnosticSeverity.Error && x.Id != LineContinuationVB12) || supportedDiagnostics.ContainsKey(x.Id));   // No compiler info about new syntax or unused usings
+
+        return checkMode == CompilationErrorBehavior.Ignore    // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
+            ? diagnostics.Where(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error).ToImmutableArray()
+            : diagnostics.ToImmutableArray();
+    }
+
+    private static (CompilationWithAnalyzers CompilationWithAnalyzers, ImmutableDictionary<string, ReportDiagnostic> SupportedDiagnostics) CreateCompilationWithAnalyzers(
+        Compilation compilation,
+        DiagnosticAnalyzer[] analyzers,
+        string additionalFilePath,
+        string[] onlyDiagnostics,
+        string[] warningsAsErrors)
+    {
         onlyDiagnostics ??= [];
-        var supportedDiagnostics = analyzer
+        var supportedDiagnostics = analyzers
             .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
             .ToImmutableDictionary(x => x, Severity)
             .Add(AD0001, ReportDiagnostic.Error);
@@ -104,16 +202,7 @@ public static class DiagnosticVerifier
         }
         var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
         var analyzerOptions = string.IsNullOrWhiteSpace(additionalFilePath) ? null : AnalysisScaffolding.CreateOptions(additionalFilePath);
-        var diagnostics = compilation
-            .WithOptions(compilationOptions)
-            .WithAnalyzers(analyzer.ToImmutableArray(), analyzerOptions)
-            .GetAllDiagnosticsAsync(default)
-            .Result
-            .Where(x => (x.Severity == DiagnosticSeverity.Error && x.Id != LineContinuationVB12) || supportedDiagnostics.ContainsKey(x.Id));   // No compiler info about new syntax or unused usings
-
-        return checkMode == CompilationErrorBehavior.Ignore    // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
-            ? diagnostics.Where(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error).ToImmutableArray()
-            : diagnostics.ToImmutableArray();
+        return (compilation.WithOptions(compilationOptions).WithAnalyzers(analyzers.ToImmutableArray(), analyzerOptions), supportedDiagnostics);
 
         ReportDiagnostic Severity(string id) =>
             onlyDiagnostics.Length == 0 || onlyDiagnostics.Contains(id) ? ReportDiagnostic.Warn : ReportDiagnostic.Suppress;
@@ -128,7 +217,7 @@ public static class DiagnosticVerifier
             var concurrentPairs = new List<IssueLocationPair>();
             foreach (var pair in filePairs)
             {
-                (pair.FilePath.Contains(ConcurrentInfix) ? concurrentPairs : defaultPairs).Add(pair);
+                (IsConcurrentCopy(pair.FilePath) ? concurrentPairs : defaultPairs).Add(pair);
             }
             messages.AddRange(SerializePairs(languageVersion, defaultPairs, concurrentPairs));
             messages.Add(VerificationMessage.EmptyLine);
@@ -171,6 +260,10 @@ public static class DiagnosticVerifier
         static string SerializePath(string path) =>
             path == string.Empty ? "<project-level-issue>" : path;
     }
+
+    // Verifier.CreateConcurrencyTest generates a copy of each file with this infix in its name.
+    private static bool IsConcurrentCopy(string filePath) =>
+        filePath.Contains(ConcurrentInfix);
 
     private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFiles(IEnumerable<SyntaxTree> syntaxTrees) =>
         syntaxTrees.Where(x =>

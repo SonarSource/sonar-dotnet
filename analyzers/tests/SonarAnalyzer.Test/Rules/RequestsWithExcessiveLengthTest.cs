@@ -26,11 +26,13 @@ public class RequestsWithExcessiveLengthTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder()
         .AddAnalyzer(() => new CS.RequestsWithExcessiveLength())
-        .AddReferences(AdditionalReferences());
+        .AddReferences(AdditionalReferences())
+        .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637");
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder()
         .AddAnalyzer(() => new VB.RequestsWithExcessiveLength())
-        .AddReferences(AdditionalReferences());
+        .AddReferences(AdditionalReferences())
+        .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637");
 
     public TestContext TestContext { get; set; }
 
@@ -44,6 +46,7 @@ public class RequestsWithExcessiveLengthTest
             .AddAnalyzer(() => new CS.RequestsWithExcessiveLength { FileUploadSizeLimit = 42 })
             .AddPaths(@"RequestsWithExcessiveLength_CustomValues.cs")
             .AddReferences(AdditionalReferences())
+            .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
             .Verify();
 
     [TestMethod]
@@ -91,6 +94,7 @@ public class RequestsWithExcessiveLengthTest
             .AddAnalyzer(() => new VB.RequestsWithExcessiveLength { FileUploadSizeLimit = 42 })
             .AddPaths(@"RequestsWithExcessiveLength_CustomValues.vb")
             .AddReferences(AdditionalReferences())
+            .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
             .Verify();
 
     [TestMethod]

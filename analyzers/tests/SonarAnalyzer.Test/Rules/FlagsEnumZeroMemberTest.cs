@@ -29,6 +29,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void FlagsEnumZeroMember_VB() =>
-            new VerifierBuilder<VB.FlagsEnumZeroMember>().AddPaths("FlagsEnumZeroMember.vb").Verify();
+            new VerifierBuilder<VB.FlagsEnumZeroMember>().AddPaths("FlagsEnumZeroMember.vb").WithoutIdeAnalysisCheck("VB: the callback is on the EnumStatement header, but the issue is reported on a member of the EnumBlock. NET-5216").Verify();
     }
 }

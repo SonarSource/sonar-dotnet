@@ -53,6 +53,7 @@ public record VerifierBuilder
     public string CodeFixTitle { get; init; }
     public bool ConcurrentAnalysis { get; init; } = !Debugger.IsAttached;
     public bool AutogenerateConcurrentFiles { get; init; } = !Debugger.IsAttached;
+    public string IdeAnalysisCheckOptOutReason { get; init; }
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
     public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = [];
     public ImmutableArray<string> WarningsAsErrors { get; init; } = [];
@@ -119,6 +120,15 @@ public record VerifierBuilder
 
     public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
         this with { ConcurrentAnalysis = concurrentAnalysis };
+
+    /// <summary>
+    /// The IDE analysis check is enabled by default. It verifies that every reported diagnostic is also returned by the per-document analysis that IDEs use.
+    /// Opt out only if the rule cannot report that way yet, or if that is by design. The reason is mandatory, so every opt-out is documented and searchable: state why it is by design, or include the ticket.
+    /// </summary>
+    public VerifierBuilder WithoutIdeAnalysisCheck(string reason) =>
+        string.IsNullOrWhiteSpace(reason)
+            ? throw new ArgumentException("A reason is required to opt out of the IDE analysis check.", nameof(reason))
+            : this with { IdeAnalysisCheckOptOutReason = reason };
 
     [Obsolete("Do not use CompilationErrorBehavior. Assert errors with // Error [CSxxxx, CSyyyy] instead")]
     public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>

@@ -22,7 +22,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class MultilineBlocksWithoutBraceTest
 {
-    private static readonly VerifierBuilder Builder = new VerifierBuilder<MultilineBlocksWithoutBrace>();
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<MultilineBlocksWithoutBrace>()
+        .WithoutIdeAnalysisCheck("S2681: the callback is on the loop or if statement, but the issue is reported on the statement after it. NET-5222");
 
     [TestMethod]
     public void MultilineBlocksWithoutBrace() =>

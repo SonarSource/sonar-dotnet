@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
-            builderVB.AddPaths("NameOfShouldBeUsed.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
+            builderVB.AddPaths("NameOfShouldBeUsed.vb").WithOptions(LanguageOptions.FromVisualBasic14).WithoutIdeAnalysisCheck("VB: the callback is on the method statement header, but the issue is reported on a string in the method block. NET-5217").Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_VB12() =>

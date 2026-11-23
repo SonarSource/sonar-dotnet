@@ -23,7 +23,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class ParameterNameMatchesOriginalTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterNameMatchesOriginal>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterNameMatchesOriginal>()
+        .WithoutIdeAnalysisCheck("S927: the issue is reported on the parameters of the other part of the partial method. NET-5219");
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParameterNameMatchesOriginal>();
 
     [TestMethod]

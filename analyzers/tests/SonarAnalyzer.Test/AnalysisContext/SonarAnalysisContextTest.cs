@@ -96,6 +96,7 @@ public partial class SonarAnalysisContextTest
             // ToDo: We test that a rule is enabled only by checking the issues are reported
             testCase.Builder
                 .WithOptions(LanguageOptions.FromCSharp8)
+                .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
                 .Verify();
         }
     }
@@ -112,6 +113,7 @@ public partial class SonarAnalysisContextTest
                 testCase.Builder
                     .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
+                    .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
                     .Verify();
             }
             else
@@ -162,6 +164,7 @@ public partial class SonarAnalysisContextTest
                 testCase.Builder
                     .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
+                    .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
                     .Verify();
             }
             else
@@ -228,6 +231,7 @@ public partial class SonarAnalysisContextTest
                     {
                         testCase.Builder
                             .WithOptions(LanguageOptions.FromCSharp8)
+                            .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637")
                             .Verify();
                     }
                 }

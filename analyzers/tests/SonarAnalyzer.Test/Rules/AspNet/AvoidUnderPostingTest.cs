@@ -32,7 +32,8 @@ public class AvoidUnderPostingTest
 
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
             .WithBasePath("AspNet")
-            .AddReferences([.. AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4"), .. NuGetMetadataReference.NewtonsoftJson("13.0.3")]);
+            .AddReferences([.. AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4"), .. NuGetMetadataReference.NewtonsoftJson("13.0.3")])
+        .WithoutIdeAnalysisCheck("S6964: the callback is on the controller action, but the issue is reported on a property of the model, which can be in another file. By design. NET-5179");
 
     [TestMethod]
     public void AvoidUnderPosting_CSharp() =>

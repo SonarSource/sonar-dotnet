@@ -22,7 +22,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DoNotExposeListTTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotExposeListT>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotExposeListT>()
+        .WithoutIdeAnalysisCheck("S3956: the callback is on the field declarator, but the issue is reported on the type of the whole declaration. NET-5218");
 
     [TestMethod]
     public void DoNotExposeListT() =>

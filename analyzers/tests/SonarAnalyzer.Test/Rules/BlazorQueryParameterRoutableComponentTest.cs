@@ -46,6 +46,7 @@ public class BlazorQueryParameterRoutableComponentTest
                 "BlazorQueryParameterRoutableComponent.Latest.Partial.1.razor.cs",
                 "BlazorQueryParameterRoutableComponent.Latest.Partial.2.razor.cs")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .WithoutIdeAnalysisCheck("Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179")
             .Verify();
 
     [TestMethod]

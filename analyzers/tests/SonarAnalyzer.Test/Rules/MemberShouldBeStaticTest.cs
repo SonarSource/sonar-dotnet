@@ -113,6 +113,7 @@ public class MemberShouldBeStaticTest
             .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
+            .WithoutIdeAnalysisCheck("Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179")
             .Verify();
 
     [TestMethod]

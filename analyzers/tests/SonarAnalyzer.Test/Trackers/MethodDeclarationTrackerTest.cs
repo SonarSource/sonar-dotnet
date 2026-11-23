@@ -96,7 +96,7 @@ public class MethodDeclarationTrackerTest
             //                             ^
             }
             """;
-        new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(LanguageOptions.FromCSharp9).Verify();
+        new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(LanguageOptions.FromCSharp9).WithoutIdeAnalysisCheck("No rule uses MethodDeclarationTracker. It reports the accessors of a property, indexer or event on the identifier of the member, outside of the accessor. By design. NET-5179").Verify();
     }
 
 #endif
@@ -162,7 +162,7 @@ public class MethodDeclarationTrackerTest
 
             End Class
             """;
-        new VerifierBuilder<TestRule_VB>().AddSnippet(code).Verify();
+        new VerifierBuilder<TestRule_VB>().AddSnippet(code).WithoutIdeAnalysisCheck("No rule uses MethodDeclarationTracker. It reports the accessors of a property, indexer or event on the identifier of the member, outside of the accessor. By design. NET-5179").Verify();
     }
 
     private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)

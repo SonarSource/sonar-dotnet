@@ -31,7 +31,7 @@ public class PropertyWriteOnlyTest
 
     [TestMethod]
     public void PropertyWriteOnly_CS_Latest() =>
-        builderCS.AddPaths("PropertyWriteOnly.Latest.cs", "PropertyWriteOnly.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths("PropertyWriteOnly.Latest.cs", "PropertyWriteOnly.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).WithoutIdeAnalysisCheck("Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179").Verify();
 
     [TestMethod]
     public void PropertyWriteOnly_VB() =>

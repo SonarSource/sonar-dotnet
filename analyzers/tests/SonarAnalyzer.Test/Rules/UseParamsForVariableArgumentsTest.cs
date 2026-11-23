@@ -31,5 +31,5 @@ public class UseParamsForVariableArgumentsTest
 
     [TestMethod]
     public void UseParamsForVariableArguments_CSharpLatest() =>
-        builder.AddPaths("UseParamsForVariableArguments.Latest.cs", "UseParamsForVariableArguments.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("UseParamsForVariableArguments.Latest.cs", "UseParamsForVariableArguments.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).WithoutIdeAnalysisCheck("Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179").Verify();
 }

@@ -34,5 +34,5 @@ public class VariableShadowsFieldTest
 
     [TestMethod]
     public void VariableShadowsField_CS_Latest() =>
-        builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).WithoutIdeAnalysisCheck("Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179").Verify();
 }

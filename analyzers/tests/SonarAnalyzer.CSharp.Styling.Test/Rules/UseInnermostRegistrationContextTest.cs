@@ -26,7 +26,8 @@ public class UseInnermostRegistrationContextTest
 {
     private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<UseInnermostRegistrationContext>()
         .AddReferences([MetadataReference.CreateFromFile(typeof(SonarAnalysisContext).Assembly.Location)])
-        .AddReferences(NuGetMetadataReference.MicrosoftCodeAnalysisCSharp());
+        .AddReferences(NuGetMetadataReference.MicrosoftCodeAnalysisCSharp())
+        .WithoutIdeAnalysisCheck("T0005: the callback is on the parameter, but the issue is reported on its usages in the inner scopes. By design for an internal analyzer. NET-5179");
 
     [TestMethod]
     public void UseInnermostRegistrationContext() =>

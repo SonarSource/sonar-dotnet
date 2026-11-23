@@ -27,6 +27,7 @@ public class CollectionQuerySimplificationTest
     [TestMethod]
     public void CollectionQuerySimplification() =>
         builder.AddPaths("CollectionQuerySimplification.cs")
+            .WithoutIdeAnalysisCheck("The callback is on the outer invocation, but the issue is reported on the inner invocation, which is outside of it for conditional access. NET-5221")
             .Verify();
 #if NETFRAMEWORK
 
