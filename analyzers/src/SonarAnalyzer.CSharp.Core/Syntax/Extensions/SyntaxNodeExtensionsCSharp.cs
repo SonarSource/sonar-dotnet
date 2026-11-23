@@ -16,6 +16,7 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CSharp.Core.Facade.Implementation;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
 #pragma warning disable T0046 // Move Extensions to dedicated class
@@ -124,6 +125,9 @@ public static class SyntaxNodeExtensionsCSharp
             _ => false
         };
     }
+
+    public static bool IsTypeDeclaration(this SyntaxNode node, TypeDeclarationKinds kinds) =>
+        CSharpSyntaxKindFacade.Instance.IsTypeDeclaration(node, kinds);
 
     public static string GetDeclarationTypeName(this SyntaxNode node) =>
         node.Kind() switch

@@ -49,7 +49,7 @@ public class UnsafeCodeBlocksTest
     [TestMethod]
     public void UnsafeUnion() =>
         builder.AddSnippet("""
-            unsafe union UnsafeUnion(int, string);  // FN NET-4971
+            unsafe union UnsafeUnion(int, string);  // Noncompliant
             union SafeUnion(int, string)            // Compliant
             {
                 unsafe void Method() { }            // Noncompliant

@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Facade;
+
 namespace SonarAnalyzer.Test.Syntax.Extensions;
 
 [TestClass]
@@ -196,5 +198,27 @@ public class SyntaxNodeExtensionsCSharpTest
         var newNamespaceDeclaration = namespaceDeclaration.ChangeSyntaxElement(namespaceDeclaration.WithName(SyntaxFactory.IdentifierName("M")), model, out var newModel);
         newNamespaceDeclaration.Should().BeNull();
         newModel.Should().BeNull();
+    }
+
+    [TestMethod]
+    [DataRow("class C { }", TypeDeclarationKinds.Class, true)]
+    [DataRow("class C { }", TypeDeclarationKinds.StructLike, false)]
+    [DataRow("record C;", TypeDeclarationKinds.ClassLike, true)]
+    [DataRow("record struct C;", TypeDeclarationKinds.StructLike, true)]
+    [DataRow("record struct C;", TypeDeclarationKinds.ClassLike, false)]
+    [DataRow("interface C { }", TypeDeclarationKinds.ClassOrStructLike, false)]
+    [DataRow("interface C { }", TypeDeclarationKinds.All, true)]
+    [DataRow("enum C { }", TypeDeclarationKinds.Enum, true)]
+    [DataRow("delegate void C();", TypeDeclarationKinds.Delegate, true)]
+    [DataRow("static class E { extension(int i) { } }", TypeDeclarationKinds.Extension, true)]
+    [DataRow("union C(int, string);", TypeDeclarationKinds.Union, true)]
+    [DataRow("union C(int, string);", TypeDeclarationKinds.StructLike, true)]
+    [DataRow("union C(int, string);", TypeDeclarationKinds.ClassLike, false)]
+    public void IsTypeDeclaration(string code, TypeDeclarationKinds kinds, bool expected)
+    {
+        var tree = SyntaxFactory.ParseSyntaxTree(code, new CSharpParseOptions(LanguageVersionEx.Preview), cancellationToken: TestContext.CancellationToken);
+        var node = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().Last(x => x is MemberDeclarationSyntax);
+
+        node.IsTypeDeclaration(kinds).Should().Be(expected);
     }
 }

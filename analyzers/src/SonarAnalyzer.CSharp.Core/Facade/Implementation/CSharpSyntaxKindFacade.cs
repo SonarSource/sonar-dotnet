@@ -17,18 +17,14 @@
 
 namespace SonarAnalyzer.CSharp.Core.Facade.Implementation;
 
-internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+internal sealed class CSharpSyntaxKindFacade : SyntaxKindFacadeBase<SyntaxKind>, ISyntaxKindFacade<SyntaxKind>
 {
+    public static CSharpSyntaxKindFacade Instance { get; } = new();
+
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind AttributeArgument => SyntaxKind.AttributeArgument;
     public SyntaxKind[] CastExpressions => new[] {SyntaxKind.CastExpression };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
-    public SyntaxKind[] ClassAndRecordDeclarations => new[]
-    {
-        SyntaxKind.ClassDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-    };
-    public SyntaxKind[] ClassAndModuleDeclarations => new[] { SyntaxKind.ClassDeclaration };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -64,15 +60,6 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructDeclaration;
     public SyntaxKind SubtractExpression => SyntaxKind.SubtractExpression;
-    public SyntaxKind[] TypeDeclaration => new[]
-    {
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKind.EnumDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
-    };
     public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
 
     public SyntaxKind[] LocalDeclarationKinds =>
@@ -88,4 +75,23 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKind.QueryContinuation,           // ... into x select
     ];
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
+
+    protected override SyntaxKind Kind(SyntaxNode node) =>
+        node.Kind();
+
+    protected override SyntaxKind[] MapTypeDeclaration(TypeDeclarationKinds kind) =>
+        kind switch
+        {
+            TypeDeclarationKinds.Class => [SyntaxKind.ClassDeclaration],
+            TypeDeclarationKinds.Struct => [SyntaxKind.StructDeclaration],
+            TypeDeclarationKinds.Record => [SyntaxKindEx.RecordDeclaration],
+            TypeDeclarationKinds.RecordStruct => [SyntaxKindEx.RecordStructDeclaration],
+            TypeDeclarationKinds.Union => [SyntaxKindEx.UnionDeclaration],
+            TypeDeclarationKinds.Interface => [SyntaxKind.InterfaceDeclaration],
+            TypeDeclarationKinds.Enum => [SyntaxKind.EnumDeclaration],
+            TypeDeclarationKinds.Delegate => [SyntaxKind.DelegateDeclaration],
+            TypeDeclarationKinds.Extension => [SyntaxKindEx.ExtensionBlockDeclaration],
+            TypeDeclarationKinds.Module => [],
+            _ => throw new UnexpectedValueException(nameof(kind), kind.ToString())
+        };
 }

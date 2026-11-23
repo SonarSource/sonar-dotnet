@@ -19,14 +19,6 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class ISymbolExtensions
 {
-    private static readonly SyntaxKind[] DeclarationsTypesWithPrimaryConstructor =
-    {
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration
-    };
-
     extension(ISymbol symbol)
     {
         public SyntaxToken? FirstDeclaringReferenceIdentifier =>
@@ -41,7 +33,7 @@ public static class ISymbolExtensions
         public bool IsPrimaryConstructor =>
             symbol.IsConstructor
             && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
-            && DeclarationsTypesWithPrimaryConstructor.Contains(syntax.Kind());
+            && syntax.IsTypeDeclaration(TypeDeclarationKinds.ClassLike | TypeDeclarationKinds.Struct | TypeDeclarationKinds.RecordStruct);
 
         public IEnumerable<SyntaxNode> LocationNodes(SyntaxNode node) =>
             symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));

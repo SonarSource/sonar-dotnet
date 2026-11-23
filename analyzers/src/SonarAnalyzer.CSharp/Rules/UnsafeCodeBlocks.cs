@@ -34,11 +34,7 @@ public sealed class UnsafeCodeBlocks : SonarDiagnosticAnalyzer
             SyntaxKind.UnsafeStatement);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseTypeDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseMethodDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.MethodDeclaration,

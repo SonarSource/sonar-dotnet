@@ -256,6 +256,6 @@ public class CSharp15Tls
 
 public union CertValidationUnion(int, string)
 {
-    static SslStream Make(System.IO.Stream stream, RemoteCertificateValidationCallback callback) => new SslStream(stream, false, callback); // FN NET-4986
-    static void Use(System.IO.Stream stream) => Make(stream, (sender, certificate, chain, errors) => true);
+    static SslStream Make(System.IO.Stream stream, RemoteCertificateValidationCallback callback) => new SslStream(stream, false, callback); // Noncompliant
+    static void Use(System.IO.Stream stream) => Make(stream, (sender, certificate, chain, errors) => true);  // Secondary
 }

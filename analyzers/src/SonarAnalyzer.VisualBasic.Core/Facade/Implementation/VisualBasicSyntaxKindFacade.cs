@@ -17,18 +17,12 @@
 
 namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 
-internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+internal sealed class VisualBasicSyntaxKindFacade : SyntaxKindFacadeBase<SyntaxKind>, ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind AttributeArgument => SyntaxKind.SimpleArgument;
     public SyntaxKind[] CastExpressions => new[] { SyntaxKind.CTypeExpression, SyntaxKind.DirectCastExpression };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
-    public SyntaxKind[] ClassAndRecordDeclarations => new[] { SyntaxKind.ClassBlock };
-    public SyntaxKind[] ClassAndModuleDeclarations => new[]
-    {
-        SyntaxKind.ClassBlock,
-        SyntaxKind.ModuleBlock
-    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -64,8 +58,23 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructureBlock;
     public SyntaxKind SubtractExpression => SyntaxKind.SubtractExpression;
-    public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
     public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
     public SyntaxKind[] LocalDeclarationKinds => [SyntaxKind.ModifiedIdentifier];
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
+
+    protected override SyntaxKind Kind(SyntaxNode node) =>
+        node.Kind();
+
+    protected override SyntaxKind[] MapTypeDeclaration(TypeDeclarationKinds kind) =>
+        kind switch
+        {
+            TypeDeclarationKinds.Class => [SyntaxKind.ClassBlock],
+            TypeDeclarationKinds.Module => [SyntaxKind.ModuleBlock],
+            TypeDeclarationKinds.Struct => [SyntaxKind.StructureBlock],
+            TypeDeclarationKinds.Interface => [SyntaxKind.InterfaceBlock],
+            TypeDeclarationKinds.Enum => [SyntaxKind.EnumBlock],
+            TypeDeclarationKinds.Delegate => [SyntaxKind.DelegateSubStatement, SyntaxKind.DelegateFunctionStatement],
+            TypeDeclarationKinds.Record or TypeDeclarationKinds.RecordStruct or TypeDeclarationKinds.Union or TypeDeclarationKinds.Extension => [],
+            _ => throw new UnexpectedValueException(nameof(kind), kind.ToString())
+        };
 }

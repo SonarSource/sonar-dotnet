@@ -53,6 +53,8 @@ public interface ISyntaxKindFacade<out TSyntaxKind> where TSyntaxKind : struct, 
     abstract TSyntaxKind StructDeclaration { get; }
     abstract TSyntaxKind SubtractExpression { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
+    abstract TSyntaxKind[] TypeDeclarations(TypeDeclarationKinds kinds);
+    abstract bool IsTypeDeclaration(SyntaxNode node, TypeDeclarationKinds kinds);
     abstract TSyntaxKind VariableDeclarator { get; }
     abstract TSyntaxKind[] LocalDeclarationKinds { get; }
     abstract TSyntaxKind WhitespaceTrivia { get; }

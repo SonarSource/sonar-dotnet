@@ -32,7 +32,7 @@ public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
 {
     protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
     protected override HashSet<SyntaxKind> MethodDeclarationKinds { get; } = [SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement];
-    protected override HashSet<SyntaxKind> TypeDeclarationKinds { get; } = CSharpFacade.Instance.SyntaxKind.TypeDeclaration.ToHashSet();
+    protected override HashSet<SyntaxKind> TypeDeclarationSyntaxKinds { get; } = CSharpFacade.Instance.SyntaxKind.TypeDeclaration.ToHashSet();
 
     internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
         argumentListNode switch

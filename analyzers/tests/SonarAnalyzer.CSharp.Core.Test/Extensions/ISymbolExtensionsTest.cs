@@ -74,4 +74,15 @@ public class ISymbolExtensionsTest
 
         methodSymbols.Count(x => x.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);
     }
+
+    [TestMethod]
+    public void IsPrimaryConstructor_Union()
+    {
+        var compiler = new SnippetCompiler("public union SymbolMember(int, string);", ignoreErrors: true, AnalyzerLanguage.CSharp, parseOptions: new CSharpParseOptions(LanguageVersionEx.Preview));
+        var typeSymbol = compiler.DeclaredSymbol<INamedTypeSymbol>("SymbolMember");
+        var constructors = typeSymbol.GetMembers().OfType<IMethodSymbol>().Where(x => x.MethodKind == MethodKind.Constructor).ToArray();
+
+        constructors.Should().NotBeEmpty();
+        constructors.Select(x => x.IsPrimaryConstructor).Should().NotContain(true);
+    }
 }

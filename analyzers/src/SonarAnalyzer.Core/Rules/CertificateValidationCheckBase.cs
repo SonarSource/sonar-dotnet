@@ -45,7 +45,7 @@ public abstract class CertificateValidationCheckBase<
 
     internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
     protected abstract HashSet<TSyntaxKind> MethodDeclarationKinds { get; }
-    protected abstract HashSet<TSyntaxKind> TypeDeclarationKinds { get; }
+    protected abstract HashSet<TSyntaxKind> TypeDeclarationSyntaxKinds { get; }
     protected abstract Location ExpressionLocation(SyntaxNode expression);
     protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
     protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
@@ -140,7 +140,7 @@ public abstract class CertificateValidationCheckBase<
     }
 
     private bool IsTypeDeclaration(SyntaxNode node) =>
-        Language.Syntax.IsAnyKind(node, TypeDeclarationKinds);
+        Language.Syntax.IsAnyKind(node, TypeDeclarationSyntaxKinds);
 
     private void TryReportLocations(InspectionContext c, Location primaryLocation, SyntaxNode expression)
     {

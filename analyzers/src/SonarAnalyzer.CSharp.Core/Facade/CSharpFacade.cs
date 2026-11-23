@@ -27,7 +27,6 @@ public sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new CSharpAssignmentFinder());
     private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new CSharpExpressionNumericConverter());
     private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new CSharpSyntaxFacade());
-    private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new CSharpSyntaxKindFacade());
     private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new CSharpTrackerFacade());
 
     public static CSharpFacade Instance => Singleton.Value;
@@ -38,7 +37,7 @@ public sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
     public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
-    public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
+    public ISyntaxKindFacade<SyntaxKind> SyntaxKind => CSharpSyntaxKindFacade.Instance;
     public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
 
     private CSharpFacade() { }
