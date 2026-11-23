@@ -245,3 +245,23 @@ public static class CSharp15ExtensionIndexers
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9796
+// https://sonarsource.atlassian.net/browse/NET-5196
+public class Repro_9796_RazorPageBase<TModel>
+{
+    public TModel Model { get; set; }
+}
+
+// Simulates the class generated from a .cshtml file with "@model StringComparison"
+public class Repro_9796 : Repro_9796_RazorPageBase<StringComparison>
+{
+    public void ExecuteAsync()
+    {
+        var text = Model switch
+        {
+            StringComparison.Ordinal => "Ordinal",
+            _ => throw new ArgumentOutOfRangeException(nameof(Model)), // Noncompliant {{The parameter name 'Model' is not declared in the argument list.}} FP
+        };
+    }
+}
