@@ -547,3 +547,28 @@ namespace CSharp15
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9807
+// https://sonarsource.atlassian.net/browse/NET-5198
+namespace Repro_9807
+{
+    public class Sample
+    {
+        private class Item
+        {
+            public string[] Filters { get; set; }
+            public bool RequiredElement() => true;
+        }
+
+        private readonly List<Item> memberItems = new List<Item>();
+
+        private IEnumerable<Item> MethodGroupInLambda(string[] values) => // Noncompliant {{Remove this parameter 'values', whose value is ignored in the method.}} FP
+            memberItems.Where(f => f.Filters.Any(values.Contains) && !f.RequiredElement());
+
+        private IEnumerable<Item> ExplicitLambdaInLambda(string[] values) =>
+            memberItems.Where(f => f.Filters.Any(x => values.Contains(x)) && !f.RequiredElement());
+
+        private bool MethodGroupOutsideLambda(string[] values) =>
+            new[] { "a" }.Any(values.Contains);
+    }
+}
