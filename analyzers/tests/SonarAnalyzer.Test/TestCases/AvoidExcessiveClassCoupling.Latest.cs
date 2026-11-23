@@ -252,3 +252,26 @@ namespace RuleExceptions
         public static bool IsNullOrEmpty(this ICollection<int> collection) => collection == null || collection.Count == 0; // +1 ICollection
     }
 }
+
+namespace CSharp15
+{
+    public union TopLevelUnion(Stream, StringReader);   // Noncompliant {{Split this union into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 1 or less.}}
+    public union SingleCaseUnion(Stream);               // Compliant, 1 dependency
+    public union UnionWithMember(int, string)           // Noncompliant
+    {
+        public Stream GetStream() => null;              // +1
+        public FileStream GetFileStream() => null;      // +1
+    }
+
+    public class OuterWithNestedUnion                   // Compliant, the nested union is analyzed on its own and not counted here (1 dependency)
+    {
+        private FileStream field;                       // +1
+
+        public union NestedUnion(Stream, StringReader); // Noncompliant
+    }
+
+    public class NestedUnionIsNotCounted                // Compliant, 0 dependencies of its own
+    {
+        public union Nested(int, string);               // Compliant
+    }
+}

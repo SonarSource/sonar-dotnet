@@ -24,6 +24,9 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its dependencies on other types from {1} to the maximum authorized {2} or less.";
         private const int ThresholdDefaultValue = 30;
 
+        // Types analyzed independently. The dependency walker skips exactly these (plus enums, which are never counted) when it meets a nested declaration.
+        private const TypeDeclarationKinds AnalyzedKinds = TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface;
+
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
@@ -89,11 +92,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         c.ReportIssue(Rule, typeDeclaration.Identifier, typeDeclaration.Keyword.ValueText, dependentTypes.Count.ToString(), Threshold.ToString());
                     }
                 },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration);
+                TypeDeclarations.Of(AnalyzedKinds));
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
             namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);
@@ -153,7 +152,7 @@ namespace SonarAnalyzer.CSharp.Rules
             //   via node.TypeSyntax() + AddDependentType, avoiding O(n²) GetSymbolInfo calls on every identifier.
             // - Nested type declarations are not drilled into; each type is analysed independently.
             //   VisitRecordDeclaration / VisitRecordStructDeclaration are not available in this Roslyn version,
-            //   so all type-declaration kinds are handled here uniformly via the facade's TypeDeclaration array.
+            //   so all analyzed type-declaration kinds are handled here uniformly.
             public override void Visit(SyntaxNode node)
             {
                 if (node is TypeSyntax)
@@ -161,7 +160,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     return;
                 }
 
-                if (node != originalTypeDeclaration && CSharpFacade.Instance.SyntaxKind.TypeDeclaration.Contains(node.Kind()))
+                if (node != originalTypeDeclaration && node.IsTypeDeclaration(AnalyzedKinds | TypeDeclarationKinds.Enum))
                 {
                     return;
                 }
