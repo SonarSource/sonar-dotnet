@@ -28,10 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="$(NuGetPackageRoot)\Microsoft.CodeAnalysis.CSharp\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll">
+    <!-- This filepath is case sensitive to build on unix -->
+    <EmbeddedResource Include="$(NuGetPackageRoot)\microsoft.codeanalysis.csharp\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll">
       <LogicalName>Microsoft.CodeAnalysis.CSharp.1.3.2.dll</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(NuGetPackageRoot)\Microsoft.CodeAnalysis.Common\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.dll">
+    <!-- This filepath is case sensitive to build on unix -->
+    <EmbeddedResource Include="$(NuGetPackageRoot)\microsoft.codeanalysis.common\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.dll">
       <LogicalName>Microsoft.CodeAnalysis.1.3.2.dll</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
