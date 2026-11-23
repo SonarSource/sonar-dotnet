@@ -132,3 +132,16 @@ namespace CSharp15
         static int field;               // Compliant, the union is not generic
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9822
+// https://sonarsource.atlassian.net/browse/NET-5200
+namespace Repro_9822
+{
+    public interface IExporter<in TParameters>
+    {
+        System.Threading.Tasks.Task ExecuteExport(TParameters queryParameters, System.Threading.CancellationToken token);
+
+        static abstract string ExportFilePrefix { get; }        // Noncompliant FP, static abstract members have no storage
+        static abstract string ExportFileSuffix { get; set; }   // Noncompliant FP
+    }
+}
