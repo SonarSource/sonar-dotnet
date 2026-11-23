@@ -15,50 +15,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.IO;
-using System.Text.RegularExpressions;
-
 namespace SonarAnalyzer.Core.AnalysisContext;
 
 public readonly record struct SonarCompilationReportingContext(SonarAnalysisContext AnalysisContext, CompilationAnalysisContext Context) : ICompilationReport, IAnalysisContext
 {
-    // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments#development-and-launchsettingsjson
-    private const string LaunchSettingsFileName = "launchSettings.json";
-
-    private static readonly TimeSpan FileNameTimeout = TimeSpan.FromMilliseconds(100);
-    private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
-    private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase, FileNameTimeout);
-
     public Compilation Compilation => Context.Compilation;
     public AnalyzerOptions Options => Context.Options;
     public CancellationToken Cancel => Context.CancellationToken;
 
-    public IEnumerable<string> WebConfigFiles()
-    {
-        return this.ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
+    public IEnumerable<string> WebConfigFiles() =>
+        this.ProjectConfiguration().FilesToAnalyze.WebConfigFiles;
 
-        static bool ShouldProcess(string path)
-        {
-            var name = Path.GetFileName(path);
-            return !name.Equals("web.debug.config", StringComparison.OrdinalIgnoreCase)
-                && name.IndexOf(".Test", StringComparison.OrdinalIgnoreCase) < 0;
-        }
-    }
-
-    public IEnumerable<string> AppSettingsFiles()
-    {
-        return this.ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
-
-        static bool ShouldProcess(string path)
-        {
-            var name = Path.GetFileName(path);
-            return !name.Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase)
-                && name.IndexOf(".Test", StringComparison.OrdinalIgnoreCase) < 0;
-        }
-    }
+    public IEnumerable<string> AppSettingsFiles() =>
+        this.ProjectConfiguration().FilesToAnalyze.AppSettingsFiles;
 
     public IEnumerable<string> LaunchSettingsFiles() =>
-        this.ProjectConfiguration().FilesToAnalyze.FindFiles(LaunchSettingsFileName);
+        this.ProjectConfiguration().FilesToAnalyze.LaunchSettingsFiles;
 
     public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

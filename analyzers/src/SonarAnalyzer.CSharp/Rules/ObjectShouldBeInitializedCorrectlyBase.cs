@@ -72,7 +72,7 @@ public abstract class ObjectShouldBeInitializedCorrectlyBase : SonarDiagnosticAn
 
     protected static bool IsWebConfigCookieSet(SonarCompilationStartAnalysisContext context, string attribute)
     {
-        foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
+        foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindWebConfigs("web.config"))
         {
             var webConfig = File.ReadAllText(fullPath);
             if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc

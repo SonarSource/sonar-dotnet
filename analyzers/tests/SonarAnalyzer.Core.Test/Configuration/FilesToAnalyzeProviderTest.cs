@@ -28,6 +28,8 @@ public class FilesToAnalyzeProviderTest
     private const string FilesToAnalyzePath = @"TestResources\FilesToAnalyze\FilesToAnalyze.txt";
     private const string InvalidFilesToAnalyzePath = @"TestResources\FilesToAnalyze\FilesToAnalyzeWithInvalidValues.txt";
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithFileName_ReturnsAllWebConfigFiles()
     {
@@ -113,6 +115,85 @@ public class FilesToAnalyzeProviderTest
             @"C:\Projects\DummyProj\VisualBasic\Controllers\HomeController.vb",
             @"C:\Projects/DummyProj/Views\Web.confiGuration"
         });
+    }
+
+    [TestMethod]
+    public void WebConfigFiles_ReturnsExistingWebConfigs_ExceptDebugAndTest()
+    {
+        var expected = new[] { TestFiles.WriteFile(TestContext, "Web.config"), TestFiles.WriteFile(TestContext, "web.Release.config") };
+        var sut = new FilesToAnalyzeProvider(TestFiles.WriteFile(TestContext, "FilesToAnalyze.txt", string.Join(
+            Environment.NewLine,
+            expected[0],
+            expected[1],
+            TestFiles.WriteFile(TestContext, "web.debug.config"),
+            TestFiles.WriteFile(TestContext, "web.Test.config"),
+            TestFiles.WriteFile(TestContext, "Web.configuration"),
+            TestFiles.TestPath(TestContext, @"NonExisting\web.config"))));
+
+        sut.WebConfigFiles.Should().BeEquivalentTo(expected);
+        sut.WebConfigFiles.Should().BeSameAs(sut.WebConfigFiles);
+    }
+
+    [TestMethod]
+    public void AppSettingsFiles_ReturnsExistingAppSettings_ExceptDevelopmentAndTest()
+    {
+        var expected = new[] { TestFiles.WriteFile(TestContext, "appsettings.json"), TestFiles.WriteFile(TestContext, "AppSettings.Production.json") };
+        var sut = new FilesToAnalyzeProvider(TestFiles.WriteFile(TestContext, "FilesToAnalyze.txt", string.Join(
+            Environment.NewLine,
+            expected[0],
+            expected[1],
+            TestFiles.WriteFile(TestContext, "appsettings.Development.json"),
+            TestFiles.WriteFile(TestContext, "appsettings.Test.json"),
+            TestFiles.WriteFile(TestContext, "appsettings.jsonc"),
+            TestFiles.TestPath(TestContext, @"NonExisting\appsettings.json"))));
+
+        sut.AppSettingsFiles.Should().BeEquivalentTo(expected);
+        sut.AppSettingsFiles.Should().BeSameAs(sut.AppSettingsFiles);
+    }
+
+    [TestMethod]
+    [DataRow("web.config", "web.config", true)]
+    [DataRow("Web.config", "WEB.CONFIG", true)]
+    [DataRow(@"Views\web.CONFIG", "web.config", true)]
+    [DataRow("web.Release.config", "web.Release.config", true)]
+    [DataRow("web.Release.config", "web.config", false)]
+    [DataRow("web.debug.config", "web.debug.config", false)]
+    [DataRow("web.Test.config", "web.Test.config", false)]
+    [DataRow("appsettings.json", "appsettings.json", false)]
+    public void FindWebConfigs_ReturnsWebConfigsWithTheFileName(string writtenFile, string fileName, bool isFound)
+    {
+        var path = TestFiles.WriteFile(TestContext, writtenFile);
+        new FilesToAnalyzeProvider(TestFiles.WriteFile(TestContext, "FilesToAnalyze.txt", path)).FindWebConfigs(fileName).Should().BeEquivalentTo(isFound ? [path] : []);
+    }
+
+    [TestMethod]
+    public void FindWebConfigs_NonExistingFile_IsNotFound() =>
+        new FilesToAnalyzeProvider(TestFiles.WriteFile(TestContext, "FilesToAnalyze.txt", TestFiles.TestPath(TestContext, "web.config"))).FindWebConfigs("web.config").Should().BeEmpty();
+
+    [TestMethod]
+    public void LaunchSettingsFiles_ReturnsExistingLaunchSettings()
+    {
+        var expected = TestFiles.WriteFile(TestContext, "LAUNCHSETTINGS.json");
+        var sut = new FilesToAnalyzeProvider(TestFiles.WriteFile(TestContext, "FilesToAnalyze.txt", string.Join(
+            Environment.NewLine,
+            expected,
+            TestFiles.WriteFile(TestContext, "launchSettings.Test.json"),
+            TestFiles.TestPath(TestContext, @"NonExisting\launchSettings.json"))));
+
+        sut.LaunchSettingsFiles.Should().BeEquivalentTo(expected);
+        sut.LaunchSettingsFiles.Should().BeSameAs(sut.LaunchSettingsFiles);
+    }
+
+    [TestMethod]
+    [DataRow(null)]
+    [DataRow(@"TestResources\FilesToAnalyze\NonExistingFile.txt")]
+    public void InvalidPath_SettingsFiles_ReturnsEmpty(string filePath)
+    {
+        var sut = new FilesToAnalyzeProvider(filePath);
+
+        sut.WebConfigFiles.Should().BeEmpty();
+        sut.AppSettingsFiles.Should().BeEmpty();
+        sut.LaunchSettingsFiles.Should().BeEmpty();
     }
 
     [TestMethod]
