@@ -42,6 +42,43 @@ public class TestMethodShouldHaveCorrectSignatureTest
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
             .Verify();
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/9844
+    // https://sonarsource.atlassian.net/browse/NET-5207
+    [TestMethod]
+    [DataRow(true, " // Noncompliant {{Make this test method 'public'.}} FP, DiscoverInternals allows MSTest to run internal test methods")]
+    [DataRow(false, " // Noncompliant {{Make this test method 'public'.}}")]
+    public void TestMethodShouldHaveCorrectSignature_MsTest_DiscoverInternals(bool hasDiscoverInternals, string expectedIssue)
+    {
+        var verifier = builder
+            .AddSnippet($$"""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                namespace MyProject.Tests
+                {
+                    [TestClass]
+                    internal class SampleTests
+                    {
+                        [TestMethod]
+                        internal void ShouldPass(){{expectedIssue}}
+                        {
+                            Assert.IsTrue(true);
+                        }
+                    }
+                }
+                """)
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest));
+        if (hasDiscoverInternals)
+        {
+            // The attribute is in a separate file, so only a compilation-level lookup can find it.
+            verifier = verifier.AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                [assembly: DiscoverInternals]
+                """);
+        }
+        verifier.Verify();
+    }
+
     [TestMethod]
     [DataRow(NUnit.Ver25)]
     [DataRow(Latest)]
