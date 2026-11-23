@@ -15,66 +15,56 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class IssueSuppression : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class IssueSuppression : SonarDiagnosticAnalyzer
+    private const string DiagnosticId = "S1309";
+    private const string MessageFormat = "Do not suppress issues.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly ImmutableArray<KnownType> SuppressMessageAttributes = ImmutableArray.Create(
+        KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute,
+        KnownType.System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        private const string DiagnosticId = "S1309";
-        private const string MessageFormat = "Do not suppress issues.";
-
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var attribute = (AttributeSyntax)c.Node;
-
-                    if (!(c.Model.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor) ||
-                        !attributeConstructor.ContainingType.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute))
-                    {
-                        return;
-                    }
-
-                    if (!(attribute.Name is IdentifierNameSyntax identifier))
-                    {
-                        identifier = (attribute.Name as QualifiedNameSyntax)?.Right as IdentifierNameSyntax;
-                    }
-
-                    if (identifier != null)
-                    {
-                        c.ReportIssue(Rule, identifier);
-                    }
-                },
-                SyntaxKind.Attribute);
-
-            context.RegisterTreeAction(
-                c =>
-                {
-                    foreach (var token in c.Tree.GetRoot().DescendantTokens())
-                    {
-                        CheckTrivias(c, token.LeadingTrivia);
-                        CheckTrivias(c, token.TrailingTrivia);
-                    }
-                });
-        }
-
-        private static void CheckTrivias(SonarSyntaxTreeReportingContext c, SyntaxTriviaList triviaList)
-        {
-            var pragmaWarnings = triviaList
-                .Where(t => t.HasStructure)
-                .Select(t => t.GetStructure())
-                .OfType<PragmaWarningDirectiveTriviaSyntax>()
-                .Where(t => t.DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword));
-
-            foreach (var pragmaWarning in pragmaWarnings)
+        context.RegisterNodeAction(
+            c =>
             {
-                c.ReportIssue(Rule, pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword));
-            }
-        }
+                var attribute = (AttributeSyntax)c.Node;
+
+                if (c.Model.GetSymbolInfo(attribute).Symbol is IMethodSymbol methodSymbol
+                    && methodSymbol.ContainingType.IsAny(SuppressMessageAttributes)
+                    && attribute.GetIdentifier() is { } identifier)
+                {
+                    c.ReportIssue(Rule, identifier);
+                }
+            },
+            SyntaxKind.Attribute);
+
+        context.RegisterNodeAction(
+            c =>
+            {
+                var pragmaWarning = (PragmaWarningDirectiveTriviaSyntax)c.Node;
+                if (pragmaWarning.DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword) && !IsVisitedTwice(c, pragmaWarning))
+                {
+                    c.ReportIssue(Rule, pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword));
+                }
+            },
+            SyntaxKind.PragmaWarningDirectiveTrivia);
     }
+
+    // Some trivia is visited twice: with the method and with the enclosing declaration.
+    // - Primary constructor types (type declaration and constructor). We only want to report from the constructor visit when the pragma is in the parameter list or base arguments.
+    // - The end of file token of top-level statements (global namespace and generated Main). We only want to report from the global namespace visit.
+    private static bool IsVisitedTwice(SonarSyntaxNodeReportingContext context, PragmaWarningDirectiveTriviaSyntax pragmaWarning) =>
+        context.ContainingSymbol.Kind == SymbolKind.Method
+        && pragmaWarning.ParentTrivia.Token.Parent.AncestorsAndSelf()
+            .First(x => x is ParameterListSyntax or MemberDeclarationSyntax or CompilationUnitSyntax || x.IsKind(SyntaxKindEx.PrimaryConstructorBaseType))
+            is TypeDeclarationSyntax or CompilationUnitSyntax;
 }

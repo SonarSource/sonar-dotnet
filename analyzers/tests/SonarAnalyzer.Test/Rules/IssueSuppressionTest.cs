@@ -17,23 +17,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class IssueSuppressionTest
 {
-    [TestClass]
-    public class IssueSuppressionTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<IssueSuppression>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<IssueSuppression>();
 
-        [TestMethod]
-        public void IssueSuppression() =>
-            builder.AddPaths("IssueSuppression.cs", "IssueSuppression2.cs").WithAutogenerateConcurrentFiles(false).Verify();
+    [TestMethod]
+    public void IssueSuppression() =>
+        builder.AddPaths("IssueSuppression.cs", "IssueSuppression.Concurrent.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
-        [TestMethod]
-        public void IssueSuppression_CSharp9() =>
-            builder.AddPaths("IssueSuppression.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void IssueSuppression_TopLevelStatements() =>
+        builder.AddPaths("IssueSuppression.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void IssueSuppression_CSharp10() =>
-            builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-    }
+    [TestMethod]
+    public void IssueSuppression_CS_Latest() =>
+        builder.AddPaths("IssueSuppression.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

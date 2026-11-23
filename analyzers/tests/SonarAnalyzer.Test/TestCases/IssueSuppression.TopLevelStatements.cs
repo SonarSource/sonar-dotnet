@@ -21,3 +21,7 @@ void Method()
     }
 }
 
+#pragma warning disable XXX // Noncompliant, leading trivia of record
+record R(int X);
+
+#pragma warning disable XXX // Noncompliant, end of file is visited by both the global namespace and the generated Main

@@ -450,6 +450,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute = new("System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute");
     public static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
     public static readonly KnownType System_Diagnostics_CodeAnalysis_SuppressMessageAttribute = new("System.Diagnostics.CodeAnalysis.SuppressMessageAttribute");
+    public static readonly KnownType System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute = new("System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute");
     public static readonly KnownType System_Diagnostics_CodeAnalysis_StringSyntaxAttribute = new("System.Diagnostics.CodeAnalysis.StringSyntaxAttribute");
     public static readonly KnownType System_Diagnostics_ConditionalAttribute = new("System.Diagnostics.ConditionalAttribute");
     public static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new("System.Diagnostics.Contracts.PureAttribute");
