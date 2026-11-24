@@ -55,4 +55,18 @@ namespace Tests.Diagnostics
     {
         void M(out T p);
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-5254
+    // A method type parameter constraint that mentions T is an input position, so T cannot be 'out' (CS1961)
+    interface IRepository<T> // Noncompliant FP, 'out' is rejected by the compiler because of the constraint on Find<TDerived>
+    {
+        T Get(int id);
+        TDerived Find<TDerived>(int id) where TDerived : T;
+    }
+
+    interface IRepositoryIn<T> // Noncompliant {{Add the 'in' keyword to parameter 'T' to make it 'contravariant'.}}
+    {
+        void Add(T item);
+        TDerived Find<TDerived>(int id) where TDerived : T;  // The constraint is input-safe, 'in' is valid
+    }
 }
