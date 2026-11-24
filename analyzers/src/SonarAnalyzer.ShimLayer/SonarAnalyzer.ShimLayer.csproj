@@ -10,7 +10,7 @@
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
-    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
