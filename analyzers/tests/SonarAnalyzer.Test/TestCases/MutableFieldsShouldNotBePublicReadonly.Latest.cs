@@ -104,7 +104,19 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union IntOrBool(int, bool)
     {
-        public static readonly List<string> MutableField = new List<string> { "a", "b" }; // FN NET-4934
+        public static readonly List<string> MutableField = new List<string> { "a", "b" }; // Noncompliant NET-4934
         public static readonly ImmutableArray<string> ImmutableField = ImmutableArray.Create("a", "b");
+    }
+
+    public union InitializedInStaticConstructor(int, bool)
+    {
+        public static readonly ISet<string> MutableInCtor;   // Noncompliant
+        public static readonly ISet<string> ImmutableInCtor; // Compliant - set to immutable in ctor
+
+        static InitializedInStaticConstructor()
+        {
+            MutableInCtor = new HashSet<string> { "a", "b" };
+            ImmutableInCtor = ImmutableHashSet.Create("a", "b");
+        }
     }
 }

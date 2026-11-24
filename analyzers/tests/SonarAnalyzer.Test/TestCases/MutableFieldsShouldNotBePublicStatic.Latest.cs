@@ -126,7 +126,7 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union IntOrBool(int, bool)
     {
-        public static List<string> MutableField = new List<string> { "a", "b" }; // FN NET-4934
+        public static List<string> MutableField = new List<string> { "a", "b" }; // Noncompliant NET-4934
         public static readonly ImmutableArray<string> ImmutableField = ImmutableArray.Create("a", "b");
     }
 }
