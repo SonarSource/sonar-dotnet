@@ -23,15 +23,6 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private const string DiagnosticId = "S3398";
     private const string MessageFormat = "Move this method inside '{0}'.";
 
-    private static readonly SyntaxKind[] AnalyzedSyntaxKinds =
-    [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration
-    ];
-
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -58,7 +49,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     }
                 }
             },
-            AnalyzedSyntaxKinds);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
 
     private static bool IsPartial(TypeDeclarationSyntax type) =>
         type.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));

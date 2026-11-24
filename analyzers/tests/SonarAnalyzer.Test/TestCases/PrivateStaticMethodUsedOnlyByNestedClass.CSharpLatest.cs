@@ -121,7 +121,7 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union UnionRepro(UnionCaseA, UnionCaseB)
     {
-        private static void UsedOnlyByNestedClass() { } // FN NET-4957
+        private static void UsedOnlyByNestedClass() { } // Noncompliant
 
         public class NestedClass
         {
