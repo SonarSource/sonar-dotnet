@@ -51,11 +51,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     c.ReportIssue(Rule, typeDeclaration.Identifier, typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass.ToString());
                 },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration);
+                TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
 
             context.RegisterNodeAction(
                 c =>

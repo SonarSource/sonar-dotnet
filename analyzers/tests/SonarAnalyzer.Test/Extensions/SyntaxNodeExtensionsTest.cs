@@ -212,6 +212,13 @@ public class SyntaxNodeExtensionsTest
         SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
 
     [TestMethod]
+    public void GetDeclarationTypeName_Union()
+    {
+        var tree = CSharpSyntaxTree.ParseText("public union MyUnion(int, string);", new CSharpParseOptions(LanguageVersion.CSharp15), cancellationToken: TestContext.CancellationToken);
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(tree.GetCompilationUnitRoot(TestContext.CancellationToken).Members.Single()).Should().Be("union");
+    }
+
+    [TestMethod]
     public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
     {
         const string code = """

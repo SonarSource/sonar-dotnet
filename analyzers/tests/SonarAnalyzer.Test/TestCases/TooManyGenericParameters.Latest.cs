@@ -53,7 +53,7 @@ class Bar<T1, T2, T3>(string classParam) // Noncompliant
 }
 
 public union Union<T1, T2>(T1, T2);         // Compliant
-public union Union<T1, T2, T3>(T1, T2, T3); // FN NET-4966
+public union Union<T1, T2, T3>(T1, T2, T3); // Noncompliant {{Reduce the number of generic parameters in the 'Union' union to no more than the 2 authorized.}}
 
 public union UnionWithMethods(int, string)
 {

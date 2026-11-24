@@ -149,6 +149,7 @@ public static class SyntaxNodeExtensionsCSharp
             SyntaxKindEx.RecordDeclaration => "record",
             SyntaxKindEx.RecordStructDeclaration => "record struct",
             SyntaxKind.StructDeclaration => "struct",
+            SyntaxKindEx.UnionDeclaration => "union",
 #if DEBUG
             _ => throw new UnexpectedValueException("node.Kind()", node.Kind().ToString())
 #else

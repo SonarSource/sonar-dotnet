@@ -69,11 +69,7 @@ public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
                         }
                         CheckTypeName(c, allowedAcronyms);
                     },
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKind.InterfaceDeclaration,
-                    SyntaxKind.StructDeclaration,
-                    SyntaxKindEx.RecordDeclaration,
-                    SyntaxKindEx.RecordStructDeclaration);
+                    TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
 
                 startContext.RegisterNodeAction(c =>
                     {
