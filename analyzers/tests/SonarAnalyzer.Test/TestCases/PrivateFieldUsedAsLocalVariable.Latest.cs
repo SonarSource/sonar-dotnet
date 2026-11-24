@@ -94,7 +94,7 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union UnionRepro(UnionCaseA, UnionCaseB)
     {
-        private static int privateStaticUsed = 0; // FN NET-4956
+        private static int privateStaticUsed = 0; // Noncompliant
 
         void Foo()
         {
