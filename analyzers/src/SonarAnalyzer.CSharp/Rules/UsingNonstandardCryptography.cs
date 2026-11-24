@@ -22,14 +22,7 @@ public sealed class UsingNonstandardCryptography : UsingNonstandardCryptographyB
 {
     protected override ILanguageFacade Language => CSharpFacade.Instance;
 
-    protected override SyntaxKind[] SyntaxKinds { get; } =
-    [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
-        SyntaxKind.StructDeclaration
-    ];
+    protected override SyntaxKind[] SyntaxKinds { get; } = TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface);
 
     protected override INamedTypeSymbol DeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel model) =>
         model.GetDeclaredSymbol(typeDeclarationSyntax);

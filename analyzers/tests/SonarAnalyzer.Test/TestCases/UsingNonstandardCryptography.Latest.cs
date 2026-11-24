@@ -14,7 +14,7 @@ public abstract class CustomKeyEncapsulation : MLKem                        // F
     protected CustomKeyEncapsulation() : base(MLKemAlgorithm.MLKem768) { }
 }
 
-public union CustomTransformUnion(int, string) : ICryptoTransform          // FN NET-4993
+public union CustomTransformUnion(int, string) : ICryptoTransform          // Noncompliant NET-4993
 {
     public int InputBlockSize => throw new NotImplementedException();
     public int OutputBlockSize => throw new NotImplementedException();
