@@ -106,14 +106,14 @@ namespace CSharp15
 {
     public union GenericUnion<T>(T, string)
     {
-        internal static string field; // FN NET-5033
+        internal static string field; // Noncompliant NET-5033
 
         internal static T genericField; // Compliant, field type depends on the type parameter
     }
 
     public union GenericUnionWithProperty<T>(T, string)
     {
-        static int Property { get; set; }       // FN NET-5033
+        static int Property { get; set; }       // Noncompliant NET-5033
 
         static T GenericProperty { get; set; }  // Compliant
     }
@@ -130,6 +130,18 @@ namespace CSharp15
     public union NonGenericUnion(int, string)
     {
         static int field;               // Compliant, the union is not generic
+    }
+
+    public union GenericUnionWithGenericBase<T>(T, string) : IComparable<T>
+    {
+        static int field;               // Compliant, base type depends on the type parameter
+        public int CompareTo(T other) => 0;
+    }
+
+    public union GenericUnionWithNonGenericBase<T>(T, string) : IComparable<string>
+    {
+        static int field;               // Noncompliant
+        public int CompareTo(string other) => 0;
     }
 }
 

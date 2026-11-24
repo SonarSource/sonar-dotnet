@@ -51,11 +51,7 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
                     CheckMember(c, property, property.Identifier.GetLocation(), typeParameterNames);
                 }
             },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
 
     private static void CheckMember(SonarSyntaxNodeReportingContext context, SyntaxNode root, Location location, string[] typeParameterNames)
     {
