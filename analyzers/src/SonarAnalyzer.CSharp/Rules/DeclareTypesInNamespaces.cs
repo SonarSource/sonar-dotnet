@@ -22,15 +22,7 @@ public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override SyntaxKind[] SyntaxKinds { get; } =
-    [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKind.EnumDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
-    ];
+    protected override SyntaxKind[] SyntaxKinds { get; } = CSharpFacade.Instance.SyntaxKind.TypeDeclaration;
 
     protected override SyntaxToken ResolveTypeIdentifier(SyntaxNode declaration) =>
         ((BaseTypeDeclarationSyntax)declaration).Identifier;

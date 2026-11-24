@@ -49,11 +49,11 @@ namespace Tests.Diagnostics
     closed class ClosedInNamespace;
 }
 
-union GlobalUnion(int, string);         // FN NET-4915
+union GlobalUnion(int, string);         // Noncompliant
 
-union GlobalUnionWithNestedType(int, string)    // FN NET-4915
+union GlobalUnionWithNestedType(int, string)    // Noncompliant
 {
-    class InnerClassOfGlobalUnion { }           // Compliant NET-4916: we want to report only on the outer union (FN NET-4915)
+    class InnerClassOfGlobalUnion { }           // Compliant NET-4916: we want to report only on the outer union
 }
 
 closed class GlobalClosed;              // Noncompliant
