@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
@@ -22,7 +24,10 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
-    private static readonly SyntaxTreeValueProvider<ShouldAnalyzeTreeCache> ShouldAnalyzeValueProvider = new(x => new ShouldAnalyzeTreeCache(x));
+    // Keyed by Compilation: the decision depends on references (e.g IsTestProject).
+    internal static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, ShouldAnalyzeTreeCache>> ShouldAnalyzeTreeCaches = new();
+
+    private ConcurrentDictionary<SyntaxTree, ShouldAnalyzeTreeCache> shouldAnalyzeTreeCache;
 
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
@@ -81,10 +86,9 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         where TSonarContext : IAnalysisContext // Generic specialization: The JIT emmits a specialized version of Execute() for each struct TSonarContext, which means it gets called without boxing.
     {
         Debug.Assert(context.HasMatchingScope(AnalysisContext.SupportedDiagnostics), "SonarAnalysisContext.Execute does this check. It should never be needed here.");
-        if (!TryGetValue(sourceTree, ShouldAnalyzeValueProvider, out var shouldAnalyzeTree))
-        {
-            shouldAnalyzeTree = new ShouldAnalyzeTreeCache(sourceTree);
-        }
+        var cache = shouldAnalyzeTreeCache ??= ShouldAnalyzeTreeCaches.GetOrCreateValue(Compilation);
+        // Roslyn's TryGetValue locks twice per call: https://github.com/dotnet/roslyn/blob/da9878a16b492563fdcefc4259f2692fc07ddb24/src/Compilers/Core/Portable/DiagnosticAnalyzer/DiagnosticStartAnalysisScope.cs#L213-L217
+        var shouldAnalyzeTree = cache.GetOrAdd(sourceTree, static x => new ShouldAnalyzeTreeCache(x));
         if (shouldAnalyzeTree.ShouldAnalyze(context, generatedCodeRecognizer))
         {
             action(context);

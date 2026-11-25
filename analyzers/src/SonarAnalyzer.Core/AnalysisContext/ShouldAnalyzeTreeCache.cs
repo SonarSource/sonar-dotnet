@@ -28,7 +28,7 @@ internal class ShouldAnalyzeTreeCache
         False
     }
 
-    private readonly HashSet<string> rulesDisabledForRazor =
+    private static readonly HashSet<string> RulesDisabledForRazor =
     [
         "S103",
         "S104",
@@ -85,6 +85,5 @@ internal class ShouldAnalyzeTreeCache
     [PerformanceSensitive("")]
     private bool ShouldAnalyzeRazorFile(ImmutableArray<DiagnosticDescriptor> supportedDiagnostics) =>
         !IsRazorFile
-            || !supportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
-                || rulesDisabledForRazor.Contains(x.Id));
+        || !supportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag)) || RulesDisabledForRazor.Contains(x.Id));
 }
