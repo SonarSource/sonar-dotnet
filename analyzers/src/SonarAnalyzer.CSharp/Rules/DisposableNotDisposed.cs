@@ -255,9 +255,14 @@ public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
         || (expression.Parent is AssignmentExpressionSyntax parentAsAssignment && ReferenceEquals(expression, parentAsAssignment.Right));
 
     private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel model) =>
-        IsNewTrackedTypeObjectCreation(expression, model)
-        || IsDisposableRefStructCreation(expression, model)
-        || IsFactoryMethodInvocation(expression, model);
+        (IsNewTrackedTypeObjectCreation(expression, model)
+            || IsDisposableRefStructCreation(expression, model)
+            || IsFactoryMethodInvocation(expression, model))
+        && IsStoredAsDisposable(expression, model);
+
+    private static bool IsStoredAsDisposable(ExpressionSyntax expression, SemanticModel model) =>
+        model.GetTypeInfo(expression) is var typeInfo
+        && (typeInfo.Type.Equals(typeInfo.ConvertedType) || typeInfo.ConvertedType.DerivesOrImplementsAny(DisposableTypes));
 
     private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel model) =>
         expression?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression

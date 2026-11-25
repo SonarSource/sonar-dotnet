@@ -297,12 +297,12 @@ namespace CSharp15
     {
         public void NotDisposed(string path)
         {
-            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} NET-5015
+            FileOrText u = new FileStream(path, FileMode.Open); // FN NET-5277, a disposable stored as a union is not tracked
         }
 
         public void DisposedViaIsPattern(string path)
         {
-            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            FileOrText u = new FileStream(path, FileMode.Open); // Compliant NET-5015
             if (u is FileStream fs)
             {
                 fs.Dispose();
@@ -311,7 +311,7 @@ namespace CSharp15
 
         public void DisposedViaSwitchExpression(string path)
         {
-            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            FileOrText u = new FileStream(path, FileMode.Open); // Compliant NET-5015
             _ = u switch
             {
                 FileStream fs => Close(fs),
@@ -321,13 +321,13 @@ namespace CSharp15
 
         public void DisposedViaValueCast(string path)
         {
-            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            FileOrText u = new FileStream(path, FileMode.Open); // Compliant NET-5015
             ((IDisposable)u.Value).Dispose();
         }
 
         public void DisposedViaValueAs(string path)
         {
-            FileOrText u = new FileStream(path, FileMode.Open); // Noncompliant {{Dispose 'u' when it is no longer needed.}} FP NET-5015
+            FileOrText u = new FileStream(path, FileMode.Open); // Compliant NET-5015
             (u.Value as IDisposable)?.Dispose();
         }
 

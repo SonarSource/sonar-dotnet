@@ -108,7 +108,7 @@ namespace Tests.Diagnostics
             NoOperation(field_fs6);
             field_fs6 = new FileStream(@"c:\foo.txt", FileMode.Open); // FN - field_fs6 is re-assigned a new FileStream (and not disposed) after passing it to a method
 
-            field_fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - even if field_fs7's type is object
+            field_fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // FN NET-5277, a disposable stored as object is not tracked
 
             NoOperation(this.field_fs8);
 
@@ -207,6 +207,42 @@ namespace Tests.Diagnostics
         public void Dispose()
         {
             ((IDisposable)source).Dispose();
+        }
+    }
+
+    public class StoredAsNonDisposableType
+    {
+        public void ObjectDisposedViaCast(string path)
+        {
+            object o = new FileStream(path, FileMode.Open); // Compliant NET-5015
+            ((IDisposable)o).Dispose();
+        }
+
+        public void ObjectNotDisposed(string path)
+        {
+            object o = new FileStream(path, FileMode.Open); // FN NET-5277, a disposable stored as object is not tracked
+        }
+
+        public void ObjectAssignedNotDisposed(string path)
+        {
+            object o;
+            o = File.Create(path);                          // FN NET-5277, a disposable stored as object is not tracked
+        }
+
+        public void DynamicNotDisposed(string path)
+        {
+            dynamic d = new FileStream(path, FileMode.Open); // FN NET-5277, a disposable stored as dynamic is not tracked
+        }
+
+        public void InterfaceNotDisposed(string path)
+        {
+            IDisposable d = new FileStream(path, FileMode.Open); // Noncompliant
+        }
+
+        public void InterfaceDisposed(string path)
+        {
+            IDisposable d = new FileStream(path, FileMode.Open); // Compliant
+            d.Dispose();
         }
     }
 
