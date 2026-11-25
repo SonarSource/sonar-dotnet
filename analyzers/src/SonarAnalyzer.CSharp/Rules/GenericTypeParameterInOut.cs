@@ -43,8 +43,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            foreach (var typeParameter in interfaceType.TypeParameters
-                .Where(typeParameter => typeParameter.Variance == VarianceKind.None))
+            foreach (var typeParameter in interfaceType.TypeParameters.Where(IsVarianceCandidate))
             {
                 var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, interfaceType);
                 var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, interfaceType);
@@ -79,8 +78,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            foreach (var typeParameter in declaredSymbol.TypeParameters
-                .Where(typeParameter => typeParameter.Variance == VarianceKind.None))
+            foreach (var typeParameter in declaredSymbol.TypeParameters.Where(IsVarianceCandidate))
             {
                 var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, returnType, parameterSymbols);
                 var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, returnType, parameterSymbols);
@@ -91,6 +89,16 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
             }
         }
+
+        private static bool IsVarianceCandidate(ITypeParameterSymbol typeParameter) =>
+            typeParameter.Variance == VarianceKind.None
+            && !typeParameter.IsValueType
+            && !IsEnumConstrained(typeParameter);
+
+        private static bool IsEnumConstrained(ITypeParameterSymbol typeParameter) =>
+            typeParameter.ConstraintTypes.Any(x =>
+                x.SpecialType == SpecialType.System_Enum
+                || (x is ITypeParameterSymbol constraint && IsEnumConstrained(constraint)));
 
         #endregion
 
