@@ -163,10 +163,13 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union UnionWithNestedClass(UnionNestedCaseA, UnionNestedCaseB)
     {
-        private class NestedNotExtended { } // FN NET-4939
+        private class NestedNotExtended { } // Noncompliant NET-4939
 
         private class NestedExtended { } // Compliant, derived
         private sealed class NestedExtendedExtension : NestedExtended { }
+
+        private record NestedRecordNotExtended { }          // Noncompliant {{Private record classes which are not derived in the current assembly should be marked as 'sealed'.}}
+        private sealed record NestedSealedRecord { }        // Compliant
     }
 
     public record class UnionNestedCaseA(string Name);

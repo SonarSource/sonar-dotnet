@@ -25,15 +25,9 @@ public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnal
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly ImmutableHashSet<SyntaxKind> KindsToBeDescended = ImmutableHashSet.Create(
-        SyntaxKind.CompilationUnit,
-        SyntaxKind.NamespaceDeclaration,
-        SyntaxKindEx.FileScopedNamespaceDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration);
+    private static readonly ImmutableHashSet<SyntaxKind> KindsToBeDescended =
+        ImmutableHashSet.Create(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration, SyntaxKindEx.FileScopedNamespaceDeclaration)
+            .Union(TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
 
     private static readonly ImmutableHashSet<SyntaxKind> PossiblyVirtualKinds = ImmutableHashSet.Create(
         SyntaxKind.MethodDeclaration,
