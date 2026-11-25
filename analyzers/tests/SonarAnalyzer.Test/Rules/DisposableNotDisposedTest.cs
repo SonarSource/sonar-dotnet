@@ -27,6 +27,7 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed() =>
         builder.AddPaths("DisposableNotDisposed.cs")
+            .AddReferences(MetadataReferenceFacade.SystemDrawing)
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
             .Verify();

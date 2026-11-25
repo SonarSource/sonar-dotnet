@@ -172,6 +172,37 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/9855
+    class Repro_9855
+    {
+        void SolidBrushNotDisposed()
+        {
+            var brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black); // FN - System.Drawing.SolidBrush is not in the list of tracked types
+            Console.WriteLine(brush.Color);
+        }
+
+        void SolidBrushDisposed()
+        {
+            var brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black); // Compliant
+            Console.WriteLine(brush.Color);
+            brush.Dispose();
+        }
+
+        void SolidBrushUsing()
+        {
+            using (var brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black)) // Compliant
+            {
+                Console.WriteLine(brush.Color);
+            }
+        }
+
+        void BitmapNotDisposed()
+        {
+            var bitmap = new System.Drawing.Bitmap(1, 1); // Noncompliant - for comparison, Bitmap is tracked
+            Console.WriteLine(bitmap.Width);
+        }
+    }
+
     public class Repro_8336_1 : IDisposable
     {
         private readonly CancellationTokenSource source;
