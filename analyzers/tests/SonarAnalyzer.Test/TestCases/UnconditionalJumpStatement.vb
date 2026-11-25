@@ -438,4 +438,282 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    Public Class JumpsToOuterLoopOfAnotherKind
+
+        ' https://sonarsource.atlassian.net/browse/NET-5050
+        Public Function ContinueDoFromNestedForEach(Grid As Integer()(), C As Boolean) As Integer
+            Do
+                For Each Row In Grid
+                    If Row.Length = 0 Then Continue Do
+                Next
+                Return 1 ' Compliant, Continue Do starts the next iteration of the Do loop
+            Loop While C
+            Return 0
+        End Function
+
+        Public Function ContinueForFromNestedForEach(Grid As Integer()(), C As Boolean) As Integer
+            Do
+                For Each Row In Grid
+                    If Row.Length = 0 Then Continue For
+                Next
+                Return 1 ' Noncompliant, Continue For targets the nested For Each
+            Loop While C
+            Return 0
+        End Function
+
+        Public Function ContinueWhileFromNestedFor(C As Boolean, X As Boolean) As Integer
+            While C
+                For I As Integer = 0 To 2
+                    If X Then Continue While
+                Next
+                Return 1 ' Compliant, Continue While starts the next iteration of the While loop
+            End While
+            Return 0
+        End Function
+
+        Public Function ContinueForFromNestedForInWhile(C As Boolean, X As Boolean) As Integer
+            While C
+                For I As Integer = 0 To 2
+                    If X Then Continue For
+                Next
+                Return 1 ' Noncompliant, Continue For targets the nested For
+            End While
+            Return 0
+        End Function
+
+        Public Function ContinueForFromNestedDoWhile(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Continue For
+                Loop
+                Return 1 ' Compliant, Continue For starts the next iteration of the For loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueForLeavingDoWhile(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Continue For
+                    Return 1 ' Noncompliant, Continue For leaves the Do While loop
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueDoInDoWhileInFor(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Continue Do
+                    Return 1 ' Compliant, Continue Do starts the next iteration of the Do While loop
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueForLeavingDoWithConditionalContinueDo(Grid As Integer()(), X As Boolean) As Integer
+            For Each Row In Grid
+                Do
+                    If X Then Continue Do
+                    Continue For ' Compliant, the Do loop can iterate through Continue Do
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueDoFromNestedDoWhileInFor(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Continue Do
+                Loop
+                Return 1 ' Noncompliant, Continue Do targets the nested Do While
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueDoFromNestedForEachInSimpleDo(Grid As Integer()()) As Integer
+            Do
+                For Each Row In Grid
+                    If Row.Length = 0 Then Continue Do
+                Next
+                Return 1 ' Compliant, Continue Do starts the next iteration of the Do loop
+            Loop
+        End Function
+
+        Public Function ContinueDoFromNestedDoLoopUntil(D As Boolean, X As Boolean) As Integer
+            Do
+                Do
+                    If X Then Continue Do
+                Loop Until D
+                Return 1 ' Noncompliant, Continue Do targets the nested Do Loop Until
+            Loop
+        End Function
+
+        Public Function ContinueForFromNestedFor(X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                For J As Integer = 0 To 2
+                    If X Then Continue For
+                Next
+                Return 1 ' Noncompliant, Continue For targets the nearest For
+            Next
+            Return 0
+        End Function
+
+        Public Function ContinueDoFromNestedDoWhile(C As Boolean, D As Boolean, X As Boolean) As Integer
+            Do
+                Do While D
+                    If X Then Continue Do
+                Loop
+                Return 1 ' Noncompliant, Continue Do targets the nested Do While
+            Loop While C
+            Return 0
+        End Function
+
+        Public Function ContinueForTargetingLoopOutsideRoot(Grid As Integer()(), C As Boolean, X As Boolean) As Integer
+            For Each Row In Grid
+                While C
+                    Do
+                        If X Then Continue For
+                    Loop
+                    Return 1 ' Noncompliant, Continue For leaves the While loop
+                End While
+            Next
+            Return 0
+        End Function
+
+        ' https://sonarsource.atlassian.net/browse/NET-5050
+        Public Function UnconditionalReturnInDoWhile(C As Boolean) As Integer
+            Do While C
+                Return 1 ' Noncompliant
+            Loop
+            Return 0
+        End Function
+
+        Public Function ConditionalContinueInDoWhile(C As Boolean, X As Boolean) As Integer
+            Do While C
+                If X Then Continue Do
+                Return 1 ' Compliant
+            Loop
+            Return 0
+        End Function
+
+        Public Function UnconditionalReturnInDoUntil(C As Boolean) As Integer
+            Do Until C
+                Return 1 ' Noncompliant
+            Loop
+            Return 0
+        End Function
+
+        Public Function ContinueDoFromNestedForEachInDoUntil(Grid As Integer()(), C As Boolean) As Integer
+            Do Until C
+                For Each Row In Grid
+                    If Row.Length = 0 Then Continue Do
+                Next
+                Return 1 ' Compliant
+            Loop
+            Return 0
+        End Function
+
+        Public Function ReturnInDoWhileNestedInFor(Grid As Integer()(), C As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    For Each Row In Grid
+                        If Row.Length = 0 Then Continue Do
+                    Next
+                    Return 1 ' Compliant, the Return belongs to the nested Do While, which has a conditional Continue Do
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ExitDoFromNestedForEach(Grid As Integer()(), C As Boolean) As Integer
+            Do
+                For Each Row In Grid
+                    If Row.Length = 0 Then Exit Do
+                Next
+                Return 1 ' Noncompliant, Exit Do leaves the Do loop instead of starting its next iteration
+            Loop While C
+            Return 0
+        End Function
+
+        Public Sub UnconditionalExitDoFromNestedForEach(Grid As Integer()(), C As Boolean)
+            Do
+                For Each Row In Grid
+                    Exit Do ' Noncompliant, the For Each runs at most once, the Do loop can iterate when Grid is empty
+                Next
+            Loop While C
+        End Sub
+
+        Public Function UnconditionalExitForFromNestedForEach(Grid As Integer()(), C As Boolean) As Integer
+            Do
+                For Each Row In Grid
+                    Exit For ' Noncompliant, the For Each runs at most once
+                Next
+                If C Then Continue Do
+                Return 1 ' Compliant, Exit For targets the nested For Each
+            Loop
+        End Function
+
+        Public Function ExitWhileFromNestedFor(C As Boolean, X As Boolean) As Integer
+            While C
+                For I As Integer = 0 To 2
+                    If X Then Exit While
+                Next
+                Return 1 ' Noncompliant, Exit While leaves the While loop instead of starting its next iteration
+            End While
+            Return 0
+        End Function
+
+        Public Function ExitForFromNestedDoWhile(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Exit For
+                Loop
+                Return 1 ' Noncompliant, Exit For leaves the For loop instead of starting its next iteration
+            Next
+            Return 0
+        End Function
+
+        Public Function ExitForLeavingDoWhile(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Exit For
+                    Return 1 ' Noncompliant, Exit For leaves the Do While loop
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ExitDoInDoWhileInFor(C As Boolean, X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                Do While C
+                    If X Then Exit Do
+                    Return 1 ' Noncompliant, Exit Do leaves the Do While loop
+                Loop
+            Next
+            Return 0
+        End Function
+
+        Public Function ExitForFromNestedFor(X As Boolean) As Integer
+            For I As Integer = 0 To 2
+                For J As Integer = 0 To 2
+                    If X Then Exit For
+                Next
+                Return 1 ' Noncompliant, Exit For targets the nearest For
+            Next
+            Return 0
+        End Function
+
+        Public Function ExitDoFromNestedDoWhile(C As Boolean, D As Boolean, X As Boolean) As Integer
+            Do
+                Do While D
+                    If X Then Exit Do
+                Loop
+                Return 1 ' Noncompliant, Exit Do targets the nested Do While
+            Loop While C
+            Return 0
+        End Function
+
+    End Class
+
 End Namespace

@@ -29,6 +29,8 @@ public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<
         SyntaxKind.WhileBlock,
         SyntaxKind.DoLoopWhileBlock,
         SyntaxKind.DoLoopUntilBlock,
+        SyntaxKind.DoWhileLoopBlock,
+        SyntaxKind.DoUntilLoopBlock,
         SyntaxKind.SimpleDoLoopBlock
     };
 
@@ -66,6 +68,23 @@ public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<
             SyntaxKind.CatchBlock
         ];
 
+        private static readonly HashSet<SyntaxKind> DoLoopKinds =
+        [
+            SyntaxKind.SimpleDoLoopBlock,
+            SyntaxKind.DoWhileLoopBlock,
+            SyntaxKind.DoUntilLoopBlock,
+            SyntaxKind.DoLoopWhileBlock,
+            SyntaxKind.DoLoopUntilBlock
+        ];
+
+        private static readonly HashSet<SyntaxKind> ForLoopKinds =
+        [
+            SyntaxKind.ForBlock,
+            SyntaxKind.ForEachBlock
+        ];
+
+        private static readonly HashSet<SyntaxKind> WhileLoopKinds = [SyntaxKind.WhileBlock];
+
         protected override ISet<SyntaxKind> StatementsThatCanThrow => StatementsThatCanThrowKinds;
         protected override ISet<SyntaxKind> LambdaSyntaxes => LambdaKinds;
         protected override ISet<SyntaxKind> LocalFunctionSyntaxes => LocalFunctionKinds;
@@ -85,7 +104,18 @@ public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<
                 ? tryBlock.Statements
                 : Enumerable.Empty<StatementSyntax>();
 
-        protected override bool IsJumpToRootLoop(StatementSyntax node) => false;
+        protected override bool IsJumpToRootLoop(StatementSyntax node) =>
+            TargetLoopKinds(node) is { } targetLoopKinds
+            && rootExpression.Equals(node.Ancestors().FirstOrDefault(x => x.IsAnyKind(targetLoopKinds)));
+
+        private static ISet<SyntaxKind> TargetLoopKinds(StatementSyntax node) =>
+            node.Kind() switch
+            {
+                SyntaxKind.ContinueDoStatement or SyntaxKind.ExitDoStatement => DoLoopKinds,
+                SyntaxKind.ContinueForStatement or SyntaxKind.ExitForStatement => ForLoopKinds,
+                SyntaxKind.ContinueWhileStatement or SyntaxKind.ExitWhileStatement => WhileLoopKinds,
+                _ => null
+            };
 
         private sealed class VbLoopwalker : SafeVisualBasicSyntaxWalker
         {
@@ -97,7 +127,14 @@ public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<
             public override void VisitContinueStatement(ContinueStatementSyntax node)
             {
                 base.VisitContinueStatement(node);
-                walker.StoreVisitData(node, walker.conditionalContinues, walker.unconditionalContinues);
+                if (walker.IsJumpToRootLoop(node))
+                {
+                    walker.StoreVisitData(node, walker.conditionalContinues, walker.unconditionalContinues);
+                }
+                else
+                {
+                    walker.StoreVisitData(node, walker.conditionalTerminates, walker.unconditionalTerminates);
+                }
             }
 
             public override void VisitExitStatement(ExitStatementSyntax node)
