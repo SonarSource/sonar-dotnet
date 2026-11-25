@@ -54,11 +54,38 @@ public class IdeAnalysisCheckTest
         new VerifierBuilder<TaggedCompilationEndAnalyzer>().AddSnippet(Code).Invoking(x => x.Verify()).Should().NotThrow();
 
     [TestMethod]
+    public void Verify_MixedAnalyzer_UntaggedDescriptor_OutsideCallbackNode_Throws() =>
+        MixedBuilder(reportTagged: false)
+            .Invoking(x => x.Verify())
+            .Should().ThrowExactly<AssertFailedException>()
+            .WithMessage("*not by the per-document analysis that IDEs use*SMixed snippet0.cs@1:7*");
+
+    [TestMethod]
+    public void Verify_MixedAnalyzer_TaggedDescriptor_OutsideCallbackNode_IsSkipped() =>
+        MixedBuilder(reportTagged: true)
+            .Invoking(x => x.Verify())
+            .Should().NotThrow();
+
+    [TestMethod]
     public void Verify_CompilationEnd_NotTagged_Throws() =>
         Builder((context, g) => context.RegisterCompilationStartAction(start =>
                 start.RegisterCompilationEndAction(end => end.ReportIssue(g, TestAnalyzer.Rule, end.Compilation.SyntaxTrees.First().GetRoot().GetFirstToken().GetLocation()))))
             .Invoking(x => x.Verify()).Should().ThrowExactly<AssertFailedException>()
             .WithMessage("*not by the per-document analysis that IDEs use*STestAnalyzer snippet0.cs@1:1*isCompilationEnd: true*");
+
+    [TestMethod]
+    public void Verify_CompilationEnd_NotTagged_WithoutLocation_Throws() =>
+        CompilationEndWithoutLocation()
+            .Invoking(x => x.Verify())
+            .Should().ThrowExactly<AssertFailedException>()
+            .WithMessage("*TestAnalyzerCS register(s) a compilation end action, but none of the descriptors has the CompilationEnd tag*isCompilationEnd: true*");
+
+    [TestMethod]
+    public void Verify_CompilationEnd_NotTagged_WithoutLocation_OptOut_Passes() =>
+        CompilationEndWithoutLocation()
+            .WithoutIdeAnalysisCheck("By design")
+            .Invoking(x => x.Verify())
+            .Should().NotThrow();
 
     [TestMethod]
     [DataRow(true)]
@@ -92,6 +119,12 @@ public class IdeAnalysisCheckTest
     private static VerifierBuilder Builder(Action<SonarAnalysisContext, GeneratedCodeRecognizer> initialize) =>
         new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerCS(initialize)).AddSnippet(Code);
 
+    private static VerifierBuilder MixedBuilder(bool reportTagged) =>
+        new VerifierBuilder().AddAnalyzer(() => new MixedAnalyzer(reportTagged)).AddSnippet(Code);
+
+    private static VerifierBuilder CompilationEndWithoutLocation() =>
+        Builder((context, g) => context.RegisterCompilationStartAction(start => start.RegisterCompilationEndAction(end => end.ReportIssue(g, TestAnalyzer.Rule, null))));
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private sealed class ConcurrencyAnalyzer : SonarDiagnosticAnalyzer
     {
@@ -111,6 +144,26 @@ public class IdeAnalysisCheckTest
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(TestAnalyzer.Rule, c.Node.GetLocation()), SyntaxKind.ClassDeclaration);
+    }
+
+    // One rule ID with a tagged and an untagged descriptor, like a rule that reports from a node action and from a compilation end action. The tag is checked per descriptor.
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    private sealed class MixedAnalyzer : SonarDiagnosticAnalyzer
+    {
+        private readonly DiagnosticDescriptor untagged = AnalysisScaffolding.CreateDescriptor("SMixed", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        private readonly DiagnosticDescriptor tagged = AnalysisScaffolding.CreateDescriptor("SMixed", DiagnosticDescriptorFactory.MainSourceScopeTag, WellKnownDiagnosticTags.CompilationEnd);
+        private readonly bool reportTagged;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(untagged, tagged);
+
+        public MixedAnalyzer(bool reportTagged) =>
+            this.reportTagged = reportTagged;
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(
+                TestGeneratedCodeRecognizer.Instance,
+                c => c.ReportIssue(reportTagged ? tagged : untagged, ((ClassDeclarationSyntax)c.Node.Parent).Identifier.GetLocation()),
+                SyntaxKind.MethodDeclaration);
     }
 
     // TestAnalyzer.Rule does not have the CompilationEnd tag, so the tagged case needs its own descriptor.

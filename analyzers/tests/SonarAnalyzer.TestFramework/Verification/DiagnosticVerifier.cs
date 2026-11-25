@@ -108,7 +108,30 @@ public static class DiagnosticVerifier
         {
             throw new AssertFailedException(IdeAnalysisFailureMessage(missing));
         }
+        // Compilation end diagnostics without a source location are not part of the comparison above, so check the registered actions as well.
+        var untagged = UntaggedCompilationEndAnalyzers(perDocument, analyzers);
+        if (untagged.Length > 0)
+        {
+            throw new AssertFailedException(UntaggedCompilationEndMessage(untagged));
+        }
     }
+
+    private static DiagnosticAnalyzer[] UntaggedCompilationEndAnalyzers(CompilationWithAnalyzers compilationWithAnalyzers, DiagnosticAnalyzer[] analyzers) =>
+        analyzers
+            .Where(x => compilationWithAnalyzers.GetAnalyzerTelemetryInfoAsync(x, CancellationToken.None).Result.CompilationEndActionsCount > 0
+                        && !x.SupportedDiagnostics.Any(d => d.CustomTags.Contains(WellKnownDiagnosticTags.CompilationEnd)))
+            .ToArray();
+
+    private static string UntaggedCompilationEndMessage(DiagnosticAnalyzer[] analyzers) =>
+        $"""
+        IDE analysis check failed: {string.Join(", ", analyzers.Select(x => x.GetType().Name))} register(s) a compilation end action, but none of the descriptors has the CompilationEnd tag.
+
+        Problem: per-document analysis never runs compilation end actions, and the tag is how IDEs and Roslyn analyzer RS1037 recognize such diagnostics.
+
+        What to do:
+          - Add the CompilationEnd tag to the descriptors that are reported from the compilation end action (isCompilationEnd: true), see NET-1637.
+          - The behavior is by design: call WithoutIdeAnalysisCheck("<reason: 'by design' and why, or the ticket>") on the VerifierBuilder of this test.
+        """;
 
     private static Dictionary<string, FileLinePositionSpan> ExpectedIdeDiagnostics(Diagnostic[] fullAnalysisDiagnostics, DiagnosticAnalyzer[] analyzers, HashSet<SyntaxTree> trees)
     {

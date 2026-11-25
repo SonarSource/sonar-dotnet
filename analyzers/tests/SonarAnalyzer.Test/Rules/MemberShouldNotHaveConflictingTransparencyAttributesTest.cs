@@ -22,8 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class MemberShouldNotHaveConflictingTransparencyAttributesTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldNotHaveConflictingTransparencyAttributes>()
-        .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637");
+    private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldNotHaveConflictingTransparencyAttributes>();
 
     [TestMethod]
     public void MemberShouldNotHaveConflictingTransparencyAttributes() =>

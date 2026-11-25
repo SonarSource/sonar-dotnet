@@ -26,8 +26,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public partial class UnusedPrivateMemberTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<UnusedPrivateMember>()
-        .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637");
+    private readonly VerifierBuilder builder = new VerifierBuilder<UnusedPrivateMember>();
 
     public TestContext TestContext { get; set; }
 

@@ -54,7 +54,7 @@ public abstract class RequestsWithExcessiveLengthBase<TSyntaxKind, TAttributeSyn
     protected override bool EnableConcurrentExecution => false;
 
     protected RequestsWithExcessiveLengthBase() =>
-        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isCompilationEnd: true);
 
     protected override void Initialize(SonarParametrizedAnalysisContext context)
     {

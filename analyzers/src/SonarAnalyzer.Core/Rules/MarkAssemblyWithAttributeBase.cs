@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Core.Rules
         protected override bool EnableConcurrentExecution => false;
 
         protected MarkAssemblyWithAttributeBase(string diagnosticId, string messageFormat) =>
-            rule = Language.CreateDescriptor(diagnosticId, messageFormat);
+            rule = Language.CreateDescriptor(diagnosticId, messageFormat, isCompilationEnd: true);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>

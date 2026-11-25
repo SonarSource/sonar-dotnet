@@ -22,8 +22,7 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class SetLocaleForDataTypesTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>().AddReferences(MetadataReferenceFacade.SystemData)
-            .WithoutIdeAnalysisCheck("Compilation end rule whose descriptor does not have the CompilationEnd tag. NET-1637");
+        private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>().AddReferences(MetadataReferenceFacade.SystemData);
 
         [TestMethod]
         public void SetLocaleForDataTypes() =>
