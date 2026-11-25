@@ -219,10 +219,10 @@ public class UnionCase2 { }
 
 public union UnionSample(UnionCase1, UnionCase2)
 {
-    public void Overloaded() { }            // FN NET-4982
+    public void Overloaded() { }            // Noncompliant {{All 'Overloaded' method overloads should be adjacent.}} NET-4982
     public void Overloaded(int a) { }
     public void Other() { }
-    public void Overloaded(string a) { }
+    public void Overloaded(string a) { }    // Secondary {{Non-adjacent overload}}
 }
 
 public union GroupedUnionSample(UnionCase1, UnionCase2)

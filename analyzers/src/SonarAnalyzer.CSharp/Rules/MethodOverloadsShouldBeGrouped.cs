@@ -22,15 +22,7 @@ public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGrou
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override SyntaxKind[] SyntaxKinds { get; } =
-    [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
-        SyntaxKindEx.ExtensionBlockDeclaration
-    ];
+    protected override SyntaxKind[] SyntaxKinds { get; } = TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface | TypeDeclarationKinds.Extension);
 
     protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, MemberDeclarationSyntax member) =>
         member switch
