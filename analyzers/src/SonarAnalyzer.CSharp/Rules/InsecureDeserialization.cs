@@ -39,10 +39,7 @@ public sealed class InsecureDeserialization : SonarDiagnosticAnalyzer
                     ReportOnInsecureDeserializations(c, declaration, typeSymbol);
                 }
             },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike));
 
     private static void ReportOnInsecureDeserializations(SonarSyntaxNodeReportingContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
     {
@@ -140,21 +137,9 @@ public sealed class InsecureDeserialization : SonarDiagnosticAnalyzer
             base.VisitConstructorDeclaration(node);
         }
 
-        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-        {
-            if (visitedFirstLevel)
-            {
-                // Skip nested visits. The rule will be triggered for them also.
-                return;
-            }
-
-            visitedFirstLevel = true;
-            base.VisitClassDeclaration(node);
-        }
-
         public override void Visit(SyntaxNode node)
         {
-            if (node.Kind() is SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration)
+            if (node.IsTypeDeclaration(TypeDeclarationKinds.ClassOrStructLike))
             {
                 if (visitedFirstLevel)
                 {

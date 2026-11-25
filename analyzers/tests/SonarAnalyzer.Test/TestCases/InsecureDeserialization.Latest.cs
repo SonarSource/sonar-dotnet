@@ -128,6 +128,49 @@ namespace CSharp10
                 Name = name;
         }
     }
+
+    [Serializable]
+    public struct StructWithNestedClass
+    {
+        public StructWithNestedClass(string name) // Noncompliant
+        {
+            name ??= string.Empty;
+        }
+
+        [Serializable]
+        public class Nested
+        {
+            public Nested(string name) // Noncompliant
+            {
+                name ??= string.Empty;
+            }
+        }
+
+        public class NotSerializableNested
+        {
+            public NotSerializableNested(string name) // Compliant
+            {
+                name ??= string.Empty;
+            }
+        }
+    }
+
+    [Serializable]
+    public class ClassWithNestedStruct
+    {
+        public ClassWithNestedStruct(string name) // Noncompliant
+        {
+            name ??= string.Empty;
+        }
+
+        public struct NotSerializableNested
+        {
+            public NotSerializableNested(string name) // Compliant
+            {
+                name ??= string.Empty;
+            }
+        }
+    }
 }
 
 namespace CSharp13
@@ -254,7 +297,7 @@ namespace CSharp15
     [Serializable]
     public union SerializableUnion(int, string)
     {
-        public SerializableUnion(bool flag, int other) : this(other)     // FN NET-4930
+        public SerializableUnion(bool flag, int other) : this(other)     // Noncompliant NET-4930
         {
             if (flag)
             {
@@ -269,6 +312,55 @@ namespace CSharp15
         public CompliantUnion(bool flag, int other) : this(other)
         {
             _ = flag;
+        }
+    }
+
+    [Serializable]
+    public union UnionWithNestedClass(int, string)
+    {
+        public UnionWithNestedClass(bool flag, int other) : this(other)     // Noncompliant
+        {
+            if (flag)
+            {
+                Value = 1;
+            }
+        }
+
+        [Serializable]
+        public class Nested
+        {
+            public Nested(string name) // Noncompliant
+            {
+                name ??= string.Empty;
+            }
+        }
+
+        public class NotSerializableNested
+        {
+            public NotSerializableNested(string name) // Compliant
+            {
+                name ??= string.Empty;
+            }
+        }
+    }
+
+    [Serializable]
+    public class ClassWithNestedUnion
+    {
+        public ClassWithNestedUnion(string name) // Noncompliant
+        {
+            name ??= string.Empty;
+        }
+
+        public union NotSerializableNested(int, string)
+        {
+            public NotSerializableNested(bool flag, int other) : this(other) // Compliant
+            {
+                if (flag)
+                {
+                    Value = 1;
+                }
+            }
         }
     }
 }
