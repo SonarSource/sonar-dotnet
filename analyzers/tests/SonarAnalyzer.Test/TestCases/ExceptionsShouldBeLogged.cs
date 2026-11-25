@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -1541,6 +1542,114 @@ public class TestCases
         catch
         {
             logger.LogWarning("Message!");                                          // Noncompliant
+        }
+    }
+
+    // NET-5189: A cancellation is expected, so logging it without the exception is not an issue. Remove the "FP" markers when this is fixed.
+    public void Cancellation_WithoutExceptionVariable()
+    {
+        try { }
+        catch (OperationCanceledException)
+        {
+            logger.LogInformation("Shutting down");                                 // Noncompliant FP - there is no exception variable to pass
+        }
+    }
+
+    public void Cancellation_ExceptionVariableNotUsed()
+    {
+        try { }
+        catch (OperationCanceledException e)
+        {
+            logger.LogInformation("Shutting down");                                 // Noncompliant FP
+        }
+    }
+
+    public void Cancellation_ExceptionLogged()
+    {
+        try { }
+        catch (OperationCanceledException e)
+        {
+            logger.LogInformation(e, "Shutting down");
+        }
+    }
+
+    public void Cancellation_TaskCanceledException()
+    {
+        try { }
+        catch (TaskCanceledException)
+        {
+            logger.LogInformation("Task canceled");                                 // Noncompliant FP - derives from OperationCanceledException
+        }
+    }
+
+    public void Cancellation_ExceptionFilter()
+    {
+        try { }
+        catch (Exception e) when (e is OperationCanceledException)
+        {
+            logger.LogInformation("Shutting down");                                 // Noncompliant FP
+        }
+    }
+
+    public void Cancellation_ExceptionFilterWithDeclarationPattern()
+    {
+        try { }
+        catch (Exception e) when (e is OperationCanceledException oce)
+        {
+            logger.LogInformation("Shutting down");                                 // Noncompliant FP
+        }
+    }
+
+    public void Cancellation_ExceptionFilterOnToken(System.Threading.CancellationToken token)
+    {
+        try { }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            logger.LogInformation("Shutting down");                                 // Noncompliant FP
+        }
+    }
+
+    public void Cancellation_TypeCheckInCatchBody()
+    {
+        try { }
+        catch (Exception e)
+        {
+            if (e is OperationCanceledException)
+            {
+                logger.LogInformation("Shutting down");                             // Noncompliant FP
+            }
+        }
+    }
+
+    public void Cancellation_TypeCheckInCatchBodyOtherPathLogs()
+    {
+        try { }
+        catch (Exception e)
+        {
+            if (e is OperationCanceledException)
+            {
+                logger.LogInformation("Shutting down");                             // Noncompliant FP
+                return;
+            }
+            logger.LogInformation("Failed");                                        // Secondary
+        }
+    }
+
+    public void Cancellation_ExceptionFilterExcludesCancellation()
+    {
+        try { }
+        catch (Exception e) when (!(e is OperationCanceledException))
+        {
+            logger.LogInformation("Failed");                                        // Noncompliant
+        }
+    }
+
+    public void Cancellation_OtherExceptionIsStillReported()
+    {
+        try { }
+        catch (InvalidOperationException)
+        {
+            logger.LogInformation("Failed");                                        // Noncompliant
         }
     }
 
