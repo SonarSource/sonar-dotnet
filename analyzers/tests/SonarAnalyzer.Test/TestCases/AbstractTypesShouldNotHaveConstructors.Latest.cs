@@ -59,6 +59,35 @@ namespace CSharp15
 {
     public closed class ClosedWithPublicCtor
     {
-        public ClosedWithPublicCtor() { } // FN NET-4874
+        public ClosedWithPublicCtor() { } // Noncompliant {{Change the visibility of this constructor to 'protected'.}} - NET-4874
+    }
+
+    public closed class ClosedWithInternalCtor
+    {
+        internal ClosedWithInternalCtor() { } // Noncompliant {{Change the visibility of this constructor to 'private protected'.}}
+    }
+
+    public closed class ClosedWithNonPublicCtors
+    {
+        protected ClosedWithNonPublicCtors() { }               // Compliant
+        private protected ClosedWithNonPublicCtors(int i) { }  // Compliant
+        private ClosedWithNonPublicCtors(string s) { }         // Compliant
+    }
+
+    public closed record ClosedRecordWithPublicCtor
+    {
+        public ClosedRecordWithPublicCtor(int i) { } // Noncompliant
+    }
+
+    public closed record ClosedRecordWithProtectedCtor
+    {
+        protected ClosedRecordWithProtectedCtor(int i) { } // Compliant
+    }
+
+    public closed partial class ClosedPartial { }
+
+    public partial class ClosedPartial
+    {
+        public ClosedPartial() { } // FN NET-5286
     }
 }

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (c.Node.Parent.GetModifiers().Any(SyntaxKind.AbstractKeyword))
+                    if (c.Node.Parent.GetModifiers().Any(x => x.IsKind(SyntaxKind.AbstractKeyword) || x.IsKind(SyntaxKindEx.ClosedKeyword)))
                     {
                         var invalidAccessModifier = c.Node.GetModifiers().FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
