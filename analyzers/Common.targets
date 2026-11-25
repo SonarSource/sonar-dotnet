@@ -15,6 +15,8 @@
          Pruning is applied during csproj restore but not during sln restore (NuGet bug), causing NU1004 in locked mode.
          See NET-3274 and https://github.com/NuGet/Home/issues/14272 -->
     <RestoreEnablePackagePruning>false</RestoreEnablePackagePruning>
+    <!-- Microsoft.Composition and the System.* 4.0.0 packages pulled in by System.Collections.Immutable 1.1.37 only have .NET Framework assets. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <!-- Generation of Assembly Attributes that are visible in the DLL properties -->
     <Company>SonarSource Sàrl</Company>
