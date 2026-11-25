@@ -42,6 +42,10 @@ public static class ModelBuilder
         {
             return baseline is null ? new SkipStrategy(latest.Type) : new NoChangeStrategy(latest.Type);
         }
+        else if (IsAssignableTo(latest.Type, typeof(Delegate).FullName))
+        {
+            return baseline is null ? new DelegateStrategy(latest.Type) : new NoChangeStrategy(latest.Type);
+        }
         // SyntaxNode is excluded here to always keep the SyntaxNodeStrategy branch below reachable, even once a baseline bump catches up with every member SyntaxNode currently needs the shim for.
         else if (baseline is not null
             && !IsSyntaxNode(latest.Type)
@@ -203,7 +207,6 @@ public static class ModelBuilder
 
     private static bool IsSkipped(Type type) =>
         type.IsNested
-        || IsAssignableTo(type, typeof(Delegate).FullName)
         || type.FullName == "Microsoft.CodeAnalysis.CSharpExtensions"   // The useful one is in CSharp namespace
         || type.FullName == "Microsoft.CodeAnalysis.AnalyzerConfigSet"; // Generic type constraints have IReadOnlyList<AnalyzerConfig>, and does not contain anything useful to shim
 

@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+
 namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
 public abstract class Snippet
@@ -48,6 +50,9 @@ public abstract class Snippet
         }
         return sb.ToString();
     }
+
+    public static string SerializeParameterName(ParameterInfo parameter) =>
+        SyntaxFacts.GetKeywordKind(parameter.Name) == SyntaxKind.None ? parameter.Name : $"@{parameter.Name}";
 
     protected static string Indent(int indentSize) =>
         new(' ', indentSize);

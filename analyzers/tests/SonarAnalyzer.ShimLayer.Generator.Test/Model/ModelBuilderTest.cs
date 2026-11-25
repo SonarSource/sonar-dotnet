@@ -51,7 +51,7 @@ public class ModelBuilderTest
         var latest = loader.LoadLatest();
         var type = latest.Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.SyntaxReceiverCreator").Type;
         var model = ModelBuilder.Build(latest, loader.LoadBaseline());
-        model[type].Should().BeOfType<SkipStrategy>();
+        model[type].Should().BeOfType<DelegateStrategy>();
     }
 
     [TestMethod]

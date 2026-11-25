@@ -28,6 +28,12 @@ namespace SonarAnalyzer.Core.Test.ShimLayer.Common;
 [TestClass]
 public class AccessorFactoryTest
 {
+    public delegate CollectionExpressionSyntaxWrapper TestCreatorWrapper(CollectionExpressionSyntaxWrapper node, int count);
+    public delegate void TestWrappedRefHandlerWrapper(ref CollectionExpressionSyntaxWrapper node);
+    public delegate void TestRefHandlerWrapper(CollectionExpressionSyntaxWrapper node, ref int count);
+    private delegate CollectionExpressionSyntax TestCreator(CollectionExpressionSyntax node, int count);
+    private delegate void TestRefHandler(CollectionExpressionSyntax node, ref int count);
+    private delegate void TestWrappedRefHandler(ref CollectionExpressionSyntax node);
     private delegate bool TryGetValueAccessorDelegate<T, TKey, TValue>(T instance, TKey key, out TValue value);
 
     [TestMethod]
@@ -274,6 +280,66 @@ public class AccessorFactoryTest
         var instance = new TestAnalysisContext();
         accessor(instance, x => throw new NotSupportedException("This should not be reached in fallback scenario"));
         instance.Action.Should().BeNull("Registration was never invoked, and action was not persisted");
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithFuncOfWrappedType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<TestAnalysisContext, Func<CollectionExpressionSyntaxWrapper, CollectionExpressionSyntaxWrapper>>>(typeof(TestAnalysisContext), nameof(TestAnalysisContext.RegisterFunc));
+        var instance = new TestAnalysisContext();
+        var parameter = CreateCollectionExpression();
+        accessor(instance, x => x);
+        instance.Func.Invoke(parameter).Should().BeSameAs(parameter, "parameter was wrapped, and the result unwrapped");
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithDelegateOfWrappedType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<TestAnalysisContext, TestCreatorWrapper>>(typeof(TestAnalysisContext), nameof(TestAnalysisContext.RegisterCreator));
+        var instance = new TestAnalysisContext();
+        var parameter = CreateCollectionExpression();
+        accessor(instance, (x, count) => count == 42 ? x : default);
+        instance.Creator.Invoke(parameter, 42).Should().BeSameAs(parameter, "parameter was wrapped, and the result unwrapped");
+        instance.Creator.Invoke(parameter, 0).Should().BeNull("default wrapper is unwrapped to null");
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithDelegateOfWrappedType_Null()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<TestAnalysisContext, TestCreatorWrapper>>(typeof(TestAnalysisContext), nameof(TestAnalysisContext.RegisterCreator));
+        var instance = new TestAnalysisContext();
+        accessor(instance, null);
+        instance.Creator.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithDelegateOfWrappedType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<TestAnalysisContext, TestCreatorWrapper>>(null, nameof(TestAnalysisContext.RegisterCreator));
+        var instance = new TestAnalysisContext();
+        accessor(instance, (x, count) => throw new NotSupportedException("This should not be reached in fallback scenario"));
+        instance.Creator.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithDelegateOfRefParameter_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<TestAnalysisContext, TestRefHandlerWrapper>>(typeof(TestAnalysisContext), nameof(TestAnalysisContext.RegisterRefHandler));
+        var instance = new TestAnalysisContext();
+        accessor(instance, (x, ref count) => count++);
+        var count = 1;
+        instance.RefHandler.Invoke(CreateCollectionExpression(), ref count);
+        count.Should().Be(2);
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithDelegateOfWrappedRefParameter_NotSupported()
+    {
+        var instance = new TestAnalysisContext();
+        var create = () => AccessorFactory.CreateMethod<Action<TestAnalysisContext, TestWrappedRefHandlerWrapper>>(typeof(TestAnalysisContext), nameof(TestAnalysisContext.RegisterWrappedRefHandler));
+        create.Should().Throw<NotSupportedException>()
+            .WithMessage("By-ref delegate parameter conversion from *CollectionExpressionSyntax to *CollectionExpressionSyntaxWrapper is not supported.");
+        instance.WrappedRefHandler.Should().BeNull("no accessor was created, so nothing could register");
     }
 
     [TestMethod]
@@ -549,6 +615,22 @@ public class AccessorFactoryTest
     private sealed class TestAnalysisContext
     {
         public Action<CollectionExpressionSyntax> Action;
+        public Func<CollectionExpressionSyntax, CollectionExpressionSyntax> Func;
+        public TestCreator Creator;
+        public TestRefHandler RefHandler;
+        public TestWrappedRefHandler WrappedRefHandler;
+
+        public void RegisterFunc(Func<CollectionExpressionSyntax, CollectionExpressionSyntax> func) =>
+            Func = func;
+
+        public void RegisterCreator(TestCreator creator) =>
+            Creator = creator;
+
+        public void RegisterRefHandler(TestRefHandler handler) =>
+            RefHandler = handler;
+
+        public void RegisterWrappedRefHandler(TestWrappedRefHandler handler) =>
+            WrappedRefHandler = handler;
 
         public void RegisterSomething(Action<CollectionExpressionSyntax> action) => // We receive non-wrapper type, as Roslyn runtime would.
             Action = action;

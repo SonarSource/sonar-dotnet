@@ -16,7 +16,6 @@
  */
 
 using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
@@ -103,7 +102,4 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
                 ? $"{type.Name.Substring(0, type.Name.IndexOf('`'))}<{string.Join(", ", type.GetGenericArguments().Select(TypeName))}>"
                 : type.Name;
     }
-
-    private static string SerializeParameterName(ParameterInfo parameter) =>
-        SyntaxFacts.GetKeywordKind(parameter.Name) == SyntaxKind.None ? parameter.Name : $"@{parameter.Name}";
 }

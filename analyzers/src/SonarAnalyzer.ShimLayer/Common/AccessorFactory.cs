@@ -211,15 +211,14 @@ internal static class AccessorFactory
         {
             return CreateImmutableArrayConversion(expression, expression.Type, type.GenericTypeArguments[0]);
         }
-        else if (type.Name == "Action`1"    // Action<XxxWrapper> => Action<Xxx>
-            && expression.Type.GetGenericArguments().Single() is var wrapperType
-            && typeof(IWrapper).IsAssignableFrom(wrapperType)
-            && wrapperType.GetMethod("From") is { } fromMethod)
+        else if (typeof(Delegate).IsAssignableFrom(type)    // Action<XxxWrapper> => Action<Xxx>, Func<XxxWrapper> => Func<Xxx>, XxxDelegateWrapper => XxxDelegate
+            && typeof(Delegate).IsAssignableFrom(expression.Type)
+            && !type.IsAssignableFrom(expression.Type)
+            && type.GetMethod(nameof(Action.Invoke)) is { } runtimeInvoke
+            && expression.Type.GetMethod(nameof(Action.Invoke)) is { } wrapperInvoke
+            && runtimeInvoke.GetParameters().Length == wrapperInvoke.GetParameters().Length)
         {
-            // Generate: x => expression.Invoke(XxxWrapper.From((object)x))
-            var lambdaParameter = Expression.Parameter(type.GetGenericArguments().Single(), "x");
-            var wrapped = Expression.Call(fromMethod, WrapConvert(lambdaParameter, fromMethod.GetParameters().Single().ParameterType));
-            return Expression.Lambda(type, Expression.Invoke(expression, wrapped), lambdaParameter);
+            return CreateDelegateConversion(expression, type, runtimeInvoke, wrapperInvoke);
         }
         else if (expression.Type.GetProperty("WrappedInstance") is { } wrappedInstance)
         {
@@ -228,6 +227,48 @@ internal static class AccessorFactory
         else
         {
             return WrapConvert(expression, type);
+        }
+    }
+
+    private static Expression CreateDelegateConversion(Expression wrapperDelegate, Type runtimeDelegateType, MethodInfo runtimeInvoke, MethodInfo wrapperInvoke)
+    {
+        // Returns an expression of the runtime delegate type (e.g. Action<Xxx>) that adapts wrapperDelegate for Roslyn:
+        // wrapperDelegate is null ? null : (p1, ..., pn) => (RuntimeResult)wrapperDelegate(XxxWrapper.From(p1), ..., pn).WrappedInstance
+        var lambdaParameters = runtimeInvoke.GetParameters().Select(x => Expression.Parameter(x.ParameterType, x.Name)).ToArray();
+        var arguments = lambdaParameters.Select((x, i) => ConvertDelegateArgument(x, wrapperInvoke.GetParameters()[i].ParameterType));
+        var body = (Expression)Expression.Invoke(wrapperDelegate, arguments);
+        if (body.Type.GetProperty("WrappedInstance") is { } wrappedInstance)
+        {
+            body = Expression.Property(body, wrappedInstance);
+        }
+        if (runtimeInvoke.ReturnType != typeof(void))
+        {
+            body = WrapConvert(body, runtimeInvoke.ReturnType);
+        }
+        return Expression.Condition(
+            Expression.ReferenceEqual(wrapperDelegate, Expression.Constant(null, wrapperDelegate.Type)),
+            Expression.Constant(null, runtimeDelegateType),
+            Expression.Lambda(runtimeDelegateType, body, lambdaParameters));
+    }
+
+    private static Expression ConvertDelegateArgument(ParameterExpression runtimeArgument, Type wrapperType)
+    {
+        var wrapperElementType = wrapperType.IsByRef ? wrapperType.GetElementType() : wrapperType;  // ParameterExpression.Type is the element type for ref/out/in
+        if (runtimeArgument.Type == wrapperElementType)
+        {
+            return runtimeArgument; // Also covers ref/out/in parameters that need no conversion
+        }
+        else if (wrapperType.IsByRef)
+        {
+            throw new NotSupportedException($"By-ref delegate parameter conversion from {runtimeArgument.Type} to {wrapperElementType} is not supported.");
+        }
+        else if (typeof(IWrapper).IsAssignableFrom(wrapperType) && wrapperType.GetMethod("From") is { } fromMethod)
+        {
+            return Expression.Call(fromMethod, WrapConvert(runtimeArgument, fromMethod.GetParameters().Single().ParameterType));
+        }
+        else
+        {
+            return WrapConvert(runtimeArgument, wrapperType);
         }
     }
 
@@ -285,7 +326,7 @@ internal static class AccessorFactory
 
         public AccessorTypes(Type methodDelegate, bool isStatic)
         {
-            var invoke = methodDelegate.GetMethod("Invoke");
+            var invoke = methodDelegate.GetMethod(nameof(Action.Invoke));
             var parameters = invoke.GetParameters();    // As declared in our delegates, has additional TSender compared to the runtime method
             SenderType = isStatic ? null : parameters.First().ParameterType;
             ParameterTypes = parameters.Skip(isStatic ? 0 : 1).Select(x => x.ParameterType).ToArray(); // Without TSender and TResult
