@@ -30,10 +30,19 @@ public abstract class UsingNonstandardCryptographyBase<TSyntaxKind, TTypeDeclara
         KnownType.System_Security_Cryptography_AsymmetricKeyExchangeFormatter,
         KnownType.System_Security_Cryptography_AsymmetricSignatureDeformatter,
         KnownType.System_Security_Cryptography_AsymmetricSignatureFormatter,
+        KnownType.System_Security_Cryptography_CompositeMLDsa,
+        KnownType.System_Security_Cryptography_CompositeMLKem,
         KnownType.System_Security_Cryptography_DeriveBytes,
         KnownType.System_Security_Cryptography_HashAlgorithm,
+        KnownType.System_Security_Cryptography_Hpke,
+        KnownType.System_Security_Cryptography_HpkeRecipient,
+        KnownType.System_Security_Cryptography_HpkeSender,
         KnownType.System_Security_Cryptography_ICryptoTransform,
-        KnownType.System_Security_Cryptography_SymmetricAlgorithm);
+        KnownType.System_Security_Cryptography_MLDsa,
+        KnownType.System_Security_Cryptography_MLKem,
+        KnownType.System_Security_Cryptography_SlhDsa,
+        KnownType.System_Security_Cryptography_SymmetricAlgorithm,
+        KnownType.System_Security_Cryptography_X25519DiffieHellman);
     private readonly DiagnosticDescriptor rule;
 
     protected abstract ILanguageFacade Language { get; }

@@ -614,6 +614,8 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_AsymmetricKeyExchangeFormatter = new("System.Security.Cryptography.AsymmetricKeyExchangeFormatter");
     public static readonly KnownType System_Security_Cryptography_AsymmetricSignatureDeformatter = new("System.Security.Cryptography.AsymmetricSignatureDeformatter");
     public static readonly KnownType System_Security_Cryptography_AsymmetricSignatureFormatter = new("System.Security.Cryptography.AsymmetricSignatureFormatter");
+    public static readonly KnownType System_Security_Cryptography_CompositeMLDsa = new("System.Security.Cryptography.CompositeMLDsa");
+    public static readonly KnownType System_Security_Cryptography_CompositeMLKem = new("System.Security.Cryptography.CompositeMLKem");
     public static readonly KnownType System_Security_Cryptography_CryptoConfig = new("System.Security.Cryptography.CryptoConfig");
     public static readonly KnownType System_Security_Cryptography_CryptographicOperations = new("System.Security.Cryptography.CryptographicOperations");
     public static readonly KnownType System_Security_Cryptography_CspParameters = new("System.Security.Cryptography.CspParameters");
@@ -630,9 +632,14 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_HMACMD5 = new("System.Security.Cryptography.HMACMD5");
     public static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new("System.Security.Cryptography.HMACRIPEMD160");
     public static readonly KnownType System_Security_Cryptography_HMACSHA1 = new("System.Security.Cryptography.HMACSHA1");
+    public static readonly KnownType System_Security_Cryptography_Hpke = new("System.Security.Cryptography.Hpke");
+    public static readonly KnownType System_Security_Cryptography_HpkeRecipient = new("System.Security.Cryptography.HpkeRecipient");
+    public static readonly KnownType System_Security_Cryptography_HpkeSender = new("System.Security.Cryptography.HpkeSender");
     public static readonly KnownType System_Security_Cryptography_ICryptoTransform = new("System.Security.Cryptography.ICryptoTransform");
     public static readonly KnownType System_Security_Cryptography_KeyedHashAlgorithm = new("System.Security.Cryptography.KeyedHashAlgorithm");
     public static readonly KnownType System_Security_Cryptography_MD5 = new("System.Security.Cryptography.MD5");
+    public static readonly KnownType System_Security_Cryptography_MLDsa = new("System.Security.Cryptography.MLDsa");
+    public static readonly KnownType System_Security_Cryptography_MLKem = new("System.Security.Cryptography.MLKem");
     public static readonly KnownType System_Security_Cryptography_PasswordDeriveBytes = new("System.Security.Cryptography.PasswordDeriveBytes");
     public static readonly KnownType System_Security_Cryptography_RC2 = new("System.Security.Cryptography.RC2");
     public static readonly KnownType System_Security_Cryptography_RandomNumberGenerator = new("System.Security.Cryptography.RandomNumberGenerator");
@@ -642,8 +649,10 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_RSA = new("System.Security.Cryptography.RSA");
     public static readonly KnownType System_Security_Cryptography_RSACryptoServiceProvider = new("System.Security.Cryptography.RSACryptoServiceProvider");
     public static readonly KnownType System_Security_Cryptography_SHA1 = new("System.Security.Cryptography.SHA1");
+    public static readonly KnownType System_Security_Cryptography_SlhDsa = new("System.Security.Cryptography.SlhDsa");
     public static readonly KnownType System_Security_Cryptography_SymmetricAlgorithm = new("System.Security.Cryptography.SymmetricAlgorithm");
     public static readonly KnownType System_Security_Cryptography_TripleDES = new("System.Security.Cryptography.TripleDES");
+    public static readonly KnownType System_Security_Cryptography_X25519DiffieHellman = new("System.Security.Cryptography.X25519DiffieHellman");
     public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Certificate2 = new("System.Security.Cryptography.X509Certificates.X509Certificate2");
     public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Chain = new("System.Security.Cryptography.X509Certificates.X509Chain");
     public static readonly KnownType System_Security_Cryptography_Xml_SignedXml = new("System.Security.Cryptography.Xml.SignedXml");
