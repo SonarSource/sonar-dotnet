@@ -84,12 +84,14 @@ namespace CSharp10
     {
         private static void UsedOnlyByNestedClass() { }  // Noncompliant
         private static void UsedOnlyByNestedRecord() { } // Noncompliant
+        static void ImplicitlyPrivateUsedOnlyByNestedClass() { } // Noncompliant
 
         class NestedClass
         {
             void Foo()
             {
                 UsedOnlyByNestedClass();
+                ImplicitlyPrivateUsedOnlyByNestedClass();
             }
         }
 
@@ -124,12 +126,14 @@ namespace CSharp15
     public union UnionRepro(UnionCaseA, UnionCaseB)
     {
         private static void UsedOnlyByNestedClass() { } // Noncompliant
+        static void ImplicitlyPrivateUsedOnlyByNestedClass() { } // Noncompliant
 
         public class NestedClass
         {
             void Foo()
             {
                 UsedOnlyByNestedClass();
+                ImplicitlyPrivateUsedOnlyByNestedClass();
             }
         }
 

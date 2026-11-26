@@ -142,12 +142,16 @@ class ClassContainsStruct
 struct StructContainsClass
 {
     private static void OnlyUsedByNestedClass() { }                 // Noncompliant
+    static void ImplicitlyPrivateOnlyUsedByNestedClass() { }        // Noncompliant
+    internal static void InternalOnlyUsedByNestedClass() { }        // Compliant - method is not private
 
     class NestedClass
     {
         void Foo()
         {
             OnlyUsedByNestedClass();
+            ImplicitlyPrivateOnlyUsedByNestedClass();
+            InternalOnlyUsedByNestedClass();
         }
     }
 }

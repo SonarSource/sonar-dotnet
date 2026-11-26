@@ -73,14 +73,9 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         bool IsExplicitlyPrivate() =>
             method.Modifiers.Any(SyntaxKind.PrivateKeyword) && !method.Modifiers.Any(SyntaxKind.ProtectedKeyword);
 
-        // The default accessibility for record class members is private, but for record structs (like all structs) it's internal.
         bool IsImplicitlyPrivate() =>
             !method.Modifiers.Any(x => x.Kind() is SyntaxKind.PublicKeyword or SyntaxKind.ProtectedKeyword or SyntaxKind.InternalKeyword)
-            && IsClassOrRecordClassDeclaration(containingType);
-
-        static bool IsClassOrRecordClassDeclaration(TypeDeclarationSyntax type) =>
-            type is ClassDeclarationSyntax
-            || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
+            && containingType is not InterfaceDeclarationSyntax;
     }
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
