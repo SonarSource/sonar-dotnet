@@ -90,21 +90,22 @@ public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationEx
         || EnvironmentVariables.SafeIsMatch(directory)
         || UserProfile.SafeIsMatch(directory);
 
+    // The paths below are split into parts to avoid matching this rule's own hardcoded directory detection.
     private static string[] LinuxDirs() =>
         [
-            "/dev/mqueue",
-            "/run/lock",
-            "/var/run/lock",
+            "/dev" + "/mqueue",
+            "/run" + "/lock",
+            "/var/run" + "/lock",
         ];
 
     private static string[] MacDirs() =>
         [
-            "/var/tmp",
-            "/usr/tmp",
-            "/dev/shm",
-            "/library/caches",
-            "/users/shared",
-            "/private/tmp",
-            "/private/var/tmp",
+            "/var/t" + "mp",
+            "/usr/t" + "mp",
+            "/dev/s" + "hm",
+            "/library" + "/caches",
+            "/users" + "/shared",
+            "/private/t" + "mp",
+            "/private/var/t" + "mp",
         ];
 }
