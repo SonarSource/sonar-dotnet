@@ -148,14 +148,44 @@ namespace Tests.Diagnostics.UnionTests
     public record Cat(string Name);
     public record Dog(string Name);
 
-    public union Pet(Cat, Dog) : IComparable<Pet> // FN NET-4879
+    public union Pet(Cat, Dog) : IComparable<Pet> // Noncompliant {{When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.}} NET-4879
+//               ^^^
     {
         public int CompareTo(Pet other) => 0;
     }
 
-    public union PetNonGeneric(Cat, Dog) : IComparable // FN NET-4879
+    public union PetNonGeneric(Cat, Dog) : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals, ==, !=, <, <=, >, and >=.}} NET-4879
+//               ^^^^^^^^^^^^^
     {
         public int CompareTo(object obj) => 0;
+    }
+
+    public union PetMissingEquals(Cat, Dog) : IComparable<PetMissingEquals> // Noncompliant {{When implementing IComparable<T>, you should also override Equals.}}
+    {
+        public int CompareTo(PetMissingEquals other) => 0;
+
+        public static bool operator ==(PetMissingEquals left, PetMissingEquals right) => true;
+        public static bool operator !=(PetMissingEquals left, PetMissingEquals right) => true;
+        public static bool operator <(PetMissingEquals left, PetMissingEquals right) => true;
+        public static bool operator >(PetMissingEquals left, PetMissingEquals right) => true;
+        public static bool operator <=(PetMissingEquals left, PetMissingEquals right) => true;
+        public static bool operator >=(PetMissingEquals left, PetMissingEquals right) => true;
+    }
+
+    public union PetMissingLessThan(Cat, Dog) : IComparable // Noncompliant {{When implementing IComparable, you should also override < and >.}}
+    {
+        public int CompareTo(object obj) => 0;
+
+        public override bool Equals(object obj) => false;
+        public override int GetHashCode() => 0;
+        public static bool operator ==(PetMissingLessThan left, PetMissingLessThan right) => true;
+        public static bool operator !=(PetMissingLessThan left, PetMissingLessThan right) => true;
+        public static bool operator <=(PetMissingLessThan left, PetMissingLessThan right) => true;
+        public static bool operator >=(PetMissingLessThan left, PetMissingLessThan right) => true;
+    }
+
+    public union NotComparablePet(Cat, Dog)
+    {
     }
 
     public union CompliantPet(Cat, Dog) : IComparable<CompliantPet>
@@ -164,6 +194,8 @@ namespace Tests.Diagnostics.UnionTests
 
         public override bool Equals(object obj) => false;
         public override int GetHashCode() => 0;
+        public static bool operator ==(CompliantPet left, CompliantPet right) => true;
+        public static bool operator !=(CompliantPet left, CompliantPet right) => true;
         public static bool operator <(CompliantPet left, CompliantPet right) => true;
         public static bool operator >(CompliantPet left, CompliantPet right) => true;
         public static bool operator <=(CompliantPet left, CompliantPet right) => true;

@@ -59,10 +59,7 @@ public sealed class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
                         membersToOverride.JoinAnd());
                 }
             },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike));
 
     private static IEnumerable<string> ImplementedComparableInterfaces(INamedTypeSymbol classSymbol) =>
         classSymbol.Interfaces
