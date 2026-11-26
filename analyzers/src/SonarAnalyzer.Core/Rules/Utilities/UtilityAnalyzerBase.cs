@@ -40,8 +40,6 @@ public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-    protected override bool EnableConcurrentExecution => false;
-
     protected UtilityAnalyzerBase(string diagnosticId, string title) =>
         rule = DiagnosticDescriptorFactory.CreateUtility(diagnosticId, title);
 

@@ -20,6 +20,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -234,6 +236,49 @@ public class UnitTestResultsAggregatorTest {
 
     assertThat(logTester.logs(Level.INFO)).hasSize(1);
     assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the Visual Studio Test Results file ");
+  }
+
+  @Test
+  public void aggregate_withMethodDeclarations_sameMethodInDifferentFiles_isOrderIndependent() {
+    var first = unitTest1Declarations("C:\\dev\\Playground\\Playground.Test\\UnitTest1.A.cs");
+    var second = unitTest1Declarations("C:\\dev\\Playground\\Playground.Test\\UnitTest1.B.cs");
+
+    var resultsInOrder = aggregateValidTrx(List.of(first, second));
+    var resultsReversed = aggregateValidTrx(List.of(second, first));
+
+    assertThat(resultsInOrder).containsOnlyKeys("C:\\dev\\Playground\\Playground.Test\\UnitTest1.A.cs");
+    assertThat(resultsReversed).containsOnlyKeys("C:\\dev\\Playground\\Playground.Test\\UnitTest1.A.cs");
+    var resultInOrder = resultsInOrder.get("C:\\dev\\Playground\\Playground.Test\\UnitTest1.A.cs");
+    var resultReversed = resultsReversed.get("C:\\dev\\Playground\\Playground.Test\\UnitTest1.A.cs");
+    assertThat(resultInOrder.tests()).isEqualTo(3).isEqualTo(resultReversed.tests());
+    assertThat(resultInOrder.failures()).isEqualTo(2).isEqualTo(resultReversed.failures());
+    assertThat(resultInOrder.skipped()).isEqualTo(1).isEqualTo(resultReversed.skipped());
+    assertThat(resultInOrder.errors()).isZero().isEqualTo(resultReversed.errors());
+    assertThat(resultInOrder.executionTime()).isEqualTo(22).isEqualTo(resultReversed.executionTime());
+  }
+
+  private static MethodDeclarationsInfo unitTest1Declarations(String filePath) {
+    return MethodDeclarationsInfo.newBuilder()
+      .setFilePath(filePath)
+      .setAssemblyName("Playground.Test.TestProject1")
+      .addMethodDeclarations(MethodDeclarationInfo.newBuilder()
+        .setTypeName("UnitTest1")
+        .setMethodName("TestShouldFail")
+        .build())
+      .addMethodDeclarations(MethodDeclarationInfo.newBuilder()
+        .setTypeName("UnitTest1")
+        .setMethodName("TestShouldSkip")
+        .build())
+      .addMethodDeclarations(MethodDeclarationInfo.newBuilder()
+        .setTypeName("UnitTest1")
+        .setMethodName("TestShouldError")
+        .build())
+      .build();
+  }
+
+  private static Map<String, UnitTestResults> aggregateValidTrx(List<MethodDeclarationsInfo> methodDeclarations) {
+    AggregateTestContext context = new AggregateTestContext("visualStudioTestResultsFile", "src/test/resources/visualstudio_test_results/valid.trx");
+    return new UnitTestResultsAggregator(context.config, context.settings.asConfig()).aggregate(context.fileProvider, methodDeclarations);
   }
 
   private static class AggregateTestContext {

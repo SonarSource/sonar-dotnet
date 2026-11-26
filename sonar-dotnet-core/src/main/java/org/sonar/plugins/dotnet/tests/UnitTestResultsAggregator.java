@@ -126,7 +126,8 @@ public class UnitTestResultsAggregator {
       String filePath = methodDeclaration.getFilePath();
       for (var methodDeclarationInfo : methodDeclaration.getMethodDeclarationsList()) {
         String key = assemblyName.trim() + "." + methodDeclarationInfo.getTypeName().trim() + "." + methodDeclarationInfo.getMethodName().trim();
-        results.put(key, filePath);
+        // The same method can be reported from several files and the message order is not deterministic. We keep the smallest path, so the same file wins regardless of the order.
+        results.merge(key, filePath, (existing, candidate) -> existing.compareTo(candidate) <= 0 ? existing : candidate);
       }
     }
     return results;
