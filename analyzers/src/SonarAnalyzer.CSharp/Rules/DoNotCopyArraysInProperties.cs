@@ -103,7 +103,7 @@ public sealed class DoNotCopyArraysInProperties : SonarDiagnosticAnalyzer
         public override void Visit(SyntaxNode node)
         {
             if (inGetterReturn
-                && node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)
+                && node.Kind() is SyntaxKindEx.ImplicitObjectCreationExpression or SyntaxKindEx.WithElement
                 && IsObjectCreationCopyingCollection(node))
             {
                 locations.Add(node.GetLocation());

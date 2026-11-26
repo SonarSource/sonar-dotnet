@@ -221,11 +221,11 @@ class CollectionExpressionArguments
     private HashSet<int> intSet = new();
     private Dictionary<int, string> dict = new();
 
-    public List<string> CopyFromWithElement => [with(stringList)];                                      // FN NET-4961
-    public HashSet<int> CopyWithComparerFromWithElement => [with(intSet, EqualityComparer<int>.Default)];  // FN NET-4961
+    public List<string> CopyFromWithElement => [with(stringList)];                                      // Noncompliant NET-4961
+    public HashSet<int> CopyWithComparerFromWithElement => [with(intSet, EqualityComparer<int>.Default)];  // Noncompliant NET-4961
     public Dictionary<int, string> DictionaryCopyFromWithElement
     {
-        get { return [with(dict)]; }    // FN NET-4961
+        get { return [with(dict)]; }    // Noncompliant NET-4961
     }
 
     public List<string> CompliantWithCapacity => [with(capacity: 10)];
@@ -238,9 +238,9 @@ class CollectionExpressionArgumentsSortedTypes
     private SortedDictionary<int, string> sortedDict = new();
     private SortedList<int, string> sortedList = new();
 
-    public SortedSet<int> SortedSetCopyFromWithElement => [with(sortedSet)];                                                // FN NET-4961
-    public SortedDictionary<int, string> SortedDictCopyFromWithElement => [with(sortedDict)];                               // FN NET-4961
-    public SortedList<int, string> SortedListCopyWithComparerFromWithElement => [with(sortedList, Comparer<int>.Default)];  // FN NET-4961
+    public SortedSet<int> SortedSetCopyFromWithElement => [with(sortedSet)];                                                // Noncompliant NET-4961
+    public SortedDictionary<int, string> SortedDictCopyFromWithElement => [with(sortedDict)];                               // Noncompliant NET-4961
+    public SortedList<int, string> SortedListCopyWithComparerFromWithElement => [with(sortedList, Comparer<int>.Default)];  // Noncompliant NET-4961
 
     public SortedSet<int> CompliantSortedSetWithComparer => [with(Comparer<int>.Default)];
     public SortedList<int, string> CompliantSortedListWithCapacity => [with(capacity: 10)];
@@ -250,6 +250,6 @@ class CollectionExpressionArgumentsMixed
 {
     private List<int> list = new();
 
-    public List<int> CopyFromWithElementPlusElement => [with(list), 1];                                     // FN NET-4961
-    public List<int> CopyFromWithElementPlusSpread => [with(list), ..list];                                 // FN NET-4961
+    public List<int> CopyFromWithElementPlusElement => [with(list), 1];                                     // Noncompliant NET-4961
+    public List<int> CopyFromWithElementPlusSpread => [with(list), ..list];                                 // Noncompliant NET-4961
 }
