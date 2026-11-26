@@ -192,7 +192,108 @@ public class LabeledBreakAndContinue
                     continue outer;
                 }
                 Console.WriteLine(cell);
-                break; // FN NET-4969
+                break; // Noncompliant NET-4969
+            }
+        }
+    }
+
+    public void ConditionalContinueOwnLabelThenBreak(int[][] grid)
+    {
+        foreach (var row in grid)
+        {
+            inner: foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue inner;
+                }
+                Console.WriteLine(cell);
+                break; // Compliant
+            }
+        }
+    }
+
+    public void ConditionalContinueOuterAndContinueThenBreak(int[][] grid)
+    {
+        outer: foreach (var row in grid)
+        {
+            foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue outer;
+                }
+                if (cell < 0)
+                {
+                    continue;
+                }
+                Console.WriteLine(cell);
+                break; // Compliant
+            }
+        }
+    }
+
+    public void ConditionalContinueOuterThenReturn(int[][] grid)
+    {
+        outer: foreach (var row in grid)
+        {
+            foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue outer;
+                }
+                return; // Noncompliant
+            }
+        }
+    }
+
+    public void ConditionalContinueOuterOnlyFromNestedLoop(int[][] grid)
+    {
+        outer: foreach (var row in grid)
+        {
+            foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue outer;
+                }
+                Console.WriteLine(cell);
+            }
+        }
+    }
+
+    public void ConditionalContinueOuterThenBreakFromInnermostLoop(int[][][] cube)
+    {
+        outer: foreach (var plane in cube)
+        {
+            foreach (var row in plane)
+            {
+                foreach (var cell in row)
+                {
+                    if (cell == 0)
+                    {
+                        continue outer;
+                    }
+                    Console.WriteLine(cell);
+                    break; // Noncompliant
+                }
+            }
+        }
+    }
+
+    public void ConditionalContinueStackedLabelThenBreak(int[][] grid)
+    {
+        foreach (var row in grid)
+        {
+            a: b: foreach (var cell in row)
+            {
+                if (cell == 0)
+                {
+                    continue b;
+                }
+                Console.WriteLine(cell);
+                break; // Compliant
             }
         }
     }

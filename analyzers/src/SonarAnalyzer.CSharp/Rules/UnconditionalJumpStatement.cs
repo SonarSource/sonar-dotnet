@@ -102,7 +102,11 @@ public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<
             public override void VisitContinueStatement(ContinueStatementSyntax node)
             {
                 base.VisitContinueStatement(node);
-                walker.StoreVisitData(node, walker.conditionalContinues, walker.unconditionalContinues);
+                var continuesRootLoop = node.Name is null || walker.IsJumpToRootLoop(node);
+                walker.StoreVisitData(
+                    node,
+                    continuesRootLoop ? walker.conditionalContinues : walker.conditionalTerminates,
+                    continuesRootLoop ? walker.unconditionalContinues : walker.unconditionalTerminates);
             }
 
             public override void VisitBreakStatement(BreakStatementSyntax node)
