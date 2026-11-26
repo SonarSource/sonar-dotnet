@@ -344,13 +344,38 @@ public class Dog;
 
 public union Pet(Cat, Dog)
 {
-    static int counter = 1;     // FN NET-4946
-    static string name = "X";   // FN NET-4946
+    static int counter = 1; // Noncompliant NET-4946
+    static string name = "X"; // Noncompliant NET-4946
 
     static Pet()
     {
         counter = 2;
         name = "Y";
+    }
+}
+
+public union PetReadBeforeWrite(Cat, Dog)
+{
+    static int counter = 1; // Compliant, read before being overwritten
+
+    static PetReadBeforeWrite()
+    {
+        counter = counter + 1;
+    }
+}
+
+public union PetWithoutStaticConstructor(Cat, Dog)
+{
+    static int counter = 1; // Compliant, no static constructor
+}
+
+public union PetWithStaticProperty(Cat, Dog)
+{
+    static int Counter { get; set; } = 1; // Noncompliant
+
+    static PetWithStaticProperty()
+    {
+        Counter = 2;
     }
 }
 

@@ -57,9 +57,7 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
             },
             // For record support, see details in https://github.com/SonarSource/sonar-dotnet/pull/4756
             // it is difficult to work with instance record constructors w/o raising FPs
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.Class | TypeDeclarationKinds.Struct | TypeDeclarationKinds.Union | TypeDeclarationKinds.Interface));
 
     private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
     {
