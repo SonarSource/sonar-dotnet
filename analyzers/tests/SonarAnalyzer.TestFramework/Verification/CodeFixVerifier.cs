@@ -38,21 +38,25 @@ internal class CodeFixVerifier
         this.codeFixTitle = codeFixTitle;
     }
 
-    public void VerifyWhileDocumentChanges(ParseOptions parseOptions, string pathToExpected)
+    public void VerifyWhileDocumentChanges(ParseOptions parseOptions, string pathToExpected) =>
+        Task.Run(() => VerifyWhileDocumentChangesAsync(parseOptions, pathToExpected)).GetAwaiter().GetResult();
+
+    public void VerifyFixAllProvider(FixAllProvider fixAllProvider, ParseOptions parseOptions, string pathToExpected) =>
+        Task.Run(() => VerifyFixAllProviderAsync(fixAllProvider, parseOptions, pathToExpected)).GetAwaiter().GetResult();
+
+    private async Task VerifyWhileDocumentChangesAsync(ParseOptions parseOptions, string pathToExpected)
     {
-        var state = new State(analyzer, originalDocument, parseOptions);
+        var state = await State.CreateAsync(analyzer, originalDocument, parseOptions);
         var codeFixExecuted = false;
         string codeBeforeFix;
         state.Diagnostics.Should().NotBeEmpty();
         do
         {
             codeBeforeFix = state.ActualCode;
-            if (state.Diagnostics
-                    .Where(x => codeFix.FixableDiagnosticIds.Contains(x.Id))    // Analyzer can also raise other Diagnostics that we can't fix
-                    .SelectMany(x => ActionToApply(codeFix, state.Document, x))
-                    .FirstOrDefault() is { } actionToApply)
+            var fixableDiagnostics = state.Diagnostics.Where(x => codeFix.FixableDiagnosticIds.Contains(x.Id));    // Analyzer can also raise other Diagnostics that we can't fix
+            if ((await ActionsToApply(codeFix, state.Document, fixableDiagnostics)).FirstOrDefault() is { } actionToApply)
             {
-                state = new State(analyzer, ApplyCodeFix(state.Document, actionToApply), parseOptions);
+                state = await State.CreateAsync(analyzer, await ApplyCodeFix(state.Document, actionToApply), parseOptions);
                 codeFixExecuted = true;
             }
         }
@@ -62,36 +66,46 @@ internal class CodeFixVerifier
         state.AssertExpected(pathToExpected, nameof(VerifyWhileDocumentChanges) + " updates the document until all issues are fixed, even if the fix itself creates a new issue again");
     }
 
-    public void VerifyFixAllProvider(FixAllProvider fixAllProvider, ParseOptions parseOptions, string pathToExpected)
+    private async Task VerifyFixAllProviderAsync(FixAllProvider fixAllProvider, ParseOptions parseOptions, string pathToExpected)
     {
-        var state = new State(analyzer, originalDocument, parseOptions);
+        var state = await State.CreateAsync(analyzer, originalDocument, parseOptions);
         state.Diagnostics.Should().NotBeEmpty();
 
         var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
-        var codeActionEquivalenceKey = codeFixTitle ?? CodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
+        var codeActionEquivalenceKey = codeFixTitle ?? await CodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
         var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeActionEquivalenceKey, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
-        var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
+        var codeActionToExecute = await fixAllProvider.GetFixAsync(fixAllContext);
         codeActionToExecute.Should().NotBeNull();
 
-        new State(analyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOptions)
+        (await State.CreateAsync(analyzer, await ApplyCodeFix(state.Document, codeActionToExecute), parseOptions))
             .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
     }
 
-    private string CodeFixTitle(CodeFixProvider codeFix, State state) =>
-        state.Diagnostics.SelectMany(x => ActionToApply(codeFix, state.Document, x)).First().Title;
+    private async Task<string> CodeFixTitle(CodeFixProvider codeFix, State state) =>
+        (await ActionsToApply(codeFix, state.Document, state.Diagnostics)).First().Title;
 
-    private static Document ApplyCodeFix(Document document, CodeAction codeAction)
+    private static async Task<Document> ApplyCodeFix(Document document, CodeAction codeAction)
     {
-        var operations = codeAction.GetOperationsAsync(CancellationToken.None).Result;
+        var operations = await codeAction.GetOperationsAsync(CancellationToken.None);
         var solution = operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
         return solution.GetDocument(document.Id);
     }
 
-    private IEnumerable<CodeAction> ActionToApply(CodeFixProvider codeFix, Document document, Diagnostic diagnostic)
+    private async Task<IEnumerable<CodeAction>> ActionsToApply(CodeFixProvider codeFix, Document document, IEnumerable<Diagnostic> diagnostics)
+    {
+        var actions = new List<CodeAction>();
+        foreach (var diagnostic in diagnostics)
+        {
+            actions.AddRange(await ActionToApply(codeFix, document, diagnostic));
+        }
+        return actions;
+    }
+
+    private async Task<IEnumerable<CodeAction>> ActionToApply(CodeFixProvider codeFix, Document document, Diagnostic diagnostic)
     {
         var actions = new List<CodeAction>();
         var context = new CodeFixContext(document, diagnostic, (action, _) => actions.Add(action), default);
-        codeFix.RegisterCodeFixesAsync(context).Wait();
+        await codeFix.RegisterCodeFixesAsync(context);
         return actions.Where(x => codeFixTitle is null || x.Title == codeFixTitle);
     }
 
@@ -102,31 +116,29 @@ internal class CodeFixVerifier
         public readonly string ActualCode;
         private readonly Compilation compilation;
 
-        public State(DiagnosticAnalyzer analyzer, Document document, ParseOptions parseOptions)
+        private State(Document document, ImmutableArray<Diagnostic> diagnostics, string actualCode, Compilation compilation)
+        {
+            Document = document;
+            Diagnostics = diagnostics;
+            ActualCode = actualCode;
+            this.compilation = compilation;
+        }
+
+        public static async Task<State> CreateAsync(DiagnosticAnalyzer analyzer, Document document, ParseOptions parseOptions)
         {
             var project = document.Project.WithParseOptions(parseOptions);
             document = project.GetDocument(document.Id);    // There's a new instance with the same ID
-            compilation = project.GetCompilationAsync().Result;
-            Document = document;
-            Diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, CompilationErrorBehavior.Ignore).Where(x => x.Severity != DiagnosticSeverity.Error).ToImmutableArray();
-            ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
+            var compilation = await project.GetCompilationAsync();
+            var diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, default).Where(x => x.Severity != DiagnosticSeverity.Error).ToImmutableArray();
+            var root = await document.GetSyntaxRootAsync();
+            return new State(document, diagnostics, root.GetText().ToString(), compilation);
         }
 
         public void AssertExpected(string pathToExpected, string becauseMessage)
         {
             var expected = File.ReadAllText(pathToExpected).ToUnixLineEndings();
             var actual = ActualCodeWithReplacedComments().ToUnixLineEndings();
-            try
-            {
-                actual.Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
-            }
-            catch
-            {
-                Console.WriteLine();
-                Console.WriteLine($"--- Actual content of {Path.GetFileName(pathToExpected)} ---");
-                Console.WriteLine(actual);
-                throw;
-            }
+            actual.Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
         }
 
         private string ActualCodeWithReplacedComments() =>
