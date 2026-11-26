@@ -314,16 +314,14 @@ public static class SyntaxNodeExtensionsCSharp
             PostfixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
             UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
             VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
-            { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
-                && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
-            { } localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
-            { } singleVar when SingleVariableDesignationSyntaxWrapper.IsInstance(singleVar) => ((SingleVariableDesignationSyntaxWrapper)singleVar).Identifier,
-            { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
-            { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
-                && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
-            { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
-            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { WrappedInstance: not null } expressionColon =>
-                GetIdentifier(expressionColon.Expression),
+            { As.FileScopedNamespaceDeclaration.Name: { } name } => GetIdentifier(name),
+            { As.LocalFunctionStatement: { } localFunction } => localFunction.Identifier,
+            { As.SingleVariableDesignation: { } singleVariable } => singleVariable.Identifier,
+            { As.ImplicitObjectCreationExpression: { } implicitObjectCreation } => implicitObjectCreation.NewKeyword,
+            { As.PrimaryConstructorBaseType.Type: { } type } => GetIdentifier(type),
+            { As.RefType.Type: { } type } => GetIdentifier(type),
+            { As.Subpattern.ExpressionColon: { WrappedInstance: not null } expressionColon } => GetIdentifier(expressionColon.Expression),
+            { As.WithElement: { } withElement } => withElement.WithKeyword,
             _ => null
         };
 
@@ -485,9 +483,9 @@ public static class SyntaxNodeExtensionsCSharp
             ElementAccessExpressionSyntax x => x.ArgumentList,
             ElementBindingExpressionSyntax x => x.ArgumentList,
             null => null,
-            _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
-            _ when WithElementSyntaxWrapper.IsInstance(node) => ((WithElementSyntaxWrapper)node).ArgumentList,
+            { As.PrimaryConstructorBaseType: { } primaryConstructorBaseType } => primaryConstructorBaseType.ArgumentList,
+            { As.ImplicitObjectCreationExpression: { } implicitObjectCreation } => implicitObjectCreation.ArgumentList,
+            { As.WithElement: { } withElement } => withElement.ArgumentList,
             _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
         };
 

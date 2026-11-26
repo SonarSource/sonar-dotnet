@@ -9,11 +9,15 @@ namespace CSharp15
         public int First { get; }
         public int Second { get; }
 
-        public SwappableArgsCollection(int first, int second)
+        public SwappableArgsCollection(int first, int second) // Secondary [with1, with2, with3]
         {
             First = first;
             Second = second;
         }
+
+        public SwappableArgsCollection(int first, int second, int third) : this(first, second) { } // Secondary [with4]
+
+        public SwappableArgsCollection(string first, int second) : this(0, second) { }
 
         public void Add(int item) { }
         public IEnumerator<int> GetEnumerator() => new List<int> { First, Second }.GetEnumerator();
@@ -23,10 +27,23 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions#collection-expression-arguments
     public class CollectionExpressionArgumentsRepro
     {
-        void M(int first, int second)
+        void M(int first, int second, int third, string text)
         {
-            SwappableArgsCollection c = [with(second: first, first: second)]; // FN NET-4955
+            SwappableArgsCollection c = [with(second: first, first: second)]; // Noncompliant [with1] NET-4955
+            //                           ^^^^
             SwappableArgsCollection ok = [with(first: first, second: second)]; // Compliant
+
+            SwappableArgsCollection positional = [with(second, first)];       // Noncompliant [with2]
+            SwappableArgsCollection positionalOk = [with(first, second)];     // Compliant
+
+            SwappableArgsCollection withElements = [with(second, first), 1, 2];   // Noncompliant [with3]
+            SwappableArgsCollection withElementsOk = [with(first, second), 1, 2]; // Compliant
+
+            SwappableArgsCollection threeArgs = [with(second, first, third)];   // Noncompliant [with4]
+            SwappableArgsCollection threeArgsOk = [with(first, second, third)]; // Compliant
+
+            SwappableArgsCollection differentTypes = [with(text, first)];  // Compliant, 'first' is int and cannot go to the string parameter
+            SwappableArgsCollection differentTypesOk = [with(text, second)]; // Compliant
         }
     }
 }

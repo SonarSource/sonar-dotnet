@@ -830,6 +830,7 @@ End Class";
     [DataRow("$$M(1)$$;")]
     [DataRow("_ = $$new C(1)$$;")]
     [DataRow("C c = $$new(1)$$;")]
+    [DataRow("System.Collections.Generic.List<int> l = [$$with(1)$$];")]
     public void ArgumentList_CS_InvocationObjectCreation(string statement)
     {
         var code = $$"""
@@ -1207,7 +1208,9 @@ End Class";
     [DataRow("""int $$i$$;""", "i")]                                              // VariableDeclaratorSyntax
     [DataRow("""object o = $$new()$$;""", "new")]                                 // ImplicitObjectCreationExpressionSyntax
     [DataRow("""void M(int p) { $$ref int$$ i = ref p; }""", "int")]              // RefTypeSyntax
-    [DataRow("""void M() { int.TryParse("", out var $$x$$); }""", "x")]            // SingleVariableDesignationSyntaxWrapper
+    [DataRow("""void M() { int.TryParse("", out var $$x$$); }""", "x")]           // SingleVariableDesignationSyntaxWrapper
+    [DataRow("""void M() { $$void Local() { }$$ }""", "Local")]                   // LocalFunctionStatementSyntax
+    [DataRow("""List<int> l = [$$with(1)$$];""", "with")]                         // WithElementSyntax
     public void GetIdentifier_Members(string member, string expected)
     {
         var node = TestCompiler.NodeBetweenMarkersCS($$"""

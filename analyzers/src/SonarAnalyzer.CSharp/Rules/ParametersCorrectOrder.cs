@@ -28,6 +28,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKind.BaseConstructorInitializer,
                 SyntaxKindEx.PrimaryConstructorBaseType,
                 SyntaxKindEx.ImplicitObjectCreationExpression,
+                SyntaxKindEx.WithElement,
             };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
