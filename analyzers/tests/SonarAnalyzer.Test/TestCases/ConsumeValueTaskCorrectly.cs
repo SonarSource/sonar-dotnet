@@ -375,7 +375,7 @@ namespace Tests.Diagnostics
 
         public static DifferentSyntaxes operator -(DifferentSyntaxes b, DifferentSyntaxes c)
         {
-            c.valueTask.GetAwaiter().GetResult(); // FN
+            c.valueTask.GetAwaiter().GetResult(); // FN https://sonarsource.atlassian.net/browse/NET-5306
             return null;
         }
 
@@ -383,6 +383,53 @@ namespace Tests.Diagnostics
         {
             var once = b.valueTask.Result; // Noncompliant
             return null;
+        }
+
+        public int this[int index]
+        {
+            get
+            {
+                var once = valueTask.AsTask(); // Noncompliant
+                var twice = valueTask.AsTask(); // Secondary
+                return 0;
+            }
+        }
+
+        public int this[string key]
+        {
+            get
+            {
+                if (valueTask.IsCompletedSuccessfully)
+                {
+                    return valueTask.Result; // Compliant
+                }
+                return 0;
+            }
+        }
+
+        public event System.EventHandler NoncompliantEvent
+        {
+            add
+            {
+                var once = valueTask.AsTask(); // Noncompliant
+                var twice = valueTask.AsTask(); // Secondary
+            }
+            remove { }
+        }
+
+        public event System.EventHandler CompliantEvent
+        {
+            add
+            {
+                var once = valueTask.AsTask(); // Compliant
+            }
+            remove
+            {
+                if (valueTask.IsCompletedSuccessfully)
+                {
+                    var once = valueTask.Result; // Compliant
+                }
+            }
         }
     }
 
@@ -425,7 +472,7 @@ namespace Tests.Diagnostics
         public static async Task MethodCallChain()
         {
             var stream = new ValueTaskProvider();
-            var t1 = stream.ReadAsync().AsTask(); // Noncompliant FP ReadAsync returns a new ValueTask on each invocation. t1 and t2 are not the same
+            var t1 = stream.ReadAsync().AsTask(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-1360 ReadAsync returns a new ValueTask on each invocation. t1 and t2 are not the same
             var t2 = stream.ReadAsync().AsTask(); // Secondary
 
             await Task.WhenAll(t1, t2);
@@ -433,7 +480,7 @@ namespace Tests.Diagnostics
 
         public static async Task StaticMethodCallChain()
         {
-            var t1 = Repro_1360.StaticValueTask().AsTask(); // Noncompliant FP
+            var t1 = Repro_1360.StaticValueTask().AsTask(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-1360
             var t2 = Repro_1360.StaticValueTask().AsTask(); // Secondary
 
             await Task.WhenAll(t1, t2);
@@ -450,7 +497,7 @@ namespace Tests.Diagnostics
         public static async Task MethodCallChainTwoMethods()
         {
             var c = Repro_1360.Factory();
-            var t1 = c.InstanceValueTask().AsTask(); // Noncompliant FP
+            var t1 = c.InstanceValueTask().AsTask(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-1360
             var t2 = c.InstanceValueTask().AsTask(); // Secondary
 
             await Task.WhenAll(t1, t2);

@@ -46,7 +46,10 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var walker = new ConsumeValueTaskWalker(c.Model);
-                walker.SafeVisit(c.Node);
+                if (!walker.SafeVisit(c.Node))
+                {
+                    return;
+                }
 
                 foreach (var syntaxNodes in walker.SymbolUsages.Values)
                 {
@@ -64,6 +67,8 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
             // when visiting a method or another member with logic inside, lambdas and local functions will be visited as well
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.EventDeclaration,
+            SyntaxKind.IndexerDeclaration,
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.PropertyDeclaration,
             SyntaxKind.DestructorDeclaration,
@@ -86,7 +91,7 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
         {
             this.model = model;
             SymbolUsages = new Dictionary<ISymbol, IList<SyntaxNode>>();
-            ConsumedButNotCompleted = new List<SyntaxNode>();
+            ConsumedButNotCompleted = [];
             VerifiedForSuccessfulCompletion = new HashSet<ISymbol>();
         }
 
@@ -95,9 +100,9 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
          */
         public override void VisitAwaitExpression(AwaitExpressionSyntax node)
         {
-            if (node.Expression is IdentifierNameSyntax identifierName &&
-                model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                symbol.SymbolType.OriginalDefinition.IsAny(ValueTaskTypes))
+            if (node.Expression is IdentifierNameSyntax identifierName
+                && model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol
+                && symbol.SymbolType.OriginalDefinition.IsAny(ValueTaskTypes))
             {
                 AddToSymbolUsages(symbol, identifierName);
             }
@@ -114,16 +119,16 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
         {
             if (node.Expression is MemberAccessExpressionSyntax memberAccess)
             {
-                if (node.IsMethodInvocation(ValueTaskTypes, "AsTask", model) &&
-                    GetLeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier1)
+                if (node.IsMethodInvocation(ValueTaskTypes, "AsTask", model)
+                    && LeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier1)
                 {
-                    AddToSymbolUsages(this.model.GetSymbolInfo(identifier1).Symbol, identifier1);
+                    AddToSymbolUsages(model.GetSymbolInfo(identifier1).Symbol, identifier1);
                 }
 
-                if (node.IsMethodInvocation(ValueTaskTypes, "GetResult", model) &&
-                    GetLeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier2 &&
-                    model.GetSymbolInfo(identifier2).Symbol is ISymbol symbol2 &&
-                    !VerifiedForSuccessfulCompletion.Contains(symbol2))
+                if (node.IsMethodInvocation(ValueTaskTypes, "GetResult", model)
+                    && LeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier2
+                    && model.GetSymbolInfo(identifier2).Symbol is ISymbol symbol2
+                    && !VerifiedForSuccessfulCompletion.Contains(symbol2))
                 {
                     AddToSymbolUsages(symbol2, identifier2);
                     ConsumedButNotCompleted.Add(identifier2);
@@ -139,10 +144,10 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
          */
         public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
-            if (node.IsPropertyInvocation(ValueTaskTypes, "Result", model) &&
-                GetLeftMostIdentifier(node) is IdentifierNameSyntax identifierName &&
-                this.model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                !VerifiedForSuccessfulCompletion.Contains(symbol))
+            if (node.IsPropertyInvocation(ValueTaskTypes, "Result", model)
+                && LeftMostIdentifier(node) is IdentifierNameSyntax identifierName
+                && model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol
+                && !VerifiedForSuccessfulCompletion.Contains(symbol))
             {
                 AddToSymbolUsages(symbol, identifierName);
                 ConsumedButNotCompleted.Add(identifierName);
@@ -153,24 +158,24 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
 
         public override void VisitIfStatement(IfStatementSyntax node)
         {
-            var valueTaskMemberAccess = node.Condition.DescendantNodesAndSelf().FirstOrDefault(n =>
-                n is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.IsPropertyInvocation(ValueTaskTypes, "IsCompletedSuccessfully", model));
-            if (valueTaskMemberAccess is MemberAccessExpressionSyntax member &&
-                GetLeftMostIdentifier(member) is IdentifierNameSyntax identifierName &&
-                this.model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                !VerifiedForSuccessfulCompletion.Contains(symbol))
+            var valueTaskMemberAccess = node.Condition.DescendantNodesAndSelf().FirstOrDefault(x =>
+                x is MemberAccessExpressionSyntax memberAccess
+                && memberAccess.IsPropertyInvocation(ValueTaskTypes, "IsCompletedSuccessfully", model));
+            if (valueTaskMemberAccess is MemberAccessExpressionSyntax member
+                && LeftMostIdentifier(member) is IdentifierNameSyntax identifierName
+                && model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol
+                && !VerifiedForSuccessfulCompletion.Contains(symbol))
             {
                 VerifiedForSuccessfulCompletion.Add(symbol);
             }
             base.VisitIfStatement(node);
         }
 
-        private SyntaxNode GetLeftMostIdentifier(MemberAccessExpressionSyntax memberAccess)
+        private static SyntaxNode LeftMostIdentifier(MemberAccessExpressionSyntax memberAccess)
         {
-            if (memberAccess.Expression is InvocationExpressionSyntax invocation &&
-                invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess &&
-                innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier)
+            if (memberAccess.Expression is InvocationExpressionSyntax invocation
+                && invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess
+                && innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier)
             {
                 return leftMostIdentifier;
             }
@@ -178,8 +183,8 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
             {
                 return identifierName;
             }
-            else if (memberAccess.Expression is MemberAccessExpressionSyntax leftMemberAccess &&
-                leftMemberAccess.Name is IdentifierNameSyntax name)
+            else if (memberAccess.Expression is MemberAccessExpressionSyntax leftMemberAccess
+                && leftMemberAccess.Name is IdentifierNameSyntax name)
             {
                 // gets 'task' from 'this.Task.Result' or 'Foo.Task.Result'
                 return name;
@@ -198,6 +203,5 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
                 SymbolUsages.Add(symbol, [node]);
             }
         }
-
     }
 }

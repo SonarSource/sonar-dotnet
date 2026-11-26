@@ -18,7 +18,7 @@ class Repro_FN_6779
 
             // The reason seems to be that 'GetLeftMostIdentifier' uses 'service' instead of 'service.DoThing1' as the identifier.
             // Invocation -> SimpleMember -> Invocation -> SimpleMember
-            var thing1 = service.DoThing1().AsTask(); // Noncompliant FP
+            var thing1 = service.DoThing1().AsTask(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-1847
             var thing2 = service.DoThing2().AsTask();
 //                       ^^^^^^^ Secondary
         }
@@ -36,6 +36,30 @@ class Test
 
     static async ValueTask<string> AnotherMethodAsync(ValueTask<string> task) =>
         await task;
+}
+
+class ReproMissedConsumptions
+{
+    private ValueTask<int> field1, field2;
+
+    async Task ConfigureAwaitTwice(ValueTask<int> vt)
+    {
+        await vt.ConfigureAwait(false);                 // FN https://sonarsource.atlassian.net/browse/NET-5305
+        await vt.ConfigureAwait(false);
+    }
+
+    async Task AwaitThenConfigureAwait(ValueTask<int> vt)
+    {
+        await vt;                                       // FN https://sonarsource.atlassian.net/browse/NET-5305
+        await vt.ConfigureAwait(false);
+    }
+
+    int ConfiguredGetResult(ValueTask<int> vt) =>
+        vt.ConfigureAwait(false).GetAwaiter().GetResult();  // FN https://sonarsource.atlassian.net/browse/NET-5305
+
+    int NullForgivingLocal(ValueTask<int> vt) => vt!.Result;                    // FN https://sonarsource.atlassian.net/browse/NET-5306
+    int NullForgivingField() => this.field1!.Result;                            // FN https://sonarsource.atlassian.net/browse/NET-5306
+    int NullForgivingAwaiter() => this.field2!.GetAwaiter().GetResult();        // FN https://sonarsource.atlassian.net/browse/NET-5306
 }
 
 
@@ -81,8 +105,8 @@ namespace CSharp15
             {
                 get
                 {
-                    var first = task.AsTask();  // FN https://sonarsource.atlassian.net/browse/NET-4912
-                    return task.AsTask();
+                    var first = task.AsTask();  // Noncompliant https://sonarsource.atlassian.net/browse/NET-4912
+                    return task.AsTask();       // Secondary
                 }
             }
 
