@@ -94,9 +94,15 @@ internal static partial class NuGetMetadataFactory
         {
             const int VersionCheckDays = 5;
             var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
+            var content = File.Exists(path)
+#if NET
+                ? await File.ReadAllTextAsync(path).ConfigureAwait(false)
+#else
+                ? File.ReadAllText(path)
+#endif
+                : null;
             var (nextCheck, latest) =
-                File.Exists(path)
-                && (await File.ReadAllTextAsync(path).ConfigureAwait(false)).Split(';') is var values
+                content?.Split(';') is { } values
                 && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
                     ? Pair.From(nextCheckValue, values[1])
                     : new(DateTime.MinValue, null);
@@ -107,7 +113,11 @@ internal static partial class NuGetMetadataFactory
                 var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
                 latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
                 new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
+#if NET
                 await File.WriteAllTextAsync(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}").ConfigureAwait(false);
+#else
+                File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
+#endif
             }
             return latest;
         }
