@@ -24,12 +24,7 @@ public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShould
 
     protected override SyntaxKind[] SyntaxKinds =>
     [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
-        SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.ExtensionBlockDeclaration,
+        .. TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface | TypeDeclarationKinds.Extension),
         SyntaxKind.CompilationUnit
     ];
 

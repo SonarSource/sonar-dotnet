@@ -349,13 +349,13 @@ public static class NewExtensions
 // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
 public union IntOrBool(int, bool)
 {
-    public void First()
+    public void First() // Secondary
     {
         Console.WriteLine("One");
         Console.WriteLine("Two");
     }
 
-    public void Second() // FN NET-4933
+    public void Second() // Noncompliant https://sonarsource.atlassian.net/browse/NET-4933
     {
         Console.WriteLine("One");
         Console.WriteLine("Two");
