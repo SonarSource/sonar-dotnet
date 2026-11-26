@@ -35,4 +35,8 @@ public class NestedCodeBlockTest
     [TestMethod]
     public void NestedCodeBlock_CS_Latest() =>
         builder.AddPaths("NestedCodeBlock.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void NestedCodeBlock_ConditionalCompilation() =>
+        builder.AddPaths("NestedCodeBlock.ConditionalCompilation.cs").Verify();
 }
