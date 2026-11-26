@@ -152,8 +152,10 @@ public static class DiagnosticVerifier
         foreach (var tree in trees)
         {
             var model = compilationWithAnalyzers.Compilation.GetSemanticModel(tree);
-            actual.UnionWith(compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(model, null, default).Result.Select(Describe));
-            actual.UnionWith(compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(tree, default).Result.Select(Describe));
+            actual.UnionWith(Task.Run(() => compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(model, null, compilationWithAnalyzers.CancellationToken),
+                compilationWithAnalyzers.CancellationToken).Result.Select(Describe));
+            actual.UnionWith(Task.Run(() => compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(tree, compilationWithAnalyzers.CancellationToken),
+                compilationWithAnalyzers.CancellationToken).Result.Select(Describe));
         }
         return actual;
     }
@@ -197,8 +199,7 @@ public static class DiagnosticVerifier
                                                                    string[] warningsAsErrors = null)
     {
         var (compilationWithAnalyzers, supportedDiagnostics) = CreateCompilationWithAnalyzers(compilation, analyzer, additionalFilePath, onlyDiagnostics, warningsAsErrors);
-        var diagnostics = compilationWithAnalyzers
-            .GetAllDiagnosticsAsync(default)
+        var diagnostics = Task.Run(() => compilationWithAnalyzers.GetAllDiagnosticsAsync(compilationWithAnalyzers.CancellationToken), compilationWithAnalyzers.CancellationToken)
             .Result
             .Where(x => (x.Severity == DiagnosticSeverity.Error && x.Id != LineContinuationVB12) || supportedDiagnostics.ContainsKey(x.Id));   // No compiler info about new syntax or unused usings
 
