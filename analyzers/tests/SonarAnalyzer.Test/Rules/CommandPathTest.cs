@@ -44,4 +44,10 @@ public class CommandPathTest
     [TestMethod]
     public void CommandPath_VB() =>
         builderVB.AddPaths("CommandPath.vb").Verify();
+
+    [TestMethod]
+    public void CommandPath_VB_Latest() =>
+        builderVB.AddPaths("CommandPath.Latest.vb")
+            .WithOptions(LanguageOptions.VisualBasicLatest)
+            .Verify();
 }

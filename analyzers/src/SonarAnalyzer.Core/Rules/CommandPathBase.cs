@@ -39,7 +39,13 @@ public abstract class CommandPathBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSy
         var inv = Language.Tracker.Invocation;
         inv.Track(
             input,
-            inv.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
+            inv.MatchMethod(
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start"),
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "Run"),
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "RunAsync"),
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "RunAndCaptureText"),
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "RunAndCaptureTextAsync"),
+                new MemberDescriptor(KnownType.System_Diagnostics_Process, "StartAndForget")),
             x => IsInvalid(FirstArgument(x)));
 
         var pa = Language.Tracker.PropertyAccess;

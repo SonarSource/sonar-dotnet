@@ -58,13 +58,17 @@ class ProcessRunMethods
 {
     async Task Methods(ProcessStartInfo startInfo)
     {
-        Process.Run("file.exe");                                                // FN NET-4878
-        Process.Run("file.exe", ["arg"], silent: true);                         // FN NET-4878
-        await Process.RunAsync("file.exe");                                     // FN NET-4878
-        Process.RunAndCaptureText("file.exe");                                  // FN NET-4878
-        await Process.RunAndCaptureTextAsync("file.exe");                       // FN NET-4878
-        Process.StartAndForget("file.exe");                                     // FN NET-4878
+        Process.Run("file.exe");                                                // Noncompliant - NET-4878
         Process.Run(@"C:\file.exe");
+        Process.Run("file.exe", ["arg"], silent: true);                         // Noncompliant - NET-4878
+        Process.Run(@"C:\file.exe", ["arg"], silent: true);
+        await Process.RunAsync("file.exe");                                     // Noncompliant - NET-4878
+        await Process.RunAsync(@"C:\file.exe");
+        Process.RunAndCaptureText("file.exe");                                  // Noncompliant - NET-4878
+        Process.RunAndCaptureText("/usr/bin/file");
+        await Process.RunAndCaptureTextAsync("file.exe");                       // Noncompliant - NET-4878
+        await Process.RunAndCaptureTextAsync("./file.exe");
+        Process.StartAndForget("file.exe");                                     // Noncompliant - NET-4878
         Process.StartAndForget("/usr/bin/file");
         Process.Run(startInfo);
         Process.Run(new ProcessStartInfo("file.exe"));                          // Noncompliant
