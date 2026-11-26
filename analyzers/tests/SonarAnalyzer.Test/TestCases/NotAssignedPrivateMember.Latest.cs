@@ -138,7 +138,7 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union UnionRepro(UnionCaseA, UnionCaseB)
     {
-        private static int unassigned; // FN NET-4940
+        private static int unassigned; // Noncompliant
 
         public static void Use() =>
             Console.WriteLine(unassigned);
@@ -147,6 +147,20 @@ namespace CSharp15
 
         public static void Assign() =>
             assigned = 1;
+    }
+
+    public class OuterWithNestedUnion
+    {
+        private union Nested(int, string)
+        {
+            private static int unassignedNested; // Noncompliant
+            private static int assignedNested;   // Compliant
+
+            public static int Use() => unassignedNested;
+            public static void Assign() => assignedNested = 1;
+        }
+
+        public int Read() => Nested.Use();
     }
 
     public record class UnionCaseA(string Name);

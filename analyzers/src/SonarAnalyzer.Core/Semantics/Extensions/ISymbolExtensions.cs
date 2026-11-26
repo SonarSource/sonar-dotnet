@@ -187,6 +187,7 @@ public static class ISymbolExtensions
                     { TypeKind: TypeKind.Module } => "module",
                     { TypeKind: TypeKind.Pointer } => "pointer",
                     { TypeKind: TypeKind.Struct, IsRecord: true } => "record struct",
+                    { TypeKind: TypeKind.Struct, IsUnion: true } => "union",
                     { TypeKind: TypeKind.Struct } => "struct",
                     { TypeKind: TypeKind.Submission } => "submission",
                     { TypeKind: TypeKind.TypeParameter } => "type parameter",

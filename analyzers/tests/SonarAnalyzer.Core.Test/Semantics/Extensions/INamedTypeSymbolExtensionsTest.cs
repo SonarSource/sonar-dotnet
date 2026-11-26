@@ -41,6 +41,8 @@ public class INamedTypeSymbolExtensionsTest
             ..NuGetMetadataReference.MicrosoftNetWebApiCore("5.2.9")
         ];
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void GetAllNamedTypesForNamedType_WhenSymbolIsNull_ReturnsEmpty() =>
         ((INamedTypeSymbol)null).AllNamedTypes.Should().BeEmpty();
@@ -96,6 +98,15 @@ public class INamedTypeSymbolExtensionsTest
 #else
         symbol.Classification.Should().Be("type");
 #endif
+    }
+
+    [TestMethod]
+    public void GetClassification_Union()
+    {
+        var (node, model) = TestCompiler.NodeBetweenMarkersCS<SyntaxNode>("$$public union SymbolMember(int, string);$$");
+        var symbol = model.GetDeclaredSymbol(node, TestContext.CancellationToken);
+
+        symbol.Classification.Should().Be("union");
     }
 
     [TestMethod]

@@ -351,10 +351,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             this.containingTypeAccessibility = containingTypeAccessibility;
         }
 
-        // This override is needed because VisitRecordDeclaration and LocalFunctionStatementSyntax are not available due to the Roslyn version.
+        // This override is needed because VisitRecordDeclaration, VisitUnionDeclaration and LocalFunctionStatementSyntax are not available due to the Roslyn version.
         public override void Visit(SyntaxNode node)
         {
-            if (node.Kind() is SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration)
+            if (node.IsTypeDeclaration(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface | TypeDeclarationKinds.Enum))
             {
                 VisitBaseTypeDeclaration(node);
             }
@@ -365,12 +365,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
 
             base.Visit(node);
-        }
-
-        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-        {
-            VisitBaseTypeDeclaration(node);
-            base.VisitClassDeclaration(node);
         }
 
         public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
@@ -392,12 +386,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
 
             base.VisitDelegateDeclaration(node);
-        }
-
-        public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
-        {
-            VisitBaseTypeDeclaration(node);
-            base.VisitEnumDeclaration(node);
         }
 
         public override void VisitEventDeclaration(EventDeclarationSyntax node)
@@ -441,12 +429,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             base.VisitIndexerDeclaration(node);
         }
 
-        public override void VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
-        {
-            VisitBaseTypeDeclaration(node);
-            base.VisitInterfaceDeclaration(node);
-        }
-
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
@@ -476,12 +458,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
 
             base.VisitPropertyDeclaration(node);
-        }
-
-        public override void VisitStructDeclaration(StructDeclarationSyntax node)
-        {
-            VisitBaseTypeDeclaration(node);
-            base.VisitStructDeclaration(node);
         }
 
         private void ConditionalStore<TSymbol>(TSymbol symbol, Func<TSymbol, bool> condition)

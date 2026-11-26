@@ -100,8 +100,21 @@ public partial class PartialEvents
 
 public union EventUnion(int, string)
 {
-    private static event EventHandler Unused; // FN NET-4970
+    private static event EventHandler Unused; // Noncompliant
     private static event EventHandler Used;   // Compliant
 
     public static void Raise() => Used?.Invoke(null, EventArgs.Empty);
+}
+
+public class OuterWithNestedEventUnion
+{
+    private union Nested(int, string)
+    {
+        private static event EventHandler Unused; // Noncompliant
+        private static event EventHandler Used;   // Compliant
+
+        public static void Raise() => Used?.Invoke(null, EventArgs.Empty);
+    }
+
+    public void Run() => Nested.Raise();
 }

@@ -135,7 +135,7 @@ namespace CSharp15
     // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/union
     public union ReturnUnion(ReturnCaseA, ReturnCaseB)
     {
-        private static int Ignored() => 1; // FN NET-4976
+        private static int Ignored() => 1; // Noncompliant
         private static int Used() => 1;
 
         public static void CallIgnored()
@@ -145,6 +145,26 @@ namespace CSharp15
 
         public static int CallUsed() =>
             Used();
+    }
+
+    public class OuterWithNestedReturnUnion
+    {
+        private union Nested(int, string)
+        {
+            private static int Ignored() => 1; // Noncompliant
+            private static int Used() => 1;
+
+            public static void CallIgnored()
+            {
+                Ignored();
+            }
+
+            public static int CallUsed() =>
+                Used();
+        }
+
+        public void Run() => Nested.CallIgnored();
+        public int Read() => Nested.CallUsed();
     }
 
     public record class ReturnCaseA(string Name);

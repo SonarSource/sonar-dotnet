@@ -1176,7 +1176,7 @@ public union UnionMembers(int, string)
 
 public class NestedUnions
 {
-    private union UnusedNestedUnion(int, string); // FN NET-4972
+    private union UnusedNestedUnion(int, string); // Noncompliant {{Remove the unused private union 'UnusedNestedUnion'.}}
     private union UsedNestedUnion(int, string);   // Compliant
 
     public object Method() => new UsedNestedUnion(42);
