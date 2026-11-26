@@ -17,12 +17,14 @@
 
     interface IOuterInterface
     {
-        static void OnlyUsedByNestedClass() { }                     // Noncompliant
+        static void ImplicitlyPublicUsedByNestedClass() { }         // Compliant NET-5275 - interface members are public by default
+        private static void OnlyUsedByNestedClass() { }             // Noncompliant
 
         class NestedClass
         {
             void Foo()
             {
+                ImplicitlyPublicUsedByNestedClass();
                 OnlyUsedByNestedClass();
             }
         }
