@@ -52,7 +52,7 @@ internal static partial class NuGetMetadataFactory
             if (!Directory.Exists(packageDir))
             {
                 LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                InstallPackageAsync(packageDir).Wait();
+                Task.Run(() => InstallPackageAsync(packageDir)).Wait();
             }
 
             return packageDir;
@@ -84,7 +84,8 @@ internal static partial class NuGetMetadataFactory
             const string fileName = "NuGet.Config";
             var source = File.Exists(Path.Combine(Paths.AnalyzersRoot, fileName))
                 ? PackageSourceProvider.LoadPackageSources(Settings.LoadSpecificSettings(Paths.AnalyzersRoot, fileName)).Single(x => x.Name == "Repox")   // CI, or Sonar local machine
-                : new PackageSource("https://api.nuget.org/v3/index.json");                                                                               // External contributor local machine, or public CI.
+                // External contributor local machine, or public CI.
+                : new PackageSource("https://api.nuget.org/v3/index.json");
 
             return await Repository.Factory.GetCoreV3(source).GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
         }
@@ -95,7 +96,7 @@ internal static partial class NuGetMetadataFactory
             var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
             var (nextCheck, latest) =
                 File.Exists(path)
-                && File.ReadAllText(path).Split(';') is var values
+                && (await File.ReadAllTextAsync(path).ConfigureAwait(false)).Split(';') is var values
                 && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
                     ? Pair.From(nextCheckValue, values[1])
                     : new(DateTime.MinValue, null);
@@ -106,7 +107,7 @@ internal static partial class NuGetMetadataFactory
                 var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
                 latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
                 new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
-                File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
+                await File.WriteAllTextAsync(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}").ConfigureAwait(false);
             }
             return latest;
         }
