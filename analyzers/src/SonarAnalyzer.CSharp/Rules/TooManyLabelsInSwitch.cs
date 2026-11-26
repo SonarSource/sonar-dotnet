@@ -20,7 +20,13 @@ namespace SonarAnalyzer.CSharp.Rules;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
 {
-    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
+    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.BreakStatement,
+        SyntaxKind.LabeledStatement,
+        SyntaxKind.ReturnStatement,
+        SyntaxKind.ThrowStatement
+    };
 
     private static readonly ISet<SyntaxKind> TransparentSyntax = new HashSet<SyntaxKind>
     {
@@ -34,6 +40,7 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
         SyntaxKindEx.ForEachVariableStatement,
         SyntaxKind.ForStatement,
         SyntaxKind.IfStatement,
+        SyntaxKind.LabeledStatement,
         SyntaxKind.LockStatement,
         SyntaxKind.SwitchStatement,
         SyntaxKind.TryStatement,

@@ -62,7 +62,7 @@ class LabeledBreakAndContinue
 
     void LabeledLoopInSection(int n, int[][] grid)
     {
-        switch (n) // FN NET-4967
+        switch (n) // Noncompliant NET-4967
         {
             case 0:
                 Console.WriteLine("0");
@@ -82,6 +82,38 @@ class LabeledBreakAndContinue
                         Console.WriteLine(cell);
                     }
                 }
+                break;
+        }
+    }
+
+    void LabeledOneLinerInSection(int n)
+    {
+        switch (n) // Compliant
+        {
+            case 0:
+                Console.WriteLine("0");
+                break;
+            case 1:
+                Console.WriteLine("1");
+                break;
+            case 2:
+                label: Console.WriteLine("2");
+                break;
+        }
+    }
+
+    void NestedLabelsOneLinerInSection(int n)
+    {
+        switch (n) // Compliant
+        {
+            case 0:
+                Console.WriteLine("0");
+                break;
+            case 1:
+                Console.WriteLine("1");
+                break;
+            case 2:
+                first: second: Console.WriteLine("2");
                 break;
         }
     }
