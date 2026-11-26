@@ -105,6 +105,16 @@ public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>
             SyntaxKind.OperatorDeclaration);
 
         context.RegisterNodeAction(
+            c => CheckComplexity<ConversionOperatorDeclarationSyntax>(
+                    c,
+                    o => o,
+                    o => o.ImplicitOrExplicitKeyword.GetLocation(),
+                    CSharpCognitiveComplexityMetric.GetComplexity,
+                    "operator",
+                    Threshold),
+            SyntaxKind.ConversionOperatorDeclaration);
+
+        context.RegisterNodeAction(
             c => CheckComplexity<AccessorDeclarationSyntax>(
                     c,
                     a => a,

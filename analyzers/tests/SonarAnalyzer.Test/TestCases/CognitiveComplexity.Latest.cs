@@ -329,13 +329,16 @@ namespace CSharp15
         private bool f;
         private static bool Make() => true;
 
-        public static implicit operator int(MissedMembers c) => c.f ? 1 : 2;    // FN NET-5299 (conversion operators are not analyzed)
+        public static implicit operator int(MissedMembers c) =>                 // Noncompliant {{Refactor this operator to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-5299
+            c.f ? 1 : 2;                                                        // Secondary {{+1}}
 
-        public static explicit operator long(MissedMembers c)                   // FN NET-5299 (conversion operators are not analyzed)
+        public static explicit operator long(MissedMembers c)                   // Noncompliant {{Refactor this operator to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-5299
         {
-            if (c.f) { return 1; }
+            if (c.f) { return 1; }                                              // Secondary {{+1}}
             return 2;
         }
+
+        public static implicit operator short(MissedMembers c) => 0;
 
         public int Initialized { get; } = Make() ? 1 : 2;                       // FN NET-5300 (property initializers are not analyzed)
     }
