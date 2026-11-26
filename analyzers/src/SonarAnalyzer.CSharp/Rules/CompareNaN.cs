@@ -26,12 +26,6 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormatComparison = "Do not compare a number with {0}.NaN.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly Dictionary<KnownType, string> KnownTypeAliasMap = new()
-        {
-            { KnownType.System_Double, "double" },
-            { KnownType.System_Single, "float" },
-        };
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -50,7 +44,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         c.ReportIssue(
                             Rule,
                             binaryExpressionSyntax,
-                            string.Format(messageFormat, KnownTypeAliasMap[floatingPointType]));
+                            string.Format(messageFormat, TypeName(floatingPointType)));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,
@@ -60,7 +54,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-        private static bool TryGetFloatingPointType(SyntaxNode expression, SemanticModel semanticModel, out KnownType floatingPointType)
+        private static bool TryGetFloatingPointType(SyntaxNode expression, SemanticModel model, out ITypeSymbol floatingPointType)
         {
             floatingPointType = null;
 
@@ -69,15 +63,34 @@ namespace SonarAnalyzer.CSharp.Rules
                 return false;
             }
 
-            var fieldSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol as IFieldSymbol;
-            if (fieldSymbol?.Name != nameof(double.NaN))
+            var symbol = model.GetSymbolInfo(memberAccess).Symbol;
+            var type = symbol switch
+            {
+                IFieldSymbol { Name: nameof(double.NaN) } field => field.Type,
+                IPropertySymbol { Name: nameof(double.NaN), IsStatic: true } property => property.Type,
+                _ => null,
+            };
+            if (type is null)
             {
                 return false;
             }
 
-            floatingPointType = KnownType.FloatingPointNumbers.FirstOrDefault(fieldSymbol.Type.Is);
-
-            return floatingPointType != null;
+            floatingPointType = type;
+            return IsFloatingPoint(type);
         }
+
+        // The list is needed on TFMs without generic math (double/float on net48 and netstandard, Half on .NET 5, NFloat on .NET 6), the interface only exists from .NET 7.
+        private static bool IsFloatingPoint(ITypeSymbol type) =>
+            type.IsAny(KnownType.FloatingPointNumbers)
+            || type.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)
+            || (type is ITypeParameterSymbol typeParameter && typeParameter.ConstraintTypes.Any(IsFloatingPoint));
+
+        private static string TypeName(ITypeSymbol type) =>
+            type.SpecialType switch
+            {
+                SpecialType.System_Double => "double",
+                SpecialType.System_Single => "float",
+                _ => type.Name,
+            };
     }
 }
