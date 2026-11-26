@@ -367,7 +367,10 @@ public class SomeClass(Serializable serializableField) : Serializable
 
 namespace CSharp15
 {
-    public union SerializableUnion(int, string) : ISerializable     // FN NET-4929
+    public union SerializableUnion(int, string) : ISerializable
+//               ^^^^^^^^^^^^^^^^^ Noncompliant NET-4929
+//         ^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'SerializableUnion' because it implements 'ISerializable'.}}
+//         ^^^^^ Secondary@-2 {{Add a 'private' constructor 'SerializableUnion(SerializationInfo, StreamingContext)'.}}
     {
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
@@ -376,6 +379,21 @@ namespace CSharp15
     public union CompliantUnion(int, string) : ISerializable        // Compliant
     {
         private CompliantUnion(SerializationInfo info, StreamingContext context) : this(0) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+    [Serializable]
+    public union PublicCtorUnion(int, string) : ISerializable
+    //           ^^^^^^^^^^^^^^^ Noncompliant
+    {
+        public PublicCtorUnion(SerializationInfo info, StreamingContext context) : this(0) { }
+        //     ^^^^^^^^^^^^^^^ Secondary {{Make the serialization constructor 'private'.}}
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+    [Serializable]
+    internal union InternalUnion(int, string) : ISerializable       // Compliant, not publicly accessible
+    {
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 

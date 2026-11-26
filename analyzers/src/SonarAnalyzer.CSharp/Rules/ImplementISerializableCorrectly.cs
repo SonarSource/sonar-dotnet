@@ -55,10 +55,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         c.ReportIssue(Rule, typeDeclarationSyntax.Identifier, implementationErrors, implementationErrors.JoinStr(" ", x => x.Message));
                     }
                 },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration,
-                SyntaxKind.StructDeclaration);
+                TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike));
 
         private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol)
         {
