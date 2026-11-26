@@ -104,12 +104,35 @@ namespace CSharp15
     public class BFloat16Equality
     {
         bool Equal(BFloat16 first, BFloat16 second) =>
-            first == second; // FN NET-4903
+            first == second; // Noncompliant - NET-4903
 
         bool NotEqual(BFloat16 first, BFloat16 second) =>
-            first != second; // FN NET-4903
+            first != second; // Noncompliant - NET-4903
 
         bool EqualsMethod(BFloat16 first, BFloat16 second) =>
-            first.Equals(second); // FN NET-4903
+            first.Equals(second); // Noncompliant - NET-4903
+    }
+
+    public class BFloat16Messages
+    {
+        void NaN(BFloat16 b)
+        {
+            _ = b == BFloat16.NaN;                  // Noncompliant {{Do not check floating point equality with exact values, use 'BFloat16.IsNaN()' instead.}}
+        }
+
+        void Infinities(BFloat16 b)
+        {
+            _ = b == BFloat16.PositiveInfinity;     // Noncompliant {{Do not check floating point equality with exact values, use 'BFloat16.IsPositiveInfinity()' instead.}}
+            _ = BFloat16.NegativeInfinity == b;     // Noncompliant {{Do not check floating point equality with exact values, use 'BFloat16.IsNegativeInfinity()' instead.}}
+        }
+
+        bool EqualsNaN(BFloat16 b) =>
+            b.Equals(BFloat16.NaN);                 // Compliant NaN check via Equals correctly detects NaN, unlike ==
+    }
+
+    public class DecimalIsNotBinary
+    {
+        bool Equal(Decimal32 first, Decimal32 second) =>
+            first == second;                        // Compliant, decimal floating point types are base-10 and excluded
     }
 }

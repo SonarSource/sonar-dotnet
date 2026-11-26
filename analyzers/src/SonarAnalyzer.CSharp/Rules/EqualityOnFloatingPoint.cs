@@ -176,6 +176,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     // - `IFloatingPointIeee754` defines `Epsilon` which indicates problems with equivalence checking.
     private static bool IsFloatingPointType(ITypeSymbol type) =>
         type.IsAny(KnownType.FloatingPointNumbers)
+        || type.DerivesOrImplements(KnownType.System_Numerics_IBinaryFloatingPointIeee754_TSelf) // Custom binary floating point types. Decimal types implement IDecimalFloatingPointIeee754 instead.
         || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult) // The operator originates from a virtual static member
             && type is INamedTypeSymbol { TypeArguments: { } typeArguments }           // Arguments of TSelf, TOther, TResult
             && typeArguments.Any(IsFloatingPointType))

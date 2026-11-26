@@ -544,6 +544,8 @@ public sealed partial class KnownType
     public static readonly KnownType System_NotSupportedException = new("System.NotSupportedException");
     public static readonly KnownType System_Nullable_T = new("System.Nullable", "T");
     public static readonly KnownType System_NullReferenceException = new("System.NullReferenceException");
+    public static readonly KnownType System_Numerics_BFloat16 = new("System.Numerics.BFloat16");
+    public static readonly KnownType System_Numerics_IBinaryFloatingPointIeee754_TSelf = new("System.Numerics.IBinaryFloatingPointIeee754", "TSelf");
     public static readonly KnownType System_Numerics_IEqualityOperators_TSelf_TOther_TResult = new("System.Numerics.IEqualityOperators", "TSelf", "TOther", "TResult");
     public static readonly KnownType System_Numerics_IFloatingPointIeee754_TSelf = new("System.Numerics.IFloatingPointIeee754", "TSelf");
     public static readonly KnownType System_Object = new("System.Object");
@@ -818,11 +820,13 @@ public sealed partial class KnownType
             Microsoft_EntityFrameworkCore_DbSet_TEntity,
             System_Data_Linq_ITable,
             System_Data_Entity_Core_Objects_ObjectQuery);
+    // Binary floating point types. All but BFloat16 predate the generic math interfaces (.NET 7), so older TFMs can't match them via IBinaryFloatingPointIeee754.
     public static readonly ImmutableArray<KnownType> FloatingPointNumbers = ImmutableArray.Create(
-            System_Half,
-            System_Single,
-            System_Double,
-            System_Runtime_InteropServices_NFloat);
+            System_Numerics_BFloat16,                // .NET 11, implements the interface
+            System_Half,                             // .NET 5, interface since .NET 7
+            System_Single,                           // .NET Framework 1.0, interface since .NET 7
+            System_Double,                           // .NET Framework 1.0, interface since .NET 7
+            System_Runtime_InteropServices_NFloat);  // .NET 6, interface since .NET 7
     public static readonly ImmutableArray<KnownType> IntegralNumbers = ImmutableArray.Create(
             System_Int16,
             System_Int32,
