@@ -300,14 +300,19 @@ namespace CSharp15
 
     public class PlainIndexer
     {
-        public int this[bool first] => first ? 1 : 2;   // FN NET-4897
+        private readonly int[] items = [];
+
+        public int this[int i] => items[i];
+        public int this[bool first] => first ? 1 : 2;   // Noncompliant {{Refactor this indexer to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-4897
+                                                // Secondary@-1 {{+1}}
     }
 
     public static class Extensions
     {
         extension(int[] source)
         {
-            public int this[bool first] => first ? source[0] : source[^1];   // FN NET-4897
+            public int this[bool first] => first ? source[0] : source[^1];   // Noncompliant {{Refactor this indexer to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-4897
+                                                             // Secondary@-1 {{+1}}
 
             public int this[string name]
             {
@@ -315,5 +320,27 @@ namespace CSharp15
                                                               // Secondary@-1 {{+1}}
             }
         }
+    }
+
+    public class ProbeBase { public ProbeBase(int x) { } }
+
+    public class MissedMembers
+    {
+        private bool f;
+        private static bool Make() => true;
+
+        public static implicit operator int(MissedMembers c) => c.f ? 1 : 2;    // FN NET-5299 (conversion operators are not analyzed)
+
+        public static explicit operator long(MissedMembers c)                   // FN NET-5299 (conversion operators are not analyzed)
+        {
+            if (c.f) { return 1; }
+            return 2;
+        }
+
+        public int Initialized { get; } = Make() ? 1 : 2;                       // FN NET-5300 (property initializers are not analyzed)
+    }
+
+    public class MissedPrimaryCtorBase(bool f) : ProbeBase(f ? 1 : 2)           // FN NET-5301 (primary constructor base-call arguments are not analyzed)
+    {
     }
 }

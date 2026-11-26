@@ -18,119 +18,129 @@
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CSharp.Metrics;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(c =>
+        context.RegisterNodeAction(c =>
+            {
+                if (c.IsTopLevelMain)
                 {
-                    if (c.IsTopLevelMain)
-                    {
-                        CheckComplexity<CompilationUnitSyntax>(
-                            c,
-                            compilationUnit => compilationUnit,
-                            _ => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)),
-                            node => CSharpCognitiveComplexityMetric.GetComplexity(node, true),
-                            "top-level file",
-                            Threshold);
-                    }
-                },
-                SyntaxKind.CompilationUnit);
+                    CheckComplexity<CompilationUnitSyntax>(
+                        c,
+                        compilationUnit => compilationUnit,
+                        _ => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)),
+                        node => CSharpCognitiveComplexityMetric.GetComplexity(node, true),
+                        "top-level file",
+                        Threshold);
+                }
+            },
+            SyntaxKind.CompilationUnit);
 
-            context.RegisterNodeAction(
-                c => CheckComplexity<MethodDeclarationSyntax>(
+        context.RegisterNodeAction(
+            c => CheckComplexity<MethodDeclarationSyntax>(
                     c,
                     m => m,
                     m => m.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "method",
                     Threshold),
-                SyntaxKind.MethodDeclaration);
+            SyntaxKind.MethodDeclaration);
 
-            // Here, we only care about arrowed properties, others will be handled by the accessor.
-            context.RegisterNodeAction(
-                c => CheckComplexity<PropertyDeclarationSyntax>(
+        // Here, we only care about arrowed properties, others will be handled by the accessor.
+        context.RegisterNodeAction(
+            c => CheckComplexity<PropertyDeclarationSyntax>(
                     c,
                     p => p.ExpressionBody,
                     p => p.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "property",
                     PropertyThreshold),
-                SyntaxKind.PropertyDeclaration);
+            SyntaxKind.PropertyDeclaration);
 
-            context.RegisterNodeAction(
-                c => CheckComplexity<ConstructorDeclarationSyntax>(
+        // Same for arrowed indexers (including extension indexers), others are handled by the accessor.
+        context.RegisterNodeAction(
+            c => CheckComplexity<IndexerDeclarationSyntax>(
+                    c,
+                    i => i.ExpressionBody,
+                    i => i.ThisKeyword.GetLocation(),
+                    CSharpCognitiveComplexityMetric.GetComplexity,
+                    "indexer",
+                    PropertyThreshold),
+            SyntaxKind.IndexerDeclaration);
+
+        context.RegisterNodeAction(
+            c => CheckComplexity<ConstructorDeclarationSyntax>(
                     c,
                     co => co,
                     co => co.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "constructor",
                     Threshold),
-                SyntaxKind.ConstructorDeclaration);
+            SyntaxKind.ConstructorDeclaration);
 
-            context.RegisterNodeAction(
-                c => CheckComplexity<DestructorDeclarationSyntax>(
+        context.RegisterNodeAction(
+            c => CheckComplexity<DestructorDeclarationSyntax>(
                     c,
                     d => d,
                     d => d.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "destructor",
                     Threshold),
-                SyntaxKind.DestructorDeclaration);
+            SyntaxKind.DestructorDeclaration);
 
-            context.RegisterNodeAction(
-                c => CheckComplexity<OperatorDeclarationSyntax>(
+        context.RegisterNodeAction(
+            c => CheckComplexity<OperatorDeclarationSyntax>(
                     c,
                     o => o,
                     o => o.OperatorToken.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "operator",
                     Threshold),
-                SyntaxKind.OperatorDeclaration);
+            SyntaxKind.OperatorDeclaration);
 
-            context.RegisterNodeAction(
-                c => CheckComplexity<AccessorDeclarationSyntax>(
+        context.RegisterNodeAction(
+            c => CheckComplexity<AccessorDeclarationSyntax>(
                     c,
                     a => a,
                     a => a.Keyword.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "accessor",
                     PropertyThreshold),
-                SyntaxKind.GetAccessorDeclaration,
-                SyntaxKind.SetAccessorDeclaration,
-                SyntaxKindEx.InitAccessorDeclaration,
-                SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.RemoveAccessorDeclaration);
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration);
 
-            context.RegisterNodeAction(
-               c => CheckComplexity<FieldDeclarationSyntax>(
-                   c,
-                   f => f,
-                   f => f.Declaration.Variables[0].Identifier.GetLocation(),
-                   CSharpCognitiveComplexityMetric.GetComplexity,
-                   "field",
-                   Threshold),
-               SyntaxKind.FieldDeclaration);
+        context.RegisterNodeAction(
+            c => CheckComplexity<FieldDeclarationSyntax>(
+                    c,
+                    f => f,
+                    f => f.Declaration.Variables[0].Identifier.GetLocation(),
+                    CSharpCognitiveComplexityMetric.GetComplexity,
+                    "field",
+                    Threshold),
+            SyntaxKind.FieldDeclaration);
 
-            context.RegisterNodeAction(c =>
+        context.RegisterNodeAction(c =>
             {
                 if (((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
                 {
-                   CheckComplexity<SyntaxNode>(
-                       c,
-                       m => m,
-                       m => ((LocalFunctionStatementSyntaxWrapper)m).Identifier.GetLocation(),
-                       CSharpCognitiveComplexityMetric.GetComplexity,
-                       "static local function",
-                       Threshold);
+                    CheckComplexity<SyntaxNode>(
+                        c,
+                        m => m,
+                        m => ((LocalFunctionStatementSyntaxWrapper)m).Identifier.GetLocation(),
+                        CSharpCognitiveComplexityMetric.GetComplexity,
+                        "static local function",
+                        Threshold);
                 }
             },
             SyntaxKindEx.LocalFunctionStatement);
-        }
     }
 }
