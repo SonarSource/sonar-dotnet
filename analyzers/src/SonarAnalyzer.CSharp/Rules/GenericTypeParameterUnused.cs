@@ -53,11 +53,7 @@ public sealed class GenericTypeParameterUnused : SonarDiagnosticAnalyzer
                     CheckGenericTypeParameters(c, c.ContainingSymbol);
                 }
             },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration);
+            TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike | TypeDeclarationKinds.Interface));
     }
 
     private static void CheckGenericTypeParameters(SonarSyntaxNodeReportingContext c, ISymbol symbol)
@@ -84,6 +80,7 @@ public sealed class GenericTypeParameterUnused : SonarDiagnosticAnalyzer
             MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, c.Model) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
             var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)c.Node).TypeParameterList, "local function"),
             var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((RecordDeclarationSyntaxWrapper)c.Node).TypeParameterList, "record"),
+            var wrapper when UnionDeclarationSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((UnionDeclarationSyntaxWrapper)c.Node).TypeParameterList, "union"),
             _ => null
         };
 

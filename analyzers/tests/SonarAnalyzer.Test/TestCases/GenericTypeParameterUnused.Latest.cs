@@ -129,12 +129,46 @@ public static class Extensions
 public class Cat;
 public class Dog;
 
-public union UnusedParameter<T>(Cat, Dog); // FN NET-4931
+public union UnusedParameter<T>(Cat, Dog); // Noncompliant {{'T' is not used in the union.}} NET-4931
+//                           ^
 
 public union UsedParameter<T>(Cat, T);
+
+public union PartiallyUsedParameters<TUsed, TUnused>(Cat, TUsed); // Noncompliant {{'TUnused' is not used in the union.}}
+//                                          ^^^^^^^
+
+public union UsedInGenericCaseType<T>(Cat, System.Collections.Generic.List<T>);
+
+public union UsedInMember<T>(Cat, Dog)
+{
+    public T Default() => default;
+}
+
+public union UnusedInMember<T>(Cat, Dog) // Noncompliant
+{
+    public int Count() => 0;
+}
+
+public union UsedOnlyInConstraint<T>(Cat, Dog) where T : class; // Noncompliant
+
+public union UsedInConstraintAndCase<T>(Cat, T) where T : class;
+
+public union UnusedButHasGenericMethod<T>(Cat, Dog) // Noncompliant
+{
+    public TMethod Method<TMethod>(TMethod value) => value;
+}
+
+public union GenericMethodWithUnusedParameter(Cat, Dog)
+{
+    public int Method<TMethod>() => 0; // Noncompliant {{'TMethod' is not used in the method.}}
+}
 
 public closed record class Tree<T>; // Compliant NET-4811
 
 public record class Leaf<T>(T Value) : Tree<T>;
 
 public closed class ClosedClass<T>; // Compliant
+
+public partial union PartialUnionUsedInOtherPart<T>(Cat, Dog);  // Compliant, T is used in the other part
+
+public partial union PartialUnionUnused<T>(Cat, Dog);           // Noncompliant

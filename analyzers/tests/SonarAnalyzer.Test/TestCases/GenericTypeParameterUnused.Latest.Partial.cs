@@ -11,3 +11,10 @@ public partial class PartialEvent<T>  // Compliant
         remove { }
     }
 }
+
+public partial union PartialUnionUsedInOtherPart<T>
+{
+    public T Default() => default;
+}
+
+public partial union PartialUnionUnused<T> { }                  // Noncompliant
