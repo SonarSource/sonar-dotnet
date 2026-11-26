@@ -47,10 +47,10 @@ stages:
 
     - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
+    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $env:BUILD_SOURCEBRANCHNAME -Sha1 $(Build.SourceVersion)
       displayName: "Set Version"
 
-    - task: SonarCloudPrepare@3
+    - task: SonarCloudPrepare@3.0.0
       displayName: '.NET Code Analysis - Begin'
       inputs:
         SonarCloud: 'SonarCloud'
@@ -92,10 +92,10 @@ stages:
         nuget pack analyzers/packaging/SonarAnalyzer.VisualBasic.nuspec -Version $(FULL_VERSION) -Properties Configuration=$(BuildConfiguration) -OutputDirectory $(Build.ArtifactStagingDirectory)/packages -Verbosity Detailed
       displayName: "Build NuGet packages"
 
-    - task: SonarCloudAnalyze@3
+    - task: SonarCloudAnalyze@3.0.0
       displayName: '.NET Code Analysis - End'
 
-    - task: SonarCloudPrepare@3
+    - task: SonarCloudPrepare@3.0.0
       displayName: 'Prepare code analysis for Java plugin'
       inputs:
         SonarCloud: 'SonarCloud'
@@ -142,7 +142,7 @@ stages:
       artifact: 'NuGet Packages'
       displayName: 'Publish NuGet packages as build artifacts'
 
-    - task: SonarCloudPublish@3
+    - task: SonarCloudPublish@3.0.0
       displayName: 'Code Analysis - Publish QG'
       inputs:
         pollingTimeoutSec: '300'
