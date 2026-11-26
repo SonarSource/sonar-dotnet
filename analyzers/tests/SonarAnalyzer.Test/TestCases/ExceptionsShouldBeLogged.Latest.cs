@@ -73,7 +73,7 @@ public class LabeledJumps
         try { }
         catch (Exception e)
         {
-            logger.LogError(message); // FN NET-4904
+            logger.LogError(message); // Noncompliant
             outer:
             do
             {
@@ -94,7 +94,7 @@ public class LabeledJumps
         try { }
         catch (Exception e)
         {
-            logger.LogError(message); // FN NET-4904
+            logger.LogError(message); // Noncompliant
             outer:
             do
             {
@@ -107,6 +107,77 @@ public class LabeledJumps
                 }
                 throw e;
             } while (flags.Length > 0);
+        }
+    }
+
+    public void Rethrow_LabeledBreakLeavesInnerLabeledLoop(string message, bool[] flags)
+    {
+        try { }
+        catch (Exception e)
+        {
+            logger.LogError(message);
+            outer:
+            do
+            {
+                inner:
+                do
+                {
+                    foreach (var flag in flags)
+                    {
+                        if (flag)
+                        {
+                            break inner;
+                        }
+                    }
+                } while (flags.Length > 0);
+                throw;
+            } while (flags.Length > 0);
+        }
+    }
+
+    public void ConditionalRethrow_LabeledBreakSkipsInnerLabel(string message, bool[] flags)
+    {
+        try { }
+        catch (Exception e)
+        {
+            logger.LogError(message); // Noncompliant
+            outer:
+            do
+            {
+                inner:
+                do
+                {
+                    foreach (var flag in flags)
+                    {
+                        if (flag)
+                        {
+                            break outer;
+                        }
+                    }
+                } while (flags.Length > 0);
+                throw;
+            } while (flags.Length > 0);
+        }
+    }
+
+    public void ConditionalRethrow_LabeledBreakLeavesCatch(string message, bool[] flags)
+    {
+        outer:
+        foreach (var a in flags)
+        {
+            try { }
+            catch (Exception e)
+            {
+                logger.LogError(message); // Noncompliant
+                foreach (var b in flags)
+                {
+                    if (b)
+                    {
+                        break outer;
+                    }
+                }
+                throw;
+            }
         }
     }
 }

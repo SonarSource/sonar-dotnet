@@ -99,10 +99,10 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
                 case SyntaxKind.ReturnStatement:
                     scopesWithJumps.Add(ContainingFunctionOrCatch(node));
                     break;
-                case SyntaxKind.BreakStatement when node.Ancestors().FirstOrDefault(x => IsLoop(x) || x.IsKind(SyntaxKind.SwitchStatement)) is { } breakTarget:
+                case SyntaxKind.BreakStatement when JumpTarget(node, ((BreakStatementSyntax)node).Name, x => IsLoop(x) || x.IsKind(SyntaxKind.SwitchStatement)) is { } breakTarget:
                     scopesWithJumps.Add(breakTarget);
                     break;
-                case SyntaxKind.ContinueStatement when node.Ancestors().FirstOrDefault(IsLoop) is { } continueTarget:
+                case SyntaxKind.ContinueStatement when JumpTarget(node, ((ContinueStatementSyntax)node).Name, IsLoop) is { } continueTarget:
                     scopesWithJumps.Add(continueTarget);
                     break;
                 case SyntaxKind.GotoStatement:
@@ -155,6 +155,11 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 
         private static SyntaxNode ContainingFunctionOrCatch(SyntaxNode node) =>
             node.Ancestors().First(x => x.Kind() is SyntaxKind.CatchClause or SyntaxKind.AnonymousMethodExpression or SyntaxKindEx.LocalFunctionStatement);
+
+        private static SyntaxNode JumpTarget(SyntaxNode jump, IdentifierNameSyntax label, Func<SyntaxNode, bool> isNearestTarget) =>
+            label is null
+                ? jump.Ancestors().FirstOrDefault(isNearestTarget)
+                : jump.Ancestors().OfType<LabeledStatementSyntax>().FirstOrDefault(x => x.Identifier.ValueText == label.Identifier.ValueText)?.Statement;
 
         private static bool IsLoop(SyntaxNode node) =>
             node.Kind() is SyntaxKind.DoStatement or SyntaxKind.WhileStatement or SyntaxKind.ForStatement or SyntaxKind.ForEachStatement or SyntaxKindEx.ForEachVariableStatement;
