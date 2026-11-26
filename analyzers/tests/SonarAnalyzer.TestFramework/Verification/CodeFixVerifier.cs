@@ -54,7 +54,7 @@ internal class CodeFixVerifier
         {
             codeBeforeFix = state.ActualCode;
             var fixableDiagnostics = state.Diagnostics.Where(x => codeFix.FixableDiagnosticIds.Contains(x.Id));    // Analyzer can also raise other Diagnostics that we can't fix
-            if ((await ActionsToApply(codeFix, state.Document, fixableDiagnostics)).FirstOrDefault() is { } actionToApply)
+            if (await FirstActionToApply(codeFix, state.Document, fixableDiagnostics) is { } actionToApply)
             {
                 state = await State.CreateAsync(analyzer, await ApplyCodeFix(state.Document, actionToApply), parseOptions);
                 codeFixExecuted = true;
@@ -82,7 +82,7 @@ internal class CodeFixVerifier
     }
 
     private async Task<string> CodeFixTitle(CodeFixProvider codeFix, State state) =>
-        (await ActionsToApply(codeFix, state.Document, state.Diagnostics)).First().Title;
+        (await FirstActionToApply(codeFix, state.Document, state.Diagnostics) ?? throw new InvalidOperationException("No code action was registered for the diagnostics.")).Title;
 
     private static async Task<Document> ApplyCodeFix(Document document, CodeAction codeAction)
     {
@@ -91,14 +91,16 @@ internal class CodeFixVerifier
         return solution.GetDocument(document.Id);
     }
 
-    private async Task<IEnumerable<CodeAction>> ActionsToApply(CodeFixProvider codeFix, Document document, IEnumerable<Diagnostic> diagnostics)
+    private async Task<CodeAction> FirstActionToApply(CodeFixProvider codeFix, Document document, IEnumerable<Diagnostic> diagnostics)
     {
-        var actions = new List<CodeAction>();
         foreach (var diagnostic in diagnostics)
         {
-            actions.AddRange(await ActionToApply(codeFix, document, diagnostic));
+            if ((await ActionToApply(codeFix, document, diagnostic)).FirstOrDefault() is { } action)
+            {
+                return action;
+            }
         }
-        return actions;
+        return null;
     }
 
     private async Task<IEnumerable<CodeAction>> ActionToApply(CodeFixProvider codeFix, Document document, Diagnostic diagnostic)
