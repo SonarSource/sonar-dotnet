@@ -99,7 +99,7 @@ public sealed class DoNotUseCollectionInItsOwnMethodCalls : SonarDiagnosticAnaly
         {
             return AlwaysEmptyCollectionMessage;
         }
-        else if (IsAnySetMethod(methodSymbol, nameof(ISet<object>.IsProperSubsetOf), nameof(ISet<object>.IsProperSupersetOf), nameof(ISet<object>.IsProperSupersetOf)))
+        else if (IsAnySetMethod(methodSymbol, nameof(ISet<object>.IsProperSubsetOf), nameof(ISet<object>.IsProperSupersetOf)))
         {
             return AlwaysFalseMessage;
         }
@@ -121,9 +121,16 @@ public sealed class DoNotUseCollectionInItsOwnMethodCalls : SonarDiagnosticAnaly
 
         public OperandsToCheck(ExpressionSyntax left, ExpressionSyntax right, string errorMessage)
         {
-            Left = left.WithoutEnclosingParentheses;
-            Right = right.WithoutEnclosingParentheses;
+            Left = UnwrapSingleSpread(left.WithoutEnclosingParentheses);
+            Right = UnwrapSingleSpread(right.WithoutEnclosingParentheses);
             ErrorMessage = errorMessage;
         }
+
+        private static ExpressionSyntax UnwrapSingleSpread(ExpressionSyntax expression) =>
+            CollectionExpressionSyntaxWrapper.IsInstance(expression)
+            && ((CollectionExpressionSyntaxWrapper)expression).Elements is { Count: 1 } elements
+            && SpreadElementSyntaxWrapper.IsInstance(elements[0].WrappedInstance)
+                ? ((SpreadElementSyntaxWrapper)elements[0].WrappedInstance).Expression.WithoutEnclosingParentheses
+                : expression;
     }
 }
