@@ -545,6 +545,10 @@ public sealed partial class KnownType
     public static readonly KnownType System_Nullable_T = new("System.Nullable", "T");
     public static readonly KnownType System_NullReferenceException = new("System.NullReferenceException");
     public static readonly KnownType System_Numerics_BFloat16 = new("System.Numerics.BFloat16");
+    public static readonly KnownType System_Numerics_Complex_T = new("System.Numerics.Complex", "T");
+    public static readonly KnownType System_Numerics_Decimal128 = new("System.Numerics.Decimal128");
+    public static readonly KnownType System_Numerics_Decimal32 = new("System.Numerics.Decimal32");
+    public static readonly KnownType System_Numerics_Decimal64 = new("System.Numerics.Decimal64");
     public static readonly KnownType System_Numerics_IBinaryFloatingPointIeee754_TSelf = new("System.Numerics.IBinaryFloatingPointIeee754", "TSelf");
     public static readonly KnownType System_Numerics_IEqualityOperators_TSelf_TOther_TResult = new("System.Numerics.IEqualityOperators", "TSelf", "TOther", "TResult");
     public static readonly KnownType System_Numerics_IFloatingPointIeee754_TSelf = new("System.Numerics.IFloatingPointIeee754", "TSelf");
