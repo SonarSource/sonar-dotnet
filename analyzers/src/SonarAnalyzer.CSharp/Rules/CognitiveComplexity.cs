@@ -52,11 +52,11 @@ public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>
                     Threshold),
             SyntaxKind.MethodDeclaration);
 
-        // Here, we only care about arrowed properties, others will be handled by the accessor.
+        // Here, we only care about arrowed properties and property initializers, others will be handled by the accessor.
         context.RegisterNodeAction(
             c => CheckComplexity<PropertyDeclarationSyntax>(
                     c,
-                    p => p.ExpressionBody,
+                    p => (SyntaxNode)p.ExpressionBody ?? p.Initializer,
                     p => p.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity,
                     "property",

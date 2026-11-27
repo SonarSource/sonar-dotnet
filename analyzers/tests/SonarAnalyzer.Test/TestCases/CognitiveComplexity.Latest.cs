@@ -340,7 +340,18 @@ namespace CSharp15
 
         public static implicit operator short(MissedMembers c) => 0;
 
-        public int Initialized { get; } = Make() ? 1 : 2;                       // FN NET-5300 (property initializers are not analyzed)
+        public int Initialized { get; } = Make() ? 1 : 2;                       // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-5300
+                                                                                // Secondary@-1 {{+1}}
+        public int InitializedSimple { get; } = 1;
+        public int InitializedGetSet { get; set; } = Make() ? 1 : 2;            // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-5300
+                                                                                // Secondary@-1 {{+1}}
+        public int InitializedWithBody                                          // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}} - NET-5300
+        {
+            get => field > 0 ? field : 0;                                       // Noncompliant {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+                                                                                // Secondary@-1 {{+1}}
+            set => field = value > 0 ? value : 0;                               // Noncompliant {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+                                                                                // Secondary@-1 {{+1}}
+        } = Make() ? 1 : 2;                                                     // Secondary {{+1}}
     }
 
     public class MissedPrimaryCtorBase(bool f) : ProbeBase(f ? 1 : 2)           // FN NET-5301 (primary constructor base-call arguments are not analyzed)
