@@ -5,14 +5,14 @@ class NumericsTypes
     void Declarations(int a, int b)
     {
         decimal dec = a / b;                    // Noncompliant
-        Complex complex = a / b;                // FN NET-4944
+        Complex complex = a / b;                // Noncompliant NET-4944
         BigInteger big = a / b;                 // Compliant, integral
         complex = (Complex)a / b;               // Compliant
     }
 
     void Arguments(int a, int b)
     {
-        TakeComplex(a / b);                     // FN NET-4944
+        TakeComplex(a / b);                     // Noncompliant NET-4944
     }
 
     void TakeComplex(Complex value) { }

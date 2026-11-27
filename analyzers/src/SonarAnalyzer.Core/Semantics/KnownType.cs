@@ -545,6 +545,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Nullable_T = new("System.Nullable", "T");
     public static readonly KnownType System_NullReferenceException = new("System.NullReferenceException");
     public static readonly KnownType System_Numerics_BFloat16 = new("System.Numerics.BFloat16");
+    public static readonly KnownType System_Numerics_Complex = new("System.Numerics.Complex");
     public static readonly KnownType System_Numerics_Complex_T = new("System.Numerics.Complex", "T");
     public static readonly KnownType System_Numerics_Decimal128 = new("System.Numerics.Decimal128");
     public static readonly KnownType System_Numerics_Decimal32 = new("System.Numerics.Decimal32");
@@ -866,6 +867,15 @@ public sealed partial class KnownType
             System_Single,
             System_Double,
             System_Decimal);
+    public static readonly ImmutableArray<KnownType> NonIntegralNumbersFromInteger = ImmutableArray.Create(
+            System_Single,
+            System_Double,
+            System_Decimal,
+            System_Numerics_Decimal64,
+            System_Numerics_Decimal128,
+            System_Numerics_Complex,
+            System_Numerics_Complex_T,
+            System_Runtime_InteropServices_NFloat);
     public static readonly ImmutableArray<KnownType> PointerTypes = ImmutableArray.Create(
             System_IntPtr,
             System_UIntPtr);

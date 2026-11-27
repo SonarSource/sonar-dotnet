@@ -54,7 +54,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 || division.Parent is LambdaExpressionSyntax)
             {
                 divisionResultType = (semanticModel.GetEnclosingSymbol(division.SpanStart) as IMethodSymbol)?.ReturnType;
-                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
             }
 
             divisionResultType = null;
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             divisionResultType = parameter.Type;
-            return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+            return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
         }
 
         private static bool DivisionIsInAssignmentAndTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
@@ -91,16 +91,16 @@ namespace SonarAnalyzer.CSharp.Rules
             if (division.Parent is AssignmentExpressionSyntax assignment)
             {
                 divisionResultType = semanticModel.GetTypeInfo(assignment.Left).Type;
-                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
             }
             if (division is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDecl } } })
             {
                 divisionResultType = semanticModel.GetTypeInfo(variableDecl.Type).Type;
-                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
             }
             if (DivisionIsInTupleTypeIsNonIntegral(division, semanticModel, out divisionResultType))
             {
-                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
             }
 
             divisionResultType = null;
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 if (divisionResult is { })
                 {
                     divisionResultType = semanticModel.GetTypeInfo(divisionResult).Type;
-                    return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                    return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
                 }
             }
             // var (a, b) = (1, 1 / 3)
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 if (divisionArgumentIndex != -1)
                 {
                     divisionResultType = flattenTupleTypes[divisionArgumentIndex];
-                    return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+                    return divisionResultType.IsAny(KnownType.NonIntegralNumbersFromInteger);
                 }
             }
             divisionResultType = null;

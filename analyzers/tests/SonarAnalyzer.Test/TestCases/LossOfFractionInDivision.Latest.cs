@@ -185,16 +185,27 @@ class OtherNonIntegralTypes
 {
     void Declarations(int a, int b)
     {
-        NFloat nfloat = a / b;                  // FN NET-4944
-        Complex<double> genericDouble = a / b;  // FN NET-4944
-        Complex<float> genericFloat = a / b;    // FN NET-4944
+        NFloat nfloat = a / b;                  // Noncompliant NET-4944
+        Complex<double> genericDouble = a / b;  // Noncompliant NET-4944
+        Complex<float> genericFloat = a / b;    // Noncompliant NET-4944
         Half half = (Half)(a / b);              // Compliant, explicit conversion
+        nfloat = (NFloat)a / b;                 // Compliant
+        genericDouble = (Complex<double>)a / b; // Compliant
+        Complex<double> message = a / b;        // Noncompliant {{Cast one of the operands of this division to 'Complex<double>'.}}
+    }
+
+    void LongDivision(long a, long b)
+    {
+        Complex<double> fromLong = a / b;       // Noncompliant
+        Complex<double> fromLongCast = (double)a / b; // Compliant
     }
 
     void Arguments(int a, int b)
     {
-        TakeNFloat(a / b);                      // FN NET-4944
-        TakeGeneric(a / b);                     // FN NET-4944
+        TakeNFloat(a / b);                      // Noncompliant NET-4944
+        TakeGeneric(a / b);                     // Noncompliant NET-4944
+        TakeNFloat((NFloat)a / b);              // Compliant
+        TakeGeneric((Complex<double>)a / b);    // Compliant
     }
 
     void TakeNFloat(NFloat value) { }
@@ -207,13 +218,28 @@ class DecimalFloatingPoint
 
     Decimal64 Assignment(int a, int b)
     {
-        Decimal64 d64 = a / b;                  // FN NET-4944
-        Decimal128 d128 = a / b;                // FN NET-4944
-        d64 = a / b;                            // FN NET-4944
-        Take64(a / b);                          // FN NET-4944
-        field64 = a / b;                        // FN NET-4944
+        Decimal64 d64 = a / b;                  // Noncompliant NET-4944
+        Decimal128 d128 = a / b;                // Noncompliant NET-4944
+        d64 = a / b;                            // Noncompliant NET-4944
+        Take64(a / b);                          // Noncompliant NET-4944
+        field64 = a / b;                        // Noncompliant NET-4944
         d128 = (Decimal128)a / b;               // Compliant
-        return a / b;                           // FN NET-4944
+        return a / b;                           // Noncompliant NET-4944
+    }
+
+    void Gaps(int a, int b)
+    {
+        Decimal64 compliant64 = (Decimal64)a / b; // Compliant
+        Decimal32 d32 = a / b;                  // Error [CS0266]
+        BFloat16 bf16 = a / b;                  // Error [CS0266]
+        (Decimal64 x, var y) = (a / b, 2);      // Noncompliant
+        (Decimal64 castX, var castY) = ((Decimal64)a / b, 2); // Compliant
+        (Decimal128, int) tuple = (a / b, 2);   // Noncompliant
+        (Decimal128, int) castTuple = ((Decimal128)a / b, 2); // Compliant
+        Func<Decimal64> lambda = () => a / b;   // Noncompliant
+        Func<Decimal64> castLambda = () => (Decimal64)a / b; // Compliant
+        Func<Complex<double>> lambdaGeneric = () => a / b; // Noncompliant
+        Func<Complex<double>> castLambdaGeneric = () => (Complex<double>)a / b; // Compliant
     }
 
     void Take64(Decimal64 value) { }
