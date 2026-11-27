@@ -20,22 +20,11 @@ namespace SonarAnalyzer.CSharp.Rules;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
 {
-    private static readonly HashSet<SyntaxKind> TypeDeclarationSyntaxKinds =
-    [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration
-    ];
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override SyntaxKind[] SyntaxKinds { get; } =
     [
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordDeclaration,
-        SyntaxKindEx.RecordStructDeclaration,
+        .. TypeDeclarations.Of(TypeDeclarationKinds.ClassOrStructLike),
         SyntaxKind.CompilationUnit
     ];
 
@@ -53,7 +42,7 @@ public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotB
 
     protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
         context.Node.Ancestors().Any(x =>
-            x.IsAnyKind(TypeDeclarationSyntaxKinds)
+            x.IsTypeDeclaration(TypeDeclarationKinds.ClassOrStructLike)
             || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
 
     protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>

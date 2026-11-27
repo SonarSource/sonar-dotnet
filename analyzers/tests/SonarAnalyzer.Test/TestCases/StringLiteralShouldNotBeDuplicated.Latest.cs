@@ -373,10 +373,10 @@ namespace CSharp15
 
     public union Pet(Cat, Dog)
     {
-        public string Name() => "unknown pet";  // FN NET-5014
-        public string Kind() => "unknown pet";
-        public string Sound() => "unknown pet";
-        public string Owner() => "unknown pet";
+        public string Name() => "unknown pet";  // Noncompliant {{Define a constant instead of using this literal 'unknown pet' 4 times.}} NET-5014
+        public string Kind() => "unknown pet";  // Secondary
+        public string Sound() => "unknown pet"; // Secondary
+        public string Owner() => "unknown pet"; // Secondary
     }
 
     public struct PetStruct
@@ -385,5 +385,37 @@ namespace CSharp15
         public string Kind() => "unknown pet";  // Secondary
         public string Sound() => "unknown pet"; // Secondary
         public string Owner() => "unknown pet"; // Secondary
+    }
+
+    public union BelowThreshold(Cat, Dog)
+    {
+        public string Name() => "unknown pet";  // Compliant, only 3 times
+        public string Kind() => "unknown pet";
+        public string Sound() => "unknown pet";
+    }
+
+    public union OuterUnion(Cat, Dog)
+    {
+        public string Name() => "unknown pet";  // Noncompliant {{Define a constant instead of using this literal 'unknown pet' 5 times.}}
+
+        public class InnerClass                 // Inner type is counted with the outer union, not on its own
+        {
+            public string Kind() => "unknown pet";  // Secondary
+            public string Sound() => "unknown pet"; // Secondary
+            public string Owner() => "unknown pet"; // Secondary
+            public string Color() => "unknown pet"; // Secondary
+        }
+    }
+
+    public class OuterClass
+    {
+        public string Name() => "unknown pet";  // Noncompliant {{Define a constant instead of using this literal 'unknown pet' 4 times.}}
+
+        public union InnerUnion(Cat, Dog)       // Inner union is counted with the outer class, not on its own
+        {
+            public string Kind() => "unknown pet";  // Secondary
+            public string Sound() => "unknown pet"; // Secondary
+            public string Owner() => "unknown pet"; // Secondary
+        }
     }
 }
