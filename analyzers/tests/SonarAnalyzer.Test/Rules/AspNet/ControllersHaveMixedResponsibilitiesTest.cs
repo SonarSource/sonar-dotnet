@@ -44,6 +44,53 @@ public class ControllersHaveMixedResponsibilitiesTest
             .WithLanguageVersion(LanguageVersion.Latest)
             .WithoutIdeAnalysisCheck("Probably a consequence of the partial indexer: Roslyn does not run node actions on the implementation of partial properties, indexers, events and constructors in per-document analysis. NET-5179")
             .Verify();
+
+    [TestMethod]
+    public void ControllersHaveMixedResponsibilities_CustomExcludedServices() =>
+        new VerifierBuilder()
+            .AddAnalyzer(() => new ControllersHaveMixedResponsibilities { ExcludedServices = "IS1, IS2" })
+            .AddReferences(References)
+            .AddSnippet("""
+                using Microsoft.AspNetCore.Mvc;
+
+                public interface IS1 { void Use(); }
+                public interface IS2 { void Use(); }
+                public interface IS3 { void Use(); }
+                public interface IS4 { void Use(); }
+                public interface ILogger<T> { void Use(); }
+
+                // Compliant: IS1 and IS2 are excluded via rule parameter; remaining services form one responsibility
+                [ApiController]
+                public class OnlyExcludedAndSharedService(IS1 s1, IS2 s2, IS3 s3) : ControllerBase
+                {
+                    public IActionResult A1() { s1.Use(); s3.Use(); return Ok(); }
+                    public IActionResult A2() { s2.Use(); s3.Use(); return Ok(); }
+                }
+
+                // Noncompliant@+2 {{This controller has multiple responsibilities and could be split into 2 smaller controllers.}}
+                [ApiController]
+                public class CustomExclusionStillFlagsOtherServices(IS3 s3, IS4 s4) : ControllerBase
+                {
+                    public IActionResult A1() { s3.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
+                    public IActionResult A2() { s4.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
+                }
+
+                // Noncompliant@+2: default well-known ILogger is not excluded when the parameter overrides the default list
+                [ApiController]
+                public class LoggerIsNotExcludedWhenOverridden(ILogger<LoggerIsNotExcludedWhenOverridden> logger, IS3 s3) : ControllerBase
+                {
+                    public IActionResult A1() { logger.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
+                    public IActionResult A2() { s3.Use(); return Ok(); }     // Secondary {{May belong to responsibility #2.}}
+                }
+                """)
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .WithAutogenerateConcurrentFiles(false)
+            .Verify();
+
+    [TestMethod]
+    public void ExcludedServices_ByDefault_ContainsWellKnownServices() =>
+        new ControllersHaveMixedResponsibilities().ExcludedServices.Should().Be(
+            "ILogger, IMediator, IMapper, IConfiguration, IBus, IMessageBus, IHttpClientFactory");
 }
 
 #endif
