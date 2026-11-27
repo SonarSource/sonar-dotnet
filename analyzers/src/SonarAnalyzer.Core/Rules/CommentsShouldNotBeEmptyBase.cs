@@ -47,7 +47,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             }
         });
 
-    private void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
+    private void CheckTrivia(SonarSyntaxTreeReportingContext context, SyntaxTriviaList trivia)
     {
         var partitions = PartitionComments(trivia);
         if (partitions is null)
@@ -63,7 +63,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         }
     }
 
-    private List<List<SyntaxTrivia>> PartitionComments(IEnumerable<SyntaxTrivia> trivia)
+    private List<List<SyntaxTrivia>> PartitionComments(SyntaxTriviaList trivia)
     {
         // Hotpath: avoid unnecessary allocations
         List<List<SyntaxTrivia>> partitions = null;
