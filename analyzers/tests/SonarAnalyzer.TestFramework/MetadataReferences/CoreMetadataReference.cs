@@ -44,6 +44,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemDiagnosticsTraceSource { get; } = CreateReference("System.Diagnostics.TraceSource.dll");
     public static MetadataReference SystemDiagnosticsProcess { get; } = CreateReference("System.Diagnostics.Process.dll");
     public static MetadataReference SystemDiagnosticsTools { get; } = CreateReference("System.Diagnostics.Tools.dll");
+    public static MetadataReference SystemDrawingPrimitives { get; } = CreateReference("System.Drawing.Primitives.dll");
     public static MetadataReference SystemGlobalization { get; } = CreateReference("System.Globalization.dll");
     public static MetadataReference SystemIoCompression { get; } = CreateReference("System.IO.Compression.dll");
     public static MetadataReference SystemIoCompressionZipFile { get; } = CreateReference("System.IO.Compression.ZipFile.dll");

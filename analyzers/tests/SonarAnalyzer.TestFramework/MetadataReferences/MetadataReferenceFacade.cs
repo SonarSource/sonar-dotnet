@@ -114,7 +114,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemDrawing;
 #else
-        NuGetMetadataReference.SystemDrawingCommon();
+        NuGetMetadataReference.SystemDrawingCommon().Concat([CoreMetadataReference.SystemDrawingPrimitives]);   // Types "Color" and "Size" are defined here
 #endif
 
     public static References SystemDirectoryServices =>
