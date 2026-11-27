@@ -26,4 +26,7 @@ public sealed class BackslashShouldBeAvoidedInAspNetRoutes : BackslashShouldBeAv
 
     protected override bool IsNamedAttributeArgument(SyntaxNode node) =>
         node is AttributeArgumentSyntax { NameEquals: not null };
+
+    protected override bool IsInArgumentList(SyntaxNode node) =>
+        node.Parent is BaseArgumentListSyntax or AttributeArgumentListSyntax;
 }

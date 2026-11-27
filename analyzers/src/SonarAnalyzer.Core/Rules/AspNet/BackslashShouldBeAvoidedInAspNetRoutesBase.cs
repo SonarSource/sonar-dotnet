@@ -24,6 +24,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
 
     protected abstract TSyntaxKind[] SyntaxKinds { get; }
     protected abstract bool IsNamedAttributeArgument(SyntaxNode node);
+    protected abstract bool IsInArgumentList(SyntaxNode node);
 
     protected override string MessageFormat => @"Replace '\' with '/'.";
 
@@ -42,21 +43,23 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     protected void Check(SonarSyntaxNodeReportingContext c)
     {
         if (!IsNamedAttributeArgument(c.Node)
+            && IsInArgumentList(c.Node) // A tuple element is not: the tuple can bind to a user-defined operator that has no argument list
             && Language.Syntax.NodeExpression(c.Node) is { } expression
+            && c.Node.Parent.Parent is var invocation
+            && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+            && methodSymbol.Parameters.Any(x => IsRouteTemplate(x, methodSymbol))
             && Language.FindConstantValue(c.Model, expression) is string constantRouteTemplate
             && ContainsBackslash(constantRouteTemplate)
-            && IsRouteTemplate(c.Model, c.Node))
+            && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
+            && parameterLookup.TryGetSymbol(c.Node, out var parameter)
+            && IsRouteTemplate(parameter, methodSymbol))
         {
             c.ReportIssue(Rule, expression);
         }
     }
 
-    private bool IsRouteTemplate(SemanticModel model, SyntaxNode node) =>
-        node.Parent.Parent is var invocation // can be a method invocation or a tuple expression
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
-        && parameterLookup.TryGetSymbol(node, out var parameter)
-        && (HasStringSyntaxAttributeOfTypeRoute(parameter) || IsRouteTemplateBeforeAspNet6(parameter, methodSymbol));
+    private static bool IsRouteTemplate(IParameterSymbol parameter, IMethodSymbol method) =>
+        HasStringSyntaxAttributeOfTypeRoute(parameter) || IsRouteTemplateBeforeAspNet6(parameter, method);
 
     private static bool HasStringSyntaxAttributeOfTypeRoute(IParameterSymbol parameter) =>
         parameter.GetAttributes(KnownType.System_Diagnostics_CodeAnalysis_StringSyntaxAttribute).FirstOrDefault() is { } syntaxAttribute
