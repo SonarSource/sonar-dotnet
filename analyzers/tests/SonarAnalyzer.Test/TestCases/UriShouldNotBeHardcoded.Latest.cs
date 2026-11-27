@@ -133,11 +133,19 @@ class CollectionExpressionArguments
         public PathList(string path) => Add(path);
     }
 
+    class NameList : List<string>
+    {
+        public NameList() { }
+        public NameList(string name) => Add(name);
+    }
+
     void Method()
     {
-        PathList viaWith = [with(@"C:\data\file.txt")];         // FN NET-4987
+        PathList viaWith = [with(@"C:\data\file.txt")];         // Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}} NET-4987
         PathList viaNew = new PathList(@"C:\data\file.txt");    // Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}}
         PathList relativeViaWith = [with("data/file.txt")];      // Compliant
         PathList relativeViaNew = new PathList("data/file.txt"); // Compliant
+        NameList nameViaWith = [with(@"C:\data\file.txt")];      // Compliant - parameter name is not path-like
+        NameList nameViaNew = new NameList(@"C:\data\file.txt"); // Compliant
     }
 }

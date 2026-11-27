@@ -23,7 +23,7 @@ public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<Syntax
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
     protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     protected override SyntaxKind[] StringConcatenateExpressions => [SyntaxKind.AddExpression];
-    protected override SyntaxKind[] InvocationOrObjectCreationKind => [SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression];
+    protected override SyntaxKind[] InvocationOrObjectCreationKind => [SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.WithElement];
 
     protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
         node switch
