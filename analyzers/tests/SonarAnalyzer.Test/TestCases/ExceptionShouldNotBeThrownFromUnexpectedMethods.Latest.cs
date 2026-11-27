@@ -149,7 +149,54 @@ namespace CSharp15
     public struct Pet : System.Runtime.CompilerServices.IUnion
     {
         public Pet(Cat value) => Value = value;
-        public Pet(Dog value) => throw new Exception(); // FN NET-4999
+        public Pet(Dog value) => throw new Exception(); // Noncompliant NET-4999
+        public object Value { get; }
+    }
+
+    [System.Runtime.CompilerServices.Union]
+    public class PetWithHelpers : System.Runtime.CompilerServices.IUnion
+    {
+        public PetWithHelpers(Cat value) => Value = value;
+        public PetWithHelpers(Dog value) => throw new NotImplementedException(); // Compliant, allowed exception
+        private PetWithHelpers(int value) => throw new Exception();              // Compliant, not a creation member
+        internal PetWithHelpers(string value) => throw new Exception();          // Compliant, not a creation member
+        public PetWithHelpers(Cat cat, Dog dog) => throw new Exception();        // Compliant, two parameters
+        public object Value { get; }
+    }
+
+    public class NotAUnion
+    {
+        public NotAUnion(Cat value) => throw new Exception();                    // Compliant, not a union
+    }
+
+    [System.Runtime.CompilerServices.Union]
+    public struct PetWithGuard : System.Runtime.CompilerServices.IUnion
+    {
+        public PetWithGuard(Cat value) => Value = value ?? throw new ArgumentNullException(nameof(value)); // Noncompliant, creation members only allow NotImplementedException
+        public object Value { get; }
+    }
+
+    [System.Runtime.CompilerServices.Union]
+    public struct PetWithProvider : System.Runtime.CompilerServices.IUnion, PetWithProvider.IUnionMembers
+    {
+        public interface IUnionMembers
+        {
+            static abstract PetWithProvider Create(Cat value);
+            object Value { get; }
+        }
+        private PetWithProvider(Cat value) => throw new Exception();                  // Compliant, conversions call Create
+        public static PetWithProvider Create(Cat value) => new PetWithProvider(value);
+        public object Value { get; }
+    }
+
+    [System.Runtime.CompilerServices.Union]
+    public struct PetWithUnimplementedMembers : System.Runtime.CompilerServices.IUnion
+    {
+        public interface IUnionMembers
+        {
+            static PetWithUnimplementedMembers Create(Cat value) => default;
+        }
+        public PetWithUnimplementedMembers(Cat value) => throw new Exception();       // Noncompliant, IUnionMembers is not implemented, so constructors are the creation members
         public object Value { get; }
     }
 

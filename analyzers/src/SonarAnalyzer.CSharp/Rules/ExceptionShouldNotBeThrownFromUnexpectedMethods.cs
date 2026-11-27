@@ -52,7 +52,7 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
             SyntaxKind.MethodDeclaration);
 
         context.RegisterNodeAction(
-            c => CheckForIssue<ConstructorDeclarationSyntax>(c, cds => cds.Modifiers.Any(SyntaxKind.StaticKeyword), DefaultAllowedExceptions),
+            c => CheckForIssue<ConstructorDeclarationSyntax>(c, cds => cds.Modifiers.Any(SyntaxKind.StaticKeyword) || IsUnionCreationMember(cds, c.Model), DefaultAllowedExceptions),
             SyntaxKind.ConstructorDeclaration);
 
         context.RegisterNodeAction(
@@ -78,6 +78,14 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
             ReportOnInvalidThrow(analysisContext, syntax, allowedThrowTypes);
         }
     }
+
+    private static bool IsUnionCreationMember(ConstructorDeclarationSyntax declaration, SemanticModel model) =>
+        model.GetDeclaredSymbol(declaration) is { Parameters.Length: 1, ContainingType: { IsUnion: true } type } constructor
+        && !HasUnionMemberProvider(type)
+        && type.UnionCaseTypes.Any(x => x.Equals(constructor.Parameters[0].Type));
+
+    private static bool HasUnionMemberProvider(INamedTypeSymbol type) =>
+        type.Interfaces.Any(x => x.Name == "IUnionMembers" && type.Equals(x.ContainingType));
 
     private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration) =>
         TrackedOperators.Contains(declaration.OperatorToken.Kind());
