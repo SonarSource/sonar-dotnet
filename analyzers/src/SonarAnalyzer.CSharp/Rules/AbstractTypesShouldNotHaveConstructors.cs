@@ -31,13 +31,10 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (c.Node.Parent.GetModifiers().Any(x => x.IsKind(SyntaxKind.AbstractKeyword) || x.IsKind(SyntaxKindEx.ClosedKeyword)))
+                    var invalidAccessModifier = c.Node.GetModifiers().FirstOrDefault(IsPublicOrInternal);
+                    if (invalidAccessModifier != default && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol { ContainingType.IsAbstract: true })
                     {
-                        var invalidAccessModifier = c.Node.GetModifiers().FirstOrDefault(IsPublicOrInternal);
-                        if (invalidAccessModifier != default)
-                        {
-                            c.ReportIssue(Rule, invalidAccessModifier, SuggestModifier(invalidAccessModifier));
-                        }
+                        c.ReportIssue(Rule, invalidAccessModifier, SuggestModifier(invalidAccessModifier));
                     }
                 },
                 SyntaxKind.ConstructorDeclaration);

@@ -88,6 +88,37 @@ namespace CSharp15
 
     public partial class ClosedPartial
     {
-        public ClosedPartial() { } // FN NET-5286
+        public ClosedPartial() { } // Noncompliant {{Change the visibility of this constructor to 'protected'.}} - NET-5286
+        internal ClosedPartial(int i) { } // Noncompliant {{Change the visibility of this constructor to 'private protected'.}}
+        protected ClosedPartial(string s) { } // Compliant
+    }
+
+    public closed partial class ClosedPartialAcrossFiles { }
+
+    public partial class NonClosedPartial { }
+
+    public partial class NonClosedPartial
+    {
+        public NonClosedPartial() { } // Compliant
+    }
+}
+
+namespace AbstractPartial
+{
+    public abstract partial class AbstractPartial { }
+
+    public partial class AbstractPartial
+    {
+        public AbstractPartial() { } // Noncompliant {{Change the visibility of this constructor to 'protected'.}} - NET-5286
+        protected AbstractPartial(int i) { } // Compliant
+    }
+
+    public abstract partial class AbstractPartialAcrossFiles { }
+
+    public partial class NonAbstractPartial { }
+
+    public partial class NonAbstractPartial
+    {
+        public NonAbstractPartial() { } // Compliant
     }
 }
